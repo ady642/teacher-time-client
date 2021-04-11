@@ -1,0 +1,42 @@
+import {FC} from 'react'
+import {AppBar, Toolbar, IconButton} from "@material-ui/core";
+import AccountCircle from '@material-ui/icons/AccountCircle';
+
+import Logo from '@/common/components/Logos/Logo'
+import TextButton from '@/common/components/Buttons/TextButton'
+import SimpleButton from "@/common/components/Buttons/SimpleButton";
+
+type HeaderProps = {
+    isMain: boolean
+}
+
+const Header: FC<HeaderProps> = ({isMain}) => {
+    return (
+        <AppBar position="static">
+            <Toolbar>
+                <div className={'flex w-full items-center justify-between'}>
+                    <div className={'flex items-center'}>
+                        <Logo/>
+                        <div className={'ml-4'}>
+                            <TextButton text={'Professeurs'}/>
+                            <TextButton text={'Progression'}/>
+                        </div>
+                    </div>
+                    <div className={'flex items-center'}>
+                        <SimpleButton text={'S\'abonner'}/>
+                        <IconButton
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-haspopup="true"
+                            color="inherit"
+                        >
+                            <AccountCircle/>
+                        </IconButton>
+                    </div>
+                </div>
+            </Toolbar>
+        </AppBar>
+    )
+}
+
+export default Header
