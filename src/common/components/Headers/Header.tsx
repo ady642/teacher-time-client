@@ -1,5 +1,5 @@
 import {FC} from 'react'
-import {AppBar, Toolbar, IconButton} from "@material-ui/core";
+import {AppBar, Toolbar, IconButton, Link} from "@material-ui/core";
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import Logo from '@/common/components/Logos/Logo'
@@ -11,19 +11,28 @@ type HeaderProps = {
 }
 
 const Header: FC<HeaderProps> = ({isMain}) => {
+    const goToPayment = () => {
+
+    }
+
     return (
         <AppBar position="static">
             <Toolbar>
                 <div className={'flex w-full items-center justify-between'}>
                     <div className={'flex items-center'}>
-                        <Logo/>
+                        <Link href={'/'}>
+                            <Logo/>
+                        </Link>
                         <div className={'ml-4'}>
-                            <TextButton text={'Professeurs'}/>
-                            <TextButton text={'Progression'}/>
+                            <Link href={'/'}>
+                                <TextButton text={'Professeurs'}/>
+                            </Link>
                         </div>
                     </div>
                     <div className={'flex items-center'}>
-                        <SimpleButton text={'S\'abonner'}/>
+                        <Link href={'/payment'}>
+                            <SimpleButton text={'S\'abonner'}/>
+                        </Link>
                         <IconButton
                             edge="end"
                             aria-label="account of current user"

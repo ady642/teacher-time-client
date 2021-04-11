@@ -1,9 +1,11 @@
 import { FC } from 'react'
 import Head from 'next/head'
 
-import styles from '@/modules/Home/styles/Home.module.scss'
 import PageWithLayoutType from '@/common/types/pageWithLayout'
 import DefaultLayout from '@/common/layouts/DefaultLayout'
+import styles from '@/modules/Home/styles/Home.module.scss'
+import TeacherFilters from "@/modules/Home/components/TeacherFilters";
+import TeacherList from "@/modules/Home/components/TeacherList/TeacherList";
 
 const Home: FC = () => {
       return (
@@ -12,9 +14,9 @@ const Home: FC = () => {
               <title>Planete Elève</title>
               <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            <main>
-
+            <main className={'flex flex-col justify-start'}>
+                <TeacherFilters />
+                <TeacherList />
             </main>
           </div>
       )
