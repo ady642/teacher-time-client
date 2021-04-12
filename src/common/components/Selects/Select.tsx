@@ -4,21 +4,21 @@ import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 interface SelectProps {
     value: any
     handleChange: Function
+    label: string
+    items: Array<{value: any, label: string}>
 }
 
-const PESelect: FunctionComponent<SelectProps> = ({ value, handleChange}) => {
+const PESelect: FunctionComponent<SelectProps> = ({ value, handleChange, label, items}) => {
     return <FormControl variant="outlined" size={'small'}>
-            <InputLabel id="matiere-label">Matière</InputLabel>
+            <InputLabel id={label}>{label}</InputLabel>
             <Select
-                labelId="matiere-label"
+                labelId={label}
                 value={value}
                 onChange={() => handleChange()}
-                label="Matière"
+                label={label}
                 margin="dense"
             >
-                <MenuItem value={'Espagnol'}>Espagnol</MenuItem>
-                <MenuItem value={'Maths'}>Maths</MenuItem>
-                <MenuItem value={'SVT'}>SVT</MenuItem>
+                {items.map((item: any) => <MenuItem value={item.value}>{item.label}</MenuItem>)}
             </Select>
         </FormControl>
 }

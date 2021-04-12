@@ -15,17 +15,33 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
         setFilters(newFilters)
     }
 
+    const matiereItems = [{
+        value: 'Maths',
+        label: 'Maths'
+    }, {
+        value: 'Espagnol',
+        label: 'Espagnol'
+    }, {
+        value: 'SVT',
+        label: 'SVT'
+    }]
+
     return <div className={'flex flex-col p-8'}>
         <div className={'flex'}>
             <h1 className={'flex items-center text-2xl'}>Trouver un professeur</h1>
             <div className="relative ml-6">
                 <input type="search" className="bg-purple-white shadow rounded border-0 p-3"
-                       placeholder="Search by name..."/>
+                       placeholder="Nom, matière..."/>
                 <SearchIcon className="absolute" style={{right: 10, top: 12}}/>
             </div>
         </div>
         <div className={'mt-4 flex'}>
-            <PESelect value={filters.matiere} handleChange={handleChangeMatiere}/>
+            <PESelect
+                value={filters.matiere}
+                handleChange={handleChangeMatiere}
+                label={'Matière'}
+                items={matiereItems}
+            />
         </div>
     </div>
 }
