@@ -6,7 +6,7 @@ interface TailwindCardProps {
 }
 
 const TailwindCard: FunctionComponent<TailwindCardProps> = ({children, className = ''}) => {
-    return <div className={`${className} py-4 px-8 flex flex-col items-center bg-white shadow-lg rounded-lg`}>
+    return <div className={`${className} flex flex-col items-center bg-white shadow-lg rounded-lg`}>
         {children}
     </div>
 }
