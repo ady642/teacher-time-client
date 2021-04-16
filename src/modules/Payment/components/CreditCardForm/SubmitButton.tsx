@@ -1,6 +1,6 @@
 import React from "react";
 
-const SubmitButton = ({ processing = false, error = false, children = '<div/>', disabled = false }) => (
+const SubmitButton = ({ processing = false, error = false, children = null, disabled = false }) => (
     <button
         className={`SubmitButton ${error ? "SubmitButton--error" : ""}`}
         type="submit"

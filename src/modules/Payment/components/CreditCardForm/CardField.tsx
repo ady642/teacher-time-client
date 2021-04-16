@@ -1,5 +1,5 @@
 import React from "react";
-import {CardNumberElement} from "@stripe/react-stripe-js";
+import {CardElement} from "@stripe/react-stripe-js";
 
 const iconStyle: ('default' | 'solid') = 'solid'
 
@@ -24,12 +24,13 @@ const CARD_OPTIONS = {
             iconColor: "#ec59c3",
             color: "#e547cc"
         }
-    }
+    },
+    hidePostalCode: true
 };
 
 const CardField = ({ onChange = (e: any) => {} }) => (
     <div className="FormRow">
-        <CardNumberElement options={CARD_OPTIONS} onChange={onChange} />
+        <CardElement options={CARD_OPTIONS} onChange={onChange} />
     </div>
 );
 

@@ -35,7 +35,7 @@ const Header: FC<HeaderProps> = ({isMain}) => {
 
                     <div className={'flex items-center'}>
                         <Link href={'/payment'}>
-                            <SimpleButton text={'S\'abonner'}/>
+                            <SimpleButton text={'Acheter Credits'}/>
                         </Link>
                         <IconButton
                             edge="end"

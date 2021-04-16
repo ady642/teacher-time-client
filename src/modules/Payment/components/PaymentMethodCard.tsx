@@ -1,14 +1,14 @@
 import {FunctionComponent} from "react";
 import TailwindCard from "@/common/components/Cards/TailwindCard";
-import Select from "@/common/components/Selects/Select";
-import PaymentMethodList from "@/modules/Payment/components/PaymentMethodList";
+import CardForm from "@/modules/Payment/components/CreditCardForm/CardForm";
 
 interface PaymentMethodCardProps {
     handleCountryChange?: Function
     handlePaymentItemClick: Function
+    creditsChosen: number
 }
 
-const PaymentMethodCard: FunctionComponent<PaymentMethodCardProps> = ({ handleCountryChange, handlePaymentItemClick = () => {} }) => {
+const PaymentMethodCard: FunctionComponent<PaymentMethodCardProps> = ({ creditsChosen, handleCountryChange, handlePaymentItemClick = () => {} }) => {
     const countriesItems = [{
         value: 'France',
         label: 'France'
@@ -17,15 +17,15 @@ const PaymentMethodCard: FunctionComponent<PaymentMethodCardProps> = ({ handleCo
         label: 'Spain'
     }]
 
-    return <TailwindCard className={'mt-6'}>
+    return <TailwindCard>
         <div className={'flex w-full justify-between items-center border-b-2 p-4'}>
             <div className={'flex items-center'}>
                 <h1 className={'text-black text-xl'}>Mode de paiement</h1>
-                <span className={'text-gray-400 ml-4'}>Pays / Région de Facturation</span>
             </div>
-            <Select value={'France'} handleChange={handleCountryChange} items={countriesItems} label={'Pays'} />
         </div>
-        <PaymentMethodList handleItemClick={handlePaymentItemClick} />
+        <div className={'p-5'}>
+            <CardForm creditsChosen={creditsChosen} />
+        </div>
     </TailwindCard>
 }
 
