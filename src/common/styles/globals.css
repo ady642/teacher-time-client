@@ -1,3 +1,5 @@
+@import './stripe_style.css';
+
 @tailwind components;
 @tailwind utilities;
 @tailwind base;
@@ -9,4 +11,12 @@ button:focus {
 
 a:hover {
     text-decoration: none!important;
+}
+
+html,body, #__next {
+    height: 100%;
+}
+
+.h-min {
+    height: min-content;
 }
