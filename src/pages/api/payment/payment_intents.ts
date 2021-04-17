@@ -1,6 +1,5 @@
 import Stripe from "stripe";
 
-console.log(process.env.SECRET_STRIPE_KEY)
 const stripe = new Stripe(process.env.SECRET_STRIPE_KEY, { apiVersion: "2020-08-27" });
 
 export default async (req: any, res: any) => {

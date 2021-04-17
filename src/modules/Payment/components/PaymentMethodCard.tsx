@@ -3,21 +3,11 @@ import TailwindCard from "@/common/components/Cards/TailwindCard";
 import CardForm from "@/modules/Payment/components/CreditCardForm/CardForm";
 
 interface PaymentMethodCardProps {
-    handleCountryChange?: Function
-    handlePaymentItemClick: Function
     creditsChosen: number
 }
 
-const PaymentMethodCard: FunctionComponent<PaymentMethodCardProps> = ({ creditsChosen, handleCountryChange, handlePaymentItemClick = () => {} }) => {
-    const countriesItems = [{
-        value: 'France',
-        label: 'France'
-    }, {
-        value: 'Spain',
-        label: 'Spain'
-    }]
-
-    return <TailwindCard>
+const PaymentMethodCard: FunctionComponent<PaymentMethodCardProps> = ({ creditsChosen }) => {
+    return <TailwindCard className={'h-min'}>
         <div className={'flex w-full justify-between items-center border-b-2 p-4'}>
             <div className={'flex items-center'}>
                 <h1 className={'text-black text-xl'}>Mode de paiement</h1>

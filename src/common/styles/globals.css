@@ -16,3 +16,7 @@ a:hover {
 html,body, #__next {
     height: 100%;
 }
+
+.h-min {
+    height: min-content;
+}

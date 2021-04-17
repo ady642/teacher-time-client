@@ -7,9 +7,9 @@ interface CreditListProps {
 }
 
 const CreditList: FunctionComponent<CreditListProps> = ({ creditsChosen = 20, onCreditChange }) => {
-    const credits = [10, 20, 30, 50, 75, 100, 200, 500]
+    const credits = [5, 10, 20, 30, 50, 75, 100, 200, 500]
 
-    return <div className={'flex flex-wrap mt-2 justify-center'}>
+    return <div className={'grid grid-cols-2 sm:grid-cols-3 gap-2'}>
         { credits.map((credit: number) => <CreditChoice
             active={creditsChosen === credit}
             key={credit}
