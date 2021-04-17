@@ -9,11 +9,11 @@ interface CreditChoiceProps {
 const CreditChoice: FunctionComponent<CreditChoiceProps> = ({ onClick, creditNumber = 20, active = false }) => {
     return <div
         onClick={() => onClick()}
-        className={`${ active ? 'border-2 border-green-400 bg-green-50' : 'border border-gray-300' } w-36 sm:w-48 hover:-translate-y-1 cursor-pointer h-20 rounded text-black bg-white flex justify-center items-center`}
+        className={`${ active ? 'border-2 border-green-400 bg-green-50' : 'border border-gray-300' } w-24 sm:w-36 hover:-translate-y-1 cursor-pointer h-15 sm:h-20 rounded text-black bg-white flex justify-center items-center`}
     >
         <div>
-            <span className="text-3xl font-bold">{ creditNumber }</span>
-            <span className="text-md">€</span>
+            <span className="text-xl sm:text-3xl font-bold">{ creditNumber }</span>
+            <span className="text-sm sm:text-md">€</span>
         </div>
     </div>
 }

@@ -1,5 +1,6 @@
 import { ReactNode, FC } from 'react'
 import Header from '@/common/components/Headers/Header'
+import BottomBar from "@/common/components/BottomNavigation/BottomNavigation";
 
 type LayoutProps = {
     children: ReactNode
@@ -10,6 +11,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <>
             <Header isMain={true} />
             {children}
+            <BottomBar />
         </>
     )
 }
