@@ -13,7 +13,9 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({rating = 4}) => {
     return <div className={styles.card}>
         <header className={'p-2 flex flex-col'}>
             <div className={'flex'}>
-                <Image className={'rounded'} src={'/img/avatar.jpeg'} width={100} height={100} alt={'photo prof'}/>
+                <div className={styles.tutorPhoto}>
+                    <Image className={'rounded'} src={'/img/avatar.jpeg'} width={100} height={100} alt={'photo prof'}/>
+                </div>
                 <div className={'ml-3 flex flex-col'}>
                     <span className={`${styles.tutorName} font-bold text-xl`}>Yves Haïk</span>
                     <Rating
@@ -32,10 +34,10 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({rating = 4}) => {
                 </div>
             </div>
             <div className={'mt-3'}>
-                <p className={'text-gray-500 text-xs'}>
+                <p className={'text-gray-500 flex flex-wrap text-xs'}>
                     10 years teaching inside the classroom and outside on the sports field - a great balance of English language. I am patient and funny.
                 </p>
-                <div className={'flex justify-end'}>
+                <div className={'flex justify-end mt-2'}>
                     <button className={'transition-all rounded uppercase p-2 font-medium bg-green-400 text-white text-sm hover:bg-green-600'}>Appel</button>
                 </div>
             </div>
