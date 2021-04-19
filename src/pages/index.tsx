@@ -11,7 +11,7 @@ const Home: FC = () => {
       return (
           <div className={styles.container}>
             <Head>
-              <title>Planete Elève</title>
+              <title>Teacher Time</title>
               <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={'flex flex-col justify-start'}>

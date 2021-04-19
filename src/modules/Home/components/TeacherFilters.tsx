@@ -19,8 +19,8 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
         value: 'Maths',
         label: 'Maths'
     }, {
-        value: 'Espagnol',
-        label: 'Espagnol'
+        value: 'Spanish',
+        label: 'Spanish'
     }, {
         value: 'SVT',
         label: 'SVT'
@@ -28,10 +28,10 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 
     return <div className={'flex flex-col p-8'}>
         <div className={'flex flex-wrap'}>
-            <h1 className={'flex items-center text-l sm:text-2xl'}>Trouver un professeur</h1>
+            <h1 className={'flex items-center text-l sm:text-2xl'}>Find a teacher</h1>
             <div className="relative ml-0 sm:ml-6">
                 <input type="search" className="bg-purple-white shadow rounded border-0 p-3"
-                       placeholder="Nom, matière..."/>
+                       placeholder="Name, matière..."/>
                 <SearchIcon className="absolute" style={{right: 10, top: 12}}/>
             </div>
         </div>
