@@ -4,11 +4,20 @@ import { Button } from '@material-ui/core';
 interface SimpleButtonProps {
     text: string
     onClick: () => void
-    size?: string
+    size?: any
+    variant?: any
+    color?: any
 }
 
-const SimpleButton: FunctionComponent<SimpleButtonProps> = ({ text, onClick, size }) => {
-    return <Button size={'small'} onClick={onClick} variant="contained" color="secondary">{ text }</Button>
-}
+const SimpleButton: FunctionComponent<SimpleButtonProps> = (
+    { text, onClick, color = 'secondary', variant = 'contained', size = 'small' }
+) => <Button
+        size={size}
+        onClick={onClick}
+        variant={variant}
+        color={color}
+    >
+        { text }
+    </Button>
 
 export default SimpleButton

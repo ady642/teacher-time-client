@@ -18,7 +18,7 @@ const PESelect: FunctionComponent<SelectProps> = ({ value, handleChange, label, 
                 label={label}
                 margin="dense"
             >
-                {items.map((item: any) => <MenuItem value={item.value}>{item.label}</MenuItem>)}
+                {items.map((item: any) => <MenuItem key={item.label} value={item.value}>{item.label}</MenuItem>)}
             </Select>
         </FormControl>
 }

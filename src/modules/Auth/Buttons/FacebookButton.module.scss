@@ -1,0 +1,20 @@
+$white: #fff;
+$google-blue: #4285f4;
+$button-active-blue: #1669F2;
+
+.fbButton {
+  background: #1877f2;
+  transition: all 0.3s;
+  &:hover {
+    box-shadow: 0 0 6px #dddddd;
+    transform: translateY(-4px);
+  }
+  &:active {
+    background: $button-active-blue;
+  }
+}
+
+.fbIcon {
+  width: 30px;
+  heigth: 30px;
+}
