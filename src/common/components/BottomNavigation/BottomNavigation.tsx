@@ -12,7 +12,7 @@ const BottomBar: FunctionComponent = () => {
         }}
         showLabels
         color={'primary'}
-        className={'block sm:hidden fixed bottom-0 z-50 w-full'}
+        className={'flex sm:hidden fixed bottom-0 z-50 w-full'}
     >
         <BottomNavigationAction label="Professeurs" icon={<AccountCircle />} />
         <BottomNavigationAction label="Mon compte" icon={<AccountCircle />} />
