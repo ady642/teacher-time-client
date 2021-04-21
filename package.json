@@ -1,11 +1,12 @@
 {
-  "name": "planete-eleve",
+  "name": "teacher-time",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export"
   },
   "dependencies": {
     "@emotion/react": "^11.1.5",

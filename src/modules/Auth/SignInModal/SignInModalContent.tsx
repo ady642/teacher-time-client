@@ -7,7 +7,6 @@ import Logo from "@/common/components/Logos/Logo";
 const SignInModalContent: FunctionComponent = () => {
     return <div className={'flex flex-col p-4 w-80'}>
             <div className={'flex flex-col items-center mb-3'}>
-                <span className={'text-2xl'}>Sign in to</span>
                 <Logo height={70}/>
                 <p className={'my-4 text-gray-400'}>Log in to make a call to a teacher</p>
             </div>

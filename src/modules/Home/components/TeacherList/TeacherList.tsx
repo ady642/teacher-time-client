@@ -12,12 +12,11 @@ const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onClickOnT
         <h2 className={'text-l uppercase text-gray-500'}>Professeurs disponibles</h2>
         <section className={'flex flex-wrap justify-between mt-4'}>
             {
-                teachers.map((teacher: Teacher) => {
-                    return <TeacherCard
+                teachers.map((teacher: Teacher) => <TeacherCard
+                        key={teacher.id}
                         teacher={teacher}
                         onClickOnTeacherCall={onClickOnTeacherCall}
-                    />
-                })
+                    />)
             }
         </section>
     </div>

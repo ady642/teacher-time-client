@@ -38,11 +38,15 @@ const Home: FC = ({ teachers }: InferGetServerSidePropsType<typeof getServerSide
 (Home as PageWithLayoutType).layout = DefaultLayout
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { data } = await axios.get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
-
-    const session = await getSession(context)
-
-    return { props: { teachers: data, session } }
+    try {
+        const { data: teachers } = await axios.get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
+        const session = await getSession(context)
+        return {
+            props: { teachers, session }
+        }
+    } catch (e) {
+        throw new Error(e)
+    }
 }
 
 export default Home
