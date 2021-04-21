@@ -1,12 +1,17 @@
-import {FunctionComponent} from "react";
+import {FC} from "react";
 import Image from 'next/image'
 
-const Logo: FunctionComponent = () => {
+interface LogoProps {
+    width?: number
+    height?: number
+}
+
+const Logo: FC<LogoProps> = ({ width = 'auto', height = 'auto' }) => {
     return <Image
-        src={'/img/logo.jpeg'}
-        alt="Picture of the author"
-        width={100}
-        height={40}
+        src={'/img/logo/logo_crop.png'}
+        alt="Logo"
+        width={width}
+        height={height}
     />
 }
 

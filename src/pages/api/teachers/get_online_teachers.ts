@@ -11,7 +11,7 @@ export default async (req: any, res: any) => {
                 "name": "Gaston Haïk",
                 "avatar": "/img/avatar.jpeg",
                 "description": "10 years teaching inside the classroom and outside on the sports field - a great balance of English language. I am patient and funny.",
-                "hasDiplom": true,
+                "hasDiploma": true,
                 "rating": 5
             }, {
                 "name": "Adrien Haïk",

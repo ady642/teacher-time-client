@@ -2,12 +2,12 @@ import {FC, useState} from 'react'
 import {AppBar, Toolbar, Link} from "@material-ui/core";
 import { useSession, signOut } from 'next-auth/client'
 
-import Logo from '@/common/components/Logos/Logo'
 import TextButton from '@/common/components/Buttons/TextButton'
 import SimpleButton from "@/common/components/Buttons/SimpleButton";
 import PaymentModal from "@/modules/Payment/components/PaymentModal";
 import SignInModal from "@/modules/Auth/SignInModal/SignInModal";
 import SignOutButton from "@/modules/Auth/Buttons/SignOutButton";
+import LogoBook from "@/common/components/Logos/LogoBook";
 
 type HeaderProps = {
     isMain: boolean
@@ -31,7 +31,9 @@ const Header: FC<HeaderProps> = ({isMain}) => {
                 <div className={'flex w-full items-center justify-between'}>
                     <div className={'flex items-center'}>
                         <Link href={'/'}>
-                            <Logo/>
+                            <div className={'p-3'}>
+                                <LogoBook height={50} width={70}/>
+                            </div>
                         </Link>
                         <div className={'ml-4 hidden sm:block'}>
                             <Link href={'/'}>
@@ -39,9 +41,8 @@ const Header: FC<HeaderProps> = ({isMain}) => {
                             </Link>
                         </div>
                     </div>
-
                     {session && <div className={'flex items-center'}>
-                        <SimpleButton size={'small'} onClick={openPaymentModal} text={'Acheter Credits'}/>
+                        <SimpleButton size={'small'} onClick={openPaymentModal} text={'Buy Credits'}/>
                         <div className={'ml-3'}>
                             <SignOutButton onClick={signOut} />
                         </div>

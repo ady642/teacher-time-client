@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Head from 'next/head'
-import { useSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/client'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import axios from "axios";
 
@@ -9,6 +9,7 @@ import DefaultLayout from '@/common/layouts/DefaultLayout'
 import styles from '@/modules/Home/styles/Home.module.scss'
 import TeacherFilters from "@/modules/Home/components/TeacherFilters";
 import TeacherList from "@/modules/Home/components/TeacherList/TeacherList";
+
 
 const Home: FC = ({ teachers }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [session] = useSession()
@@ -36,12 +37,12 @@ const Home: FC = ({ teachers }: InferGetServerSidePropsType<typeof getServerSide
 
 (Home as PageWithLayoutType).layout = DefaultLayout
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const { data } = await axios.get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
 
-    console.log(data)
+    const session = await getSession(context)
 
-    return { props: { teachers: data } }
+    return { props: { teachers: data, session } }
 }
 
 export default Home
