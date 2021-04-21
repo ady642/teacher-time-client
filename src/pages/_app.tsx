@@ -1,20 +1,25 @@
 import '@/common/styles/globals.css'
+import {NextPage} from "next";
 import {Provider} from 'next-auth/client'
 
-import PageWithLayoutType from '@/common/types/pageWithLayout'
+import { ContextProvider } from "@/context";
+import DefaultLayout from "@/common/layouts/DefaultLayout";
 
 type AppLayoutProps = {
-    Component: PageWithLayoutType
+    Component: NextPage
     pageProps: any
 }
 
 function MyApp({Component, pageProps}: AppLayoutProps) {
-    const Layout = Component.layout || ((children: any) => <>{children}</>)
-    return <Layout>
-        <Provider session={pageProps.session}>
-            <Component {...pageProps} />
-        </Provider>
-    </Layout>
+    const Layout = DefaultLayout
+    return <ContextProvider>
+        <Layout>
+            <Provider session={pageProps.session}>
+                <Component {...pageProps} />
+            </Provider>
+        </Layout>
+    </ContextProvider>
+
 }
 
 export default MyApp

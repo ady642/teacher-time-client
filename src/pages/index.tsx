@@ -1,27 +1,29 @@
-import { FC } from 'react'
+import {FC} from 'react'
 import Head from 'next/head'
 import { useSession, getSession } from 'next-auth/client'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import axios from "axios";
 
-import PageWithLayoutType from '@/common/types/pageWithLayout'
-import DefaultLayout from '@/common/layouts/DefaultLayout'
 import styles from '@/modules/Home/styles/Home.module.scss'
 import TeacherFilters from "@/modules/Home/components/TeacherFilters";
 import TeacherList from "@/modules/Home/components/TeacherList/TeacherList";
-
+import {useAppContext} from "@/context";
+import {OPEN_SIGN_IN_MODAL} from "@/context/reducers/auth/reducersTypes";
 
 const Home: FC = ({ teachers }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [session] = useSession()
+    const { dispatch } = useAppContext();
+
+    const openSignInModal = () => dispatch({type: OPEN_SIGN_IN_MODAL})
 
     const onClickOnTeacherCall = (teacherId = '') => {
-        session ? console.log('japelle le teacher') : console.log('jopen la modal de connexion')
+        session ? console.log('jouvre la fenetre pour parler au teacher') : openSignInModal()
     }
 
       return (
           <div className={styles.container}>
             <Head>
-              <title>Teacher Time</title>
+              <title>Teachers</title>
               <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={'flex flex-col justify-start'}>
@@ -35,8 +37,6 @@ const Home: FC = ({ teachers }: InferGetServerSidePropsType<typeof getServerSide
       )
     }
 
-(Home as PageWithLayoutType).layout = DefaultLayout
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
         const { data: teachers } = await axios.get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
@@ -45,7 +45,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             props: { teachers, session }
         }
     } catch (e) {
-        throw new Error(e)
+        return {
+            props: { teachers: [], session: {} }
+        }
     }
 }
 

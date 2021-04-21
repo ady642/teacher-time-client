@@ -9,7 +9,7 @@ type LayoutProps = {
 const Layout: FC<LayoutProps> = ({ children }) => {
     return (
         <>
-            <Header isMain={true} />
+            <Header />
             {children}
             <BottomBar />
         </>

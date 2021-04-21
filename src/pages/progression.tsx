@@ -1,6 +1,4 @@
 import {FunctionComponent} from "react";
-import PageWithLayoutType from "@/common/types/pageWithLayout";
-import DefaultLayout from "@/common/layouts/DefaultLayout";
 import { useSession, signIn, signOut } from 'next-auth/client'
 
 const Progression: FunctionComponent = () => {
@@ -21,7 +19,5 @@ const Progression: FunctionComponent = () => {
         </div>
     </>
 }
-
-(Progression as PageWithLayoutType).layout = DefaultLayout
 
 export default Progression

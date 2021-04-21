@@ -1,4 +1,4 @@
-import {FC, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {AppBar, Toolbar, Link} from "@material-ui/core";
 import { useSession, signOut } from 'next-auth/client'
 
@@ -8,14 +8,21 @@ import PaymentModal from "@/modules/Payment/components/PaymentModal";
 import SignInModal from "@/modules/Auth/SignInModal/SignInModal";
 import SignOutButton from "@/modules/Auth/Buttons/SignOutButton";
 import LogoBook from "@/common/components/Logos/LogoBook";
+import {useAppContext} from "@/context";
+import {CLOSE_SIGN_IN_MODAL, OPEN_SIGN_IN_MODAL} from "@/context/reducers/auth/reducersTypes";
 
-type HeaderProps = {
-    isMain: boolean
-}
-
-const Header: FC<HeaderProps> = ({isMain}) => {
+const Header: FC = () => {
     const [paymentModalOpened, setPaymentModalOpened] = useState(false)
+    const [openedTest, setOpenedTest] = useState(false)
     const [ session ] = useSession()
+    const { state, dispatch } = useAppContext();
+    const openSignInModal = () => dispatch({ type: OPEN_SIGN_IN_MODAL })
+    const closeSignInModal = () => dispatch({type: CLOSE_SIGN_IN_MODAL})
+
+    useEffect(() => {
+        console.log(state)
+        setOpenedTest(state.auth.signInModalOpened)
+    }, [state.auth.signInModalOpened])
 
     const openPaymentModal = () => {
         setPaymentModalOpened(true)
@@ -47,7 +54,11 @@ const Header: FC<HeaderProps> = ({isMain}) => {
                             <SignOutButton onClick={signOut} />
                         </div>
                     </div>}
-                    {!session && <SignInModal />}
+                    {!session && <SignInModal
+                        opened={openedTest}
+                        handleOpen={openSignInModal}
+                        handleClose={closeSignInModal}
+                    />}
                 </div>
             </Toolbar>
             <PaymentModal open={paymentModalOpened} handleClose={handlePaymentModalClose} />
