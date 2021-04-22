@@ -1,5 +1,5 @@
 import {createContext, useContext, useReducer} from 'react';
-import auth from "@/context/reducers/auth";
+import auth from "@/context/auth/reducers";
 import initialState from "@/context/state/state";
 
 export const Context = createContext({ dispatch: ({

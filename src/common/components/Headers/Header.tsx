@@ -8,21 +8,14 @@ import PaymentModal from "@/modules/Payment/components/PaymentModal";
 import SignInModal from "@/modules/Auth/SignInModal/SignInModal";
 import SignOutButton from "@/modules/Auth/Buttons/SignOutButton";
 import LogoBook from "@/common/components/Logos/LogoBook";
-import {useAppContext} from "@/context";
-import {CLOSE_SIGN_IN_MODAL, OPEN_SIGN_IN_MODAL} from "@/context/reducers/auth/reducersTypes";
+import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 const Header: FC = () => {
     const [paymentModalOpened, setPaymentModalOpened] = useState(false)
-    const [openedTest, setOpenedTest] = useState(false)
     const [ session ] = useSession()
-    const { state, dispatch } = useAppContext();
-    const openSignInModal = () => dispatch({ type: OPEN_SIGN_IN_MODAL })
-    const closeSignInModal = () => dispatch({type: CLOSE_SIGN_IN_MODAL})
-
-    useEffect(() => {
-        console.log(state)
-        setOpenedTest(state.auth.signInModalOpened)
-    }, [state.auth.signInModalOpened])
+    const { openSignInModal, closeSignInModal } = useAuthReducers()
+    const { signInModalOpened } = useAuthGetters()
 
     const openPaymentModal = () => {
         setPaymentModalOpened(true)
@@ -55,7 +48,7 @@ const Header: FC = () => {
                         </div>
                     </div>}
                     {!session && <SignInModal
-                        opened={openedTest}
+                        opened={signInModalOpened}
                         handleOpen={openSignInModal}
                         handleClose={closeSignInModal}
                     />}

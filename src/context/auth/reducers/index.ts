@@ -1,4 +1,4 @@
-import {CLOSE_SIGN_IN_MODAL, OPEN_SIGN_IN_MODAL} from "@/context/reducers/auth/reducersTypes";
+import {CLOSE_SIGN_IN_MODAL, OPEN_SIGN_IN_MODAL} from "@/context/auth/reducers/reducersTypes";
 
 const authReducer = (state: any, action: { type: string }) => {
     switch (action.type) {

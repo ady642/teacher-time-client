@@ -7,14 +7,11 @@ import axios from "axios";
 import styles from '@/modules/Home/styles/Home.module.scss'
 import TeacherFilters from "@/modules/Home/components/TeacherFilters";
 import TeacherList from "@/modules/Home/components/TeacherList/TeacherList";
-import {useAppContext} from "@/context";
-import {OPEN_SIGN_IN_MODAL} from "@/context/reducers/auth/reducersTypes";
+import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 
 const Home: FC = ({ teachers }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [session] = useSession()
-    const { dispatch } = useAppContext();
-
-    const openSignInModal = () => dispatch({type: OPEN_SIGN_IN_MODAL})
+    const { openSignInModal }= useAuthReducers()
 
     const onClickOnTeacherCall = (teacherId = '') => {
         session ? console.log('jouvre la fenetre pour parler au teacher') : openSignInModal()
