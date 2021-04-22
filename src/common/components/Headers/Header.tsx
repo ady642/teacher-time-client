@@ -10,6 +10,7 @@ import SignOutButton from "@/modules/Auth/Buttons/SignOutButton";
 import LogoBook from "@/common/components/Logos/LogoBook";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
+import CreditsNumber from "@/modules/Payment/components/CreditsNumber";
 
 const Header: FC = () => {
     const [paymentModalOpened, setPaymentModalOpened] = useState(false)
@@ -42,6 +43,9 @@ const Header: FC = () => {
                         </div>
                     </div>
                     {session && <div className={'flex items-center'}>
+                        <div className={'mr-4'}>
+                            <CreditsNumber credits={20} />
+                        </div>
                         <SimpleButton size={'small'} onClick={openPaymentModal} text={'Buy Credits'}/>
                         <div className={'ml-3'}>
                             <SignOutButton onClick={signOut} />

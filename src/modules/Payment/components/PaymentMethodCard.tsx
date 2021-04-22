@@ -10,7 +10,7 @@ const PaymentMethodCard: FunctionComponent<PaymentMethodCardProps> = ({ creditsC
     return <TailwindCard className={'h-min'}>
         <div className={'flex w-full justify-between items-center border-b-2 p-4'}>
             <div className={'flex items-center'}>
-                <h1 className={'text-black text-xl'}>Mode de paiement</h1>
+                <h1 className={'text-black text-xl'}>Payment</h1>
             </div>
         </div>
         <div className={'p-5'}>

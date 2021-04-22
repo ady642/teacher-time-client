@@ -3,18 +3,11 @@ import Stripe from "stripe";
 const stripe = new Stripe(process.env.SECRET_STRIPE_KEY, { apiVersion: "2020-08-27" });
 
 export default async (req: any, res: any) => {
-    if (req.method === "POST") {
+    if (req.method === "GET") {
         try {
-            const { amount, user: { email } } = req.body;
+            const customer = await stripe.customers.retrieve(req.query.id)
 
-            await stripe.customers.create({email})
-
-            const paymentIntent = await stripe.paymentIntents.create({
-                amount,
-                currency: "eur"
-            });
-
-            res.status(200).send(paymentIntent.client_secret);
+            res.status(200).send(customer);
         } catch (err) {
             res.status(500).json({ statusCode: 500, message: err.message });
         }

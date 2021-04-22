@@ -13,11 +13,11 @@ type AppLayoutProps = {
 function MyApp({Component, pageProps}: AppLayoutProps) {
     const Layout = DefaultLayout
     return <ContextProvider>
-        <Layout>
             <Provider session={pageProps.session}>
-                <Component {...pageProps} />
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
             </Provider>
-        </Layout>
     </ContextProvider>
 
 }

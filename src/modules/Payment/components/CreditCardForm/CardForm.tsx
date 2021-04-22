@@ -4,8 +4,9 @@ import Field from "@/modules/Payment/components/CreditCardForm/InfoField";
 import CardField from "@/modules/Payment/components/CreditCardForm/CardField";
 import SubmitButton from "@/modules/Payment/components/CreditCardForm/SubmitButton";
 import ErrorMessage from "@/modules/Payment/components/CreditCardForm/ErrorMessage";
-import axios from 'axios'
 import SuccessPaymentCard from "@/modules/Payment/components/CreditCardForm/SuccessPaymentCard";
+import {useSession} from "next-auth/client";
+import usePaymentClient from "@/modules/Payment/services/PaymentClient";
 
 interface CardFormProps {
     creditsChosen: number
@@ -14,6 +15,8 @@ interface CardFormProps {
 const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
     const stripe = useStripe();
     const elements = useElements();
+    const [session] = useSession()
+    const { paymentIntent } = usePaymentClient()
 
     const [error, setError] = useState(null);
     const [cardComplete, setCardComplete] = useState(false);
@@ -25,6 +28,11 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
 
     const pay = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
+
+        if(!session) {
+            throw new Error('session not defined')
+            return
+        }
 
         try {
             if (!stripe || !elements) {
@@ -40,9 +48,7 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
                 setProcessing(true);
             }
 
-            const {data: clientSecret} = await axios.post("/api/payment/payment_intents", {
-                amount: creditsChosen * 100
-            });
+            const clientSecret = await paymentIntent({ user: session.user, amount: creditsChosen * 100 })
 
             const paymentMethodRequest = await stripe.createPaymentMethod({
                 type: "card",
@@ -60,7 +66,7 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
                 setPaymentMethod(paymentMethodRequest.paymentMethod);
             }
         } catch (e) {
-            alert('Erreur lié au paiement, veuillez contacter le support client')
+            alert('Payment error, please contact support at support@teacher-time.com')
         } finally {
             setProcessing(false);
         }
@@ -103,7 +109,7 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
             </fieldset>
             {error && <ErrorMessage>{error.message}</ErrorMessage>}
             <SubmitButton processing={processing} error={error} disabled={!stripe}>
-                Acheter {creditsChosen}€ Credits
+                Buy {creditsChosen}€ credits
             </SubmitButton>
         </form>
 };
