@@ -9,6 +9,7 @@ export default NextAuth({
         Providers.Google({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
         }),
         Providers.Facebook({
             clientId: process.env.FACEBOOK_CLIENT_ID,
@@ -26,7 +27,7 @@ export default NextAuth({
     // The secret should be set to a reasonably long random string.
     // It is used to sign cookies and to sign and encrypt JSON Web Tokens, unless
     // a separate secret is defined explicitly for encrypting the JWT.
-    secret: process.env.SECRET,
+    secret: process.env.JWT_SECRET,
 
     session: {
         // Use JSON Web Tokens for session instead of database sessions.
@@ -47,6 +48,8 @@ export default NextAuth({
     // option is set - or by default if no database is specified.
     // https://next-auth.js.org/configuration/options#jwt
     jwt: {
+        secret: process.env.JWT_SECRET,
+        encryption: true
         // A secret to use for key generation (you should set this explicitly)
         // secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw',
         // Set to true to use encryption (default: false)
