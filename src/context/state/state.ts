@@ -1,5 +1,6 @@
 export default {
-    auth: {
-        signInModalOpened: false
-    },
+	auth: {
+		signInModalOpened: false,
+		token: '',
+	},
 }

@@ -6,7 +6,7 @@ interface SignInModalActivatorProps {
 }
 
 const SignInModalActivator: FunctionComponent<SignInModalActivatorProps> = ({ onClick }) => {
-    return <SimpleButton text={'Sign In'} onClick={onClick} />
+	return <SimpleButton text={'Sign In'} onClick={onClick} />
 }
 
 export default SignInModalActivator

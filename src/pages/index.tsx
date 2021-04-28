@@ -1,6 +1,5 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import Head from 'next/head'
-import { useSession, getSession } from 'next-auth/client'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 import axios from "axios";
 
@@ -8,13 +7,14 @@ import styles from '@/modules/Home/styles/Home.module.scss'
 import TeacherFilters from "@/modules/Home/components/TeacherFilters";
 import TeacherList from "@/modules/Home/components/TeacherList/TeacherList";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 const Home: FC = ({ teachers }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-    const [session] = useSession()
     const { openSignInModal }= useAuthReducers()
+    const { token } = useAuthGetters()
 
     const onClickOnTeacherCall = (teacherId = '') => {
-        session ? console.log('jouvre la fenetre pour parler au teacher') : openSignInModal()
+        token ? console.log('jouvre la fenetre pour parler au teacher') : openSignInModal()
     }
 
       return (
@@ -34,16 +34,15 @@ const Home: FC = ({ teachers }: InferGetServerSidePropsType<typeof getServerSide
       )
     }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
     try {
         const { data: teachers } = await axios.get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
-        const session = await getSession(context)
         return {
-            props: { teachers, session }
+            props: { teachers }
         }
     } catch (e) {
         return {
-            props: { teachers: [], session: {} }
+            props: { teachers: [] }
         }
     }
 }
