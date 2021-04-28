@@ -11,8 +11,6 @@ const useAuthGetters = () => {
 		user = jwt_decode(token);
 	}
 
-	console.log(user)
-
 	return {
 		signInModalOpened,
 		token,

@@ -13,7 +13,7 @@ import CreditsNumber from "@/modules/Payment/components/CreditsNumber";
 
 const Header: FC = () => {
 	const [paymentModalOpened, setPaymentModalOpened] = useState(false)
-	const { openSignInModal, closeSignInModal, signOut } = useAuthReducers()
+	const { openSignInModal, closeSignInModal, resetToken } = useAuthReducers()
 	const { signInModalOpened, token } = useAuthGetters()
 
 	const openPaymentModal = () => {
@@ -46,7 +46,7 @@ const Header: FC = () => {
 						</div>
 						<SimpleButton size={'small'} onClick={openPaymentModal} text={'Buy Credits'}/>
 						<div className={'ml-3'}>
-							<SignOutButton onClick={signOut} />
+							<SignOutButton onClick={resetToken} />
 						</div>
 					</div>}
 					{!token && <SignInModal

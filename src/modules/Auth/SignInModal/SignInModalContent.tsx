@@ -2,10 +2,15 @@ import { FunctionComponent } from 'react';
 import GoogleButton from '@/modules/Auth/Buttons/GoogleButton';
 import FacebookButton from '@/modules/Auth/Buttons/FacebookButton';
 import Logo from '@/common/components/Logos/Logo';
-import useAuthReducers from '@/context/auth/helpers/useAuthReducers';
+import AuthService from "@/modules/Auth/services/AuthService";
+import client from "@/common/utils/client";
 
 const SignInModalContent: FunctionComponent = () => {
-	const { signIn } = useAuthReducers();
+	const authService = new AuthService(client)
+
+	const signIn = (provider: string) => {
+		authService.signIn(provider)
+	}
 
 	return (
 		<div className="flex flex-col p-4 w-80">

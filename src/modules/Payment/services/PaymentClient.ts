@@ -7,16 +7,16 @@ interface PayPayload {
 }
 
 const usePaymentClient = () => {
-    const paymentIntent =  async ({ user, amount }: PayPayload) => {
-        const {data: clientSecret} = await client.post("/api/payment/payment_intents", {
-            amount,
-            user
-        });
+	const paymentIntent =  async ({ user, amount }: PayPayload) => {
+		const {data: clientSecret} = await client.post("/api/payment/payment_intents", {
+			amount,
+			user
+		});
 
-        return clientSecret
-    }
+		return clientSecret
+	}
 
-    return { paymentIntent }
+	return { paymentIntent }
 }
 
 export default usePaymentClient
