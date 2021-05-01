@@ -1,19 +1,20 @@
 import {FC, useEffect} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
-import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 import styles from '@/modules/Home/styles/Home.module.scss'
 import TeacherFilters from "@/modules/Home/components/TeacherFilters";
 import TeacherList from "@/modules/Home/components/TeacherList/TeacherList";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
+import client from "@/common/utils/client";
+import UserSession from "@/common/types/UserSession";
 
 const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { openSignInModal }= useAuthReducers()
 	const { setToken } = useAuthReducers()
 
 	useEffect(() => {
-		console.log(token)
 		setToken(token)
 	}, [token])
 
@@ -40,15 +41,17 @@ const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getSer
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	const token = query?.token ?? ''
-	console.log(token)
+	let balance = 0
+
 	try {
-		const { data: teachers } = await axios.get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
+		const { data: teachers } = await client.get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
+
 		return {
-			props: { teachers, token }
+			props: { teachers, token, balance }
 		}
 	} catch (e) {
 		return {
-			props: { teachers: [], token: '' }
+			props: { teachers: [], token: '', balance }
 		}
 	}
 }

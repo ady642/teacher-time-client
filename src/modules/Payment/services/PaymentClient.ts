@@ -1,22 +1,34 @@
-import UserSession from "@/common/types/UserSession";
 import client from "@/common/utils/client";
 
 interface PayPayload {
-    user: UserSession,
+    email: string,
     amount: number
 }
 
-const usePaymentClient = () => {
-	const paymentIntent =  async ({ user, amount }: PayPayload) => {
-		const {data: clientSecret} = await client.post("/api/payment/payment_intents", {
-			amount,
-			user
-		});
+const paymentIntent = async ({ email, amount }: PayPayload) => {
+	const {data: clientSecret} = await client.post(`${process.env.SERVER_URL}/payment/stripe/intent`, {
+		email,
+		amount,
+	});
 
-		return clientSecret
-	}
-
-	return { paymentIntent }
+	return clientSecret
 }
+
+const addCredits = async ({ email, amount }: PayPayload) => {
+	await client.post(`${process.env.SERVER_URL}/payment/stripe/add_credits`, {
+		email,
+		amount,
+	});
+}
+
+const getBalance = async (email: string) => {
+	await client.post(`${process.env.SERVER_URL}/payment/stripe/get_balance/${email}`);
+}
+
+const usePaymentClient = () => ({
+	paymentIntent,
+	addCredits,
+	getBalance
+})
 
 export default usePaymentClient

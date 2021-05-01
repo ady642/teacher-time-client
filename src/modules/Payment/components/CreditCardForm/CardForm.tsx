@@ -16,7 +16,7 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
 	const stripe = useStripe();
 	const { token, user } = useAuthGetters();
 	const elements = useElements();
-	const { paymentIntent } = usePaymentClient()
+	const { paymentIntent, addCredits } = usePaymentClient()
 
 	const [error, setError] = useState(null);
 	const [cardComplete, setCardComplete] = useState(false);
@@ -47,16 +47,28 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
 				setProcessing(true);
 			}
 
-			const clientSecret = await paymentIntent({ user, amount: creditsChosen * 100 })
+			// Get client secret
+			const clientSecret = await paymentIntent({
+				email: user.email,
+				amount: creditsChosen * 100
+			})
 
+			// Create Payment Method
 			const paymentMethodRequest = await stripe.createPaymentMethod({
-				type: "card",
+				type: 'card',
 				card: elements.getElement(CardElement),
 				billing_details: billingDetails
 			});
 
+			// Use payment method and client secret to pay
 			await stripe.confirmCardPayment(clientSecret, {
 				payment_method: paymentMethodRequest.paymentMethod.id
+			})
+
+			// Add money on customer balance
+			await addCredits({
+				email: user.email,
+				amount: creditsChosen * 100
 			})
 
 			if (paymentMethodRequest.error) {

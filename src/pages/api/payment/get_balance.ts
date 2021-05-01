@@ -3,10 +3,10 @@ import client from "@/common/utils/client";
 export default async (req: any, res: any) => {
 	if (req.method === "GET") {
 		try {
-			const customer = await client.get(`${process.env.SERVER_URL}/payment/stripe/get_customer_by_email/`)
-			res.status(201).json({customer})
+			const balance = await client.post(`${process.env.SERVER_URL}/payment/stripe/get_balance/${req.email}`)
+			res.status(201).json(balance)
 		} catch (err) {
-			res.status(500).json({ statusCode: 500, message: err.message });
+			res.status(500).json({ statusCode: err.status, message: err.message });
 		}
 	} else {
 		res.setHeader("Allow", "POST");
