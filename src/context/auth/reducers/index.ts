@@ -4,7 +4,6 @@ import Cookies from 'js-cookie'
 const authReducer = (state: any, action: { payload: any, type: string }) => {
 	switch (action.type) {
 	case RESET_TOKEN:
-		Cookies.set('token','');
 		return {...state, auth: { token: '', signInModalOpened: state.auth.signInModalOpened }}
 	case SET_TOKEN:
 		Cookies.set('token', action.payload);

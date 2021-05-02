@@ -1,5 +1,6 @@
 import {createContext, useContext, useReducer} from 'react';
 import auth from "@/context/auth/reducers";
+import paymentReducer from "@/context/payment/reducers";
 import initialState from "@/context/state/state";
 
 export const Context = createContext({ dispatch: null, state: initialState });
@@ -10,7 +11,7 @@ const combineReducers = (...reducers: ((arg0: any, arg1: any) => any)[]) => (sta
 };
 
 export const ContextProvider = ({ children = <div>default</div> }) => {
-	const [state, dispatch] = useReducer(combineReducers(auth), initialState);
+	const [state, dispatch] = useReducer(combineReducers(auth, paymentReducer), initialState);
 	const value = { state, dispatch };
 
 	return <Context.Provider value={value}>

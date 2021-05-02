@@ -3,4 +3,7 @@ export default {
 		signInModalOpened: false,
 		token: '',
 	},
+	payment: {
+		balance: 0
+	}
 }

@@ -1,34 +1,31 @@
-import client from "@/common/utils/client";
+import createAxiosInstance from "@/common/utils/client";
 
-interface PayPayload {
-    email: string,
-    amount: number
-}
-
-const paymentIntent = async ({ email, amount }: PayPayload) => {
+const paymentIntent = async (amount: number) => {
 	const {data: clientSecret} = await client.post(`${process.env.SERVER_URL}/payment/stripe/intent`, {
-		email,
 		amount,
 	});
 
 	return clientSecret
 }
 
-const addCredits = async ({ email, amount }: PayPayload) => {
+const addCredits = async (amount: number) => {
 	await client.post(`${process.env.SERVER_URL}/payment/stripe/add_credits`, {
-		email,
 		amount,
 	});
 }
 
-const getBalance = async (email: string) => {
-	await client.post(`${process.env.SERVER_URL}/payment/stripe/get_balance/${email}`);
+const getBalance = async ({ token }: { token: string }): Promise<number> => {
+	const { data: balance } = await client.get(`${process.env.SERVER_URL}/payment/stripe/get_balance`, {
+		headers: {
+			authorization: ` Bearer ${token}`
+		}
+	});
+
+	return balance
 }
 
 const usePaymentClient = () => ({
 	paymentIntent,
 	addCredits,
-	getBalance
+	getBalance,
 })
-
-export default usePaymentClient

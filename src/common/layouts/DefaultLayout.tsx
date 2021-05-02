@@ -1,4 +1,4 @@
-import { ReactNode, FC } from 'react'
+import {ReactNode, FC} from 'react'
 import Header from '@/common/components/Headers/Header'
 import BottomBar from "@/common/components/BottomNavigation/BottomNavigation";
 
@@ -7,13 +7,13 @@ type LayoutProps = {
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-    return (
-        <>
-            <Header />
-            {children}
-            <BottomBar />
-        </>
-    )
+	return (
+		<>
+			<Header />
+			{children}
+			<BottomBar />
+		</>
+	)
 }
 
 export default Layout

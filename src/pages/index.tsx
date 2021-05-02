@@ -1,22 +1,36 @@
-import {FC, useEffect} from 'react'
+import {FC, useCallback, useEffect} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
-import jwt_decode from "jwt-decode";
 
 import styles from '@/modules/Home/styles/Home.module.scss'
 import TeacherFilters from "@/modules/Home/components/TeacherFilters";
 import TeacherList from "@/modules/Home/components/TeacherList/TeacherList";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import client from "@/common/utils/client";
-import UserSession from "@/common/types/UserSession";
+import usePaymentClient from "@/modules/Payment/services/PaymentClient";
+import usePaymentReducers from "@/context/payment/helpers/usePaymentReducers";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const { openSignInModal }= useAuthReducers()
-	const { setToken } = useAuthReducers()
+	const { setBalance } = usePaymentReducers()
+	const { token: tokenCtx } = useAuthGetters()
+	const { openSignInModal, setToken }= useAuthReducers()
+	const { getBalance } = usePaymentClient()
+
+	const fetchMyAPI = useCallback(async () => {
+		if(!token && !tokenCtx) {
+			return
+		}
+
+		let response = await getBalance({ token })
+		setBalance(response)
+	}, [])
 
 	useEffect(() => {
 		setToken(token)
-	}, [token])
+
+		fetchMyAPI()
+	}, [fetchMyAPI])
 
 	const onClickOnTeacherCall = (teacherId = '') => {
 		token ? console.log('jouvre la fenetre pour parler au teacher') : openSignInModal()
@@ -41,17 +55,16 @@ const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getSer
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	const token = query?.token ?? ''
-	let balance = 0
 
 	try {
 		const { data: teachers } = await client.get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
 
 		return {
-			props: { teachers, token, balance }
+			props: { teachers, token }
 		}
 	} catch (e) {
 		return {
-			props: { teachers: [], token: '', balance }
+			props: { teachers: [], token }
 		}
 	}
 }
