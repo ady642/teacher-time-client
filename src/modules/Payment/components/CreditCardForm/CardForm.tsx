@@ -5,8 +5,10 @@ import CardField from "@/modules/Payment/components/CreditCardForm/CardField";
 import SubmitButton from "@/modules/Payment/components/CreditCardForm/SubmitButton";
 import ErrorMessage from "@/modules/Payment/components/CreditCardForm/ErrorMessage";
 import SuccessPaymentCard from "@/modules/Payment/components/CreditCardForm/SuccessPaymentCard";
-import usePaymentClient from "@/modules/Payment/services/PaymentClient";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
+import PaymentClient from "@/modules/Payment/services/PaymentClient";
+import usePaymentReducers from "@/context/payment/helpers/usePaymentReducers";
+import usePaymentGetters from "@/context/payment/helpers/usePaymentGetters";
 
 interface CardFormProps {
     creditsChosen: number
@@ -14,9 +16,11 @@ interface CardFormProps {
 
 const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
 	const stripe = useStripe();
-	const { token, user } = useAuthGetters();
+	const { token } = useAuthGetters();
 	const elements = useElements();
-	const { paymentIntent, addCredits } = usePaymentClient()
+	const paymentClient = new PaymentClient(token)
+	const {setBalance} = usePaymentReducers()
+	const { balance } = usePaymentGetters()
 
 	const [error, setError] = useState(null);
 	const [cardComplete, setCardComplete] = useState(false);
@@ -48,10 +52,7 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
 			}
 
 			// Get client secret
-			const clientSecret = await paymentIntent({
-				email: user.email,
-				amount: creditsChosen * 100
-			})
+			const clientSecret = await paymentClient.paymentIntent(creditsChosen * 100)
 
 			// Create Payment Method
 			const paymentMethodRequest = await stripe.createPaymentMethod({
@@ -66,11 +67,10 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
 			})
 
 			// Add money on customer balance
-			await addCredits({
-				email: user.email,
-				amount: creditsChosen * 100
-			})
+			await paymentClient.addCredits(creditsChosen * 100)
 
+			//Set Balance
+			setBalance(balance + (creditsChosen * 100))
 			if (paymentMethodRequest.error) {
 				setError(paymentMethodRequest.error);
 			} else {

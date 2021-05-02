@@ -7,18 +7,18 @@ export default class Teacher {
     rating: number
 
     constructor({
-        id= '',
-        name = '',
-        avatar = '',
-        description = '',
-        hasDiploma = false,
-        rating = 1
+    	id= '',
+    	name = '',
+    	avatar = '',
+    	description = '',
+    	hasDiploma = false,
+    	rating = 1
     } = {}) {
-        this.id = id
-        this.name = name
-        this.avatar = avatar
-        this.description = description
-        this.hasDiploma = hasDiploma
-        this.rating = rating
+    	this.id = id
+    	this.name = name
+    	this.avatar = avatar
+    	this.description = description
+    	this.hasDiploma = hasDiploma
+    	this.rating = rating
     }
 }
