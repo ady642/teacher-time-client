@@ -12,11 +12,9 @@ const BoardContainer: FunctionComponent<ContainerProps> = ({ socket }) => {
 			<input type='color' />
 		</div>
 
-		<div className={styles.boardContainer}>
-			<Board
-				socket={socket}
-			/>
-		</div>
+		<Board
+			socket={socket}
+		/>
 	</div>
 }
 

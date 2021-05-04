@@ -1,4 +1,4 @@
-import {FunctionComponent, useEffect} from "react";
+import {FunctionComponent, useEffect, useState} from "react";
 import styles from './style.module.css'
 
 interface BoardProps {
@@ -12,7 +12,7 @@ const Board: FunctionComponent<BoardProps> = ({ socket }) => {
 		let context = canvas.getContext('2d');
 
 		let current = {
-			color: 'red',
+			color: 'white',
 			x: 0,
 			y: 0
 		};
@@ -21,13 +21,13 @@ const Board: FunctionComponent<BoardProps> = ({ socket }) => {
 		canvas.addEventListener('mousedown', onMouseDown, false);
 		canvas.addEventListener('mouseup', onMouseUp, false);
 		canvas.addEventListener('mouseout', onMouseUp, false);
-		canvas.addEventListener('mousemove', throttle(onMouseMove, 10), false);
+		canvas.addEventListener('mousemove', throttle(onMouseMove, 50), false);
 
 		//Touch support for mobile devices
 		canvas.addEventListener('touchstart', onMouseDown, false);
 		canvas.addEventListener('touchend', onMouseUp, false);
 		canvas.addEventListener('touchcancel', onMouseUp, false);
-		canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false);
+		canvas.addEventListener('touchmove', throttle(onMouseMove, 50), false);
 
 		for (let i = 0; i < colors.length; i++){
 			colors[i].addEventListener('click', onColorUpdate, false);
@@ -38,11 +38,10 @@ const Board: FunctionComponent<BoardProps> = ({ socket }) => {
 		window.addEventListener('resize', onResize, false);
 		onResize();
 
-
 		function drawLine(x0: number, y0: number, x1: number, y1: number, color: string, isEmitting = false){
 			context.beginPath();
-			context.moveTo(x0, y0);
-			context.lineTo(x1, y1);
+			context.moveTo(x0, y0 - 105);
+			context.lineTo(x1, y1 - 105);
 			context.strokeStyle = color;
 			context.lineWidth = 5;
 			context.stroke();

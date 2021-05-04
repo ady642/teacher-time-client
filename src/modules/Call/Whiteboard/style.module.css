@@ -1,18 +1,11 @@
 .whiteboardContainer {
   width: 100%;
   height: 100%;
-  background: #000;
+  background: #115d50;
 }
 
 .colorPickerContainer {
   text-align: center;
-}
-
-.boardContainer {
-  width: 90%;
-  height: 90%;
-  margin: 1% auto auto;
-  background-color: #FFF;
 }
 
 .board {
