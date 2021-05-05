@@ -10,7 +10,9 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 	return (
 		<>
 			<Header />
-			{children}
+			<div className='relative h-full w-full'>
+				{children}
+			</div>
 			<BottomBar />
 		</>
 	)

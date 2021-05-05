@@ -8,13 +8,11 @@ interface ContainerProps {
 
 const BoardContainer: FunctionComponent<ContainerProps> = ({ socket }) => {
 	return <div className={styles.whiteboardContainer}>
-		<div className={styles.colorPickerContainer}>
-			<input type='color' />
+		<div className={styles.shade}>
+			<Board
+				socket={socket}
+			/>
 		</div>
-
-		<Board
-			socket={socket}
-		/>
 	</div>
 }
 
