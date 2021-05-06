@@ -18,8 +18,6 @@
 }
 
 .board {
-  position: relative;
-  width: 80%;
   border: tan solid 12px;
   border-top: #bda27e solid 12px;
   border-left: #b19876 solid 12px;

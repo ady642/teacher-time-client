@@ -1,48 +1,53 @@
-import {FunctionComponent, useEffect, useRef, useState} from "react";
+import {FunctionComponent, MutableRefObject, useEffect, useRef, useState} from "react";
 import styles from './style.module.css'
 import {SocketData} from "@/modules/Call/Whiteboard/types/SocketData";
+import ChalkParams from "@/modules/Call/Whiteboard/types/ChalkParams";
+import {socket} from "@/common/utils/client";
 
 interface BoardProps {
-	socket: any
+	boardContainerRef: MutableRefObject<HTMLDivElement>;
+	chalkParams: ChalkParams;
+	setChalkParams: (chalkParams: ChalkParams) => void
 }
 
-const Board: FunctionComponent<BoardProps> = ({ socket }) => {
+const Board: FunctionComponent<BoardProps> = ({ chalkParams, setChalkParams, boardContainerRef }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null)
 	const [drawing, setDrawing] = useState(false)
-	const [current, setCurrent] = useState({color: 'white', x: 0, y: 0 })
 
 	const onMouseUp = (e: any) => {
 		setDrawing(false);
-		drawLine(current.x, current.y, e.screenX||e.touches[0].screenX, e.screenY||e.touches[0].screenY, current.color, true);
+		drawLine(chalkParams.x, chalkParams.y, e.pageX||e.touches[0].pageX, e.pageY||e.touches[0].pageY, chalkParams.color, true);
 	}
 
 	const onMouseDown = (e: any) => {
-		console.log(e)
 		setDrawing(true);
-		setCurrent({
-			x: e.screenX||e.touches[0].screenX,
-			y: e.screenY||e.touches[0].screenY,
-			color: current.color
+		setChalkParams({
+			x: e.pageX||e.touches[0].pageX,
+			y: e.pageY||e.touches[0].pageY,
+			color: chalkParams.color
 		})
 	}
 
 	const onMouseMove = (e: any): void => {
 		if (!drawing) { return; }
-		drawLine(current.x, current.y, e.screenX||e.touches[0].screenX, e.screenY||e.touches[0].screenY, current.color, true);
-		setCurrent({
-			x: e.screenX||e.touches[0].screenX,
-			y: e.screenY||e.touches[0].screenY,
-			color: current.color
+		drawLine(chalkParams.x, chalkParams.y, e.pageX||e.touches[0].pageX, e.pageY||e.touches[0].pageY, chalkParams.color, true);
+		setChalkParams({
+			x: e.pageX||e.touches[0].pageX,
+			y: e.pageY||e.touches[0].pageY,
+			color: chalkParams.color
 		})
 	}
 
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, isEmitting = false) => {
 		const canvas = canvasRef.current
 		const context = canvas.getContext('2d')
+		const rect = canvas.getBoundingClientRect();
+		const offsetLeft = rect.left;
+		const offsetTop = rect.top;
 
 		context.beginPath();
-		context.moveTo(x0, y0);
-		context.lineTo(x1, y1);
+		context.moveTo(x0 - offsetLeft - 12, y0 - offsetTop - 12); // 12 is for the borderWidth
+		context.lineTo(x1 - offsetLeft - 12, y1 - offsetTop - 12);
 		context.strokeStyle = color;
 		context.lineWidth = 5;
 		context.stroke();
@@ -70,8 +75,9 @@ const Board: FunctionComponent<BoardProps> = ({ socket }) => {
 
 	const onResize = () => {
 		const canvas = canvasRef.current
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
+		const boardContainer = boardContainerRef.current
+		canvas.width = boardContainer.offsetWidth - 200; // Padding of 200
+		canvas.height = boardContainer.offsetHeight - 200;
 	}
 
 	useEffect(() => {
@@ -80,19 +86,17 @@ const Board: FunctionComponent<BoardProps> = ({ socket }) => {
 		onResize()
 	}, [])
 
-	return <div>
-		<canvas
-			className={styles.board}
-			id="board"
-			ref={canvasRef}
-			onMouseDown={(e) => onMouseDown(e)}
-			onMouseUp={(e) => onMouseUp(e)}
-			onMouseMove={(e) => onMouseMove(e)}
-			onTouchStart={(e) => onMouseDown(e)}
-			onTouchEnd={(e) => onMouseUp(e)}
-			onTouchMove={(e) => onMouseMove(e)}
-		/>
-	</div>
+	return <canvas
+		className={styles.board}
+		id="board"
+		ref={canvasRef}
+		onMouseDown={(e) => onMouseDown(e)}
+		onMouseUp={(e) => onMouseUp(e)}
+		onMouseMove={(e) => onMouseMove(e)}
+		onTouchStart={(e) => onMouseDown(e)}
+		onTouchEnd={(e) => onMouseUp(e)}
+		onTouchMove={(e) => onMouseMove(e)}
+	/>
 }
 
 export default Board
