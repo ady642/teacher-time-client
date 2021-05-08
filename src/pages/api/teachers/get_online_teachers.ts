@@ -1,22 +1,24 @@
+import { uuid } from 'uuidv4';
+
 export default async (req: any, res: any) => {
 	if (req.method === "GET") {
 		try {
 			const onlineTeachers = [{
-				"id": "1",
+				"id": uuid(),
 				"name": "Yves Haïk",
 				"avatar": "/img/avatar.jpeg",
 				"description": "10 years teaching inside the classroom and outside on the sports field - a great balance of English language. I am patient and funny.",
 				"hasDiploma": true,
 				"rating": 5
 			}, {
-				"id": "2",
+				"id": uuid(),
 				"name": "Gaston Haïk",
 				"avatar": "/img/avatar.jpeg",
 				"description": "10 years teaching inside the classroom and outside on the sports field - a great balance of English language. I am patient and funny.",
 				"hasDiploma": true,
 				"rating": 5
 			}, {
-				"id": "3",
+				"id": uuid(),
 				"name": "Adrien Haïk",
 				"avatar": "/img/avatar.jpeg",
 				"description": "10 years teaching inside the classroom and outside on the sports field - a great balance of English language. I am patient and funny.",

@@ -37,7 +37,7 @@ const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getSer
 	}, [fetchMyAPI])
 
 	const onClickOnTeacherCall = (teacherId = '') => {
-		token || tokenCtx ? router.push(`/call/${teacherId}`) : openSignInModal()
+		token || tokenCtx ? router.push(`/room/${teacherId}`) : openSignInModal()
 	}
 
 	return (
