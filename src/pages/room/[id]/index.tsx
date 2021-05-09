@@ -1,9 +1,10 @@
-import {FC, useEffect, useRef, useState} from "react";
+import {FC, useCallback, useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
 import { socket } from "@/common/utils/client";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import PaymentClient from '@/modules/Payment/services/PaymentClient'
+import TeacherClient from '@/modules/Teachers/services/TeacherClient'
 import Teacher from "@/modules/Teachers/models/Teacher";
 
 interface RTCPayload {
@@ -18,7 +19,8 @@ const Room: FC = () => {
 	const { id } = router.query
 
 	const { token } = useAuthGetters()
-	const paymentClient =  new PaymentClient(token)
+	const paymentClient = new PaymentClient(token)
+	const teacherClient = new TeacherClient(token)
 	const [teacher, setTeacher] = useState(new Teacher())
 
 	useEffect(() => {
@@ -32,9 +34,11 @@ const Room: FC = () => {
 	const otherUser = useRef<string>()
 	const userStream = useRef<MediaStream>()
 
+	const spendCredits = () => useCallback()
+
 	useEffect(() => {
 		// Get Teacher from uuid to retrieve information and hourly rate
-		setTeacher(new Teacher(teacherClient.get(id)))
+		teacherClient.get(id).then(teacher => { setTeacher(new Teacher(teacher)) })
 
 		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 			userVideo.current.srcObject = stream

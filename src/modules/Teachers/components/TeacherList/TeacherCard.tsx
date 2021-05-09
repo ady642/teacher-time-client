@@ -5,13 +5,16 @@ import Rating from '@material-ui/core/Rating';
 import {Chip} from "@material-ui/core";
 import FaceIcon from "@material-ui/icons/Face";
 import Teacher from "@/modules/Teachers/models/Teacher";
+import {EuroRounded} from "@material-ui/icons";
 
 interface TeacherCArdProps {
     teacher: Teacher;
     onClickOnTeacherCall: (id: string) => void
 }
 
-const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall, teacher: { id, rating, hasDiploma, description, avatar, name }}) => {
+const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall, teacher: { id, rating, hasDiploma, description, avatar, name, hourlyRate }}) => {
+	const priceInMinutes = () => Math.round((hourlyRate / 60) * 100) / 100
+
 	return <div className={styles.card}>
 		<header className={'p-2 flex flex-col'}>
 			<div className={'flex'}>
@@ -33,6 +36,15 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 						icon={<FaceIcon/>}
 						label={'Diplome d\'enseignant'}
 					/> }
+					<div className='mt-2.5 w-min whitespace-nowrap text-blue-400 border border-blue-400 rounded p-1 flex items-center'>
+						<span>
+							{ priceInMinutes() }
+						</span>
+						<EuroRounded fontSize={'small'}/>
+						<span>
+							/ min
+						</span>
+					</div>
 				</div>
 			</div>
 			<div className={'mt-3'}>
