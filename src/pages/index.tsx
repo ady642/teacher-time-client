@@ -2,9 +2,9 @@ import {FC, useCallback, useEffect} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
-import styles from '@/modules/Home/styles/Home.module.scss'
-import TeacherFilters from "@/modules/Home/components/TeacherFilters";
-import TeacherList from "@/modules/Home/components/TeacherList/TeacherList";
+import styles from '@/modules/Teachers/styles/Home.module.scss'
+import TeacherFilters from "@/modules/Teachers/components/TeacherFilters";
+import TeacherList from "@/modules/Teachers/components/TeacherList/TeacherList";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import usePaymentReducers from "@/context/payment/helpers/usePaymentReducers";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";

@@ -1,7 +1,7 @@
 import {FunctionComponent, useRef, useState} from "react";
-import Board from "@/modules/Call/Whiteboard/Board";
+import Board from "@/modules/Room/Whiteboard/Board";
 import styles from './style.module.css'
-import ChalkParams from "@/modules/Call/Whiteboard/types/ChalkParams";
+import ChalkParams from "@/modules/Room/Whiteboard/types/ChalkParams";
 
 const BoardContainer: FunctionComponent = () => {
 	const boardContainerRef = useRef<HTMLDivElement>(null)

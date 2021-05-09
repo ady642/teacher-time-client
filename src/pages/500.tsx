@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 import PageWithLayoutType from '@/common/types/pageWithLayout'
 import DefaultLayout from '@/common/layouts/DefaultLayout'
-import styles from '@/modules/Home/styles/Home.module.scss'
+import styles from '@/modules/Teachers/styles/Home.module.scss'
 
 const Custom500: FC = () => {
     return (

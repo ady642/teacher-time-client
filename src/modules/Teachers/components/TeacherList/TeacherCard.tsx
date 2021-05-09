@@ -1,10 +1,10 @@
 import Image from "next/image";
 import {FunctionComponent} from "react";
-import styles from '@/modules/Home/styles/TeacherCard.module.scss'
+import styles from '@/modules/Teachers/styles/TeacherCard.module.scss'
 import Rating from '@material-ui/core/Rating';
 import {Chip} from "@material-ui/core";
 import FaceIcon from "@material-ui/icons/Face";
-import Teacher from "@/modules/Home/models/Teacher";
+import Teacher from "@/modules/Teachers/models/Teacher";
 
 interface TeacherCArdProps {
     teacher: Teacher;

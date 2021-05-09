@@ -17,7 +17,13 @@ export default class PaymentClient {
 	}
 
 	addCredits = async (amount: number) => {
-		await this.client.post(`${process.env.SERVER_URL}/payment/stripe/add_credits`, {
+		await this.client.put(`${process.env.SERVER_URL}/payment/stripe/add_credits`, {
+			amount,
+		});
+	}
+
+	spendCredits = async (amount: number) => {
+		await this.client.put(`${process.env.SERVER_URL}/payment/stripe/spend_credits`, {
 			amount,
 		});
 	}

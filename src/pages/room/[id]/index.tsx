@@ -1,7 +1,10 @@
-import {FC, useEffect, useRef} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
-import BoardContainer from "@/modules/Call/Whiteboard/BoardContainer";
+import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
 import { socket } from "@/common/utils/client";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
+import PaymentClient from '@/modules/Payment/services/PaymentClient'
+import Teacher from "@/modules/Teachers/models/Teacher";
 
 interface RTCPayload {
 	target: string,
@@ -11,7 +14,17 @@ interface RTCPayload {
 
 const Room: FC = () => {
 	const router = useRouter()
+
 	const { id } = router.query
+
+	const { token } = useAuthGetters()
+	const paymentClient =  new PaymentClient(token)
+	const [teacher, setTeacher] = useState(new Teacher())
+
+	useEffect(() => {
+		if (token) return; // do nothing if the user is logged in
+		router.replace("/room", "/", { shallow: true });
+	}, [token]);
 
 	const userVideo = useRef<HTMLVideoElement>()
 	const partnerVideo = useRef<HTMLVideoElement>()
@@ -20,7 +33,10 @@ const Room: FC = () => {
 	const userStream = useRef<MediaStream>()
 
 	useEffect(() => {
-		navigator.mediaDevices.getUserMedia({ audio: true, video: true}).then(stream => {
+		// Get Teacher from uuid to retrieve information and hourly rate
+		setTeacher(new Teacher(teacherClient.get(id)))
+
+		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 			userVideo.current.srcObject = stream
 			userStream.current = stream
 
@@ -34,6 +50,10 @@ const Room: FC = () => {
 			socket.on('answer', handleAnswer)
 			socket.on('ice-candidate', handleNewICECandidateMsg)
 		})
+
+		return () => {
+			paymentClient.spendCredits(amount) // amount is equal to teacher hourly rate and time
+		}
 	}, [])
 
 	const callUser = (userID: string) => {
@@ -113,10 +133,7 @@ const Room: FC = () => {
 	}
 
 	return <div>
-		<div>
-			<audio autoPlay ref={userVideo} />
-			<audio autoPlay ref={partnerVideo} />
-		</div>
+		<audio autoPlay ref={partnerVideo} />
 		<BoardContainer />
 	</div>
 }

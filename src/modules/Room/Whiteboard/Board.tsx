@@ -1,7 +1,7 @@
 import {FunctionComponent, MutableRefObject, useEffect, useRef, useState} from "react";
 import styles from './style.module.css'
-import {SocketData} from "@/modules/Call/Whiteboard/types/SocketData";
-import ChalkParams from "@/modules/Call/Whiteboard/types/ChalkParams";
+import {SocketData} from "@/modules/Room/Whiteboard/types/SocketData";
+import ChalkParams from "@/modules/Room/Whiteboard/types/ChalkParams";
 import {socket} from "@/common/utils/client";
 
 interface BoardProps {
