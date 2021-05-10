@@ -1,6 +1,7 @@
 import {FC, useCallback, useEffect} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
+import cookies from 'next-cookies'
 
 import styles from '@/modules/Teachers/styles/Home.module.scss'
 import TeacherFilters from "@/modules/Teachers/components/TeacherFilters";
@@ -9,8 +10,8 @@ import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import usePaymentReducers from "@/context/payment/helpers/usePaymentReducers";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import PaymentClient from "@/modules/Payment/services/PaymentClient";
-import axios from "axios";
 import {useRouter} from "next/router";
+import client from "@/common/utils/client";
 
 const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { setBalance } = usePaymentReducers()
@@ -57,16 +58,19 @@ const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getSer
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-	const token = query?.token ?? ''
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+	// @ts-ignore
+	const token: string = ctx.query?.token ?? cookies(ctx).token
 
 	try {
-		const { data: teachers } = await axios.get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
-
+		const response = await client(token).get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
+		console.debug(response)
+		console.debug('je suis dans le try')
 		return {
-			props: { teachers, token }
+			props: { teachers: response.data, token }
 		}
 	} catch (e) {
+		throw new Error(e)
 		return {
 			props: { teachers: [], token }
 		}

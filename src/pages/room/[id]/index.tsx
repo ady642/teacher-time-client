@@ -34,11 +34,13 @@ const Room: FC = () => {
 	const otherUser = useRef<string>()
 	const userStream = useRef<MediaStream>()
 
-	const spendCredits = () => useCallback()
+	const fetchTeacher = useCallback(async () => {
+		const teacher = await teacherClient.get(id)
+		setTeacher(new Teacher(teacher))
+	}, [])
 
 	useEffect(() => {
-		// Get Teacher from uuid to retrieve information and hourly rate
-		teacherClient.get(id).then(teacher => { setTeacher(new Teacher(teacher)) })
+		fetchTeacher()
 
 		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 			userVideo.current.srcObject = stream
@@ -56,7 +58,7 @@ const Room: FC = () => {
 		})
 
 		return () => {
-			paymentClient.spendCredits(amount) // amount is equal to teacher hourly rate and time
+			paymentClient.spendCredits((teacher.hourlyRate / 60) * 5) // amount is equal to teacher hourly rate and time
 		}
 	}, [])
 
