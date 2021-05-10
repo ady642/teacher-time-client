@@ -19,7 +19,7 @@ const Header: FC<HeaderProps> = () => {
 	const [paymentModalOpened, setPaymentModalOpened] = useState(false)
 	const { openSignInModal, closeSignInModal, resetToken } = useAuthReducers()
 	const { signInModalOpened, token } = useAuthGetters()
-	const { balance } = usePaymentGetters()
+	//const { balance } = usePaymentGetters()
 
 	const openPaymentModal = () => {
 		setPaymentModalOpened(true)
@@ -47,7 +47,7 @@ const Header: FC<HeaderProps> = () => {
 					</div>
 					{token && <div className={'flex items-center'}>
 						<div className={'mr-4'}>
-							<CreditsNumber credits={balance} />
+							{/*<CreditsNumber credits={balance} />*/}
 						</div>
 						<SimpleButton size={'small'} onClick={openPaymentModal} text={'Buy Credits'}/>
 						<div className={'ml-3'}>
