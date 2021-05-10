@@ -1,7 +1,6 @@
 import {FC, useCallback, useEffect} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
-import cookies from 'next-cookies'
 
 import styles from '@/modules/Teachers/styles/Home.module.scss'
 import TeacherFilters from "@/modules/Teachers/components/TeacherFilters";
@@ -20,22 +19,22 @@ const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getSer
 	const paymentClient = new PaymentClient(token || tokenCtx)
 	const router = useRouter()
 
-	const fetchMyAPI = useCallback(async () => {
+	/*	const fetchBalance = useCallback(async () => {
 		if(!token && !tokenCtx) {
 			return
 		}
 
 		let balance = await paymentClient.getBalance()
 		setBalance(balance)
-	}, [])
+	}, [])*/
 
 	useEffect(() => {
 		if(token) {
 			setToken(token)
 		}
 
-		fetchMyAPI()
-	}, [fetchMyAPI])
+		//fetchBalance()
+	}, [])
 
 	const onClickOnTeacherCall = (teacherId = '') => {
 		token || tokenCtx ? router.push(`/room/${teacherId}`) : openSignInModal()
@@ -48,7 +47,7 @@ const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getSer
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={'flex flex-col justify-start'}>
-				<TeacherFilters />
+				{/*<TeacherFilters />*/}
 				<TeacherList
 					teachers={teachers}
 					onClickOnTeacherCall={onClickOnTeacherCall}
@@ -58,22 +57,17 @@ const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getSer
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	// @ts-ignore
-	const token: string = ctx.query?.token ?? cookies(ctx).token
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+	const token = query?.token ?? ''
 
 	try {
-		const response = await client(token).get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
-		console.debug(response)
-		console.debug('je suis dans le try')
+		const { data: teachers } = await client('').get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
+
 		return {
-			props: { teachers: response.data, token }
+			props: { teachers, token }
 		}
 	} catch (e) {
 		throw new Error(e)
-		return {
-			props: { teachers: [], token }
-		}
 	}
 }
 

@@ -18,9 +18,9 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 	return <div className={styles.card}>
 		<header className={'p-2 flex flex-col'}>
 			<div className={'flex'}>
-				<div className={styles.tutorPhoto}>
+				{/*				<div className={styles.tutorPhoto}>
 					<Image className={'rounded'} src={avatar} width={100} height={100} alt={'photo prof'}/>
-				</div>
+				</div>*/}
 				<div className={'ml-3 flex flex-col'}>
 					<span className={`${styles.tutorName} font-bold text-xl`}>{name}</span>
 					<Rating
@@ -36,7 +36,7 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 						icon={<FaceIcon/>}
 						label={'Diplome d\'enseignant'}
 					/> }
-					<div className='mt-2.5 w-min whitespace-nowrap text-blue-400 border border-blue-400 rounded p-1 flex items-center'>
+					{/*					<div className='mt-2.5 w-min whitespace-nowrap text-blue-400 border border-blue-400 rounded p-1 flex items-center'>
 						<span>
 							{ priceInMinutes() }
 						</span>
@@ -44,7 +44,7 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 						<span>
 							/ min
 						</span>
-					</div>
+					</div>*/}
 				</div>
 			</div>
 			<div className={'mt-3'}>
