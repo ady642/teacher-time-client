@@ -12,7 +12,7 @@ interface TeacherCArdProps {
     onClickOnTeacherCall: (id: string) => void
 }
 
-const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall, teacher: { id, rating, hasDiploma, description, avatar, name, hourlyRate }}) => {
+const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall, teacher: { _id, rating, hasDiploma, description, avatar, name, hourlyRate }}) => {
 	const priceInMinutes = () => Math.round((hourlyRate / 60) * 100) / 100
 
 	return <div className={styles.card}>
@@ -52,7 +52,7 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 					{ description }
 				</p>
 				<div className={'flex justify-end mt-2'}>
-					<button onClick={() => onClickOnTeacherCall(id)} className={'transition-all rounded uppercase p-2 font-medium bg-green-400 text-white text-sm hover:bg-green-600'}>Appel</button>
+					<button onClick={() => onClickOnTeacherCall(_id)} className={'transition-all rounded uppercase p-2 font-medium bg-green-400 text-white text-sm hover:bg-green-600'}>Appel</button>
 				</div>
 			</div>
 		</header>

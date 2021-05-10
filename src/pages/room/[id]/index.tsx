@@ -28,22 +28,20 @@ const Room: FC = () => {
 		router.replace("/room", "/", { shallow: true });
 	}, [token]);
 
-	const userVideo = useRef<HTMLVideoElement>()
 	const partnerVideo = useRef<HTMLVideoElement>()
 	const peerRef = useRef<RTCPeerConnection>()
 	const otherUser = useRef<string>()
 	const userStream = useRef<MediaStream>()
 
-	const fetchTeacher = useCallback(async () => {
+	/*const fetchTeacher = useCallback(async () => {
 		const teacher = await teacherClient.get(id)
 		setTeacher(new Teacher(teacher))
-	}, [])
+	}, []) */
 
 	useEffect(() => {
-		fetchTeacher()
+		//fetchTeacher()
 
 		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-			userVideo.current.srcObject = stream
 			userStream.current = stream
 
 			socket.emit('join-room', id)
@@ -56,10 +54,6 @@ const Room: FC = () => {
 			socket.on('answer', handleAnswer)
 			socket.on('ice-candidate', handleNewICECandidateMsg)
 		})
-
-		return () => {
-			paymentClient.spendCredits((teacher.hourlyRate / 60) * 5) // amount is equal to teacher hourly rate and time
-		}
 	}, [])
 
 	const callUser = (userID: string) => {
@@ -69,7 +63,7 @@ const Room: FC = () => {
 
 	const createPeer = (userID: string): RTCPeerConnection => {
 		const peer = new RTCPeerConnection({
-			iceServers: []
+			iceServers: [],
 		})
 
 		peer.onicecandidate = handleICECandidateEvent
@@ -79,42 +73,39 @@ const Room: FC = () => {
 		return peer
 	}
 
-	const handleNegotiationNeededEvent = (userID: string) => {
-		peerRef.current.createOffer().then(offer => {
-			return peerRef.current.setLocalDescription(offer)
-		}).then(() => {
-			const payload: RTCPayload = {
-				target: userID,
-				caller: socket.id,
-				sdp: peerRef.current.localDescription
-			}
+	const handleNegotiationNeededEvent = async (userID: string) => {
+		const offer = await peerRef.current.createOffer()
+		await peerRef.current.setLocalDescription(offer)
+		const payload: RTCPayload = {
+			target: userID,
+			caller: socket.id,
+			sdp: peerRef.current.localDescription
+		}
 
-			socket.emit('offer', payload)
-		})
+		socket.emit('offer', payload)
 	}
 
-	const handleReceiveCall = (incoming: RTCPayload) => {
+	const handleReceiveCall = async (incoming: RTCPayload) => {
 		peerRef.current = createPeer('');
+
 		const desc = new RTCSessionDescription(incoming.sdp);
-		peerRef.current.setRemoteDescription(desc).then(() => {
-			userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
-		}).then(() => {
-			return peerRef.current.createAnswer();
-		}).then(answer => {
-			return peerRef.current.setLocalDescription(answer);
-		}).then(() => {
-			const payload: RTCPayload = {
-				target: incoming.caller,
-				caller: socket.id,
-				sdp: peerRef.current.localDescription
-			}
-			socket.emit("answer", payload);
-		})
+		await peerRef.current.setRemoteDescription(desc)
+		userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
+
+		const answer = await peerRef.current.createAnswer();
+		await peerRef.current.setLocalDescription(answer);
+		const payload: RTCPayload = {
+			target: incoming.caller,
+			caller: socket.id,
+			sdp: peerRef.current.localDescription
+		}
+
+		socket.emit("answer", payload);
 	}
 
-	const handleAnswer = (message: RTCPayload) => {
+	const handleAnswer = async (message: RTCPayload) => {
 		const desc = new RTCSessionDescription(message.sdp);
-		peerRef.current.setRemoteDescription(desc).catch(e => console.log(e));
+		await peerRef.current.setRemoteDescription(desc)
 	}
 
 	const handleICECandidateEvent = (e: RTCPeerConnectionIceEvent) => {
@@ -127,11 +118,10 @@ const Room: FC = () => {
 		}
 	}
 
-	const handleNewICECandidateMsg = (incoming: any ) => {
+	const handleNewICECandidateMsg = async (incoming: any ) => {
 		const candidate = new RTCIceCandidate(incoming);
 
-		peerRef.current.addIceCandidate(candidate)
-			.catch(e => console.log(e));
+		await peerRef.current.addIceCandidate(candidate)
 	}
 
 	const handleTrackEvent = (e: RTCTrackEvent) => {

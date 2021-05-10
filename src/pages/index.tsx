@@ -11,6 +11,7 @@ import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import PaymentClient from "@/modules/Payment/services/PaymentClient";
 import {useRouter} from "next/router";
 import client from "@/common/utils/client";
+import Teacher from "@/modules/Teachers/models/Teacher";
 
 const Home: FC = ({ teachers, token }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { setBalance } = usePaymentReducers()

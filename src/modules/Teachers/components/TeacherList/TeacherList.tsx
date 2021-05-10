@@ -13,7 +13,7 @@ const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onClickOnT
 		<section className={'flex flex-wrap justify-between mt-4'}>
 			{
 				teachers.map((teacher: Teacher) => <TeacherCard
-					key={teacher.id}
+					key={teacher.name}
 					teacher={teacher}
 					onClickOnTeacherCall={onClickOnTeacherCall}
 				/>)

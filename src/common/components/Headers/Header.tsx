@@ -46,10 +46,10 @@ const Header: FC<HeaderProps> = () => {
 						</div>
 					</div>
 					{token && <div className={'flex items-center'}>
-						<div className={'mr-4'}>
-							{/*<CreditsNumber credits={balance} />*/}
+						{/*<div className={'mr-4'}>
+							<CreditsNumber credits={balance} />
 						</div>
-						<SimpleButton size={'small'} onClick={openPaymentModal} text={'Buy Credits'}/>
+						<SimpleButton size={'small'} onClick={openPaymentModal} text={'Buy Credits'}/>*/}
 						<div className={'ml-3'}>
 							<SignOutButton onClick={resetToken} />
 						</div>
