@@ -10,7 +10,8 @@
     "react/jsx-filename-extension": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "indent": ["error", "tab"]
+    "indent": ["error", "tab"],
+    "no-mixed-spaces-and-tabs": "off"
   },
   "env": {
     "browser": true,

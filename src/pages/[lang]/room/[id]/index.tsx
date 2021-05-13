@@ -145,7 +145,7 @@ const Room: FC<RoomProps> = ({ roomID, router, localization }: InferGetServerSid
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const id = ctx.query?.id ?? ''
 	const localization = getLocalizationProps(ctx, "room");
-	
+
 	return { props: { roomID: id, localization } }
 }
 

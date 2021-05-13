@@ -40,6 +40,9 @@ const Header: FC<HeaderProps> = ({ locale }) => {
 							<Link href={`/${locale}`}>
 								<TextButton text={t('common.teachers')}/>
 							</Link>
+							<Link href={`/${locale}/contact`}>
+								<TextButton text='Contact'/>
+							</Link>
 						</div>
 					</div>
 					{token && <div className={'flex items-center'}>
