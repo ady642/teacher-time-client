@@ -1,5 +1,5 @@
 export default class Teacher {
-    id: string
+    _id: string
     name: string
     avatar: string
     description: string
@@ -8,7 +8,7 @@ export default class Teacher {
 	hourlyRate: number
 
 	constructor({
-		id= '',
+		_id= '',
 		name = '',
 		avatar = '',
 		description = '',
@@ -16,7 +16,7 @@ export default class Teacher {
 		rating = 1,
 		hourlyRate = 0
 	} = {}) {
-		this.id = id
+		this._id = _id
 		this.name = name
 		this.avatar = avatar
 		this.description = description

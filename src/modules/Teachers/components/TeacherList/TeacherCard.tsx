@@ -1,19 +1,19 @@
-import Image from "next/image";
 import {FunctionComponent} from "react";
 import styles from '@/modules/Teachers/styles/TeacherCard.module.scss'
 import Rating from '@material-ui/core/Rating';
 import {Chip} from "@material-ui/core";
 import FaceIcon from "@material-ui/icons/Face";
 import Teacher from "@/modules/Teachers/models/Teacher";
-import {EuroRounded} from "@material-ui/icons";
+import useTranslation from "@/common/hooks/useTranslation";
 
 interface TeacherCArdProps {
     teacher: Teacher;
     onClickOnTeacherCall: (id: string) => void
 }
 
-const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall, teacher: { _id, rating, hasDiploma, description, avatar, name, hourlyRate }}) => {
-	const priceInMinutes = () => Math.round((hourlyRate / 60) * 100) / 100
+const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall, teacher: { _id, rating, hasDiploma, description, name }}) => {
+	const { t } = useTranslation();
+
 
 	return <div className={styles.card}>
 		<header className={'p-2 flex flex-col'}>
@@ -34,7 +34,7 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 						size={'small'}
 						style={{borderRadius: '4px'}}
 						icon={<FaceIcon/>}
-						label={'Diplome d\'enseignant'}
+						label={t('diploma')}
 					/> }
 					{/*					<div className='mt-2.5 w-min whitespace-nowrap text-blue-400 border border-blue-400 rounded p-1 flex items-center'>
 						<span>
@@ -52,7 +52,7 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 					{ description }
 				</p>
 				<div className={'flex justify-end mt-2'}>
-					<button onClick={() => onClickOnTeacherCall(_id)} className={'transition-all rounded uppercase p-2 font-medium bg-green-400 text-white text-sm hover:bg-green-600'}>Appel</button>
+					<button onClick={() => onClickOnTeacherCall(_id)} className={'transition-all rounded uppercase p-2 font-medium bg-green-400 text-white text-sm hover:bg-green-600'}>{t('call')}</button>
 				</div>
 			</div>
 		</header>

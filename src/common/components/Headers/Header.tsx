@@ -9,21 +9,18 @@ import SignOutButton from "@/modules/Auth/Buttons/SignOutButton";
 import LogoBook from "@/common/components/Logos/LogoBook";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
-import CreditsNumber from "@/modules/Payment/components/CreditsNumber";
-import usePaymentGetters from "@/context/payment/helpers/usePaymentGetters";
+import useTranslation from "@/common/hooks/useTranslation";
 
 interface HeaderProps {
+	locale: string
 }
 
-const Header: FC<HeaderProps> = () => {
+const Header: FC<HeaderProps> = ({ locale }) => {
 	const [paymentModalOpened, setPaymentModalOpened] = useState(false)
 	const { openSignInModal, closeSignInModal, resetToken } = useAuthReducers()
 	const { signInModalOpened, token } = useAuthGetters()
 	//const { balance } = usePaymentGetters()
-
-	const openPaymentModal = () => {
-		setPaymentModalOpened(true)
-	}
+	const { t } = useTranslation()
 
 	const handlePaymentModalClose = () => {
 		setPaymentModalOpened(false)
@@ -40,8 +37,8 @@ const Header: FC<HeaderProps> = () => {
 							</div>
 						</Link>
 						<div className={'ml-4 hidden sm:block'}>
-							<Link href={'/'}>
-								<TextButton text={'Teachers'}/>
+							<Link href={`/${locale}`}>
+								<TextButton text={t('common.teachers')}/>
 							</Link>
 						</div>
 					</div>
