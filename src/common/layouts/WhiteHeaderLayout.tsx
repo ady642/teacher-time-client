@@ -1,17 +1,17 @@
 import {ReactNode, FC} from 'react'
-import Header from '@/common/components/Headers/Header'
 import BottomBar from "@/common/components/BottomNavigation/BottomNavigation";
+import WhiteHeader from "@/common/components/Headers/WhiteHeader";
 
 type LayoutProps = {
     children: ReactNode;
     locale: string
 }
 
-const Layout: FC<LayoutProps> = ({ children, locale }) => {
+const WhiteHeaderLayout: FC<LayoutProps> = ({ children, locale }) => {
 	return (
 		<>
-			<Header locale={locale} />
-			<div className='relative h-full w-full bg-gray-400'>
+			<WhiteHeader locale={locale} />
+			<div className={'h-5/6'}>
 				{children}
 			</div>
 			<BottomBar locale={locale} />
@@ -19,4 +19,4 @@ const Layout: FC<LayoutProps> = ({ children, locale }) => {
 	)
 }
 
-export default Layout
+export default WhiteHeaderLayout

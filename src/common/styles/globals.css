@@ -15,6 +15,7 @@ a:hover {
 
 html,body, #__next {
     height: 100%;
+    font-family: -apple-system, serif;
 }
 
 .h-min {
