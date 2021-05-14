@@ -14,7 +14,7 @@ const Layout: FC<LayoutProps> = ({ children, locale }) => {
 			<div className='relative h-full w-full'>
 				{children}
 			</div>
-			<BottomBar />
+			<BottomBar locale={locale} />
 		</>
 	)
 }

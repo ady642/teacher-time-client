@@ -1,0 +1,7 @@
+.aboutContainer {
+    flex-basis: 30%;
+
+    @media all and (max-width: 768px) {
+        flex-basis: 100%;
+    }
+}

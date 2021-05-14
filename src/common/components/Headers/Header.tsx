@@ -2,7 +2,6 @@ import React, {FC, useState} from 'react'
 import {AppBar, Toolbar, Link} from "@material-ui/core";
 
 import TextButton from '@/common/components/Buttons/TextButton'
-import SimpleButton from "@/common/components/Buttons/SimpleButton";
 import PaymentModal from "@/modules/Payment/components/PaymentModal";
 import SignInModal from "@/modules/Auth/SignInModal/SignInModal";
 import SignOutButton from "@/modules/Auth/Buttons/SignOutButton";
@@ -19,7 +18,6 @@ const Header: FC<HeaderProps> = ({ locale }) => {
 	const [paymentModalOpened, setPaymentModalOpened] = useState(false)
 	const { openSignInModal, closeSignInModal, resetToken } = useAuthReducers()
 	const { signInModalOpened, token } = useAuthGetters()
-	//const { balance } = usePaymentGetters()
 	const { t } = useTranslation()
 
 	const handlePaymentModalClose = () => {
