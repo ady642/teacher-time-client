@@ -6,9 +6,9 @@ const useRoutePush = () => {
 
 	const { setAppLoading } = useAppReducers()
 
-	const goTo = async (locale: string, url: string) => {
+	const goTo = async (locale: string, url: string, query?: any) => {
 		setAppLoading(true)
-		await router.push(`/${locale}/${url}`)
+		await router.push({ pathname: `/${locale}/${url}`, query })
 		setAppLoading(false)
 	}
 

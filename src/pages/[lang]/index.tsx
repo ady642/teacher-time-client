@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {FC, useEffect} from 'react'
 import Head from 'next/head'
 
 import {useRouter} from "next/router";
@@ -8,15 +8,21 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import LogoBook from "@/common/components/Logos/LogoBook";
 import useRoutePush from "@/common/hooks/useRoutePush";
+import {socket} from "@/common/utils/client";
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
 
-	const callTeacher = () => {
-
+	const callTeacher = async () => {
+		await socket.emit('join-intent')
 	}
 
-
+	useEffect(() => {
+		socket.on('accepted', async ({roomID = '', teacherID = '' }) => {
+			await goTo(localization.locale, `room/${roomID}`, { teacherID })
+		})
+		socket.on('rejected', () => alert('rejected'))
+	}, [])
 
 	return (
 		<LanguageProvider localization={localization}>
