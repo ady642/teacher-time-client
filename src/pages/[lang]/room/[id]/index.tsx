@@ -8,6 +8,7 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import useToast from "@/common/hooks/useToast";
 import ModalAcceptation from "@/modules/Room/components/ModalAcceptation";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
+import useRoutePush from "@/common/hooks/useRoutePush";
 
 interface RoomProps {
 }
@@ -16,11 +17,23 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 	const { displayToastInfo } = useToast()
 	const [displayAcceptModal, setDisplayAcceptModal] = useState(false)
 	const [studentID, setStudentID] = useState('')
+	const { goTo } = useRoutePush()
 
 	const partnerVideo = useRef<HTMLVideoElement>()
 	const peerRef = useRef<RTCPeerConnection>()
 	const otherUser = useRef<string>()
 	const userStream = useRef<MediaStream>()
+
+	const handleUserDisconnection = async () => {
+		if(teacherID) {
+			alert('Error, the teacher is gone')
+			await goTo(localization.locale, '/')
+		} else {
+			alert('The student is gone')
+			otherUser.current = null
+			setStudentID('')
+		}
+	}
 
 	const joinIntent = (id: string) => {
 		setStudentID(id)
@@ -38,7 +51,6 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 	}
 
 	const setTeacher = (otherUserID: string) => {
-		console.log('je set le teacher', otherUserID)
 		otherUser.current = otherUserID
 	}
 
@@ -61,7 +73,6 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 		const answer: RTCSessionDescriptionInit = await peerRef.current.createAnswer();
 		await peerRef.current.setLocalDescription(new RTCSessionDescription(answer));
 
-		console.log('je repond a loffer à ', otherUser.current)
 		socket.emit('answer', {answer, to: otherUser.current});
 	}
 
@@ -100,9 +111,6 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 	useEffect(() => {
 		if(teacherID) {
 			setTeacher(teacherID)
-			socket.emit('student-joined', teacherID)
-			socket.on('on-offer', answerToOffer)
-			socket.on('on-ice-candidate-offer', setICECandidateMsg)
 		}
 
 		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
@@ -111,18 +119,24 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 			peerRef.current = createPeer()
 			userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
 			socket.emit('join-room', roomID)
-			socket.on('join-intent', joinIntent)
-			socket.on('student-joined', setStudent)
+			socket.on('on-join-intent', joinIntent)
+			socket.on('on-student-joined', setStudent)
 			socket.on('on-answer', setAnswerAsLocalDescription)
+
+			socket.on('on-user-leave', handleUserDisconnection)
+
+			socket.emit('student-joined', teacherID)
+			socket.on('on-offer', answerToOffer)
+			socket.on('on-ice-candidate-offer', setICECandidateMsg)
 
 			socket.on('rejected', () => displayToastInfo('Teacher cant accept you for the moment, try later'))
 		})
 
 		return () => {
-			socket.emit('leave-room', roomID)
 			userStream.current.getTracks().forEach(track => {
 				track.stop();
 			});
+			socket.disconnect()
 		}
 	}, [])
 
