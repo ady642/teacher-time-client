@@ -7,7 +7,7 @@ interface SimpleButtonProps {
     size?: any;
     variant?: any;
     color?: any;
-    className: string
+    className?: string
 }
 
 const SimpleButton: FunctionComponent<SimpleButtonProps> = (

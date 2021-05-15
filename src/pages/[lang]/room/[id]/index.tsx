@@ -6,29 +6,16 @@ import {OfferIcePayload, RTCIceCandidateInit, RTCSessionDescriptionInit} from "@
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import useToast from "@/common/hooks/useToast";
-import Notificiation from "@/common/components/Notifications/Notification";
 import ModalAcceptation from "@/modules/Room/components/ModalAcceptation";
-import DefaultLayout from "@/common/layouts/DefaultLayout";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
-import {getInitialLocale} from "@/translations/getInitialLocale";
 
 interface RoomProps {
-	router: any
 }
 
-const Room: FC<RoomProps> = ({ roomID, router, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const { token } = useAuthGetters()
+const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { displayToastInfo } = useToast()
 	const [displayAcceptModal, setDisplayAcceptModal] = useState(false)
 	const [studentID, setStudentID] = useState('')
-	const [locale, setLocale] = useState('')
-
-	useEffect(() => {
-		if (token) return; // do nothing if the user is logged in
-		router.replace("/room", "/", { shallow: true });
-
-		setLocale(getInitialLocale())
-	}, [token]);
 
 	const partnerVideo = useRef<HTMLVideoElement>()
 	const peerRef = useRef<RTCPeerConnection>()
@@ -120,25 +107,25 @@ const Room: FC<RoomProps> = ({ roomID, router, localization }: InferGetServerSid
 
 		return () => {
 			socket.emit('leave-room', roomID)
+			userStream.current.getTracks().forEach(track => {
+				track.stop();
+			});
 		}
 	}, [])
 
 
 
 	return <LanguageProvider localization={localization}>
-		<DefaultLayout locale={locale}>
-			<div>
-				<audio autoPlay ref={partnerVideo} />
-				<BoardContainer />
-				<Notificiation onToastClick={() => console.log('notif clicked')}/>
-				<ModalAcceptation
-					displayAcceptModal={displayAcceptModal}
-					handleClose={() => setDisplayAcceptModal(false)}
-					acceptStudent={acceptStudent}
-					rejectStudent={rejectStudent}
-				/>
-			</div>
-		</DefaultLayout>
+		<div>
+			<audio autoPlay ref={partnerVideo} />
+			<BoardContainer />
+			<ModalAcceptation
+				displayAcceptModal={displayAcceptModal}
+				handleClose={() => setDisplayAcceptModal(false)}
+				acceptStudent={acceptStudent}
+				rejectStudent={rejectStudent}
+			/>
+		</div>
 	</LanguageProvider>
 }
 

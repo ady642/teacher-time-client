@@ -11,6 +11,7 @@ import InfoCards from "@/modules/Contact/components/InfoCards";
 import styles from '@/modules/Contact/styles/contact.module.scss'
 import ContactClient from "@/modules/Contact/client/ContactClient";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
+import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 
 interface ContactProps {
 
@@ -31,7 +32,7 @@ const Contact: FunctionComponent<ContactProps> = ({ localization }: InferGetServ
 	}, []);
 
 	return <LanguageProvider localization={localization}>
-		<DefaultLayout locale={locale}>
+		<WhiteHeaderLayout locale={locale}>
 			<div className='p-8'>
 				<TailwindCard>
 					<section className='flex p-8 w-full	flex-wrap'>
@@ -47,7 +48,7 @@ const Contact: FunctionComponent<ContactProps> = ({ localization }: InferGetServ
 					<InfoCards />
 				</TailwindCard>
 			</div>
-		</DefaultLayout>
+		</WhiteHeaderLayout>
 	</LanguageProvider>
 }
 

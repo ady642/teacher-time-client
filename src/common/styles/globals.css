@@ -21,3 +21,7 @@ html,body, #__next {
 .h-min {
     height: min-content;
 }
+
+.header {
+    background: linear-gradient(90deg, rgb(48, 131, 254) 0%, rgb(36, 119, 222) 44%, rgba(4,71,164,1) 100%);
+}

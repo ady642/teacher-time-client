@@ -7,9 +7,16 @@ import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext"
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import LogoBook from "@/common/components/Logos/LogoBook";
+import useRoutePush from "@/common/hooks/useRoutePush";
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const router = useRouter()
+	const { goTo } = useRoutePush()
+
+	const callTeacher = () => {
+
+	}
+
+
 
 	return (
 		<LanguageProvider localization={localization}>
@@ -23,13 +30,15 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 				<div className={`w-full h-full flex justify-between items-center p-14`} style={{backgroundColor: '#F9F8FD'}}>
 					<section className={'font-black tracking-wide text-gray-500 w-2/3'}>
 						<div className={'text-5xl text-gray-800'}>
-							{ localization.translations.common['teacherTimeWorld'] } <span className={'text-4xl'}>🌍</span>
+							{ localization.translations.common['teacherTimeWorld'] }<br/>
+							{ localization.translations.common['allWorld'] }
+							<span className={'text-4xl ml-2'}>🌍</span>
 						</div>
 						<div className={'text-3xl my-6'}>
 							{ localization.translations.common['teacherTimeDesc'] }
 						</div>
-						<button className={'bg-green-500 text-white font-bold text-2xl rounded-lg p-5'}>
-							{ localization.translations.common['login'] } 🚀
+						<button onClick={callTeacher} className={'bg-green-500 text-white font-bold text-2xl rounded-lg p-5'}>
+							{ localization.translations.common['callTeacher'] } 🚀
 						</button>
 					</section>
 					<section className={'mr-16'}>

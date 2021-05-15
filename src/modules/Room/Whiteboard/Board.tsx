@@ -84,6 +84,10 @@ const Board: FunctionComponent<BoardProps> = ({ chalkParams, setChalkParams, boa
 		socket.on('drawing', onDrawingEvent);
 		window.addEventListener('resize', onResize, false);
 		onResize()
+
+		return () => {
+			window.removeEventListener('resize', onResize, false)
+		}
 	}, [])
 
 	return <canvas

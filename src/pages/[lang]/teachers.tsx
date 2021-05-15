@@ -15,6 +15,8 @@ import Teacher from "@/modules/Teachers/models/Teacher";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import DefaultLayout from "@/common/layouts/DefaultLayout";
 import {getInitialLocale} from "@/translations/getInitialLocale";
+import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
+import useRoutePush from "@/common/hooks/useRoutePush";
 
 const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { setBalance } = usePaymentReducers()
@@ -22,7 +24,7 @@ const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType
 	const { openSignInModal, setToken }= useAuthReducers()
 	const paymentClient = new PaymentClient(token || tokenCtx)
 	const [locale, setLocale] = useState('')
-	const router = useRouter()
+	const { goTo } = useRoutePush()
 
 	/*	const fetchBalance = useCallback(async () => {
 		if(!token && !tokenCtx) {
@@ -42,13 +44,13 @@ const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType
 		//fetchBalance()
 	}, [])
 
-	const onClickOnTeacherCall = (teacherId = '') => {
-		token || tokenCtx ? router.push(`/${getInitialLocale()}/room/${teacherId}`) : openSignInModal()
+	const onClickOnTeacherCall = async (teacherId = '') => {
+		await goTo(getInitialLocale(), `room/${teacherId}`)
 	}
 
 	return (
 		<LanguageProvider localization={localization}>
-			<DefaultLayout
+			<WhiteHeaderLayout
 				locale={locale}
 			>
 				<div className={styles.container}>
@@ -64,7 +66,7 @@ const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType
 						/>
 					</main>
 				</div>
-			</DefaultLayout>
+			</WhiteHeaderLayout>
 		</LanguageProvider>
 	)
 }

@@ -5,5 +5,8 @@ export default {
 	},
 	payment: {
 		balance: 0
+	},
+	app: {
+		loading: false
 	}
 }

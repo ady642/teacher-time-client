@@ -6,9 +6,10 @@ const common = {
 	google: "Google",
 	facebook: "Facebook",
 	loginPhrase: "Se connecter pour appeler un professeur",
-	callTeacher: "Call a teacher",
-	teacherTimeWorld: "Teacher-time est la plateforme d'échange qui permet la mise en relation instantanée entre élèves et professeurs du monde entier",
-	teacherTimeDesc: "Après acceptation, la conversation peut alors  commencer et vous pouvez posez  vos  questions au professeur"
+	callTeacher: "Appeler un professeur",
+	teacherTimeWorld: "Teacher-time met en relation instantanée et interactive élèves et professeurs du",
+	allWorld: "monde entier",
+	teacherTimeDesc: "Après acceptation, la conversation peut alors  commencer et vous pouvez poser vos questions au professeur"
 };
 
 export default common;

@@ -16,7 +16,7 @@ const InfoCards: FunctionComponent<InfoCardsProps> = () => {
 				<PhoneInTalk color='inherit'/>
 			</div>
 		</InfoCard>
-		<InfoCard title={t('writeToUs')} text='Email: contact@teacher-time.com' className={'sm:ml-6 sm:mt-0 mt-2 ml-0'}>
+		<InfoCard title={t('writeToUs')} text='Email: webmaster@teacher-time.com' className={'sm:ml-6 sm:mt-0 mt-2 ml-0'}>
 			<div className={'text-yellow-500'}>
 				<Email />
 			</div>
