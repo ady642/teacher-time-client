@@ -25,9 +25,9 @@ const Header: FC<HeaderProps> = ({ locale }) => {
 			<div className={'cursor-pointer'} onClick={goToHome}>
 				<LogoText height={80} width={300}/>
 			</div>
-			<div className={'flex justify-between flex-1 mr-10'}>
+			<div className={'flex sm:flex hidden justify-between flex-1 mr-10'}>
 				<nav className={'ml-16 flex items-center'}>
-					<ul className={'flex items-center font-bold text-2xl tracking-wide text-gray-200'}>
+					<ul className={'flex items-center font-bold text-2xl lg:flex hidden tracking-wide text-gray-200'}>
 						<li onClick={goToContact} className={'ml-10 cursor-pointer hover:text-green-300 transition'}>
 							{ t('common.contactUs')}
 						</li>

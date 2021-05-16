@@ -23,7 +23,7 @@ const CreateRoom: FunctionComponent<CreateRoomProps> = () => {
 		<button className={'bg-green-500 text-white rounded p-5'} onClick={createRoom}>
             Create room
 		</button>
-		<button className={'bg-red-500 text-white rounded ml-6 mt-5 p-5'} onClick={deleteRoom}>
+		<button className={'bg-red-500  text-white rounded ml-6 mt-5 p-5'} onClick={deleteRoom}>
 			Delete Room
 		</button>
 	</div>

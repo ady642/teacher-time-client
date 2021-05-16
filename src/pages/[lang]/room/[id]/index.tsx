@@ -1,6 +1,5 @@
 import {FC, useEffect, useRef, useState} from "react";
 import {socket} from "@/common/utils/client";
-import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import {withRouter} from 'next/router'
 import {OfferIcePayload, RTCIceCandidateInit, RTCSessionDescriptionInit} from "@/modules/Room/types";
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";

@@ -1,0 +1,36 @@
+build site:
+  image: node:latest
+  stage: build
+  script:
+    - npm install --progress=false
+    - npm run build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist
+  only:
+    - master
+
+#Production stage
+production:
+  stage: deploy
+  image: alpine
+  before_script:
+    #generate ssh key
+    - apk add --no-cache rsync openssh
+    - mkdir -p ~/.ssh
+    - echo -n "$SSH_KEY_ARCADUS" > ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh
+    - chmod 600 ~/.ssh/id_rsa
+    - echo "IdentityFile ~/.ssh/id_rsa" >> /etc/ssh/ssh_config
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+  only:
+    - master
+
+  script:
+    - rsync -rav --delete dist root@teacher-time.com:/var/www/teacher-time.com/front
+
+  environment:
+    name: production
+    url: https://arcadus.club

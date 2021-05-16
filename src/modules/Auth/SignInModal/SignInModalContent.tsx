@@ -3,11 +3,10 @@ import GoogleButton from '@/modules/Auth/Buttons/GoogleButton';
 import FacebookButton from '@/modules/Auth/Buttons/FacebookButton';
 import Logo from '@/common/components/Logos/Logo';
 import AuthService from "@/modules/Auth/services/AuthService";
-import client from "@/common/utils/client";
 import useTranslation from "@/common/hooks/useTranslation";
 
 const SignInModalContent: FunctionComponent = () => {
-	const authService = new AuthService(client)
+	const authService = new AuthService('')
 	const { t } = useTranslation()
 
 	const signIn = (provider: string) => {

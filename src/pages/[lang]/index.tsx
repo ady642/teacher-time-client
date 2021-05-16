@@ -35,22 +35,22 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 			<WhiteHeaderLayout
 				locale={localization.locale}
 			>
-				<div className={`w-full h-full flex justify-between items-center p-14`} style={{backgroundColor: '#F9F8FD'}}>
-					<section className={'font-black tracking-wide text-gray-500 w-2/3'}>
-						<div className={'text-5xl text-gray-800'}>
-							{ localization.translations.common['teacherTimeWorld'] }<br/>
-							{ localization.translations.common['allWorld'] }
+				<div className={`w-full h-full flex md:flex-row flex-col justify-between items-center md:p-14 p-4`} style={{backgroundColor: '#F9F8FD'}}>
+					<section className={'font-black tracking-wide text-gray-500 md:w-2/3'}>
+						<div className={'md:text-5xl text-3xl text-gray-800'}>
+							{ localization.translations['teacherTimeWorld'] }<br/>
+							{ localization.translations['allWorld'] }
 							<span className={'text-4xl ml-2'}>🌍</span>
 						</div>
-						<div className={'text-3xl my-6'}>
-							{ localization.translations.common['teacherTimeDesc'] }
+						<div className={'md:text-3xl text-xl my-6'}>
+							{ localization.translations['teacherTimeDesc'] }
 						</div>
 						<button onClick={callTeacher} className={'bg-green-500 text-white font-bold text-2xl rounded-lg p-5'}>
-							{ localization.translations.common['callTeacher'] } 🚀
+							{ localization.translations['callTeacher'] } 🚀
 						</button>
 					</section>
 					<section className={'mr-16'}>
-						<LogoBook width={350} height={350}/>
+						<LogoBook width={300} height={300}/>
 					</section>
 				</div>
 			</WhiteHeaderLayout>
