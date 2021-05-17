@@ -5,6 +5,7 @@ const common = {
 	logout: 'Sign Out',
 	google: "Google",
 	facebook: "Facebook",
+	tutoring: "Instant tutoring"
 };
 
 export default common;

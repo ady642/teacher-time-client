@@ -1,8 +1,6 @@
 import {FunctionComponent, useState} from "react";
 import {BottomNavigation, BottomNavigationAction} from "@material-ui/core";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import useTranslation from "@/common/hooks/useTranslation";
-import {MailOutline} from "@material-ui/icons";
+import { House, MailOutline} from "@material-ui/icons";
 import {useRouter} from "next/router";
 
 interface BottomBarProps {
@@ -11,7 +9,6 @@ interface BottomBarProps {
 
 const BottomBar: FunctionComponent<BottomBarProps> = ({ locale }) => {
 	const [value, setValue] = useState(0)
-	const { t } = useTranslation()
 	const router = useRouter()
 
 	const goToContact = async () => {
@@ -31,7 +28,7 @@ const BottomBar: FunctionComponent<BottomBarProps> = ({ locale }) => {
 		color={'primary'}
 		className={'sm:hidden fixed bottom-0 z-50 w-full'}
 	>
-		<BottomNavigationAction onClick={goToTeachersList} label={t('common.teachers')} icon={<AccountCircle />} />
+		<BottomNavigationAction onClick={goToTeachersList} label={'Home'} icon={<House />} />
 		<BottomNavigationAction onClick={goToContact} label="Contact" icon={<MailOutline />} />
 	</BottomNavigation>
 }

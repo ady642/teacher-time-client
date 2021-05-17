@@ -17,7 +17,7 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children, locale }) => {
 	return (
 		<>
 			<WhiteHeader locale={locale} />
-			<div className={'h-5/6'}>
+			<div className={'h-5/6 relative'}>
 				{children}
 			</div>
 			<BottomBar locale={locale} />

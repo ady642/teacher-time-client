@@ -4,7 +4,8 @@ const common = {
 	login: "Se connecter",
 	logout: 'Se déconnecter',
 	google: "Google",
-	facebook: "Facebook"
+	facebook: "Facebook",
+	tutoring: "Soutien Scolaire Instantané"
 };
 
 export default common;

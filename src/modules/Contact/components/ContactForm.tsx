@@ -28,12 +28,12 @@ const ContactFormContent: FunctionComponent<ContactFormProps> = ({ contactForm, 
 
 	return <section className='flex flex-col'>
 		<h1 className='uppercase sm:text-2xl text-l mb-6'>{ t('contactUs') }</h1>
-		<TextField className='mb-4' value={contactForm.email} onChange={(e) => setEmail(e.target.value)} id="outlined-basic" label='Email' variant="outlined" />
 		<TextField value={contactForm.message} onChange={(e) => setMessage(e.target.value)}
 			id="outlined-basic"
 			className='mb-4'
 			label='Message' variant="outlined" multiline minRows='5'
 		/>
+		<TextField className='mb-4' value={contactForm.email} onChange={(e) => setEmail(e.target.value)} id="outlined-basic" label='Email' variant="outlined" />
 		<SimpleButton className={'self-end sm:w-48 w-full'} text={t('send')} onClick={sendMail} />
 	</section>
 }
