@@ -26,11 +26,11 @@ production:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
   only:
-    - master
+    - main
 
   script:
     - rsync -rav --delete dist root@teacher-time.com:/var/www/teacher-time.com/front
 
   environment:
     name: production
-    url: https://arcadus.club
+    url: http://teacher-time.com
