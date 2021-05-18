@@ -2,7 +2,7 @@ import axios, {AxiosInstance} from 'axios'
 // @ts-ignore
 import socketIO from 'socket.io-client';
 
-export const socket = socketIO.connect(process.env.SOCKET_SERVER, {secure: true});
+export const socket = socketIO.connect(process.env.SERVER_URL, { secure: true});
 
 export class Client {
 	client: AxiosInstance
