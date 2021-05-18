@@ -7,8 +7,6 @@
 @tailwind base;
 @tailwind screens;
 
-
-
 button:focus {
     outline: none
 }
@@ -26,10 +24,18 @@ html,body, #__next {
     height: min-content;
 }
 
-.header {
-    background: transparent;
-}
-
 .main-title {
     font-family: 'MuseoModerno', sans-serif;
+}
+
+.header {
+    background: linear-gradient(
+        122deg,
+        rgb(255 255 255 / 32%) 0%, rgb(125 125 125 / 45%) 44%, rgba(84,84,84,0.23012955182072825) 100%
+    );
+}
+
+.bg-home {
+    background: url('../../../public/img/home-bg.png');
+    background-size: cover;
 }

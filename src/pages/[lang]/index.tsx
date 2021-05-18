@@ -35,7 +35,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 			<WhiteHeaderLayout
 				locale={localization.locale}
 			>
-				<div className={`w-full bg-transparent h-full bg-blue-600 text-white flex lg:flex-row flex-col-reverse lg:justify-between justify-center items-center md:p-14 p-4`} style={{backgroundColor: '#F9F8FD'}}>
+				<div className={`w-full h-full text-white flex lg:flex-row flex-col-reverse lg:justify-between justify-center items-center md:p-14 p-4`}>
 					<section className={'font-black tracking-wide lg:w-2/3'}>
 						<div className={'md:text-4xl main-title text-xl'}>
 							{ localization.translations['teacherTimeWorld'] }

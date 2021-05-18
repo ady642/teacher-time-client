@@ -6,7 +6,7 @@ const home = {
 	callTeacher: "Appeler un professeur",
 	teacherTimeWorld: "Teacher-time met en relation instantanée élèves et professeurs du monde entier",
 	allWorld: "monde entier",
-	teacherTimeDesc: "Après acceptation, la conversation peut alors  commencer et vous pouvez poser vos questions au professeur"
+	teacherTimeDesc: "Après acceptation, la conversation peut alors commencer. Un professeur répondra à vos questions"
 };
 
 export default home;

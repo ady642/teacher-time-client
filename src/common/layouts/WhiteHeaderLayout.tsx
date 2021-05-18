@@ -15,14 +15,14 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children, locale }) => {
 	const { setAppLoading } = useAppReducers()
 
 	return (
-		<>
+		<div className={'bg-home h-full'}>
 			<WhiteHeader locale={locale} />
 			<div className={'h-5/6'}>
 				{children}
 			</div>
 			<BottomBar locale={locale} />
 			<LoadingModal open={appLoading} handleClose={() => setAppLoading(false)} />
-		</>
+		</div>
 	)
 }
 
