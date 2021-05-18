@@ -98,7 +98,9 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 		partnerVideo.current.srcObject = e.streams[0];
 	}
 	const createPeer = (): RTCPeerConnection => {
-		const peer = new RTCPeerConnection()
+		const peer = new RTCPeerConnection({
+			iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+		})
 
 		peer.createDataChannel('test')
 		peer.onicecandidate = handleICECandidateEvent
