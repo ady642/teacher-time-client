@@ -1,10 +1,13 @@
 @import './stripe_style.css';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Source+Sans+Pro:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap');
 
 @tailwind components;
 @tailwind utilities;
 @tailwind base;
 @tailwind screens;
+
+
 
 button:focus {
     outline: none
@@ -24,15 +27,9 @@ html,body, #__next {
 }
 
 .header {
-    background: linear-gradient(90deg, rgb(48, 131, 254) 0%, rgb(36, 119, 222) 44%, rgba(4,71,164,1) 100%);
+    background: transparent;
 }
 
-.particles {
-    background-color: transparent;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
+.main-title {
+    font-family: 'MuseoModerno', sans-serif;
 }

@@ -21,14 +21,14 @@ const Header: FC<HeaderProps> = ({ locale }) => {
 	}
 
 	return (
-		<div className={'flex items-center header h-1/6 p-14	'}>
+		<div className={'flex items-center bg-blue-700 h-1/6 p-14	'}>
 			<div className={'cursor-pointer'} onClick={goToHome}>
 				<Logo height={80} width={300}/>
 			</div>
 			<div className={'flex sm:flex hidden justify-between flex-1'}>
 				<nav className={'ml-16 flex items-center'}>
-					<ul className={'flex items-center font-bold sm:text-lg text-sm lg:flex hidden tracking-wide text-gray-200'}>
-						<li onClick={goToContact} className={'cursor-pointer hover:text-green-300 transition'}>
+					<ul className={'flex items-center font-bold sm:text-lg text-sm lg:flex hidden tracking-wide text-gray-400'}>
+						<li onClick={goToContact} className={'cursor-pointer hover:text-green-500 transition'}>
 							{ t('common.tutoring')}
 						</li>
 					</ul>
