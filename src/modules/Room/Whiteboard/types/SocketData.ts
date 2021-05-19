@@ -4,4 +4,5 @@ export interface SocketData {
     x1: number;
     y1: number;
     color: string;
+    width: number;
 }
