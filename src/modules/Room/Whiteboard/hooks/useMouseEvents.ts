@@ -7,6 +7,7 @@ const useMouseEvents = (
 	chalkParams: ChalkParams,
 	setChalkParams: (chalkParams: ChalkParams) => void,
 	drawLine: (chalkX: number, chalkY: number, pageX: number, pageY: number, chalkColor: string, chalkWidth: number, isEmitting: boolean) => void,
+	clearPoints: () => void
 ) => {
 
 	const onMouseDown = (e: MouseEvent<HTMLCanvasElement>) => {
@@ -31,6 +32,7 @@ const useMouseEvents = (
 	const onMouseUp = (e: MouseEvent<HTMLCanvasElement>) => {
 		setDrawing(false);
 		drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
+		clearPoints()
 	}
 
 	return {
