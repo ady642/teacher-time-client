@@ -1,5 +1,5 @@
 import ChalkParams from "@/modules/Room/Whiteboard/interfaces/ChalkParams";
-import {MouseEvent, MutableRefObject} from "react";
+import {MouseEvent} from "react";
 
 const useMouseEvents = (
 	drawing: boolean,
@@ -7,7 +7,6 @@ const useMouseEvents = (
 	chalkParams: ChalkParams,
 	setChalkParams: (chalkParams: ChalkParams) => void,
 	drawLine: (chalkX: number, chalkY: number, pageX: number, pageY: number, chalkColor: string, chalkWidth: number, isEmitting: boolean) => void,
-	canvasRef: MutableRefObject<HTMLCanvasElement>
 ) => {
 
 	const onMouseDown = (e: MouseEvent<HTMLCanvasElement>) => {

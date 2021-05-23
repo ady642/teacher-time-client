@@ -1,4 +1,4 @@
-import {MouseEvent, MutableRefObject, useEffect, useRef, useState} from "react";
+import {MutableRefObject, useEffect, useRef, useState} from "react";
 import ChalkParams from "@/modules/Room/Whiteboard/interfaces/ChalkParams";
 import {socket} from "@/common/utils/client";
 import {SocketData} from "@/modules/Room/Whiteboard/types/SocketData";
@@ -9,30 +9,29 @@ import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface) => {
 	const [drawing, setDrawing] = useState(false)
 	const [chalkParams, setChalkParams] = useState<ChalkParams>({ width: tool.width, color: tool.color, x: 0, y: 0})
-	const contextRef = useRef<CanvasRenderingContext2D>(null)
-	const rectRef = useRef<DOMRect>(null)
 
 	useEffect(() => {
-		contextRef.current = canvasRef.current.getContext('2d')
-		rectRef.current = canvasRef.current.getBoundingClientRect();
-	})
+
+	}, )
 
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
 		if(drawing === false) {
 			return
 		}
 
-		const canvas = canvasRef.current;
-		const context = contextRef.current
-		const rect = rectRef.current
+		const canvas = canvasRef.current
+		const context = canvas.getContext('2d')
+		const rect = canvasRef.current.getBoundingClientRect();
+
 		const offsetLeft = rect.left;
 		const offsetTop = rect.top;
 
+		context.strokeStyle = color;
+		context.lineWidth = width;
+		context.lineCap = 'round';
+
 		context.beginPath();
 		context.moveTo(x0 - offsetLeft, y0 - offsetTop);
-		context.strokeStyle = color;
-		context.lineWidth = 50;
-		context.lineCap = 'round';
 		context.lineTo(x1 - offsetLeft, y1 - offsetTop);
 		context.stroke();
 		context.closePath();
