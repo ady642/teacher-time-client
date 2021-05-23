@@ -4,24 +4,26 @@ import styles from './style.module.scss'
 import Toolbox from '@/modules/Room/Whiteboard/components/Toolbox/Index'
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
-import Eraser from "@/modules/Room/Whiteboard/models/Eraser";
 
 const BoardContainer: FunctionComponent = () => {
 	const boardContainerRef = useRef<HTMLDivElement>(null)
 	const [tool, setTool] = useState<ToolInterface>(new Pencil())
 	const [cursorClass, setCursorClass] = useState<string>(null)
+	const canvasRef = useRef<HTMLCanvasElement>(null)
 
-	const selectTool = (toolName: string) => {
-		const tool: ToolInterface = toolName === 'Pencil' ? new Pencil() : new Eraser()
-		setTool(tool)
-
-		const cursorClass: string = toolName === 'Pencil' ? styles.pencilCursor : styles.eraserCursor
+	useEffect(() => {
+		const cursorClass: string = tool.name === 'Pencil' ? styles.pencilCursor : styles.eraserCursor
 		setCursorClass(cursorClass)
+	}, [tool])
+
+	const clearCanvas = () => {
+		const context = canvasRef.current.getContext('2d');
+		context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 	}
 
 	return <div ref={boardContainerRef} className={`${styles.shade} ${cursorClass}`}>
-		<Toolbox tool={tool} selectTool={selectTool}/>
-		<Board tool={tool} boardContainerRef={boardContainerRef}/>
+		<Toolbox clearCanvas={clearCanvas} tool={tool} setTool={setTool} />
+		<Board canvasRef={canvasRef} tool={tool} boardContainerRef={boardContainerRef}/>
 	</div>
 }
 

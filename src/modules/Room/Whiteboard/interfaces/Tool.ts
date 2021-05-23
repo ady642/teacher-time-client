@@ -1,4 +1,5 @@
 interface ToolInterface {
+    name: string,
     width: number;
     color?: string
 }

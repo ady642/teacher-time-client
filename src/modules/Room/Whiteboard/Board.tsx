@@ -5,12 +5,11 @@ import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 
 interface BoardProps {
 	boardContainerRef: MutableRefObject<HTMLDivElement>;
-	tool: ToolInterface
+	tool: ToolInterface;
+	canvasRef: any
 }
 
-const Board: FunctionComponent<BoardProps> = ({ boardContainerRef, tool }) => {
-	const canvasRef = useRef<HTMLCanvasElement>(null)
-
+const Board: FunctionComponent<BoardProps> = ({ boardContainerRef, canvasRef, tool }) => {
 	const { onMouseDown, onMouseMove, onMouseUp, onTouchStart, onTouchEnd, onTouchMove } =  useBoard(boardContainerRef, canvasRef, tool)
 
 	return <canvas

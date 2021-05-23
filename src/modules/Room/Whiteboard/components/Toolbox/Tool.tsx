@@ -1,16 +1,13 @@
-import {FunctionComponent} from "react";
-import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool"
+import {FunctionComponent, MouseEventHandler} from "react";
 
 interface ToolProps {
-    selectTool: (toolName: string) => void;
-    Icon: FunctionComponent;
-    tool: ToolInterface;
-    name: string;
+    onClick: MouseEventHandler<HTMLButtonElement>;
+    children: any;
 }
 
-const Tool: FunctionComponent<ToolProps> = ({ selectTool, Icon, name }) => {
-	return <button onClick={() => selectTool(name)} className={'w-12 h-12 flex justify-center items-center rounded bg-transparent hover:bg-gray-300 my-2'}>
-		<Icon />
+const Tool: FunctionComponent<ToolProps> = ({ onClick, children }) => {
+	return <button onClick={onClick} className={'w-12 h-12 flex justify-center items-center rounded bg-transparent hover:bg-gray-300 my-2'}>
+		{ children }
 	</button>
 }
 
