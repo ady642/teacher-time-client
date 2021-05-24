@@ -146,7 +146,9 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 	return <LanguageProvider localization={localization}>
 		<div>
 			<audio autoPlay ref={partnerVideo} />
-			<BoardContainer />
+			<BoardContainer
+				socket={socket}
+			/>
 			<ModalAcceptation
 				displayAcceptModal={displayAcceptModal}
 				handleClose={() => setDisplayAcceptModal(false)}
