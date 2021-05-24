@@ -6,7 +6,7 @@ import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import useTouchEvents from '@/modules/Room/Whiteboard/hooks/useTouchEvents';
 import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
-import {bzCurve, bzCurveCustom, linearCurve, quadraticCurve} from "@/modules/Room/Whiteboard/utils";
+import { linearCurve } from "@/modules/Room/Whiteboard/utils";
 
 const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface) => {
 	const [drawing, setDrawing] = useState(false)
@@ -14,13 +14,10 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	const pointsRef: MutableRefObject<Point[]>  = useRef<Point[]>([])
 
 	const clearPoints = () => {
-		console.log('je clear les points')
 		pointsRef.current = []
 	}
 
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
-		if (!drawing) { return; }
-
 		const canvas = canvasRef.current
 		//let points = pointsRef.current
 		const context = canvas.getContext('2d')
@@ -52,7 +49,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	}
 
 	const {onTouchStart, onTouchMove, onTouchEnd} = useTouchEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints)
-	const {onMouseUp, onMouseMove, onMouseDown,} = useMouseEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints)
+	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut} = useMouseEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints)
 
 	useEffect(() => {
 		setChalkParams({ ...chalkParams, color: tool.color, width: tool.width })
@@ -84,7 +81,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 
 	return {
 	    onMouseMove, onMouseDown, onMouseUp,
-		onTouchStart, onTouchMove, onTouchEnd
+		onTouchStart, onTouchMove, onTouchEnd, onMouseOut
 	}
 }
 

@@ -146,10 +146,6 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 	return <LanguageProvider localization={localization}>
 		<div>
 			<audio autoPlay ref={partnerVideo} />
-			<div className={'flex flex-col'}>
-				<span>{ socket.id }</span>
-				<span>{ otherUser.current }</span>
-			</div>
 			<BoardContainer />
 			<ModalAcceptation
 				displayAcceptModal={displayAcceptModal}

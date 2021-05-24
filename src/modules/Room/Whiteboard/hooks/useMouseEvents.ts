@@ -35,10 +35,16 @@ const useMouseEvents = (
 		clearPoints()
 	}
 
+	const onMouseOut = () => {
+		setDrawing(false);
+		clearPoints()
+	}
+
 	return {
 		onMouseUp,
 		onMouseDown,
-		onMouseMove
+		onMouseMove,
+		onMouseOut
 	}
 }
 
