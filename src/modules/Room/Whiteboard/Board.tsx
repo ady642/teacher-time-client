@@ -22,6 +22,7 @@ const Board: FunctionComponent<BoardProps> = ({ boardContainerRef, canvasRef, to
 		onTouchStart={(e) => onTouchStart(e)}
 		onTouchEnd={(e) => onTouchEnd(e)}
 		onTouchMove={(e) => onTouchMove(e)}
+		onMouseOut={(e) => onMouseUp(e)}
 	/>
 }
 

@@ -5,28 +5,24 @@ import {SocketData} from "@/modules/Room/Whiteboard/types/SocketData";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import useTouchEvents from '@/modules/Room/Whiteboard/hooks/useTouchEvents';
 import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
-
-interface Point {
-	x: number,
-	y: number
-}
+import Point from "@/modules/Room/Whiteboard/interfaces/Point";
+import {bzCurve, bzCurveCustom, linearCurve, quadraticCurve} from "@/modules/Room/Whiteboard/utils";
 
 const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface) => {
 	const [drawing, setDrawing] = useState(false)
 	const [chalkParams, setChalkParams] = useState<ChalkParams>({ width: tool.width, color: tool.color, x: 0, y: 0})
-	const pointsRef: MutableRefObject<{x: number, y: number}[]>  = useRef<{x: number, y: number}[]>([])
+	const pointsRef: MutableRefObject<Point[]>  = useRef<Point[]>([])
 
 	const clearPoints = () => {
+		console.log('je clear les points')
 		pointsRef.current = []
 	}
 
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
-		if(drawing === false) {
-			return
-		}
+		if (!drawing) { return; }
 
 		const canvas = canvasRef.current
-		const points = pointsRef.current
+		//let points = pointsRef.current
 		const context = canvas.getContext('2d')
 		const rect = canvasRef.current.getBoundingClientRect();
 
@@ -40,66 +36,12 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		context.lineCap = 'round';
 
 		// Saving all the points in an array
-		points.push({x: x1 - offsetLeft, y: y1 - offsetTop});
-
-		// Create points
-		if (points.length < 3) {
-			const firstPoint = points[0];
-			context.beginPath();
-			context.arc(firstPoint.x, firstPoint.y, context.lineWidth / 2, 0, Math.PI * 2, !0);
-			context.fill();
-			context.closePath();
-
-			return;
-		}
+		//points.push({x: x0 - offsetLeft, y: y0 - offsetTop});
 
 		// Create curve between points
-		context.beginPath();
-		let i = 1
-
-		const findBPrim = (A: Point, B: Point, Cy: number): Point => {
-			const coeffDirecteur = (B.y - A.y) / (B.x - A.x)
-			const BPrimx = B.x + ((Cy - B.y) / coeffDirecteur)
-			const BPrimy = Cy
-
-			return {
-				x: BPrimx,
-				y: BPrimy
-			}
-		}
-
-		const findCPrim = (C: Point, D: Point, By: number): Point => {
-			const coeffDirecteur = (D.y - C.y) / (D.x - C.x)
-			const CPrimx = C.x + ((By - C.y) / coeffDirecteur)
-			const CPrimy = By
-
-			return {
-				x: CPrimx,
-				y: CPrimy
-			}
-		}
-
-		for (i; i < points.length - 3; i++) {
-			const A = points[i]
-			const B = points[i + 1]
-			const C = points[i + 2]
-			const D = points[i + 3]
-			const BPrim = findBPrim(A, B, C.y)
-			const CPrim = findCPrim(C, D, B.y)
-
-			context.moveTo(B.x, B.y)
-			context.bezierCurveTo(BPrim.x, BPrim.y, CPrim.x, CPrim.y, D.x, D.y);
-		}
-
-		// For the last 2 points
-		context.quadraticCurveTo(
-			points[i].x,
-			points[i].y,
-			points[i + 1].x,
-			points[i + 1].y
-		);
-		context.stroke();
-
+		const A = { x: x0 - offsetLeft, y: y0 - offsetTop }
+		const B = { x: x1 - offsetLeft, y: y1 - offsetTop }
+		linearCurve(context, A, B);
 
 		// Data Emission
 		if (!isEmitting) { return; }
