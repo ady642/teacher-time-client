@@ -10,10 +10,16 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head >
-					<title>Teacher Time</title>
+					<script
+						async
+						src={`https://www.googletagmanager.com/gtag/js?id=G-DN26ZWEN22`}
+					/>
 					<script
 						dangerouslySetInnerHTML={{
 							__html: `
+							if (localhost) { // disable GA:
+							  window['ga-disable-UA-XXXXX-Y'] = true; // enter your tracking ID
+							}
 							  window.dataLayer = window.dataLayer || [];
 							  function gtag(){dataLayer.push(arguments);}
 							  gtag('js', new Date());
