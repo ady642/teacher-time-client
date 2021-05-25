@@ -1,6 +1,5 @@
 import {FunctionComponent, useEffect, useState} from "react";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
-import DefaultLayout from "@/common/layouts/DefaultLayout";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {getInitialLocale} from "@/translations/getInitialLocale";
 import ContactForm from "@/modules/Contact/components/ContactForm";
@@ -10,7 +9,6 @@ import TailwindCard from "@/common/components/Cards/TailwindCard";
 import InfoCards from "@/modules/Contact/components/InfoCards";
 import styles from '@/modules/Contact/styles/contact.module.scss'
 import ContactClient from "@/modules/Contact/client/ContactClient";
-import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 
 interface ContactProps {
@@ -20,11 +18,15 @@ interface ContactProps {
 const Contact: FunctionComponent<ContactProps> = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [locale, setLocale] = useState('')
 	const [contactForm, setContactForm] = useState(new ContactFormModel())
-	const { token } = useAuthGetters()
-	const contactClient = new ContactClient(token)
+	const contactClient = new ContactClient('')
 
 	const sendMail = async () => {
-		await contactClient.sendMail(contactForm)
+		try {
+			await contactClient.sendMail(contactForm)
+			alert('Votre message a été envoyé !')
+		} catch (e) {
+			alert (e.message)
+		}
 	}
 
 	useEffect(() => {
