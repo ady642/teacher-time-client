@@ -17,14 +17,14 @@ class MyDocument extends Document {
 					<script
 						dangerouslySetInnerHTML={{
 							__html: `
-							if (localhost) { // disable GA:
-							  window['ga-disable-UA-XXXXX-Y'] = true; // enter your tracking ID
-							}
+							var host = window.location.hostname;
+							if (host != "localhost") { // disable GA:
 							  window.dataLayer = window.dataLayer || [];
 							  function gtag(){dataLayer.push(arguments);}
 							  gtag('js', new Date());
 							
 							  gtag('config', 'G-DN26ZWEN22');
+							 }
 							`,
 						}}
 					/>
