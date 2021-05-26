@@ -36,7 +36,7 @@
     "sass": "^1.33.0",
     "stripe": "^8.143.0",
     "styled-components": "^5.2.3",
-    "uuidv4": "^6.2.7"
+    "uuidv4": "^6.2.8"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.12.0",

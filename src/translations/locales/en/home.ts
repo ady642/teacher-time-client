@@ -6,7 +6,9 @@ const home = {
 	callTeacher: "Call a teacher",
 	teacherTimeWorld: "Instantly connects students and teachers around the world",
 	allWorld: "around the world",
-	teacherTimeDesc: "After acceptance, the conversation begin and you can ask your questions to the teacher"
+	teacherTimeDesc: "After acceptance, the conversation begin and you can ask your questions to the teacher",
+	startConv: "After acceptance, the conversation begin",
+	teacherAnswer: "and you can ask your questions to the teacher"
 };
 
 export default home;

@@ -1,5 +1,6 @@
 import React, {FC, useEffect} from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
 
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
@@ -7,6 +8,7 @@ import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import {socket} from "@/common/utils/client";
 import useAppReducers from "@/context/app/helpers/useAppReducers";
+
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
@@ -37,15 +39,28 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 			>
 				<div className={`w-full h-full text-white flex lg:flex-row flex-col-reverse lg:justify-between justify-center items-center md:p-14 p-4`}>
 					<section className={'font-black tracking-wide lg:w-2/3'}>
-						<div className={'md:text-4xl main-title text-xl'}>
+						<div className={'md:text-4xl main-title text-2xl'}>
 							{ localization.translations['teacherTimeWorld'] }
 							<span className={'text-xl ml-2'}>🌍</span>
 						</div>
-						<div className={'md:text-md text-sm my-6'}>
-							{ localization.translations['teacherTimeDesc'] }
+						<div className={'md:text-md text-sm flex flex-col my-6'}>
+							<span>
+								{ localization.translations['startConv'] }
+							</span>
+							<span>
+								{ localization.translations['teacherAnswer'] }
+							</span>
 						</div>
-						<button onClick={callTeacher} className={'bg-green-500 text-white flex justify-center hover:bg-green-700 transition-all md:w-auto w-full font-bold sm:text-lg text-md rounded sm:p-3 p-2'}>
-							{ localization.translations['callTeacher'] } 🚀
+						<button onClick={callTeacher} className={'bg-green-600 text-white flex justify-center hover:bg-green-800 transition-all md:w-auto w-full font-bold sm:text-ml text-md rounded sm:p-3 p-2'}>
+							<span className={'mr-2'}>
+								{ localization.translations['callTeacher'] }
+							</span>
+							<Image
+								src={'/img/headphone.png'}
+								alt={'headphone'}
+								width={25}
+								height={25}
+							/>
 						</button>
 					</section>
 				</div>
