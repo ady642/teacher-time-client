@@ -8,6 +8,7 @@ import useToast from "@/common/hooks/useToast";
 import ModalAcceptation from "@/modules/Room/components/ModalAcceptation";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import useRoutePush from "@/common/hooks/useRoutePush";
+import useWebRTC from "@/modules/Room/hooks/useWebRTC";
 
 interface RoomProps {
 }
@@ -18,10 +19,15 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 	const [studentID, setStudentID] = useState('')
 	const { goTo } = useRoutePush()
 
+	// WebRTC
 	const partnerVideo = useRef<HTMLVideoElement>()
 	const peerRef = useRef<RTCPeerConnection>()
 	const otherUser = useRef<string>()
 	const userStream = useRef<MediaStream>()
+
+	const { createPeer,answerToOffer,sendOffer,
+		setAnswerAsLocalDescription,setICECandidateMsg
+	} = useWebRTC({ socket, peerRef, otherUser, partnerVideo})
 
 	const handleUserDisconnection = async () => {
 		if(teacherID) {
@@ -59,56 +65,6 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 		setDisplayAcceptModal(false)
 	}
 
-	const sendOffer = async (to: string) => {
-		console.log('je send loffer à ', to)
-		const offer: RTCSessionDescriptionInit = await peerRef.current.createOffer();
-		await peerRef.current.setLocalDescription(new RTCSessionDescription(offer));
-
-		socket.emit('offer', { offer, to });
-	}
-
-	const answerToOffer = async (offer: RTCSessionDescriptionInit) => {
-		await peerRef.current.setRemoteDescription(offer)
-		const answer: RTCSessionDescriptionInit = await peerRef.current.createAnswer();
-		await peerRef.current.setLocalDescription(new RTCSessionDescription(answer));
-
-		socket.emit('answer', {answer, to: otherUser.current});
-	}
-
-	const setAnswerAsLocalDescription = async (answer: RTCSessionDescriptionInit) => {
-		console.log('je set lanswser as localdescription')
-		await peerRef.current.setRemoteDescription(new RTCSessionDescription(answer))
-	}
-
-	const handleICECandidateEvent = (e: RTCPeerConnectionIceEvent) => {
-		if (e.candidate) {
-			const payload: OfferIcePayload = {
-				target: otherUser.current,
-				candidate: e.candidate,
-			}
-			socket.emit("offer-ice-candidate", payload);
-		}
-	}
-	const setICECandidateMsg = async (candidateInit: RTCIceCandidateInit ) => {
-		const candidate = new RTCIceCandidate(candidateInit);
-
-		await peerRef.current.addIceCandidate(candidate)
-	}
-	const handleTrackEvent = (e: RTCTrackEvent) => {
-		partnerVideo.current.srcObject = e.streams[0];
-	}
-	const createPeer = (): RTCPeerConnection => {
-		const peer = new RTCPeerConnection({
-			iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
-		})
-
-		peer.createDataChannel('test')
-		peer.onicecandidate = handleICECandidateEvent
-		peer.ontrack = handleTrackEvent
-
-		return peer
-	}
-
 	useEffect(() => {
 		if(teacherID) {
 			setTeacher(teacherID)
@@ -119,7 +75,6 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 
 			peerRef.current = createPeer()
 			userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
-			socket.emit('join-room', roomID)
 			socket.on('on-join-intent', joinIntent)
 			socket.on('on-student-joined', setStudent)
 			socket.on('on-answer', setAnswerAsLocalDescription)
@@ -137,6 +92,7 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 			userStream.current.getTracks().forEach(track => {
 				track.stop();
 			});
+			peerRef.current.close()
 			socket.disconnect()
 		}
 	}, [])
@@ -145,6 +101,9 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 
 	return <LanguageProvider localization={localization}>
 		<div>
+			<div className={'flex flex-col'}>
+				<span>{ otherUser.current }</span>
+			</div>
 			<audio autoPlay ref={partnerVideo} />
 			<BoardContainer
 				socket={socket}

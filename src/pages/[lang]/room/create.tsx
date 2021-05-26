@@ -11,8 +11,9 @@ const CreateRoom: FunctionComponent<CreateRoomProps> = () => {
 	const { goTo } = useRoutePush()
 
 	const createRoom = async () => {
-		await socket.emit('create-room', '6098d3c3a5383e2bac0ee5a6')
-		await goTo('fr', 'room/6098d3c3a5383e2bac0ee5a6')
+		const roomId = uuid()
+		await socket.emit('create-room', roomId)
+		await goTo('fr', `room/${roomId}`)
 	}
 
 	const deleteRoom = async () => {
