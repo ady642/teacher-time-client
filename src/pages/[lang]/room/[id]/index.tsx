@@ -89,8 +89,6 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		}
 	}, [])
 
-
-
 	return <LanguageProvider localization={localization}>
 		<div>
 			<audio autoPlay ref={partnerVideo} />

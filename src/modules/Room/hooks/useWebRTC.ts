@@ -28,7 +28,7 @@ const useWebRTC = ({
 		const answer: RTCSessionDescriptionInit = await peerRef.current.createAnswer();
 		await peerRef.current.setLocalDescription(new RTCSessionDescription(answer));
 
-		socket.emit('answer', {answer, to: roomID});
+		socket.emit('answer', {answer, roomID});
 	}
 
 	const setAnswerAsLocalDescription = async (answer: RTCSessionDescriptionInit) => {
