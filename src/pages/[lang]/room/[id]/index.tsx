@@ -1,7 +1,6 @@
 import {FC, useEffect, useRef, useState} from "react";
 import {socket} from "@/common/utils/client";
 import {withRouter} from 'next/router'
-import {OfferIcePayload, RTCIceCandidateInit, RTCSessionDescriptionInit} from "@/modules/Room/types";
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import useToast from "@/common/hooks/useToast";
@@ -13,7 +12,7 @@ import useWebRTC from "@/modules/Room/hooks/useWebRTC";
 interface RoomProps {
 }
 
-const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { displayToastInfo } = useToast()
 	const [displayAcceptModal, setDisplayAcceptModal] = useState(false)
 	const [studentID, setStudentID] = useState('')
@@ -22,22 +21,20 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 	// WebRTC
 	const partnerVideo = useRef<HTMLVideoElement>()
 	const peerRef = useRef<RTCPeerConnection>()
-	const otherUser = useRef<string>()
 	const userStream = useRef<MediaStream>()
 
 	const { createPeer,answerToOffer,sendOffer,
 		setAnswerAsLocalDescription,setICECandidateMsg
-	} = useWebRTC({ socket, peerRef, otherUser, partnerVideo})
+	} = useWebRTC({ socket, peerRef , partnerVideo, roomID})
 
-	const handleUserDisconnection = async () => {
-		if(teacherID) {
-			alert('Error, the teacher is gone')
-			await goTo(localization.locale, '/')
-		} else {
-			alert('The student is gone')
-			otherUser.current = null
-			setStudentID('')
-		}
+	const handleTeacherDisconnection = async () => {
+		alert('The teacher is gone')
+		await goTo(localization.locale, '/')
+	}
+
+	const handleStudentDisconnection = async (studentID: string) => {
+		alert('The student is gone')
+		setStudentID('')
 	}
 
 	const joinIntent = (id: string) => {
@@ -55,37 +52,32 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 		setDisplayAcceptModal(false)
 	}
 
-	const setTeacher = (otherUserID: string) => {
-		otherUser.current = otherUserID
-	}
-
 	const setStudent = async (student: string) => {
-		otherUser.current = student
 		await sendOffer(student)
 		setDisplayAcceptModal(false)
 	}
 
 	useEffect(() => {
-		if(teacherID) {
-			setTeacher(teacherID)
-		}
-
 		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 			userStream.current = stream
 
 			peerRef.current = createPeer()
 			userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
+			socket.emit('join-room', roomID)
+
 			socket.on('on-join-intent', joinIntent)
 			socket.on('on-student-joined', setStudent)
+
 			socket.on('on-answer', setAnswerAsLocalDescription)
 
-			socket.on('on-user-leave', handleUserDisconnection)
+			socket.on('on-teacher-leave', handleTeacherDisconnection)
+			socket.on('on-student-leave', handleStudentDisconnection)
 
-			socket.emit('student-joined', teacherID)
 			socket.on('on-offer', answerToOffer)
 			socket.on('on-ice-candidate-offer', setICECandidateMsg)
 
 			socket.on('rejected', () => displayToastInfo('Teacher cant accept you for the moment, try later'))
+			socket.on('on-ended-room', () => alert('This room does not exist anymore'))
 		})
 
 		return () => {
@@ -101,9 +93,6 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 
 	return <LanguageProvider localization={localization}>
 		<div>
-			<div className={'flex flex-col'}>
-				<span>{ otherUser.current }</span>
-			</div>
 			<audio autoPlay ref={partnerVideo} />
 			<BoardContainer
 				socket={socket}
@@ -120,10 +109,9 @@ const Room: FC<RoomProps> = ({ roomID, teacherID, localization }: InferGetServer
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const id = ctx.query?.id ?? ''
-	const teacherID = ctx.query?.teacherID ?? ''
 	const localization = getLocalizationProps(ctx, "room");
 
-	return { props: { roomID: id, localization, teacherID } }
+	return { props: { roomID: id, localization } }
 }
 
 export default withRouter(Room)

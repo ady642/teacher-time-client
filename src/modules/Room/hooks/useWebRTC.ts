@@ -4,15 +4,15 @@ import {OfferIcePayload, RTCIceCandidateInit, RTCSessionDescriptionInit} from "@
 interface useWebRTCParams {
     socket: any;
     peerRef: MutableRefObject<RTCPeerConnection>;
-    otherUser: MutableRefObject<string>;
-    partnerVideo: MutableRefObject<HTMLVideoElement>
+    partnerVideo: MutableRefObject<HTMLVideoElement>;
+    roomID: string
 }
 
 const useWebRTC = ({
 	socket,
 	peerRef,
-	otherUser,
-	partnerVideo
+	partnerVideo,
+	roomID
 }: useWebRTCParams) => {
 	const sendOffer = async (to: string) => {
 		console.log('je send loffer à ', to)
@@ -23,11 +23,12 @@ const useWebRTC = ({
 	}
 
 	const answerToOffer = async (offer: RTCSessionDescriptionInit) => {
+		console.log('je set loffer as RemoteDescription')
 		await peerRef.current.setRemoteDescription(offer)
 		const answer: RTCSessionDescriptionInit = await peerRef.current.createAnswer();
 		await peerRef.current.setLocalDescription(new RTCSessionDescription(answer));
 
-		socket.emit('answer', {answer, to: otherUser.current});
+		socket.emit('answer', {answer, to: roomID});
 	}
 
 	const setAnswerAsLocalDescription = async (answer: RTCSessionDescriptionInit) => {
@@ -38,7 +39,7 @@ const useWebRTC = ({
 	const handleICECandidateEvent = (e: RTCPeerConnectionIceEvent) => {
 		if (e.candidate) {
 			const payload: OfferIcePayload = {
-				target: otherUser.current,
+				target: roomID,
 				candidate: e.candidate,
 			}
 			socket.emit("offer-ice-candidate", payload);
@@ -46,7 +47,7 @@ const useWebRTC = ({
 	}
 	const setICECandidateMsg = async (candidateInit: RTCIceCandidateInit ) => {
 		const candidate = new RTCIceCandidate(candidateInit);
-
+		console.log(candidateInit)
 		await peerRef.current.addIceCandidate(candidate)
 	}
 	const handleTrackEvent = (e: RTCTrackEvent) => {
