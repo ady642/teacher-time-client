@@ -32,9 +32,9 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		await goTo(localization.locale, '/')
 	}
 
-	const handleStudentDisconnection = async (studentID: string) => {
+	const handleStudentDisconnection = async () => {
 		alert('The student is gone')
-		setStudentID('')
+		await goTo(localization.locale, 'room/create')
 	}
 
 	const joinIntent = (id: string) => {

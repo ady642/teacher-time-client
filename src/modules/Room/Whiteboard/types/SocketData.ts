@@ -5,4 +5,5 @@ export interface SocketData {
     y1: number;
     color: string;
     width: number;
+    aspectRatio: number;
 }

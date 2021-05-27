@@ -1,5 +1,6 @@
 const common = {
 	contactUs: "Contactez-nous",
+	about: "Qui sommes-nous ?",
 	teachers: 'Professeurs',
 	login: "Se connecter",
 	logout: 'Se déconnecter',

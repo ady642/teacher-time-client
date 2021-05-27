@@ -3,7 +3,7 @@ const home = {
 	diploma: "Diplôme d'enseignant",
 	call: "Appel",
 	loginPhrase: "Se connecter pour appeler un professeur",
-	callTeacher: "Appeler un professeur",
+	callTeacher: "Appeler gratuitement un professeur",
 	teacherTimeWorld: "Teacher-time met en relation instantanée élèves et professeurs du monde entier",
 	allWorld: "monde entier",
 	teacherTimeDesc: "Après acceptation, la conversation peut alors commencer. Un professeur répondra à vos questions",
