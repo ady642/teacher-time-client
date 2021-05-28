@@ -1,7 +1,7 @@
 import {FunctionComponent} from "react";
 import {socket} from "@/common/utils/client";
 import useRoutePush from "@/common/hooks/useRoutePush";
-import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 
 interface CreateRoomProps {
 
@@ -11,9 +11,9 @@ const CreateRoom: FunctionComponent<CreateRoomProps> = () => {
 	const { goTo } = useRoutePush()
 
 	const createRoom = async () => {
-		const roomId = uuid()
-		await socket.emit('create-room', roomId)
-		await goTo('fr', `room/${roomId}`)
+		const roomID = v4()
+		await socket.emit('create-room', roomID)
+		await goTo('fr', `room/${roomID}`)
 	}
 
 	const deleteRoom = async () => {

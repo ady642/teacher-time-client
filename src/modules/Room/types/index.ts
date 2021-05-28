@@ -4,7 +4,7 @@ export interface RoomUsers {
 }
 
 export interface OfferIcePayload {
-    target: string,
+    roomID: string,
     candidate: RTCIceCandidateInit,
 }
 
@@ -15,7 +15,7 @@ export interface RTCSessionDescriptionInit {
 }
 
 export interface RTCPayload {
-    target: string,
+    roomID: string,
     caller: string,
     sdp: RTCSessionDescription
 }

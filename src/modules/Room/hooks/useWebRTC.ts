@@ -14,12 +14,12 @@ const useWebRTC = ({
 	partnerVideo,
 	roomID
 }: useWebRTCParams) => {
-	const sendOffer = async (to: string) => {
-		console.log('je send loffer à ', to)
+	const sendOffer = async (roomID: string) => {
+		console.log('je send loffer à ', roomID)
 		const offer: RTCSessionDescriptionInit = await peerRef.current.createOffer();
 		await peerRef.current.setLocalDescription(new RTCSessionDescription(offer));
 
-		socket.emit('offer', { offer, to });
+		socket.emit('offer', { offer, roomID });
 	}
 
 	const answerToOffer = async (offer: RTCSessionDescriptionInit) => {
@@ -39,7 +39,7 @@ const useWebRTC = ({
 	const handleICECandidateEvent = (e: RTCPeerConnectionIceEvent) => {
 		if (e.candidate) {
 			const payload: OfferIcePayload = {
-				target: roomID,
+				roomID,
 				candidate: e.candidate,
 			}
 			socket.emit("offer-ice-candidate", payload);

@@ -52,8 +52,8 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		setDisplayAcceptModal(false)
 	}
 
-	const setStudent = async (student: string) => {
-		await sendOffer(student)
+	const setStudent = async () => {
+		await sendOffer(roomID)
 		setDisplayAcceptModal(false)
 	}
 
