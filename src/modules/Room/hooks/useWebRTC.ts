@@ -56,12 +56,7 @@ const useWebRTC = ({
 	}
 	const createPeer = (): RTCPeerConnection => {
 		const peer = new RTCPeerConnection({
-			iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, {
-				urls: 'turn:numb.viagenie.ca',
-				credential: 'muazkh',
-				username: 'webrtc@live.com'
-			}],
-
+			iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
 		})
 
 		//peer.createDataChannel('test')
