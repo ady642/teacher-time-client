@@ -56,41 +56,7 @@ const useWebRTC = ({
 	}
 	const createPeer = (): RTCPeerConnection => {
 		const peer = new RTCPeerConnection({
-			iceServers: [
-				{
-					"urls": "stun:eu-turn1.xirsys.com"
-				},
-				{
-					"username": "g8wQeEQ8mhJa6uwBXdxGUgwZKIdwMuTHCbwWI7lyDYYpkyTI2K6DM_E8mxxATqWcAAAAAGCxKPN0ZWFjaGVydGltZQ==",
-					"urls": "turn:eu-turn1.xirsys.com:80?transport=udp",
-					"credential": "8ad306d2-bfda-11eb-af31-0242ac140004"
-				},
-				{
-					"username": "g8wQeEQ8mhJa6uwBXdxGUgwZKIdwMuTHCbwWI7lyDYYpkyTI2K6DM_E8mxxATqWcAAAAAGCxKPN0ZWFjaGVydGltZQ==",
-					"urls": "turn:eu-turn1.xirsys.com:3478?transport=udp",
-					"credential": "8ad306d2-bfda-11eb-af31-0242ac140004"
-				},
-				{
-					"username": "g8wQeEQ8mhJa6uwBXdxGUgwZKIdwMuTHCbwWI7lyDYYpkyTI2K6DM_E8mxxATqWcAAAAAGCxKPN0ZWFjaGVydGltZQ==",
-					"urls": "turn:eu-turn1.xirsys.com:80?transport=tcp",
-					"credential": "8ad306d2-bfda-11eb-af31-0242ac140004"
-				},
-				{
-					"username": "g8wQeEQ8mhJa6uwBXdxGUgwZKIdwMuTHCbwWI7lyDYYpkyTI2K6DM_E8mxxATqWcAAAAAGCxKPN0ZWFjaGVydGltZQ==",
-					"urls": "turn:eu-turn1.xirsys.com:3478?transport=tcp",
-					"credential": "8ad306d2-bfda-11eb-af31-0242ac140004"
-				},
-				{
-					"username": "g8wQeEQ8mhJa6uwBXdxGUgwZKIdwMuTHCbwWI7lyDYYpkyTI2K6DM_E8mxxATqWcAAAAAGCxKPN0ZWFjaGVydGltZQ==",
-					"urls": "turns:eu-turn1.xirsys.com:443?transport=tcp",
-					"credential": "8ad306d2-bfda-11eb-af31-0242ac140004"
-				},
-				{
-					"username": "g8wQeEQ8mhJa6uwBXdxGUgwZKIdwMuTHCbwWI7lyDYYpkyTI2K6DM_E8mxxATqWcAAAAAGCxKPN0ZWFjaGVydGltZQ==",
-					"urls": "turns:eu-turn1.xirsys.com:5349?transport=tcp",
-					"credential": "8ad306d2-bfda-11eb-af31-0242ac140004"
-				}
-			],
+			iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
 		})
 
 		//peer.createDataChannel('test')
