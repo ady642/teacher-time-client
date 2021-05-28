@@ -25,7 +25,10 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 			await goTo(localization.locale, `room/${roomID}`, { teacherID })
 			setAppLoading(false)
 		})
-		socket.on('on-rejected', () => alert('rejected'))
+		socket.on('on-rejected', () => {
+			alert('Les professeur sont tous occupés pour le moment, Veuillez réessayer plus tard')
+			setAppLoading(false)
+		})
 	}, [])
 
 	return (

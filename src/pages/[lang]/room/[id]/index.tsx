@@ -3,7 +3,6 @@ import {socket} from "@/common/utils/client";
 import {withRouter} from 'next/router'
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import useToast from "@/common/hooks/useToast";
 import ModalAcceptation from "@/modules/Room/components/ModalAcceptation";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import useRoutePush from "@/common/hooks/useRoutePush";
@@ -13,7 +12,6 @@ interface RoomProps {
 }
 
 const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const { displayToastInfo } = useToast()
 	const [displayAcceptModal, setDisplayAcceptModal] = useState(false)
 	const [studentID, setStudentID] = useState('')
 	const { goTo } = useRoutePush()
@@ -35,7 +33,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 
 	const handleStudentDisconnection = async () => {
 		alert('The student is gone')
-		await goTo(localization.locale, 'room/create')
+		window.location.replace(`${process.env.BASE_URL}/${localization.locale}/room/create`)
 	}
 
 	const beep = async () => {
@@ -53,10 +51,11 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		socket.emit('accept-student', { studentID, roomID })
 	}
 
-	const rejectStudent = () => {
+	const rejectStudent = async () => {
 		socket.emit('reject-student', studentID)
 		setStudentID('')
 		setDisplayAcceptModal(false)
+		await llamadaRef.current.pause()
 	}
 
 	const setStudent = async () => {
@@ -84,7 +83,6 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 			socket.on('on-offer', answerToOffer)
 			socket.on('on-ice-candidate-offer', setICECandidateMsg)
 
-			socket.on('rejected', () => displayToastInfo('Teacher cant accept you for the moment, try later'))
 			socket.on('on-ended-room', () => alert('This room does not exist anymore'))
 		})
 
