@@ -58,7 +58,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 	}
 
 	useEffect(() => {
-		navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+		navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream => {
 			userStream.current = stream
 
 			peerRef.current = createPeer()

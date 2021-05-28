@@ -15,9 +15,10 @@ const useWebRTC = ({
 	roomID
 }: useWebRTCParams) => {
 	const sendOffer = async (roomID: string) => {
-		console.log('je send loffer à ', roomID)
 		const offer: RTCSessionDescriptionInit = await peerRef.current.createOffer();
+		console.log('je set loffer as localDescription')
 		await peerRef.current.setLocalDescription(new RTCSessionDescription(offer));
+		console.log('je send loffer à ', roomID)
 
 		socket.emit('offer', { offer, roomID });
 	}
@@ -32,7 +33,7 @@ const useWebRTC = ({
 	}
 
 	const setAnswerAsLocalDescription = async (answer: RTCSessionDescriptionInit) => {
-		console.log('je set lanswser as localdescription')
+		console.log('je set lanswser as RemoteDescription')
 		await peerRef.current.setRemoteDescription(new RTCSessionDescription(answer))
 	}
 
@@ -55,10 +56,15 @@ const useWebRTC = ({
 	}
 	const createPeer = (): RTCPeerConnection => {
 		const peer = new RTCPeerConnection({
-			iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+			iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, {
+				urls: 'turn:numb.viagenie.ca',
+				credential: 'muazkh',
+				username: 'webrtc@live.com'
+			}],
+
 		})
 
-		peer.createDataChannel('test')
+		//peer.createDataChannel('test')
 		peer.onicecandidate = handleICECandidateEvent
 		peer.ontrack = handleTrackEvent
 
