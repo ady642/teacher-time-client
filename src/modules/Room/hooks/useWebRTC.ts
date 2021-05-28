@@ -33,7 +33,7 @@ const useWebRTC = ({
 	}
 
 	const setAnswerAsLocalDescription = async (answer: RTCSessionDescriptionInit) => {
-		console.log('je set lanswser as RemoteDescription')
+		console.log('je set lanswser as localdescription')
 		await peerRef.current.setRemoteDescription(new RTCSessionDescription(answer))
 	}
 

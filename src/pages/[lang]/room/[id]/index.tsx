@@ -17,6 +17,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 	const [displayAcceptModal, setDisplayAcceptModal] = useState(false)
 	const [studentID, setStudentID] = useState('')
 	const { goTo } = useRoutePush()
+	const llamadaRef = useRef<HTMLAudioElement>(null)
 
 	// WebRTC
 	const partnerVideo = useRef<HTMLVideoElement>()
@@ -37,9 +38,15 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		await goTo(localization.locale, 'room/create')
 	}
 
-	const joinIntent = (id: string) => {
+	const beep = async () => {
+		llamadaRef.current.src = '/sound/tonoDeLlamada.mp3';
+		await llamadaRef.current.play()
+	}
+
+	const joinIntent = async (id: string) => {
 		setStudentID(id)
 		setDisplayAcceptModal(true)
+		await beep()
 	}
 
 	const acceptStudent = async () => {
@@ -53,6 +60,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 	}
 
 	const setStudent = async () => {
+		await llamadaRef.current.pause()
 		await sendOffer(roomID)
 		setDisplayAcceptModal(false)
 	}
@@ -89,6 +97,8 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		}
 	}, [])
 
+
+
 	return <LanguageProvider localization={localization}>
 		<div>
 			<audio autoPlay ref={partnerVideo} />
@@ -101,6 +111,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 				acceptStudent={acceptStudent}
 				rejectStudent={rejectStudent}
 			/>
+			<audio loop ref={llamadaRef} />
 		</div>
 	</LanguageProvider>
 }
