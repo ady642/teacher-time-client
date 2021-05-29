@@ -30,7 +30,7 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal }) => {
 			<div className={'flex sm:flex hidden justify-between flex-1'}>
 				<nav className={'ml-16 flex items-center'}>
 					<ul className={'flex items-center font-bold sm:text-lg text-sm lg:flex hidden tracking-wide text-white'}>
-						<li onClick={goToContact} className={'cursor-pointer hover:text-green-500 transition'}>
+						<li className={'transition'}>
 							{ t('common.tutoring')}
 						</li>
 						<li onClick={openAboutModal} className={'ml-16 cursor-pointer hover:text-green-500 transition'}>
