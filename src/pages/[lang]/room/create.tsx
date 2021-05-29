@@ -17,19 +17,12 @@ const CreateRoom: FunctionComponent<CreateRoomProps> = ({ localization }: InferG
 
 	const createRoom = () => {
 		const roomID = v4()
-		console.log('test')
 		socket.emit('create-room', roomID)
 		setAppLoading(true)
 	}
 
-	const deleteRoom = async () => {
-		await socket.emit('delete-room', '6098d3c3a5383e2bac0ee5a6')
-		await goTo('fr', '/')
-	}
-
 	useEffect(() => {
 		socket.on('on-room-created', async (roomID: string) => {
-			setAppLoading(false)
 			await goTo('fr', `room/${roomID}`)
 		})
 	})

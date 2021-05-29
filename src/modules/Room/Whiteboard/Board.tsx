@@ -1,4 +1,4 @@
-import {FunctionComponent, MutableRefObject, useRef} from "react";
+import {FunctionComponent, MutableRefObject} from "react";
 import styles from './style.module.scss'
 import useBoard from "@/modules/Room/Whiteboard/hooks/useBoard";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
@@ -6,11 +6,12 @@ import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 interface BoardProps {
 	boardContainerRef: MutableRefObject<HTMLDivElement>;
 	tool: ToolInterface;
-	canvasRef: any
+	canvasRef: any;
+	roomID: string
 }
 
-const Board: FunctionComponent<BoardProps> = ({ boardContainerRef, canvasRef, tool }) => {
-	const { onMouseDown, onMouseMove, onMouseUp, onMouseOut, onTouchStart, onTouchEnd, onTouchMove } =  useBoard(boardContainerRef, canvasRef, tool)
+const Board: FunctionComponent<BoardProps> = ({ boardContainerRef, canvasRef, tool, roomID }) => {
+	const { onMouseDown, onMouseMove, onMouseUp, onMouseOut, onTouchStart, onTouchEnd, onTouchMove } =  useBoard(boardContainerRef, canvasRef, tool, roomID)
 
 	return <canvas
 		className={styles.board}

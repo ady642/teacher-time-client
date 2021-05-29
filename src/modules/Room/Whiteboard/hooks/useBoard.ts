@@ -8,7 +8,7 @@ import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
 import { linearCurve } from "@/modules/Room/Whiteboard/utils";
 
-const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface) => {
+const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface, roomID: string) => {
 	const [drawing, setDrawing] = useState(false)
 	const [chalkParams, setChalkParams] = useState<ChalkParams>({ width: tool.width, color: tool.color, x: 0, y: 0})
 	const pointsRef: MutableRefObject<Point[]>  = useRef<Point[]>([])
@@ -45,7 +45,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		let w = canvas.offsetWidth;
 		let h = canvas.offsetHeight;
 
-		socket.emit('drawing', { x0: x0 / w, y0: y0 / h, x1: x1 / w, y1: y1 / h, color, width});
+		socket.emit('drawing', { x0: x0 / w, y0: y0 / h, x1: x1 / w, y1: y1 / h, color, width, roomID});
 	}
 
 	const {onTouchStart, onTouchMove, onTouchEnd} = useTouchEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints)

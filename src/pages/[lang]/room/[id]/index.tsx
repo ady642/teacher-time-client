@@ -47,6 +47,11 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		await beep()
 	}
 
+	const closeModalAcceptation = async () => {
+		setDisplayAcceptModal(false)
+		await llamadaRef.current.pause()
+	}
+
 	const acceptStudent = async () => {
 		socket.emit('accept-student', { studentID, roomID })
 	}
@@ -73,6 +78,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 			socket.emit('join-room', roomID)
 
 			socket.on('on-join-intent', joinIntent)
+			socket.on('on-student-already-accepted', closeModalAcceptation)
 			socket.on('on-student-joined', setStudent)
 
 			socket.on('on-answer', setAnswerAsLocalDescription)
@@ -102,6 +108,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 			<audio autoPlay ref={partnerVideo} />
 			<BoardContainer
 				socket={socket}
+				roomID={roomID}
 			/>
 			<ModalAcceptation
 				displayAcceptModal={displayAcceptModal}

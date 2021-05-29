@@ -6,10 +6,11 @@ import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
 
 interface BoardContainerProps {
-	socket: any
+	socket: any;
+	roomID: string
 }
 
-const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket }) => {
+const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, roomID }) => {
 	const boardContainerRef = useRef<HTMLDivElement>(null)
 	const [tool, setTool] = useState<ToolInterface>(new Pencil())
 	const [cursorClass, setCursorClass] = useState<string>(null)
@@ -21,7 +22,7 @@ const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket }) => {
 	}, [tool])
 
 	useEffect(() => {
-		socket.on('on-clear-canvas', () => clearCanvas())
+		socket.on('on-clear-canvas', clearCanvas)
 	})
 
 	const clearCanvas = () => {
@@ -30,12 +31,17 @@ const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket }) => {
 	}
 
 	const emitToClear = () => {
-		socket.emit('clear-canvas')
+		socket.emit('clear-canvas', roomID)
 	}
 
 	return <div ref={boardContainerRef} className={`${styles.shade} ${cursorClass}`}>
 		<Toolbox clearCanvas={emitToClear} tool={tool} setTool={setTool} />
-		<Board canvasRef={canvasRef} tool={tool} boardContainerRef={boardContainerRef}/>
+		<Board
+			canvasRef={canvasRef}
+			tool={tool}
+			boardContainerRef={boardContainerRef}
+			roomID={roomID}
+		/>
 	</div>
 }
 
