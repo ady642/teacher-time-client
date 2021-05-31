@@ -31,12 +31,14 @@ const useMouseEvents = (
 	const onMouseMove = (e: MouseEvent<HTMLCanvasElement>): void => {
 		if (!drawing) { return; }
 
-		drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
+		console.log(e)
+
 		setChalkParams({
 			...chalkParams,
 			x: e.pageX,
 			y: e.pageY,
 		})
+		drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
 	}
 
 	const onMouseUp = (e: MouseEvent<HTMLCanvasElement>) => {
