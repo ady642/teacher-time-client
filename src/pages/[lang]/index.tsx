@@ -9,6 +9,7 @@ import useRoutePush from "@/common/hooks/useRoutePush";
 import {socket} from "@/common/utils/client";
 import useAppReducers from "@/context/app/helpers/useAppReducers";
 
+import styles from '@/common/styles/WhiteHeader.module.scss'
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
@@ -39,8 +40,9 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 			</Head>
 			<WhiteHeaderLayout
 				locale={localization.locale}
+				className={`bg-home overflow-hidden ${styles.page}`}
 			>
-				<div className={`w-full h-full text-white flex lg:flex-row flex-col-reverse lg:justify-between justify-center items-center md:p-14 p-4`}>
+				<div className={`w-full h-5/6 text-white flex lg:flex-row flex-col-reverse lg:justify-between justify-center items-center md:p-14 p-4`}>
 					<section className={'font-black tracking-wide lg:w-2/3'}>
 						<div className={'md:text-4xl main-title text-2xl'}>
 							{ localization.translations['teacherTimeWorld'] }

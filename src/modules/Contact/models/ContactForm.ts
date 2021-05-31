@@ -1,13 +1,16 @@
 class ContactForm {
     email: string;
-    message: string;
+    level: string;
+    field: string;
 
     constructor({
     	email= '',
-    	message = ''
+    	level = '',
+    	field = '',
     } = {}) {
     	this.email = email
-    	this.message = message
+    	this.level = level
+    	this.field = field
     }
 
 }

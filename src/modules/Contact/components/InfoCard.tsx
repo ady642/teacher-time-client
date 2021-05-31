@@ -9,7 +9,7 @@ interface InfoCardProps {
 const InfoCard: FunctionComponent<InfoCardProps> = ({ children, text, className }) => {
 	return <div className={`flex items-center ${className}`}>
 		{ children }
-		<p className={'sm:text-ml text-sm text-gray-400'}>{ text }</p>
+		<p className={'sm:text-xl text-sm text-white'}>{ text }</p>
 	</div>
 }
 

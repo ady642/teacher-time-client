@@ -8,21 +8,20 @@ import AboutModal from "@/common/components/Modals/AboutModal";
 
 type LayoutProps = {
     children: ReactNode;
-    locale: string
+    locale: string;
+    className?: string;
 }
 
-const WhiteHeaderLayout: FC<LayoutProps> = ({ children, locale }) => {
+const WhiteHeaderLayout: FC<LayoutProps> = ({ children, className, locale }) => {
 	const { appLoading } = useAppGetters()
 	const { setAppLoading } = useAppReducers()
 
 	const [aboutModalOpened, setModalOpened] = useState(false)
 
 	return (
-		<div className={'bg-home h-full'}>
+		<div className={`${className}`}>
 			<WhiteHeader locale={locale} openAboutModal={() => setModalOpened(true)} />
-			<div className={'h-5/6'}>
-				{children}
-			</div>
+			{children}
 			<BottomBar locale={locale} />
 			<LoadingModal open={appLoading} handleClose={() => setAppLoading(false)} />
 			<AboutModal open={aboutModalOpened} handleClose={() => setModalOpened(false)} />

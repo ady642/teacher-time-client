@@ -5,3 +5,26 @@
         flex-basis: 100%;
     }
 }
+
+.prependIcon {
+    position: absolute;
+    left: 15px;
+    top: 52px;
+}
+
+.contactFieldInput {
+    width: 80%;
+    position: relative;
+    left: 40px;
+    background: transparent;
+}
+
+.contactFieldInputContainer {
+
+    background: white;
+
+    &:focus-within {
+        background: rgba(99, 172, 244, 0.16);
+        border-color: dodgerblue
+    }
+}
