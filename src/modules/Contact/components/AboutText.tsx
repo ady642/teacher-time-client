@@ -13,9 +13,12 @@ const AboutText: FunctionComponent<AboutCardProps> = () => {
 		<h2 className={'font-bold sm:text-3xl letter-spacing text-xl mb-5 capitalize'}>
 			{ t('aboutTitle')}
 		</h2>
-		<div className={'text-white'}>
-			<p className='mb-8 text-xl'>{ t('description') }</p>
-			<div className={'flex flex-col text-xl mb-8'}>
+		<div className={'text-gray-700'}>
+			<p className='mb-8 text-xl flex flex-col flex-nowrap'>
+				<span>Teacher-time est une plate-forme gratuite mise à la disposition de tous</span>
+				<span>les enseignants ou étudiants pour :</span>
+			</p>
+			<div className={'flex flex-col text-xl mb-8 text-black'}>
 				<span className={'mb-3'}>
 					{ t('privateClass') }
 				</span>

@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -10,10 +10,12 @@ import {socket} from "@/common/utils/client";
 import useAppReducers from "@/context/app/helpers/useAppReducers";
 
 import styles from '@/common/styles/WhiteHeader.module.scss'
+import NoRoomModal from "@/modules/Room/components/NoRoomModal";
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
 	const { setAppLoading } = useAppReducers()
+	const [noRoomModalOpened ,setNoRoomModalOpened] = useState(false)
 
 	const callTeacher = async () => {
 		await socket.emit('join-intent')
@@ -22,6 +24,10 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 
 
 	useEffect(() => {
+		socket.on('on-no-room', () => {
+			setNoRoomModalOpened(true)
+			setAppLoading(false)
+		})
 		socket.on('on-accepted', async ({roomID = '', teacherID = '' }) => {
 			await goTo(localization.locale, `room/${roomID}`, { teacherID })
 			setAppLoading(false)
@@ -69,6 +75,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 						</button>
 					</section>
 				</div>
+				<NoRoomModal open={noRoomModalOpened} handleClose={() => setNoRoomModalOpened(false)} />
 			</WhiteHeaderLayout>
 		</LanguageProvider>
 	)

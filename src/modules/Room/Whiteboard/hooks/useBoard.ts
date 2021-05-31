@@ -12,6 +12,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	const [drawing, setDrawing] = useState(false)
 	const [chalkParams, setChalkParams] = useState<ChalkParams>({ width: tool.width, color: tool.color, x: 0, y: 0})
 	const pointsRef: MutableRefObject<Point[]>  = useRef<Point[]>([])
+	const [rightClickActivated, setRightClickActivated] = useState(false)
 
 	const clearPoints = () => {
 		pointsRef.current = []
@@ -49,7 +50,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	}
 
 	const {onTouchStart, onTouchMove, onTouchEnd} = useTouchEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints)
-	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut} = useMouseEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints)
+	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut, onRightClick} = useMouseEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints, setRightClickActivated, rightClickActivated)
 
 	useEffect(() => {
 		setChalkParams({ ...chalkParams, color: tool.color, width: tool.width })
@@ -80,8 +81,8 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	}, [])
 
 	return {
-	    onMouseMove, onMouseDown, onMouseUp,
-		onTouchStart, onTouchMove, onTouchEnd, onMouseOut
+	    onMouseMove, onMouseDown, onMouseUp, onRightClick, onMouseOut,
+		onTouchStart, onTouchMove, onTouchEnd
 	}
 }
 

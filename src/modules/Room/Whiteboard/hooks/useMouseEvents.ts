@@ -7,10 +7,17 @@ const useMouseEvents = (
 	chalkParams: ChalkParams,
 	setChalkParams: (chalkParams: ChalkParams) => void,
 	drawLine: (chalkX: number, chalkY: number, pageX: number, pageY: number, chalkColor: string, chalkWidth: number, isEmitting: boolean) => void,
-	clearPoints: () => void
+	clearPoints: () => void,
+	setRightClickActivated: (rightClickActivated: boolean) => void,
+	rightClickActivated: boolean
 ) => {
 
 	const onMouseDown = (e: MouseEvent<HTMLCanvasElement>) => {
+		if(e.button !== 0) {
+			return
+		}
+
+		setRightClickActivated(false)
 		setDrawing(true);
 		setChalkParams({
 			...chalkParams,
@@ -21,6 +28,7 @@ const useMouseEvents = (
 
 	const onMouseMove = (e: MouseEvent<HTMLCanvasElement>): void => {
 		if (!drawing) { return; }
+
 		drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
 		setChalkParams({
 			...chalkParams,
@@ -30,8 +38,19 @@ const useMouseEvents = (
 	}
 
 	const onMouseUp = (e: MouseEvent<HTMLCanvasElement>) => {
+		if(e.button !== 0) {
+			return
+		}
+
+		setChalkParams({
+			...chalkParams,
+			x: e.pageX,
+			y: e.pageY,
+		})
+		if(!rightClickActivated) {
+			drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
+		}
 		setDrawing(false);
-		drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
 		clearPoints()
 	}
 
@@ -40,11 +59,16 @@ const useMouseEvents = (
 		clearPoints()
 	}
 
+	const onRightClick = () => {
+		setRightClickActivated(true)
+	}
+
 	return {
 		onMouseUp,
 		onMouseDown,
 		onMouseMove,
-		onMouseOut
+		onMouseOut,
+		onRightClick
 	}
 }
 

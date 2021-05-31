@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import {socket} from "@/common/utils/client";
 import {withRouter} from 'next/router'
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
@@ -7,6 +7,7 @@ import ModalAcceptation from "@/modules/Room/components/ModalAcceptation";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import useWebRTC from "@/modules/Room/hooks/useWebRTC";
+import Head from "next/head";
 
 interface RoomProps {
 }
@@ -104,6 +105,10 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 
 
 	return <LanguageProvider localization={localization}>
+		<Head>
+			<title>Teacher-time | Room</title>
+			<link rel="icon" href="/favicon.ico" />
+		</Head>
 		<div>
 			<audio autoPlay ref={partnerVideo} />
 			<BoardContainer
