@@ -13,6 +13,8 @@ const useMouseEvents = (
 ) => {
 
 	const onMouseDown = (e: MouseEvent<HTMLCanvasElement>) => {
+		console.log(e)
+
 		if(e.button !== 0) {
 			return
 		}
