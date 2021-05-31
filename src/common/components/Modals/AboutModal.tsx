@@ -21,7 +21,7 @@ const AboutModal: FunctionComponent<AboutModalProps> = ({ open, handleClose }) =
 				<span>
                     Teacher-time est une plate-forme interactive entièrement
                     gratuite conçue et
-                    administrée par Yves Haïk.
+                    administrée par Yves Haïk, retraité de l'éducation nationale.
 				</span>
 
 				<span>
