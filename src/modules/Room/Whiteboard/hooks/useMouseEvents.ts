@@ -1,5 +1,4 @@
 import ChalkParams from "@/modules/Room/Whiteboard/interfaces/ChalkParams";
-import {MouseEvent} from "react";
 
 const useMouseEvents = (
 	drawing: boolean,
@@ -12,10 +11,8 @@ const useMouseEvents = (
 	rightClickActivated: boolean
 ) => {
 
-	const onMouseDown = (e: MouseEvent<HTMLCanvasElement>) => {
-		console.log(e)
-
-		if(e.button !== 0) {
+	const onMouseDown = (e: any) => {
+		if((('button' in e ) && e.button !== 0) || ('touches' in e) && e.touches.length === 0) {
 			return
 		}
 
@@ -23,36 +20,48 @@ const useMouseEvents = (
 		setDrawing(true);
 		setChalkParams({
 			...chalkParams,
-			x: e.pageX,
-			y: e.pageY,
+			x: e.pageX||e.touches[0].pageX,
+			y: e.pageY||e.touches[0].pageY,
 		})
 	}
 
-	const onMouseMove = (e: MouseEvent<HTMLCanvasElement>): void => {
+	const onMouseMove = (e: any): void => {
 		if (!drawing) { return; }
 
-		console.log(e)
+		if((('button' in e ) && e.button === 0)) {
+			setChalkParams({
+				...chalkParams,
+				x: e.pageX,
+				y: e.pageY,
+			})
 
-		setChalkParams({
-			...chalkParams,
-			x: e.pageX,
-			y: e.pageY,
-		})
-		drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
+			drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
+		}
+
+		if( ('touches' in e) && e.touches.length !== 0) {
+			setChalkParams({
+				...chalkParams,
+				x: e.touches[0].pageX,
+				y: e.touches[0].pageY,
+			})
+
+			drawLine(chalkParams.x, chalkParams.y, e.touches[0].pageX, e.touches[0].pageY, chalkParams.color, chalkParams.width, true);
+		}
 	}
 
-	const onMouseUp = (e: MouseEvent<HTMLCanvasElement>) => {
-		if(e.button !== 0) {
+	const onMouseUp = (e: any) => {
+		if((('button' in e ) && e.button !== 0) || ('touches' in e) && e.touches.length === 0) {
 			return
 		}
 
 		setChalkParams({
 			...chalkParams,
-			x: e.pageX,
-			y: e.pageY,
+			x: e.pageX||e.touches[0].pageX,
+			y: e.pageY||e.touches[0].pageY,
 		})
-		if(!rightClickActivated) {
-			drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
+
+		if(!rightClickActivated && drawing) {
+			drawLine(chalkParams.x, chalkParams.y, e.pageX||e.touches[0].pageX, e.pageY||e.touches[0].pageY, chalkParams.color, chalkParams.width, true);
 		}
 		setDrawing(false);
 		clearPoints()

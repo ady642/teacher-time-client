@@ -3,7 +3,6 @@ import ChalkParams from "@/modules/Room/Whiteboard/interfaces/ChalkParams";
 import {socket} from "@/common/utils/client";
 import {SocketData} from "@/modules/Room/Whiteboard/types/SocketData";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
-import useTouchEvents from '@/modules/Room/Whiteboard/hooks/useTouchEvents';
 import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
 import { linearCurve } from "@/modules/Room/Whiteboard/utils";
@@ -49,7 +48,6 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		socket.emit('drawing', { x0: x0 / w, y0: y0 / h, x1: x1 / w, y1: y1 / h, color, width, roomID});
 	}
 
-	const {onTouchStart, onTouchMove, onTouchEnd} = useTouchEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints)
 	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut, onRightClick} = useMouseEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints, setRightClickActivated, rightClickActivated)
 
 	useEffect(() => {
@@ -81,8 +79,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	}, [])
 
 	return {
-	    onMouseMove, onMouseDown, onMouseUp, onRightClick, onMouseOut,
-		onTouchStart, onTouchMove, onTouchEnd
+	    onMouseMove, onMouseDown, onMouseUp, onRightClick, onMouseOut
 	}
 }
 

@@ -1,8 +1,9 @@
-import {FunctionComponent} from "react";
+import {ChangeEvent, FunctionComponent} from "react";
 import useTranslation from "@/common/hooks/useTranslation";
 import ContactForm from "@/modules/Contact/models/ContactForm";
 import ContactField from "@/modules/Contact/components/ContactForm/ContactField";
-import Image from 'next/image'
+import ContactFieldDropdown from "@/modules/Contact/components/ContactForm/ContactFieldDropdown";
+import styles from "@/modules/Contact/styles/contact.module.scss"
 
 interface ContactFormProps {
     contactForm: ContactForm;
@@ -13,39 +14,80 @@ interface ContactFormProps {
 const ContactFormContent: FunctionComponent<ContactFormProps> = ({ contactForm, setContactForm, sendMail}) => {
 	const { t } = useTranslation()
 
+	const itemsField = [{
+		onClick: () => { setContactForm({
+			...contactForm,
+			field: 'Mathématiques'
+		}) },
+		title: 'Mathématiques'
+	}, {
+		onClick: () => { setContactForm({
+			...contactForm,
+			field: 'Français'
+		}) },
+		title: 'Français'
+	}, {
+		onClick: () => { setContactForm({
+			...contactForm,
+			field: 'Anglais'
+		}) },
+		title: 'Anglais'
+	}]
+
+	const itemsLevel = [{
+		onClick: () => { setContactForm({
+			...contactForm,
+			level: 'Primaire'
+		}) },
+		title: 'Primaire'
+	}, {
+		onClick: () => { setContactForm({
+			...contactForm,
+			level: 'Collège'
+		}) },
+		title: 'Collège'
+	}, {
+		onClick: () => { setContactForm({
+			...contactForm,
+			level: 'Lycée'
+		}) },
+		title: 'Lycée'
+	}, {
+		onClick: () => { setContactForm({
+			...contactForm,
+			level: 'Autre'
+		}) },
+		title: 'Autre'
+	}]
+
 	return <section className='flex flex-col w-full p-8'>
+		<p className={'uppercase text-center mb-4'}>
+			Inscription professeurs
+		</p>
+		<ContactFieldDropdown
+			className={'mb-4'}
+			label={'Discipline'}
+			value={contactForm.field}
+			items={itemsField}
+		/>
+		<ContactFieldDropdown
+			className={'mb-4'}
+			label={'Niveau'}
+			items={itemsLevel}
+			value={contactForm.level}
+		/>
 		<ContactField
 			className='mb-4'
-			input={contactForm.field}
-			setInput={(field: string) => setContactForm({
-				...contactForm,
-				field
-			})}
-			label={t('field')}
-		>
-			<span className={'text-2xl'}>🔘</span>
-		</ContactField>
-		<ContactField
-			className='mb-4'
-			input={contactForm.level}
-			setInput={(level: string) => setContactForm({
-				...contactForm,
-				level
-			})}
-			label={t('level')}
-		>
-			<Image src={'/img/icon/ladder.png'} width={30} height={30} />
-		</ContactField>
-		<ContactField
-			className='mb-4'
-			input={contactForm.email}
-			setInput={(email: string) => setContactForm({
-				...contactForm,
-				email
-			})}
 			label='Email'
-		>
-			<span className='text-2xl'>📨</span>
+		 prependIcon={'📨'}>
+			<input
+				className={styles.contactFieldInput}
+				value={contactForm.email}
+				onChange={(e: ChangeEvent<HTMLInputElement>) => { setContactForm({
+					...contactForm,
+					email: e.target.value
+				}) }}
+			/>
 		</ContactField>
 		<button
 			onClick={() => sendMail()}

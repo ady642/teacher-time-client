@@ -11,7 +11,7 @@ interface BoardProps {
 }
 
 const Board: FunctionComponent<BoardProps> = ({ boardContainerRef, canvasRef, tool, roomID }) => {
-	const { onMouseDown, onMouseMove, onMouseUp, onRightClick, onMouseOut, onTouchStart, onTouchEnd, onTouchMove } =  useBoard(boardContainerRef, canvasRef, tool, roomID)
+	const { onMouseDown, onMouseMove, onMouseUp, onRightClick, onMouseOut } =  useBoard(boardContainerRef, canvasRef, tool, roomID)
 
 	return <canvas
 		className={styles.board}
@@ -20,9 +20,9 @@ const Board: FunctionComponent<BoardProps> = ({ boardContainerRef, canvasRef, to
 		onMouseDown={(e) => onMouseDown(e)}
 		onMouseUp={(e) => onMouseUp(e)}
 		onMouseMove={(e) => onMouseMove(e)}
-		onTouchStart={(e) => onTouchStart(e)}
-		onTouchEnd={(e) => onTouchEnd(e)}
-		onTouchMove={(e) => onTouchMove(e)}
+		onTouchStart={(e) => onMouseDown(e)}
+		onTouchEnd={(e) => onMouseUp(e)}
+		onTouchMove={(e) => onMouseMove(e)}
 		onMouseOut={() => onMouseOut()}
 		onContextMenu={onRightClick}
 	/>

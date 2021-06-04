@@ -12,6 +12,7 @@ const contact = {
 	mobile: 'phone',
 	field: 'field',
 	level: 'level',
+	correction: 'suggest corrections for assignments'
 };
 
 export default contact;

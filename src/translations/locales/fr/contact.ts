@@ -12,6 +12,7 @@ const contact = {
 	mobile: 'téléphone',
 	field: 'discipline',
 	level: 'niveau',
+	correction: '📝 Proposer des corrections de devoir'
 };
 
 export default contact;

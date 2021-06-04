@@ -19,8 +19,7 @@ const AboutModal: FunctionComponent<AboutModalProps> = ({ open, handleClose }) =
 		<DialogContent>
 			<DialogContentText className={'text-xl flex flex-col'} id="alert-dialog-description">
 				<span>
-                    Teacher-time est une plate-forme interactive entièrement
-                    gratuite conçue et
+                    Teacher-time est une plate-forme interactive conçue et
                     administrée par Yves Haïk, retraité de l'éducation nationale.
 				</span>
 

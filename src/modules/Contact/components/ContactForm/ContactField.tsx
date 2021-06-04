@@ -1,26 +1,23 @@
-import {ChangeEvent, FunctionComponent} from "react";
+import {FunctionComponent} from "react";
 import styles from '@/modules/Contact/styles/contact.module.scss'
 
 interface ContactFieldProps {
-    input: string;
-    setInput: (input: string) => void;
     label: string;
     className?: string;
-    children: any
+    prependIcon: any;
+    children: any;
+    onClick?: Function;
+    active?: Boolean
 }
 
-const ContactField: FunctionComponent<ContactFieldProps> = ({ input, setInput, children, label, className }) => {
-	return <div className={`${className} relative flex flex-col`}>
+const ContactField: FunctionComponent<ContactFieldProps> = ({ onClick = () => {}, active = false,  prependIcon, label, children, className }) => {
+	return <div id={label} onClick={() => onClick()} className={`${className} relative flex flex-col`}>
 		<label className={'text-black mb-2 text-xl capitalize'}>{label}</label>
 		<div className={styles.prependIcon}>
-			{ children }
+			{ prependIcon }
 		</div>
-		<div className={`${styles.contactFieldInputContainer} border-2 text-md text-black border-solid p-4 rounded-lg transition duration-500`}>
-			<input
-				className={styles.contactFieldInput}
-				value={input}
-				onChange={(e: ChangeEvent<HTMLInputElement>) => { setInput(e.target.value) }}
-			/>
+		<div className={`${styles.contactFieldInputContainer} ${active ? styles.contactFieldDropDownOpened : ''} border-2 text-md text-black border-solid p-4 rounded-lg`}>
+			{ children }
 		</div>
 	</div>
 }

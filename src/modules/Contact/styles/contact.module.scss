@@ -21,11 +21,27 @@
 }
 
 .contactFieldInputContainer {
-
     background: white;
+    min-height: 64px;
 
     &:focus-within {
         background: rgba(99, 172, 244, 0.16);
         border-color: dodgerblue
     }
+}
+
+.contactFieldDropDownList {
+    margin-top: 30px;
+    margin-left: 30px;
+    transition: all 0.3s ease
+}
+
+.contactFieldDropDownClosed {
+    height: 20px;
+    transition: all 0.3s ease
+}
+
+.contactFieldDropDownOpened {
+    background: rgba(99, 172, 244, 0.16);
+    border-color: dodgerblue
 }

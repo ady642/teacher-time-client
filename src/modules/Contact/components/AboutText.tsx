@@ -22,8 +22,11 @@ const AboutText: FunctionComponent<AboutCardProps> = () => {
 				<span className={'mb-3'}>
 					{ t('privateClass') }
 				</span>
-				<span>
+				<span className={'mb-3'}>
 					{ t('classRoom') }
+				</span>
+				<span>
+					{ t('correction') }
 				</span>
 			</div>
 		</div>
