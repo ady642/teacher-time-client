@@ -1,13 +1,17 @@
 import {FunctionComponent, useState} from "react";
-import SearchIcon from '@material-ui/icons/Search';
 import PESelect from "@/common/components/Selects/Select";
 import TeacherFiltersModel from "@/modules/Teachers/models/TeacherFiltersModel";
+import useRoutePush from "@/common/hooks/useRoutePush";
+import useTranslation from "@/common/hooks/useTranslation";
+import styles from '@/modules/Teachers/styles/TeacherFilters.module.scss'
 
 interface TeacherFiltersProps {
 }
 
 const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 	const [filters, setFilters] = useState(new TeacherFiltersModel())
+	const { locale } = useTranslation()
+	const { goTo } = useRoutePush()
 
 	const handleChangeMatiere = (matiere: string) => {
 		const newFilters = {...filters}
@@ -15,9 +19,14 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 		setFilters(newFilters)
 	}
 
+	const goToContact = async () => {
+		await goTo(locale, 'contact')
+	}
+
+
 	const matiereItems = [{
-		value: 'Maths',
-		label: 'Maths'
+		value: 'Mathématiques',
+		label: 'Mathématiques'
 	}, {
 		value: 'Spanish',
 		label: 'Spanish'
@@ -26,22 +35,22 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 		label: 'SVT'
 	}]
 
-	return <div className={'flex flex-col p-8'}>
+	return <div className={`flex flex-col mb-4 ${styles.container} p-8`}>
 		<div className={'flex flex-wrap'}>
-			<h1 className={'flex items-center text-l sm:text-2xl'}>Find a teacher</h1>
-			<div className="relative ml-0 sm:ml-6">
-				<input type="search" className="bg-purple-white shadow rounded border-0 p-3"
-					placeholder="Name, matière..."/>
-				<SearchIcon className="absolute" style={{right: 10, top: 12}}/>
-			</div>
+			<h1 className={'flex items-center text-l sm:text-2xl'}>Trouver un professeur</h1>
 		</div>
 		<div className={'mt-4 flex'}>
 			<PESelect
+				disabled
 				value={filters.matiere}
 				handleChange={handleChangeMatiere}
 				label={'Matière'}
 				items={matiereItems}
 			/>
+		</div>
+		<div>
+			<span>Nous cherchons des professeurs: </span>
+			<button onClick={goToContact} className={'transition-all rounded p-2 ml-2 mt-5 font-medium bg-blue-400 text-white text-sm hover:bg-blue-600'}>Inscription professeurs</button>
 		</div>
 	</div>
 }

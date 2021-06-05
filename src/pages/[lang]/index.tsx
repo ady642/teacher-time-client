@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {FC} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -6,37 +6,15 @@ import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext"
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import useRoutePush from "@/common/hooks/useRoutePush";
-import {socket} from "@/common/utils/client";
-import useAppReducers from "@/context/app/helpers/useAppReducers";
 
 import styles from '@/common/styles/WhiteHeader.module.scss'
-import NoRoomModal from "@/modules/Room/components/NoRoomModal";
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
-	const { setAppLoading } = useAppReducers()
-	const [noRoomModalOpened ,setNoRoomModalOpened] = useState(false)
 
-	const callTeacher = async () => {
-		await socket.emit('join-intent')
-		setAppLoading(true)
+	const goToTeachers = async () => {
+		await goTo(localization.locale, 'teachers')
 	}
-
-
-	useEffect(() => {
-		socket.on('on-no-room', () => {
-			setNoRoomModalOpened(true)
-			setAppLoading(false)
-		})
-		socket.on('on-accepted', async ({roomID = '', teacherID = '' }) => {
-			await goTo(localization.locale, `room/${roomID}`, { teacherID })
-			setAppLoading(false)
-		})
-		socket.on('on-rejected', () => {
-			alert('Les professeur sont tous occupés pour le moment, Veuillez réessayer plus tard')
-			setAppLoading(false)
-		})
-	}, [])
 
 	return (
 		<LanguageProvider localization={localization}>
@@ -62,9 +40,9 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 								{ localization.translations['teacherAnswer'] }
 							</span>
 						</div>
-						<button onClick={callTeacher} className={'bg-green-600 text-white flex justify-center hover:bg-green-800 transition-all md:w-auto w-full font-bold sm:text-ml text-md rounded sm:p-3 p-2'}>
+						<button onClick={goToTeachers} className={'bg-green-600 text-white flex justify-center hover:bg-green-800 transition-all md:w-auto w-full font-bold sm:text-ml text-md rounded sm:p-3 p-2'}>
 							<span className={'mr-2'}>
-								{ localization.translations['callTeacher'] }
+								Liste des professeurs en ligne
 							</span>
 							<Image
 								src={'/img/headphone.png'}
@@ -75,7 +53,6 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 						</button>
 					</section>
 				</div>
-				<NoRoomModal open={noRoomModalOpened} handleClose={() => setNoRoomModalOpened(false)} />
 			</WhiteHeaderLayout>
 		</LanguageProvider>
 	)

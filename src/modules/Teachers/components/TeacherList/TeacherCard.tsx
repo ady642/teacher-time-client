@@ -16,12 +16,12 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 
 
 	return <div className={styles.card}>
-		<header className={'p-2 flex flex-col'}>
+		<header className={'flex flex-col'}>
 			<div className={'flex'}>
 				{/*				<div className={styles.tutorPhoto}>
 					<Image className={'rounded'} src={avatar} width={100} height={100} alt={'photo prof'}/>
 				</div>*/}
-				<div className={'ml-3 flex flex-col'}>
+				<div className={'flex flex-col'}>
 					<span className={`${styles.tutorName} font-bold text-xl`}>{name}</span>
 					<Rating
 						className={'mt-1'}

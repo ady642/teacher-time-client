@@ -11,7 +11,7 @@ interface TeacherListProps {
 const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onClickOnTeacherCall }) => {
 	const { t } = useTranslation();
 
-	return <div className={'bg-gray-100 w-full h-full p-8 px-2 lg:px-20'}>
+	return <div className={'w-full h-full p-8'}>
 		<h2 className={'text-l uppercase text-gray-500'}>{t("availableTeachers")}</h2>
 		<section className={'flex flex-wrap justify-between mt-4'}>
 			{

@@ -40,3 +40,8 @@ html,body, #__next {
     background: url('../../../public/img/home-bg.png');
     background-size: cover;
 }
+
+.bg-teachers {
+    background: url('../../../public/img/teachers-bg.png');
+    background-size: cover;
+}

@@ -45,7 +45,7 @@ const AboutText: FunctionComponent<AboutCardProps> = () => {
 				</span>
 				<span className={'mb-3'}>
 					🎙 Assurer des
-					<Tooltip text={'conférences'} title={'Chaque professeurs s\'il le désire assurer un cours ou une conférence pour les élèves de son choix. Plusieurs formules  ee rémunération  sont possibles.Pour s\'inscrire il suffit de renseigner le formulaire ci-contre'} />
+					<Tooltip text={'conférences'} title={'Chaque professeur, s\'il le désire peut assurer un cours ou une  conférence pour les élève de son choix. Plusieurs formules  de rémunération sont possibles. Pour s\'inscrire il suffit de renseigner le formulaire ci-contre'} />
 				</span>
 				<span>
 					📝 Proposer des
