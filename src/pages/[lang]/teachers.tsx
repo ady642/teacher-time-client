@@ -79,7 +79,21 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const localization = getLocalizationProps(ctx, "home");
 
 	try {
-		const { data: teachers } = await client('').get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
+		//const { data: teachers } = await client('').get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
+
+		const teachers = [
+			{
+				_id: '60bb3e699ba3676bb91d4e31',
+				hourlyRate: 20,
+				rating: 5,
+				hasDiploma: true,
+				description: 'Professeur de mathématiques à la retraite',
+				avatar: '/img/avatar.png',
+				name: 'Yves'
+			}
+		]
+
+		console.log(teachers)
 
 		return {
 			props: { teachers, token, localization }
