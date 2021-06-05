@@ -1,4 +1,4 @@
-import {FC, useCallback, useEffect, useState} from 'react'
+import React, {FC, useCallback, useEffect, useState} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, GetStaticPaths, GetStaticProps, InferGetServerSidePropsType} from 'next'
 
@@ -50,6 +50,10 @@ const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType
 
 	return (
 		<LanguageProvider localization={localization}>
+			<Head>
+				<title>Teacher-time | Professeurs</title>
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
 			<WhiteHeaderLayout
 				locale={locale}
 			>
