@@ -5,22 +5,23 @@ import {Chip} from "@material-ui/core";
 import FaceIcon from "@material-ui/icons/Face";
 import Teacher from "@/modules/Teachers/models/Teacher";
 import useTranslation from "@/common/hooks/useTranslation";
+import {EuroRounded} from "@material-ui/icons";
+import Image from "next/image";
 
 interface TeacherCArdProps {
     teacher: Teacher;
     onClickOnTeacherCall: (id: string) => void
 }
 
-const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall, teacher: { _id, rating, hasDiploma, description, name }}) => {
+const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall, teacher: { _id,avatar,  rating, hasDiploma, hourlyRate, description, name }}) => {
 	const { t } = useTranslation();
-
 
 	return <div className={styles.card}>
 		<header className={'flex flex-col'}>
 			<div className={'flex'}>
-				{/*				<div className={styles.tutorPhoto}>
-					<Image className={'rounded'} src={avatar} width={100} height={100} alt={'photo prof'}/>
-				</div>*/}
+				{<div className={'mr-3'}>
+					<Image className={'rounded'} src={avatar} width={70} height={70} alt={'photo prof'}/>
+				</div>}
 				<div className={'flex flex-col'}>
 					<span className={`${styles.tutorName} font-bold text-xl`}>{name}</span>
 					<Rating
@@ -36,15 +37,15 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 						icon={<FaceIcon/>}
 						label={t('diploma')}
 					/> }
-					{/*					<div className='mt-2.5 w-min whitespace-nowrap text-blue-400 border border-blue-400 rounded p-1 flex items-center'>
+					{<div className='mt-2.5 w-min whitespace-nowrap text-blue-400 border border-blue-400 rounded p-1 flex items-center'>
 						<span>
-							{ priceInMinutes() }
+							{ hourlyRate }
 						</span>
 						<EuroRounded fontSize={'small'}/>
 						<span>
-							/ min
+							/ heure
 						</span>
-					</div>*/}
+					</div>}
 				</div>
 			</div>
 			<div className={'mt-3'}>
@@ -52,7 +53,7 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 					{ description }
 				</p>
 				<div className={'flex justify-end mt-2'}>
-					<button onClick={() => onClickOnTeacherCall(_id)} className={'transition-all rounded uppercase p-2 font-medium bg-green-400 text-white text-sm hover:bg-green-600'}>{t('call')}</button>
+					<button onClick={() => onClickOnTeacherCall(_id)} className={'transition-all rounded uppercase font-bold p-2 font-medium bg-green-600 text-white text-sm hover:bg-green-700'}>{t('call')}</button>
 				</div>
 			</div>
 		</header>

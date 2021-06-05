@@ -84,7 +84,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 		const teachers = [
 			{
 				_id: '60bb3e699ba3676bb91d4e31',
-				hourlyRate: 20,
+				hourlyRate: 30,
 				rating: 5,
 				hasDiploma: true,
 				description: 'Professeur de mathématiques à la retraite',
