@@ -42,7 +42,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 						</div>
 						<button onClick={goToTeachers} className={'bg-green-600 text-white flex justify-center hover:bg-green-800 transition-all md:w-auto w-full font-bold sm:text-ml text-md rounded sm:p-3 p-2'}>
 							<span className={'mr-2'}>
-								Liste des professeurs en ligne
+								Appeler un professeur
 							</span>
 							<Image
 								src={'/img/headphone.png'}

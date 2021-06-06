@@ -5,7 +5,6 @@ import {Chip} from "@material-ui/core";
 import FaceIcon from "@material-ui/icons/Face";
 import Teacher from "@/modules/Teachers/models/Teacher";
 import useTranslation from "@/common/hooks/useTranslation";
-import {EuroRounded} from "@material-ui/icons";
 import Image from "next/image";
 
 interface TeacherCArdProps {
@@ -38,13 +37,7 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 						label={t('diploma')}
 					/> }
 					{<div className='mt-2.5 w-min whitespace-nowrap text-blue-400 border border-blue-400 rounded p-1 flex items-center'>
-						<span>
-							{ hourlyRate }
-						</span>
-						<EuroRounded fontSize={'small'}/>
-						<span>
-							/ heure
-						</span>
+						Période d'essai
 					</div>}
 				</div>
 			</div>
@@ -53,7 +46,7 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 					{ description }
 				</p>
 				<div className={'flex justify-end mt-2'}>
-					<button onClick={() => onClickOnTeacherCall(_id)} className={'transition-all rounded uppercase font-bold p-2 font-medium bg-green-600 text-white text-sm hover:bg-green-700'}>{t('call')}</button>
+					<button onClick={() => onClickOnTeacherCall(_id)} className={'transition-all rounded uppercase font-bold p-2 font-medium bg-green-600 text-white text-sm hover:bg-green-700'}>{t('call')} gratuit</button>
 				</div>
 			</div>
 		</header>

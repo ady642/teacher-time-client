@@ -4,6 +4,8 @@ import TeacherFiltersModel from "@/modules/Teachers/models/TeacherFiltersModel";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import useTranslation from "@/common/hooks/useTranslation";
 import styles from '@/modules/Teachers/styles/TeacherFilters.module.scss'
+import {Menu} from "@material-ui/icons";
+import {MenuItem} from "@material-ui/core";
 
 interface TeacherFiltersProps {
 }
@@ -25,14 +27,17 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 
 
 	const matiereItems = [{
-		value: 'Mathématiques',
+		value: 'maths',
 		label: 'Mathématiques'
 	}, {
-		value: 'Spanish',
-		label: 'Spanish'
+		value: 'french',
+		label: 'Français'
 	}, {
-		value: 'SVT',
-		label: 'SVT'
+		value: 'spanish',
+		label: 'Espagnol'
+	}, {
+		value: 'english',
+		label: 'Anglais'
 	}]
 
 	return <div className={`flex flex-col mb-4 ${styles.container} p-8`}>
@@ -41,11 +46,11 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 		</div>
 		<div className={'mt-4 flex'}>
 			<PESelect
-				disabled
 				value={filters.matiere}
 				handleChange={handleChangeMatiere}
 				label={'Matière'}
 				items={matiereItems}
+				disabledItems={['english', 'french', 'spanish']}
 			/>
 		</div>
 		<div>

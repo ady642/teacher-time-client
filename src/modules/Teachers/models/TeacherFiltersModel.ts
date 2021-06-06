@@ -1,7 +1,7 @@
 export default class TeacherFiltersModel {
-    matiere: string = 'Maths'
+    matiere: string = 'maths'
 
-    constructor({ matiere = 'Mathématiques' } = {}) {
+    constructor({ matiere = 'maths' } = {}) {
     	this.matiere = matiere
     }
 }
