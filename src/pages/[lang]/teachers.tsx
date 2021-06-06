@@ -29,7 +29,7 @@ const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType
 	const paymentClient = new PaymentClient(token || tokenCtx)
 	const [locale, setLocale] = useState('')
 
-	const { noRoomModalOpened, setNoRoomModalOpened, callTeacher } = useRoom(localization.locale)
+	const { noRooms, noRoomModalOpened, setNoRoomModalOpened, callTeacher } = useRoom(localization.locale)
 
 	/*	const fetchBalance = useCallback(async () => {
 		if(!token && !tokenCtx) {
@@ -46,7 +46,6 @@ const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType
 			setToken(token)
 		}
 		setLocale(getInitialLocale())
-
 		//fetchBalance()
 	}, [])
 
@@ -58,12 +57,13 @@ const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType
 			</Head>
 			<WhiteHeaderLayout
 				locale={locale}
-				className={'bg-teachers h-full'}
+				className={'h-full'}
 			>
 				<main className={'flex flex-col justify-start'}>
 					<TeacherFilters />
 					<TeacherList
 						teachers={teachers}
+						noRooms={noRooms}
 						onClickOnTeacherCall={callTeacher}
 					/>
 				</main>
@@ -92,9 +92,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 				name: 'Yohan'
 			}
 		]
-
-		console.log(teachers)
-
 		return {
 			props: { teachers, token, localization }
 		}

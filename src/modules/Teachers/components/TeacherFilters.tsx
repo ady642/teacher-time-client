@@ -40,7 +40,7 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 		label: 'Anglais'
 	}]
 
-	return <div className={`flex flex-col mb-4 ${styles.container} p-8`}>
+	return <div className={`flex flex-col mb-4 p-8`}>
 		<div className={'flex flex-wrap'}>
 			<h1 className={'flex items-center text-l sm:text-2xl'}>Trouver un professeur</h1>
 		</div>
@@ -50,7 +50,7 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 				handleChange={handleChangeMatiere}
 				label={'Matière'}
 				items={matiereItems}
-				disabledItems={['english', 'french', 'spanish']}
+				disabledItems={['english', 'french']}
 			/>
 		</div>
 		<div>

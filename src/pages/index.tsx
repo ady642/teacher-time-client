@@ -14,6 +14,7 @@ const Index: React.FC = ({ token }: InferGetServerSidePropsType<typeof getServer
 		<Head>
 			<meta name="robots" content="noindex, nofollow" />
 			<title>Teacher Time</title>
+			<meta name="description" content="Tu bloques sur un exercice ? Go teacher-time.com pour trouver un professeur qui répondra à ta question en un click" />
 		</Head>
 	);
 };

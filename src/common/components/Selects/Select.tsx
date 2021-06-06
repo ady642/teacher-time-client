@@ -17,7 +17,7 @@ const PESelect: FunctionComponent<SelectProps> = ({ value,disabledItems, handleC
 			disabled={disabled}
 			labelId={label}
 			value={value}
-			onChange={() => handleChange()}
+			onChange={(e) => handleChange(e.target.value)}
 			label={label}
 			margin="dense"
 		>

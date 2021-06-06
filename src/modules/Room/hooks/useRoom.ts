@@ -6,6 +6,7 @@ import useRoutePush from "@/common/hooks/useRoutePush";
 export default (locale: string) => {
 	const { setAppLoading } = useAppReducers()
 	const [noRoomModalOpened, setNoRoomModalOpened] = useState(false)
+	const [noRooms, setNoRooms] = useState(false)
 	const { goTo } = useRoutePush()
 
 	const callTeacher = async () => {
@@ -14,8 +15,11 @@ export default (locale: string) => {
 	}
 
 	useEffect(() => {
+		socket.emit('check-room')
+
 		socket.on('on-no-room', () => {
 			setNoRoomModalOpened(true)
+			setNoRooms(true)
 			setAppLoading(false)
 		})
 		socket.on('on-accepted', async ({roomID = '', teacherID = '' }) => {
@@ -31,6 +35,7 @@ export default (locale: string) => {
 	return {
 	    callTeacher,
 		setNoRoomModalOpened,
-		noRoomModalOpened
+		noRoomModalOpened,
+		noRooms
 	}
 }
