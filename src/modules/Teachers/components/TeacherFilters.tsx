@@ -54,7 +54,7 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 			/>
 		</div>
 		<div>
-			<span>Nous cherchons des professeurs: </span>
+			<span>Si vous aussi vous voulez créer votre room: </span>
 			<button onClick={goToContact} className={'transition-all rounded p-2 ml-2 mt-5 font-medium bg-blue-400 text-white text-sm hover:bg-blue-600'}>Inscription professeurs</button>
 		</div>
 	</div>

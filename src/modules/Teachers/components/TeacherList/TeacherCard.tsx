@@ -45,7 +45,11 @@ const TeacherCard: FunctionComponent<TeacherCArdProps> = ({onClickOnTeacherCall,
 				<p className={'text-gray-500 flex flex-wrap text-xs'}>
 					{ description }
 				</p>
-				<div className={'flex justify-end mt-2'}>
+				<div className={'flex items-center justify-end mt-2'}>
+					<Image className={'border border-solid rounded'} src={'/img/blackboard.jpg'} width="30" height="20" alt={'board'} />
+					<span className={'mx-3'}>
+						🎙️
+					</span>
 					<button onClick={() => onClickOnTeacherCall(_id)} className={'transition-all rounded uppercase font-bold p-2 font-medium bg-green-600 text-white text-sm hover:bg-green-700'}>{t('call')} gratuit</button>
 				</div>
 			</div>

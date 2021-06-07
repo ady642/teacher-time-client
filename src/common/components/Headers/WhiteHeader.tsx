@@ -7,10 +7,11 @@ import styles from '@/common/components/Headers/styles.module.scss'
 
 interface HeaderProps {
     locale: string;
-    openAboutModal: () => void
+    openAboutModal: () => void;
+    dark?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({ locale, openAboutModal }) => {
+const Header: FC<HeaderProps> = ({ locale, openAboutModal, dark = false }) => {
 	const { t } = useTranslation()
 	const { goTo } = useRoutePush()
 
@@ -33,7 +34,7 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal }) => {
 			</div>
 			<div className={'flex sm:flex hidden justify-between flex-1'}>
 				<nav className={'ml-16 flex items-center'}>
-					<ul className={'flex items-center font-bold sm:text-lg text-sm lg:flex hidden tracking-wide text-white'}>
+					<ul className={`flex items-center font-bold sm:text-lg text-sm lg:flex hidden tracking-wide ${dark} text-gray-600`}>
 						<li onClick={goToTeachers} className={'cursor-pointer hover:text-green-500 transition'}>
 							Liste professeurs
 						</li>

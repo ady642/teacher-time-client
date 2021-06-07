@@ -89,6 +89,19 @@ const ContactFormContent: FunctionComponent<ContactFormProps> = ({ contactForm, 
 				}) }}
 			/>
 		</ContactField>
+		<ContactField
+			className='mb-4'
+			label='Message'
+			prependIcon={'💬'}>
+			<textarea
+				className={`${styles.contactFieldInput} text-black border-none outline-none`}
+				value={contactForm.message}
+				onChange={(e: ChangeEvent<HTMLTextAreaElement>) => { setContactForm({
+					...contactForm,
+					message: e.target.value
+				}) }}
+			/>
+		</ContactField>
 		<button
 			onClick={() => sendMail()}
 			className={'transition-all w-1/3 self-end rounded uppercase p-2 font-medium bg-green-400 text-white text-sm hover:bg-green-600'}>

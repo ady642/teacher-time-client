@@ -34,10 +34,10 @@ const AboutText: FunctionComponent<AboutCardProps> = () => {
 							<h2>Le professeur peut: </h2>
 							<ul className={'text-sm list-inside my-2'} style={{listStyleType: 'disclosure-closed'}}>
 								<li>donner un cours particulier à un élève</li>
-								<li>il peut aussi se  connecter à la plate-forme teacher-time  et répondre à la  demande d'un élève connecté</li>
+								<li>il peut aussi se connecter à la plate-forme teacher-time et répondre à la demande d'un élève connecté</li>
 							</ul>
 							<span>
-								Plusieurs rémunérations  sont à l'étude.Pour s'inscrire il suffit  de renseigner le formulaire ci-contre
+								Plusieurs formules de rémunération sont à l'étude. Pour s'inscrire il suffit de renseigner le formulaire ci-contre
 							</span>
 						</>
 					} />
