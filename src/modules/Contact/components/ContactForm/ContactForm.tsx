@@ -62,7 +62,7 @@ const ContactFormContent: FunctionComponent<ContactFormProps> = ({ contactForm, 
 
 	return <section className='flex flex-col w-full p-8'>
 		<p className={'uppercase text-center mb-4'}>
-			Inscription professeurs
+			Prise de contact
 		</p>
 		<ContactFieldDropdown
 			className={'mb-4'}
@@ -91,7 +91,7 @@ const ContactFormContent: FunctionComponent<ContactFormProps> = ({ contactForm, 
 		</ContactField>
 		<ContactField
 			className='mb-4'
-			label='Message'
+			label='Commentaires'
 			prependIcon={'💬'}>
 			<textarea
 				className={`${styles.contactFieldInput} text-black border-none outline-none`}

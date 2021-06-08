@@ -10,9 +10,10 @@ type LayoutProps = {
     children: ReactNode;
     locale: string;
     className?: string;
+    dark?: boolean;
 }
 
-const WhiteHeaderLayout: FC<LayoutProps> = ({ children, className, locale }) => {
+const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, locale }) => {
 	const { appLoading } = useAppGetters()
 	const { setAppLoading } = useAppReducers()
 
@@ -20,7 +21,7 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children, className, locale }) => 
 
 	return (
 		<div className={`${className}`}>
-			<WhiteHeader locale={locale} openAboutModal={() => setModalOpened(true)} />
+			<WhiteHeader dark={dark} locale={locale} openAboutModal={() => setModalOpened(true)} />
 			{children}
 			<BottomBar locale={locale} />
 			<LoadingModal open={appLoading} handleClose={() => setAppLoading(false)} />

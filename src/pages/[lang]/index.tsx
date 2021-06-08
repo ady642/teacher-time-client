@@ -23,6 +23,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<WhiteHeaderLayout
+				dark
 				locale={localization.locale}
 				className={`bg-home overflow-hidden ${styles.page}`}
 			>
