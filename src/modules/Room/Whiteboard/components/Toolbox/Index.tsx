@@ -7,7 +7,9 @@ import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import WidthSelection from "@/modules/Room/Whiteboard/components/Toolbox/WidthSelection/WidthSelectionContainer";
 import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
 import EraserModel from "@/modules/Room/Whiteboard/models/Eraser";
-
+import TextBox from "@/modules/Room/Whiteboard/models/TextBox";
+import LogoTextBox from "@/common/components/Logos/LogoTextBox";
+import InputText from "@/modules/Room/Whiteboard/components/Toolbox/InputText";
 interface ToolBoxProps {
 	setTool: (tool: ToolInterface) => void;
 	tool: ToolInterface;
@@ -20,12 +22,14 @@ const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) =
 	const icons = [
 		{ component: Create, toolName: 'Pencil' },
 		{ component: Eraser, toolName: 'Eraser' },
+		{ component: LogoTextBox, toolName: 'TextBox' },
 	]
 
 	const selectTool = (toolName: string) => {
 		const toolMap = new Map()
 		toolMap.set('Pencil',  new Pencil())
 		toolMap.set('Eraser',  new EraserModel())
+		toolMap.set('TextBox',  new TextBox())
 
 		setTool(toolMap.get(toolName))
 		setWidth(5)
@@ -47,6 +51,7 @@ const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) =
 			}
 		</Tool>)
 		}
+		
 		<WidthSelection setWidth={setWidth} width={width}/>
 		<Tool onClick={clearCanvas}>
 			<Delete />

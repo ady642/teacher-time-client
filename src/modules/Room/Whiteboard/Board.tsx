@@ -7,11 +7,13 @@ interface BoardProps {
 	boardContainerRef: MutableRefObject<HTMLDivElement>;
 	tool: ToolInterface;
 	canvasRef: any;
-	roomID: string
+	roomID: string;
+	textBoxRef: MutableRefObject<HTMLTextAreaElement>
+
 }
 
-const Board: FunctionComponent<BoardProps> = ({ boardContainerRef, canvasRef, tool, roomID }) => {
-	const { onMouseDown, onMouseMove, onMouseUp, onRightClick, onMouseOut } =  useBoard(boardContainerRef, canvasRef, tool, roomID)
+const Board: FunctionComponent<BoardProps> = ({ boardContainerRef, canvasRef, tool, roomID, textBoxRef }) => {
+	const { onMouseDown, onMouseMove, onMouseUp, onRightClick, onMouseOut } =  useBoard(boardContainerRef, canvasRef, tool, roomID, textBoxRef)
 
 	return <canvas
 		className={styles.board}
