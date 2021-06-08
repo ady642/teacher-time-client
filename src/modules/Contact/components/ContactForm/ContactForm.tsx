@@ -32,6 +32,12 @@ const ContactFormContent: FunctionComponent<ContactFormProps> = ({ contactForm, 
 			field: 'Anglais'
 		}) },
 		title: 'Anglais'
+	}, {
+		onClick: () => { setContactForm({
+			...contactForm,
+			field: 'Autre'
+		}) },
+		title: 'Autre'
 	}]
 
 	const itemsLevel = [{
