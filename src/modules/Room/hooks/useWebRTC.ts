@@ -1,40 +1,50 @@
-import { MutableRefObject } from 'react'
+import {MutableRefObject} from 'react'
 import {OfferIcePayload, RTCIceCandidateInit, RTCSessionDescriptionInit} from "@/modules/Room/types";
 
 interface useWebRTCParams {
     socket: any;
-    peerRef: MutableRefObject<RTCPeerConnection>;
-    partnerVideo: MutableRefObject<HTMLVideoElement>;
-    roomID: string
+    peers: MutableRefObject<{ [id: string]: RTCPeerConnection }>;
+    partnersVideos: MutableRefObject<HTMLAudioElement[]>;
+    userStream: MutableRefObject<MediaStream>;
+    roomID: string,
 }
 
 const useWebRTC = ({
 	socket,
-	peerRef,
-	partnerVideo,
+	peers,
+	partnersVideos,
+	userStream,
 	roomID
 }: useWebRTCParams) => {
-	const sendOffer = async (roomID: string) => {
-		const offer: RTCSessionDescriptionInit = await peerRef.current.createOffer();
+	const sendOffer = async (newStudent: string) => {
+		peers.current[newStudent] = createPeer()
+
+		userStream.current.getTracks().forEach(track => peers.current[newStudent].addTrack(track, userStream.current));
+
+		const offer: RTCSessionDescriptionInit = await peers.current[newStudent].createOffer();
 		console.log('je set loffer as localDescription')
-		await peerRef.current.setLocalDescription(new RTCSessionDescription(offer));
-		console.log('je send loffer à ', roomID)
+		await peers.current[newStudent].setLocalDescription(new RTCSessionDescription(offer));
+		console.log('je send loffer à ', newStudent)
 
-		socket.emit('offer', { offer, roomID });
+		socket.emit('offer', { offer, newStudent: newStudent });
 	}
 
-	const answerToOffer = async (offer: RTCSessionDescriptionInit) => {
+	const answerToOffer = async ({ offer, offerSender } : { offer: RTCSessionDescriptionInit, offerSender: string } ) => {
 		console.log('je set loffer as RemoteDescription')
-		await peerRef.current.setRemoteDescription(offer)
-		const answer: RTCSessionDescriptionInit = await peerRef.current.createAnswer();
-		await peerRef.current.setLocalDescription(new RTCSessionDescription(answer));
+		peers.current[offerSender] = createPeer()
 
-		socket.emit('answer', {answer, roomID});
+		userStream.current.getTracks().forEach(track => peers.current[offerSender].addTrack(track, userStream.current));
+
+		await peers.current[offerSender].setRemoteDescription(offer)
+		const answer: RTCSessionDescriptionInit = await peers.current[offerSender].createAnswer();
+		await peers.current[offerSender].setLocalDescription(new RTCSessionDescription(answer));
+
+		socket.emit('answer', {answer, offerSender});
 	}
 
-	const setAnswerAsLocalDescription = async (answer: RTCSessionDescriptionInit) => {
-		console.log('je set lanswser as localdescription')
-		await peerRef.current.setRemoteDescription(new RTCSessionDescription(answer))
+	const setAnswerAsRemoteDescription = async ({ answer, newStudent }: { answer: RTCSessionDescriptionInit, newStudent: string }) => {
+		console.log('je set lanswser as remotedescription')
+		await peers.current[newStudent].setRemoteDescription(new RTCSessionDescription(answer))
 	}
 
 	const handleICECandidateEvent = (e: RTCPeerConnectionIceEvent) => {
@@ -46,13 +56,19 @@ const useWebRTC = ({
 			socket.emit("offer-ice-candidate", payload);
 		}
 	}
-	const setICECandidateMsg = async (candidateInit: RTCIceCandidateInit ) => {
+	const setICECandidateMsg = async ({ candidate: candidateInit, from }: { candidate: RTCIceCandidateInit, from: string } ) => {
 		const candidate = new RTCIceCandidate(candidateInit);
 		console.log(candidateInit)
-		await peerRef.current.addIceCandidate(candidate)
+		console.log(from)
+		console.log(peers.current)
+		await peers.current[from].addIceCandidate(candidate)
 	}
 	const handleTrackEvent = (e: RTCTrackEvent) => {
-		partnerVideo.current.srcObject = e.streams[0];
+		const partnerVideo: HTMLAudioElement = document.createElement('audio')
+		partnerVideo.srcObject = e.streams[0];
+		partnerVideo.autoplay = true
+
+		partnersVideos.current.push(partnerVideo)
 	}
 	const createPeer = (): RTCPeerConnection => {
 		const peer = new RTCPeerConnection({
@@ -70,7 +86,7 @@ const useWebRTC = ({
 	    createPeer,
 		sendOffer,
 		answerToOffer,
-		setAnswerAsLocalDescription,
+		setAnswerAsRemoteDescription,
 		setICECandidateMsg
 	}
 }
