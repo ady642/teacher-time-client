@@ -19,13 +19,13 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 	const llamadaRef = useRef<HTMLAudioElement>(null)
 
 	// WebRTC
-	const partnerVideo = useRef<HTMLVideoElement>()
-	const peerRef = useRef<RTCPeerConnection>()
+	const peers = useRef<{ [id: string]: RTCPeerConnection }>({})
+	const partnersVideos = useRef<HTMLAudioElement[]>([])
 	const userStream = useRef<MediaStream>()
 
-	const { createPeer,answerToOffer,sendOffer,
-		setAnswerAsLocalDescription,setICECandidateMsg
-	} = useWebRTC({ socket, peerRef , partnerVideo, roomID})
+	const { answerToOffer, sendOffer,
+		setAnswerAsRemoteDescription, setICECandidateMsg
+	} = useWebRTC({ socket, peers, partnersVideos, roomID, userStream })
 
 	const handleTeacherDisconnection = async () => {
 		alert('The teacher is gone')
@@ -34,10 +34,13 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 
 	const handleStudentDisconnection = async () => {
 		alert('The student is gone')
-		window.location.replace(`${process.env.BASE_URL}/${localization.locale}/room/create`)
+		//window.location.replace(`${process.env.BASE_URL}/${localization.locale}/room/create`)
 	}
 
 	const beep = async () => {
+		if(!llamadaRef.current)
+			return
+
 		llamadaRef.current.src = '/sound/tonoDeLlamada.mp3';
 		await llamadaRef.current.play()
 	}
@@ -64,9 +67,9 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		await llamadaRef.current.pause()
 	}
 
-	const setStudent = async () => {
+	const setStudent = async (newStudent: string) => {
 		await llamadaRef.current.pause()
-		await sendOffer(roomID)
+		await sendOffer(newStudent)
 		setDisplayAcceptModal(false)
 	}
 
@@ -74,21 +77,19 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream => {
 			userStream.current = stream
 
-			peerRef.current = createPeer()
-			userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
 			socket.emit('join-room', roomID)
 
 			socket.on('on-join-intent', joinIntent)
 			socket.on('on-student-already-accepted', closeModalAcceptation)
 			socket.on('on-student-joined', setStudent)
 
-			socket.on('on-answer', setAnswerAsLocalDescription)
-
-			socket.on('on-teacher-leave', handleTeacherDisconnection)
-			socket.on('on-student-leave', handleStudentDisconnection)
+			socket.on('on-answer', setAnswerAsRemoteDescription)
 
 			socket.on('on-offer', answerToOffer)
 			socket.on('on-ice-candidate-offer', setICECandidateMsg)
+
+			socket.on('on-teacher-leave', handleTeacherDisconnection)
+			socket.on('on-student-leave', handleStudentDisconnection)
 
 			socket.on('on-ended-room', () => alert('This room does not exist anymore'))
 		})
@@ -97,12 +98,12 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 			userStream.current.getTracks().forEach(track => {
 				track.stop();
 			});
-			peerRef.current.close()
+			/*			peers.current.forEach(({peer}) => {
+				peer.close();
+			})*/
 			socket.disconnect()
 		}
 	}, [])
-
-
 
 	return <LanguageProvider localization={localization}>
 		<Head>
@@ -110,7 +111,8 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 		<div>
-			<audio autoPlay ref={partnerVideo} />
+			{ //partnersVideos.current.map((partnerVideo) => partnerVideo )
+				 }
 			<BoardContainer
 				socket={socket}
 				roomID={roomID}
