@@ -6,6 +6,7 @@ import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
 import InputText from "./components/Toolbox/InputText";
 
+
 interface BoardContainerProps {
 	socket: any;
 	roomID: string

@@ -9,7 +9,9 @@ import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
 import EraserModel from "@/modules/Room/Whiteboard/models/Eraser";
 import TextBox from "@/modules/Room/Whiteboard/models/TextBox";
 import LogoTextBox from "@/common/components/Logos/LogoTextBox";
-import InputText from "@/modules/Room/Whiteboard/components/Toolbox/InputText";
+import LogoColorSelector from "@/common/components/Logos/LogoColorSelector";
+import ColorSelector from "@/modules/Room/Whiteboard/models/ColorSelector";
+
 interface ToolBoxProps {
 	setTool: (tool: ToolInterface) => void;
 	tool: ToolInterface;
@@ -23,6 +25,7 @@ const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) =
 		{ component: Create, toolName: 'Pencil' },
 		{ component: Eraser, toolName: 'Eraser' },
 		{ component: LogoTextBox, toolName: 'TextBox' },
+		{ component: LogoColorSelector, toolName: 'ColorSelector' },
 	]
 
 	const selectTool = (toolName: string) => {
@@ -30,6 +33,7 @@ const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) =
 		toolMap.set('Pencil',  new Pencil())
 		toolMap.set('Eraser',  new EraserModel())
 		toolMap.set('TextBox',  new TextBox())
+		toolMap.set('ColorSelector',  new ColorSelector())
 
 		setTool(toolMap.get(toolName))
 		setWidth(5)

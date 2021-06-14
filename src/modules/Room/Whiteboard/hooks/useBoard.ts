@@ -7,9 +7,7 @@ import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
 import { linearCurve } from "@/modules/Room/Whiteboard/utils";
-import LogoTextBox from "@/common/components/Logos/LogoTextBox";
-import TextBox from "../models/TextBox";
-import InputText from "@/modules/Room/Whiteboard/components/Toolbox/InputText";
+
 
 
 const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface, roomID: string, textBoxRef: MutableRefObject<HTMLTextAreaElement>) => {
