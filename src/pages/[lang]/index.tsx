@@ -16,6 +16,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 		await goTo(localization.locale, 'teachers')
 	}
 
+
 	return (
 		<LanguageProvider localization={localization}>
 			<Head>
@@ -24,33 +25,26 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 			</Head>
 			<WhiteHeaderLayout
 				locale={localization.locale}
-				className={`bg-home overflow-hidden ${styles.page}`}
+				className={`${styles.page}`}
 			>
-				<div className={`w-full h-5/6 text-white flex lg:flex-row flex-col-reverse lg:justify-between justify-center items-center md:p-14 p-4`}>
-					<section className={'font-black tracking-wide lg:w-2/3'}>
-						<div className={'md:text-4xl main-title text-2xl'}>
+				<div style={{ height: 'calc(100% - 80px)' }} className={`w-full overflow-hidden bg-blueviolet text-white flex lg:flex-row flex-col-reverse lg:justify-between justify-center items-center md:p-36 p-4`}>
+					<section>
+						<div className={'leading-4 md:text-4xl text-2xl mb-4'}>
 							{ localization.translations['teacherTimeWorld'] }
-							<span className={'text-xl ml-2'}>🌍</span>
 						</div>
-						<div className={'md:text-md text-sm flex flex-col my-6'}>
-							<span>
-								{ localization.translations['startConv'] }
+						<button onClick={goToTeachers} className={'bg-orange text-white flex justify-center hover:bg-red-700 transition-all md:w-auto w-full font-bold sm:text-ml text-md rounded-3xl sm:px-6 sm:p-3 p-2'}>
+							<span className={'mr-2 capitalize'}>
+								{ localization.translations.common['findAteacher'] }
 							</span>
-							<span>
-								{ localization.translations['teacherAnswer'] }
-							</span>
-						</div>
-						<button onClick={goToTeachers} className={'bg-green-600 text-white flex justify-center hover:bg-green-800 transition-all md:w-auto w-full font-bold sm:text-ml text-md rounded sm:p-3 p-2'}>
-							<span className={'mr-2'}>
-								Appeler un professeur
-							</span>
-							<Image
-								src={'/img/headphone.png'}
-								alt={'headphone'}
-								width={25}
-								height={25}
-							/>
 						</button>
+					</section>
+					<section className={'ml-3'}>
+						<Image
+							src={'/img/home/girl.png'}
+							alt={'working woman'}
+							width={1800}
+							height={1250}
+						/>
 					</section>
 				</div>
 			</WhiteHeaderLayout>

@@ -18,15 +18,11 @@ a:hover {
 
 html,body, #__next {
     height: 100%;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Noto Sans', serif;
 }
 
 .h-min {
     height: min-content;
-}
-
-.main-title {
-    font-family: 'MuseoModerno', sans-serif;
 }
 
 .bg-home {
@@ -34,7 +30,3 @@ html,body, #__next {
     background-size: cover;
 }
 
-.bg-teachers {
-    background: url('../../../public/img/teachers-bg.png');
-    background-size: cover;
-}
