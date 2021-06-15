@@ -7,7 +7,10 @@ const common = {
 	google: "Google",
 	facebook: "Facebook",
 	tutoring: "Instant tutoring",
-	for: 'for'
+	for: 'for',
+	findAteacher: 'find a teacher',
+	buyMinutes: 'buy minutes',
+	giveClasses: 'give classes'
 };
 
 export default common;

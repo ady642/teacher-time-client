@@ -3,7 +3,7 @@ import React, {FC} from 'react'
 import useTranslation from "@/common/hooks/useTranslation";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import Logo from "@/common/components/Logos/Logo";
-import styles from '@/common/components/Headers/styles.module.scss'
+import NavItem from "@/common/components/Headers/NavItem";
 
 interface HeaderProps {
     locale: string;
@@ -27,23 +27,43 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal, dark = false }) => {
 		await goTo(locale, '/')
 	}
 
+	const goToAbout = async () => {
+		await goTo(locale, 'about')
+	}
+
+	const goToGiveClasses = async () => {
+		await goTo(locale, 'give_classes')
+	}
+
+	const navItems = [
+		{
+			onClick: () => goToTeachers(),
+			translationKey: 'common.findAteacher'
+		},
+		{
+			onClick: () => openAboutModal(),
+			translationKey: 'common.about'
+		},
+		{
+			onClick: () => goToContact(),
+			translationKey: 'common.giveClasses'
+		}
+	]
+
 	return (
-		<div className={'flex items-center header sm:p-4 p-2'}>
+		<div className={'flex items-center sm:px-6 sm:py-3 p-1 bg-white'}>
 			<div className={'cursor-pointer opacity-100'} onClick={goToHome}>
-				<Logo height={80} width={300}/>
+				<Logo height={50} width={200}/>
 			</div>
-			<div className={'flex sm:flex hidden justify-between flex-1'}>
-				<nav className={'ml-16 flex items-center'}>
-					<ul className={`flex items-center font-bold sm:text-lg text-sm lg:flex hidden tracking-wide ${dark ? 'text-white' : 'text-gray-600'}`}>
-						<li onClick={goToTeachers} className={'cursor-pointer hover:text-green-500 transition'}>
-							Liste professeurs
-						</li>
-						<li onClick={openAboutModal} className={'ml-16 cursor-pointer hover:text-green-500 transition'}>
-							{ t('common.about')}
-						</li>
+			<div className={'sm:flex ml-10 justify-between hidden flex-1'}>
+				<nav className={'flex items-center'}>
+					<ul className={`flex items-center font-bold sm:text-base text-sm lg:flex hidden ${dark ? 'text-white' : 'text-gray-600'}`}>
+						{ navItems.map(({ onClick, translationKey }) => <NavItem key={translationKey} onClick={onClick}>
+							{ t(translationKey) }
+						</NavItem>) }
 					</ul>
 				</nav>
-				<button onClick={goToContact} className={`${styles.meet} ${styles.draw} ${styles.buttonHover} font-bold md:text-lg text-sm md:p-3 p-1`}>
+				<button onClick={goToContact} className={`rounded-3xl transition bg-orange hover:bg-red-700 text-white font-bold md:text-lg text-sm md:px-4 md:p-2 p-1`}>
 					{ t('common.teachers') }
 				</button>
 			</div>
