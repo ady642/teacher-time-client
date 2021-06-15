@@ -42,15 +42,16 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		context.font = "21px Arial";
 
 
-		var textInBox = textBoxRef.current
+		const textInBox = textBoxRef.current
 
 
-		var lineheight = 25;
-			var lines = textInBox.value.split('\n');
+		const lineheight = 25;
+		const lines = textInBox.value.split('\n');
 
-			for (var i = 0; i<lines.length; i++)
-				context.fillText(lines[i], parseInt(textInBox.style.left) ,parseInt(textInBox.style.top)+ (i*lineheight)+ 25 );
-
+		for (var i = 0; i<lines.length; i++){
+			context.fillText(lines[i], parseInt(textInBox.style.left) ,parseInt(textInBox.style.top)+ (i*lineheight)+ 25 );
+		}
+		socket.emit('fill-text', {text: textInBox.value, x: textInBox.style.left, y: textInBox.style.top, roomID});
 		console.log(textInBox.value,parseInt(textInBox.style.left),parseInt(textInBox.style.top));
 		textInBox.value = null
 		textInBox.style.display = "none"
@@ -99,6 +100,16 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		let h = canvas.offsetHeight;
 		drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color, data.width);
 	}
+	const onFillTextEvent = (data: {text: string , x: string, y:string, roomID:string}): void => {
+		const canvas = canvasRef.current;
+		const context = canvas.getContext('2d');
+		const lines = data.text.split('\n');
+		const lineheight = 25;
+		console.log("ici")
+		for (var i = 0; i<lines.length; i++){	
+			context.fillText(lines[i], parseInt(data.x) ,parseInt(data.y)+ (i*lineheight)+ 25 );
+		}	
+	}
 
 	const onResize = () => {
 		const canvas = canvasRef.current
@@ -109,8 +120,10 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 
 	useEffect(() => {
 		socket.on('drawing', onDrawingEvent);
+		socket.on('fill-text', onFillTextEvent);
 		window.addEventListener('resize', onResize, false);
 		onResize()
+		
 		textBoxRef.current.style.display="none"
 
 		return () => {
