@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {socket} from "@/common/utils/client";
 import useRoutePush from "@/common/hooks/useRoutePush";
 
-export default (locale: string) => {
+const useRoom = (locale: string) => {
 	const { setAppLoading } = useAppReducers()
 	const [noRoomModalOpened, setNoRoomModalOpened] = useState(false)
 	const [noRooms, setNoRooms] = useState(false)
@@ -39,3 +39,5 @@ export default (locale: string) => {
 		noRooms
 	}
 }
+
+export default useRoom

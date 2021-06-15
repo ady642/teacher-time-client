@@ -7,7 +7,10 @@ const common = {
 	google: "Google",
 	facebook: "Facebook",
 	tutoring: "Soutien Scolaire Instantané",
-	for: 'pour'
+	for: 'pour',
+	findAteacher: 'trouver un professeur',
+	buyMinutes: 'Acheter des minutes',
+	giveClasses: 'donner des cours'
 };
 
 export default common;

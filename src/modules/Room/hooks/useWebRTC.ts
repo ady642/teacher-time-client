@@ -24,7 +24,7 @@ const useWebRTC = ({
 		const offer: RTCSessionDescriptionInit = await peers.current[newStudent].createOffer();
 		console.log('je set loffer as localDescription')
 		await peers.current[newStudent].setLocalDescription(new RTCSessionDescription(offer));
-		console.log('je send loffer à ', newStudent)
+		console.log('je send loffer à', newStudent)
 
 		socket.emit('offer', { offer, newStudent: newStudent });
 	}
@@ -58,9 +58,6 @@ const useWebRTC = ({
 	}
 	const setICECandidateMsg = async ({ candidate: candidateInit, from }: { candidate: RTCIceCandidateInit, from: string } ) => {
 		const candidate = new RTCIceCandidate(candidateInit);
-		console.log(candidateInit)
-		console.log(from)
-		console.log(peers.current)
 		await peers.current[from].addIceCandidate(candidate)
 	}
 	const handleTrackEvent = (e: RTCTrackEvent) => {
