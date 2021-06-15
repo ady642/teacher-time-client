@@ -8,8 +8,6 @@ import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
 import { linearCurve } from "@/modules/Room/Whiteboard/utils";
 
-
-
 const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface, roomID: string, textBoxRef: MutableRefObject<HTMLTextAreaElement>) => {
 	const [drawing, setDrawing] = useState(false)
 	const [chalkParams, setChalkParams] = useState<ChalkParams>({ width: tool.width, color: tool.color, x: 0, y: 0})
@@ -21,16 +19,11 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		pointsRef.current = []
 	}
 	const inputSetCoords = (x0: number, y0: number) => {
-		var textArea = textBoxRef.current;
-
-
+		const textArea = textBoxRef.current;
 		textArea.style.left = ( (x0 - 2) + "px" );
 		textArea.style.top = ( (y0 - 15) + "px" );
 		textArea.style.display="block"
-
 	}
-
-
 
 	const fillTextBox = (x0: number, y0: number,color: string, size:number,text:string,cpt:boolean) => {
 
@@ -48,14 +41,16 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		const lineheight = 25;
 		const lines = textInBox.value.split('\n');
 
-		for (var i = 0; i<lines.length; i++){
+		for (let i = 0; i<lines.length; i++){
 			context.fillText(lines[i], parseInt(textInBox.style.left) ,parseInt(textInBox.style.top)+ (i*lineheight)+ 25 );
 		}
+
+		// Emit values to fill text
 		socket.emit('fill-text', {text: textInBox.value, x: textInBox.style.left, y: textInBox.style.top, roomID});
-		console.log(textInBox.value,parseInt(textInBox.style.left),parseInt(textInBox.style.top));
+
+		// Reset Text and hide textArea
 		textInBox.value = null
 		textInBox.style.display = "none"
-
 	}
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
 		const canvas = canvasRef.current
@@ -106,9 +101,9 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		const lines = data.text.split('\n');
 		const lineheight = 25;
 		console.log("ici")
-		for (var i = 0; i<lines.length; i++){	
+		for (var i = 0; i<lines.length; i++){
 			context.fillText(lines[i], parseInt(data.x) ,parseInt(data.y)+ (i*lineheight)+ 25 );
-		}	
+		}
 	}
 
 	const onResize = () => {
@@ -120,10 +115,10 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 
 	useEffect(() => {
 		socket.on('drawing', onDrawingEvent);
-		socket.on('fill-text', onFillTextEvent);
+		socket.on('on-fill-text', onFillTextEvent);
 		window.addEventListener('resize', onResize, false);
 		onResize()
-		
+
 		textBoxRef.current.style.display="none"
 
 		return () => {
