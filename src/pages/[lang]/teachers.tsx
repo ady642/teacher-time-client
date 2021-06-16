@@ -2,31 +2,16 @@ import React, {FC, useEffect, useState} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
-import styles from '@/modules/Teachers/styles/Home.module.scss'
 import TeacherFilters from "@/modules/Teachers/components/TeacherFilters";
 import TeacherList from "@/modules/Teachers/components/TeacherList/TeacherList";
-import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
-import usePaymentReducers from "@/context/payment/helpers/usePaymentReducers";
-import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
-import PaymentClient from "@/modules/Payment/services/PaymentClient";
-import client from "@/common/utils/client";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import {getInitialLocale} from "@/translations/getInitialLocale";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
-import useRoutePush from "@/common/hooks/useRoutePush";
-import {socket} from "@/common/utils/client";
-import TeacherClient from "@/modules/Teachers/services/TeacherClient";
-import useAppReducers from "@/context/app/helpers/useAppReducers";
 import NoRoomModal from "@/modules/Room/components/NoRoomModal";
 import useRoom from "@/modules/Room/hooks/useRoom";
 
 
-const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const { setBalance } = usePaymentReducers()
-	const { setAppLoading } = useAppReducers()
-	const { token: tokenCtx } = useAuthGetters()
-	const { openSignInModal, setToken }= useAuthReducers()
-	const paymentClient = new PaymentClient(token || tokenCtx)
+const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [locale, setLocale] = useState('')
 
 	const { noRooms, noRoomModalOpened, setNoRoomModalOpened, callTeacher } = useRoom(localization.locale)
@@ -42,9 +27,6 @@ const Home: FC = ({ teachers, token, localization }: InferGetServerSidePropsType
 
 
 	useEffect(() => {
-		if(token) {
-			setToken(token)
-		}
 		setLocale(getInitialLocale())
 		//fetchBalance()
 	}, [])

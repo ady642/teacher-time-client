@@ -11,7 +11,8 @@
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "indent": ["error", "tab"],
-    "no-mixed-spaces-and-tabs": "off"
+    "no-mixed-spaces-and-tabs": "off",
+    "react-hooks/exhaustive-deps": "off"
   },
   "env": {
     "browser": true,

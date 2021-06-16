@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import {socket} from "@/common/utils/client";
 import {withRouter} from 'next/router'
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
@@ -17,23 +17,17 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 	const [studentID, setStudentID] = useState('')
 	const { goTo } = useRoutePush()
 	const llamadaRef = useRef<HTMLAudioElement>(null)
-	const [muted, setMuted] = useState(false)
-	const [socketIDs, setSocketIDs] = useState<string[]>([])
+	/*	const [muted, setMuted] = useState(false)
 
 	const toggleMute = () => {
 		setMuted(!muted)
 		userStream.current.getAudioTracks()[0].enabled = !userStream.current.getAudioTracks()[0].enabled
-	}
+	}*/
 
 	// WebRTC
 	const peers = useRef<{ [id: string]: RTCPeerConnection }>({})
 	const partnersVideos = useRef<HTMLAudioElement[]>([])
 	const userStream = useRef<MediaStream>()
-
-	useEffect(() => {
-		console.log(Object.keys(peers.current))
-		setSocketIDs(Object.keys(peers.current))
-	}, [peers.current])
 
 	const { answerToOffer, sendOffer,
 		setAnswerAsRemoteDescription, setICECandidateMsg
@@ -123,10 +117,6 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 		<div>
-			{ socketIDs.length > 0 && <span className={'text-black flex flex-col'}>
-				{ socketIDs.map((id: string) => <span key={id}>{ id }</span>) }
-				<button className={'w-fit-content text-white rounded bg-green-500'} onClick={toggleMute}>{ muted ? 'unmute': 'mute' }</button>
-			</span> }
 			<BoardContainer
 				socket={socket}
 				roomID={roomID}

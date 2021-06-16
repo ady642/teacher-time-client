@@ -8,7 +8,6 @@ import AboutText from "@/modules/Contact/components/AboutText";
 import TailwindCard from "@/common/components/Cards/TailwindCard";
 import ContactClient from "@/modules/Contact/client/ContactClient";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
-import styles from "@/common/styles/WhiteHeader.module.scss"
 import MailConfirmationModal from "@/modules/Contact/components/ContactForm/MailConfirmationModal";
 import Head from "next/head";
 
