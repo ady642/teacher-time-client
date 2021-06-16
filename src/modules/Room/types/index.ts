@@ -11,7 +11,7 @@ export interface OfferIcePayload {
 type RTCSdpType = "answer" | "offer" | "pranswer" | "rollback";
 export interface RTCSessionDescriptionInit {
     sdp?: string;
-    type?: RTCSdpType;
+    type: RTCSdpType;
 }
 
 export interface RTCPayload {
