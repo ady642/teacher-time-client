@@ -38,7 +38,7 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal, dark = false }) => {
 	const navItems = [
 		{
 			onClick: () => goToTeachers(),
-			translationKey: 'common.findAteacher'
+			translationKey: 'common.teachersList'
 		},
 		{
 			onClick: () => openAboutModal(),

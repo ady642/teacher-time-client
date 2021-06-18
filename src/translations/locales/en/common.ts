@@ -10,7 +10,8 @@ const common = {
 	for: 'for',
 	findAteacher: 'find a teacher',
 	buyMinutes: 'buy minutes',
-	giveClasses: 'give classes'
+	giveClasses: 'give classes',
+	teachersList: 'Teachers List'
 };
 
 export default common;
