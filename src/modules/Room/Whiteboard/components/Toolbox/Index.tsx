@@ -1,15 +1,16 @@
 import {createElement, FunctionComponent, useEffect, useState} from "react";
 import Tool from "@/modules/Room/Whiteboard/components/Toolbox/Tool";
-import {Create, Delete} from "@material-ui/icons";
+import {Delete} from "@material-ui/icons";
 import styles from '@/modules/Room/Whiteboard/components/Toolbox/tools.module.scss'
 import Eraser from "@/common/components/Icons/Eraser";
+import Pen from "@/common/components/Icons/Pencil";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import WidthSelection from "@/modules/Room/Whiteboard/components/Toolbox/WidthSelection/WidthSelectionContainer";
 import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
 import EraserModel from "@/modules/Room/Whiteboard/models/Eraser";
 import TextBox from "@/modules/Room/Whiteboard/models/TextBox";
 import LogoTextBox from "@/common/components/Logos/LogoTextBox";
-import InputText from "@/modules/Room/Whiteboard/components/Toolbox/InputText";
+
 interface ToolBoxProps {
 	setTool: (tool: ToolInterface) => void;
 	tool: ToolInterface;
@@ -20,9 +21,9 @@ const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) =
 	const [width, setWidth] = useState(5)
 
 	const icons = [
-		{ component: Create, toolName: 'Pencil' },
-		{ component: Eraser, toolName: 'Eraser' },
-		{ component: LogoTextBox, toolName: 'TextBox' },
+		{ component: Pen, toolName: 'Pencil', action: 'Dessiner' },
+		{ component: Eraser, toolName: 'Eraser', action: 'Gommer' },
+		{ component: LogoTextBox, toolName: 'TextBox', action: '' },
 	]
 
 	const selectTool = (toolName: string) => {
@@ -51,7 +52,7 @@ const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) =
 			}
 		</Tool>)
 		}
-		
+
 		<WidthSelection setWidth={setWidth} width={width}/>
 		<Tool onClick={clearCanvas}>
 			<Delete />

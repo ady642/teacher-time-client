@@ -5,6 +5,8 @@ import Toolbox from '@/modules/Room/Whiteboard/components/Toolbox/Index'
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
 import InputText from "./components/Toolbox/InputText";
+import ZoomIcons from "@/modules/Room/Whiteboard/components/ZoomIcons";
+import TailwindButton from "@/common/components/Buttons/TailwindButton";
 
 interface BoardContainerProps {
 	socket: any;
@@ -37,18 +39,32 @@ const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, roomID
 		socket.emit('clear-canvas', roomID)
 	}
 
-	return <div ref={boardContainerRef} className={`${styles.shade} ${cursorClass}`}>
-		
+	return <div ref={boardContainerRef} className={`${styles.shade}`}>
 		<InputText textBoxRef={textBoxRef}/>
-		<Toolbox clearCanvas={emitToClear} tool={tool} setTool={setTool} />
-		<Board
-			canvasRef={canvasRef}
-			tool={tool}
-			boardContainerRef={boardContainerRef}
-			roomID={roomID}
-			textBoxRef={textBoxRef}
-			
-		/>
+		<div className="flex flex-col">
+			<div>
+				Je suis le header
+			</div>
+			<div className="flex justify-between mt-28">
+				<Toolbox clearCanvas={emitToClear} tool={tool} setTool={setTool} />
+				<Board
+					canvasRef={canvasRef}
+					tool={tool}
+					boardContainerRef={boardContainerRef}
+					roomID={roomID}
+					textBoxRef={textBoxRef}
+					className={cursorClass}
+				/>
+				<div className="flex w-28 pb-16 pr-2 justify-start items-center">
+					<ZoomIcons />
+				</div>
+			</div>
+			<div className={'flex w-full justify-center items-center mt-14'}>
+				<TailwindButton className={'w-60 p-2'}>
+					Finish class
+				</TailwindButton>
+			</div>
+		</div>
 	</div>
 }
 
