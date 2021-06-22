@@ -19,7 +19,7 @@ interface ToolBoxProps {
 }
 
 const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) => {
-	const [width, setWidth] = useState(5)
+	const [width, setWidth] = useState(2)
 
 	const icons = [
 		{ toolName: 'Pencil', action: 'Dessiner' },

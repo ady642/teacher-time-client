@@ -1,9 +1,10 @@
 import {FunctionComponent} from "react";
+import {Dayjs} from "dayjs";
 
 interface TimeInfoProps {
     className?: string;
     title: string;
-    time: string;
+    time: Dayjs;
 }
 
 const TimeInfo: FunctionComponent<TimeInfoProps> = ({ className = '', title, time}) => {
@@ -12,7 +13,7 @@ const TimeInfo: FunctionComponent<TimeInfoProps> = ({ className = '', title, tim
 			{title}
 		</span>
 		<span className="mt-2 font-bold">
-			{time}
+			{time.toString()}
 		</span>
 	</div>
 }
