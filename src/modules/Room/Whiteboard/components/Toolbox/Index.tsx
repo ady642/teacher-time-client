@@ -9,7 +9,8 @@ import WidthSelection from "@/modules/Room/Whiteboard/components/Toolbox/WidthSe
 import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
 import EraserModel from "@/modules/Room/Whiteboard/models/Eraser";
 import TextBox from "@/modules/Room/Whiteboard/models/TextBox";
-import LogoTextBox from "@/common/components/Logos/LogoTextBox";
+import TextBoxIcon from "@/common/components/Icons/TextBox";
+import {Case, Switch} from "react-switch-case-module";
 
 interface ToolBoxProps {
 	setTool: (tool: ToolInterface) => void;
@@ -21,9 +22,9 @@ const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) =
 	const [width, setWidth] = useState(5)
 
 	const icons = [
-		{ component: Pen, toolName: 'Pencil', action: 'Dessiner' },
-		{ component: Eraser, toolName: 'Eraser', action: 'Gommer' },
-		{ component: LogoTextBox, toolName: 'TextBox', action: '' },
+		{ toolName: 'Pencil', action: 'Dessiner' },
+		{ toolName: 'Eraser', action: 'Gommer' },
+		{ toolName: 'TextBox', action: 'Texte' },
 	]
 
 	const selectTool = (toolName: string) => {
@@ -45,16 +46,18 @@ const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) =
 	}, [width])
 
 	return <aside className={styles.tools}>
-		{ icons.map(({ component, toolName}) => <Tool
-			onClick={() => selectTool(toolName)} key={toolName}>
-			{
-				createElement(component)
-			}
+		{ icons.map(({ toolName, action}) => <Tool
+			onClick={() => selectTool(toolName)} key={toolName} subtitle={action} active={toolName === tool.name}>
+			<Switch componentName={toolName} defaultComponent={<Pen active={false}/>}>
+				<Case value={'Pencil'}><Pen active={toolName === tool.name}/></Case>
+				<Case value={'Eraser'}><Eraser active={toolName === tool.name}/></Case>
+				<Case value={'TextBox'}><TextBoxIcon active={toolName === tool.name}/></Case>
+			</Switch>
 		</Tool>)
 		}
 
 		<WidthSelection setWidth={setWidth} width={width}/>
-		<Tool onClick={clearCanvas}>
+		<Tool onClick={clearCanvas} subtitle={'Tout effacer'}>
 			<Delete />
 		</Tool>
 	</aside>

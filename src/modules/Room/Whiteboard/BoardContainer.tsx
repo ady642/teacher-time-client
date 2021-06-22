@@ -7,6 +7,7 @@ import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
 import InputText from "./components/Toolbox/InputText";
 import ZoomIcons from "@/modules/Room/Whiteboard/components/ZoomIcons";
 import TailwindButton from "@/common/components/Buttons/TailwindButton";
+import Header from "@/modules/Room/Whiteboard/components/Header/Header";
 
 interface BoardContainerProps {
 	socket: any;
@@ -42,9 +43,7 @@ const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, roomID
 	return <div ref={boardContainerRef} className={`${styles.shade}`}>
 		<InputText textBoxRef={textBoxRef}/>
 		<div className="flex flex-col">
-			<div>
-				Je suis le header
-			</div>
+			<Header />
 			<div className="flex justify-between mt-28">
 				<Toolbox clearCanvas={emitToClear} tool={tool} setTool={setTool} />
 				<Board

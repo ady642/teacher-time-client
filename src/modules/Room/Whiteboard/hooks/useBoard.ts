@@ -26,14 +26,10 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	}
 
 	const fillTextBox = (x0: number, y0: number,color: string, size:number,text:string,cpt:boolean) => {
-
 		const canvas = canvasRef.current
 
 		const context = canvas.getContext('2d')
-		//boardContainerRef.current.appendChild(document.createElement('Input'))
-		/*context.font.fontsize(size)*/
 		context.font = "21px Arial";
-
 
 		const textInBox = textBoxRef.current
 
@@ -100,17 +96,16 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		const context = canvas.getContext('2d');
 		const lines = data.text.split('\n');
 		const lineheight = 25;
-		console.log("ici")
-		for (var i = 0; i<lines.length; i++){
+
+		for (let i = 0; i<lines.length; i++){
 			context.fillText(lines[i], parseInt(data.x) ,parseInt(data.y)+ (i*lineheight)+ 25 );
 		}
 	}
 
 	const onResize = () => {
 		const canvas = canvasRef.current
-		const boardContainer = boardContainerRef.current
-		canvas.width = boardContainer.offsetWidth;
-		canvas.height = boardContainer.offsetHeight;
+		canvas.width = canvas.offsetWidth;
+		canvas.height = canvas.offsetHeight;
 	}
 
 	useEffect(() => {

@@ -16,13 +16,13 @@ const WidthSelectionContainer: FunctionComponent<WidthSelectionProps> = ({setWid
 		</Tool>
 		{ widthListOpened && (
 		    <div>
-				<Tool onClick={() => setWidth(5)}>
+				<Tool onClick={() => setWidth(2)}>
 					<Image src="/img/dot.png" width='8' height='8' />
 				</Tool>
-				<Tool onClick={() => setWidth(10)}>
+				<Tool onClick={() => setWidth(5)}>
 					<Image src="/img/dot.png" width='12' height='12' />
 				</Tool>
-				<Tool onClick={() => setWidth(15)}>
+				<Tool onClick={() => setWidth(10)}>
 					<Image src="/img/dot.png" width='16' height='16' />
 				</Tool>
 			</div>

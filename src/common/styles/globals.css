@@ -1,7 +1,6 @@
 @import './stripe_style.css';
 @import './override_material.css';
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Source+Sans+Pro:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
 
 @tailwind components;
 @tailwind utilities;
@@ -18,7 +17,7 @@ a:hover {
 
 html,body, #__next {
     height: 100%;
-    font-family: 'Noto Sans', serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 .h-min {
