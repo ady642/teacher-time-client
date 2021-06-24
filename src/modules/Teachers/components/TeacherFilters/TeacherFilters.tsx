@@ -6,6 +6,7 @@ import useTranslation from "@/common/hooks/useTranslation";
 import styles from '@/modules/Teachers/styles/TeacherFilters.module.scss'
 import {Menu} from "@material-ui/icons";
 import {MenuItem} from "@material-ui/core";
+import FieldSelector from "@/modules/Teachers/components/TeacherFilters/FieldSelector/FieldSelector";
 
 interface TeacherFiltersProps {
 }
@@ -41,21 +42,8 @@ const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
 	}]
 
 	return <div className={`flex flex-col mb-4 p-8`}>
-		<div className={'flex flex-wrap'}>
-			<h1 className={'flex items-center text-l sm:text-2xl'}>Trouver un professeur</h1>
-		</div>
-		<div className={'mt-4 flex'}>
-			<PESelect
-				value={filters.matiere}
-				handleChange={handleChangeMatiere}
-				label={'Matière'}
-				items={matiereItems}
-				disabledItems={['english', 'french']}
-			/>
-		</div>
-		<div>
-			<span>Si vous aussi vous voulez créer votre room: </span>
-			<button onClick={goToContact} className={'transition-all rounded p-2 ml-2 mt-5 font-medium bg-blue-400 text-white text-sm hover:bg-blue-600'}>Inscription professeurs</button>
+		<div className="flex justify-center">
+			<FieldSelector />
 		</div>
 	</div>
 }

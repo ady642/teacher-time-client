@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
-import TeacherFilters from "@/modules/Teachers/components/TeacherFilters";
+import TeacherFilters from "@/modules/Teachers/components/TeacherFilters/TeacherFilters";
 import TeacherList from "@/modules/Teachers/components/TeacherList/TeacherList";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import {getInitialLocale} from "@/translations/getInitialLocale";
@@ -39,7 +39,7 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 			</Head>
 			<WhiteHeaderLayout
 				locale={locale}
-				className={'h-full'}
+				className={'h-full bg-customgray'}
 			>
 				<main className={'flex flex-col justify-start'}>
 					<TeacherFilters />
