@@ -59,8 +59,8 @@ const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, roomID
 				</div>
 			</div>
 			<div className={'flex w-full justify-center items-center mt-14'}>
-				<TailwindButton className={'w-60 p-2'}>
-					Finish class
+				<TailwindButton onClick={() => alert('finish room')} className={'w-60 p-2'}>
+					Terminer la classe
 				</TailwindButton>
 			</div>
 		</div>
