@@ -5,7 +5,7 @@ class Pencil implements ToolInterface {
     width: number;
     name: string;
 
-    constructor({ color = '#000', width = 5, name = 'Pencil' } = {}) {
+    constructor({ color = '#000', width = 2, name = 'Pencil' } = {}) {
     	this.color = color
     	this.width = width
     	this.name = name

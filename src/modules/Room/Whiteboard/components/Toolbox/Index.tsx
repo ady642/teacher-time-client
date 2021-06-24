@@ -1,15 +1,17 @@
 import {createElement, FunctionComponent, useEffect, useState} from "react";
 import Tool from "@/modules/Room/Whiteboard/components/Toolbox/Tool";
-import {Create, Delete} from "@material-ui/icons";
+import {Delete} from "@material-ui/icons";
 import styles from '@/modules/Room/Whiteboard/components/Toolbox/tools.module.scss'
 import Eraser from "@/common/components/Icons/Eraser";
+import Pen from "@/common/components/Icons/Pencil";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import WidthSelection from "@/modules/Room/Whiteboard/components/Toolbox/WidthSelection/WidthSelectionContainer";
 import Pencil from "@/modules/Room/Whiteboard/models/Pencil";
 import EraserModel from "@/modules/Room/Whiteboard/models/Eraser";
 import TextBox from "@/modules/Room/Whiteboard/models/TextBox";
-import LogoTextBox from "@/common/components/Logos/LogoTextBox";
-import InputText from "@/modules/Room/Whiteboard/components/Toolbox/InputText";
+import TextBoxIcon from "@/common/components/Icons/TextBox";
+import {Case, Switch} from "react-switch-case-module";
+
 interface ToolBoxProps {
 	setTool: (tool: ToolInterface) => void;
 	tool: ToolInterface;
@@ -17,12 +19,12 @@ interface ToolBoxProps {
 }
 
 const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) => {
-	const [width, setWidth] = useState(5)
+	const [width, setWidth] = useState(2)
 
 	const icons = [
-		{ component: Create, toolName: 'Pencil' },
-		{ component: Eraser, toolName: 'Eraser' },
-		{ component: LogoTextBox, toolName: 'TextBox' },
+		{ toolName: 'Pencil', action: 'Dessiner' },
+		{ toolName: 'Eraser', action: 'Gommer' },
+		{ toolName: 'TextBox', action: 'Texte' },
 	]
 
 	const selectTool = (toolName: string) => {
@@ -44,16 +46,18 @@ const Index: FunctionComponent<ToolBoxProps> = ({ setTool, tool, clearCanvas}) =
 	}, [width])
 
 	return <aside className={styles.tools}>
-		{ icons.map(({ component, toolName}) => <Tool
-			onClick={() => selectTool(toolName)} key={toolName}>
-			{
-				createElement(component)
-			}
+		{ icons.map(({ toolName, action}) => <Tool
+			onClick={() => selectTool(toolName)} key={toolName} subtitle={action} active={toolName === tool.name}>
+			<Switch componentName={toolName} defaultComponent={<Pen active={false}/>}>
+				<Case value={'Pencil'}><Pen active={toolName === tool.name}/></Case>
+				<Case value={'Eraser'}><Eraser active={toolName === tool.name}/></Case>
+				<Case value={'TextBox'}><TextBoxIcon active={toolName === tool.name}/></Case>
+			</Switch>
 		</Tool>)
 		}
-		
+
 		<WidthSelection setWidth={setWidth} width={width}/>
-		<Tool onClick={clearCanvas}>
+		<Tool onClick={clearCanvas} subtitle={'Tout effacer'}>
 			<Delete />
 		</Tool>
 	</aside>

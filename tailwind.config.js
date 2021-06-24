@@ -8,6 +8,10 @@ module.exports = {
 			...theme('colors'),
 			'orange': '#fa5a5f',
 			'blueviolet': '#454e9e'
+		}),
+		textColor: theme => ({
+			...theme('colors'),
+			'blueviolet': '#454e9e'
 		})
 	},
 	variants: {

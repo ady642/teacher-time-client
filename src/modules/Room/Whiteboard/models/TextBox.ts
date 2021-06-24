@@ -6,11 +6,11 @@ class TextBox implements ToolInterface {
     color: string;
     text: string;
 
-    constructor({ color = '#000', width = 5, name = 'TextBox'/*, text=""*/} = {}) {
+    constructor({ color = '#000', width = 2, name = 'TextBox'/*, text=""*/} = {}) {
     	this.width = width
     	this.color = color
     	this.name = name
-       /* this.text = text*/
+    	/* this.text = text*/
     }
 }
 
