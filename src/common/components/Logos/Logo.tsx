@@ -2,8 +2,8 @@ import {FC} from "react";
 import Image from 'next/image'
 
 interface LogoProps {
-    width?: number
-    height?: number
+    width: string;
+    height: string;
 }
 
 const Logo: FC<LogoProps> = ({ width = 'auto', height = 'auto' }) => {
