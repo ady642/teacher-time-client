@@ -46,7 +46,7 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 					<TeacherList
 						teachers={teachers}
 						noRooms={noRooms}
-						onClickOnTeacherCall={callTeacher}
+						onCall={callTeacher}
 					/>
 				</main>
 				<NoRoomModal open={noRoomModalOpened} handleClose={() => setNoRoomModalOpened(false)} />
@@ -70,9 +70,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 				rating: 5,
 				hasDiploma: true,
 				description: 'Professeur de mathématiques. Pour toutes questions mathématiques',
-				avatar: '/img/avatar.png',
-				name: 'Adrien',
-				lang: ['fr', 'es']
+				avatar: '/img/teachers-bg.png',
+				name: 'Jon Smith',
+				languages: ['fr', 'es']
 			}
 		]
 		return {

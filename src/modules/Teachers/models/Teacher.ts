@@ -6,6 +6,7 @@ export default class Teacher {
     hasDiploma: boolean
     rating: number
 	hourlyRate: number
+	languages: string[]
 
 	constructor({
 		_id= '',
@@ -14,7 +15,8 @@ export default class Teacher {
 		description = '',
 		hasDiploma = false,
 		rating = 1,
-		hourlyRate = 0
+		hourlyRate = 0,
+		languages = new Array<string>()
 	} = {}) {
 		this._id = _id
 		this.name = name
@@ -23,5 +25,6 @@ export default class Teacher {
 		this.hasDiploma = hasDiploma
 		this.rating = rating
 		this.hourlyRate = hourlyRate
+		this.languages = languages
 	}
 }

@@ -8,10 +8,10 @@ interface ChipFiltersProps {
 const ChipFilters: FunctionComponent<ChipFiltersProps> = () => {
 	return <div className={'flex w-1/5'}>
 		<ChipFilter className={'mr-4'}>
-			Idioma
+			Langues
 		</ChipFilter>
 		<ChipFilter>
-			Nivel
+			Niveau
 		</ChipFilter>
 	</div>
 }
