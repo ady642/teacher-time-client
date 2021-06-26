@@ -51,7 +51,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 					</section>
 				</div>
 				<div style={{ height: '75vh' }} className={`w-full  bg-white flew-wrap  `}>
-					<section>
+					<section className={'overflow-hidden'} >
 						<section className={'relative flex w-full place-content-between'}>
 							<div style={{width:'29vw', marginLeft:'6vw', padding:'3.9vw'}} className={'h-auto'}>
 								<Draw1 />
@@ -63,9 +63,9 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 									<NavLink locale={localization.locale} openAboutModal={() => setModalOpened(true)}/>
 								</section>
 							</div>
- 							<div style= {{top:'10px', width:'10.5vw',height:'10.5vw',left:'-5vw'}} className ={'animate-bounce rounded-full flex items-center justify-center absolute bg-yellow-300'} />
+ 							<div style= {{bottom:'-37%', width:'11vw',height:'11vw',left:'-4.7vw'}} className ={'animate-bounce absolute rounded-full flex items-center justify-center  bg-yellow-300'} />
 						</section>
-						<section style= {{marginTop:'1.8vw'}} className={'relative overflow-x-hidden flex w-full place-content-between'}>
+						<section style= {{marginTop:'1.8vw'}} className={'relative flex w-full place-content-between'}>
 							<div style={{width:'59vw', fontSize:'2vw', padding:'3.9vw', lineHeight:'2.4vw', marginTop:'4.8vw', marginLeft:'5vw'}} className={' relative text-black font-black  justify-self-end h-auto'}>
 								{ localization.translations['titreDraw2'] }
 								<section style={{fontSize:'1.5vw', marginTop:'1.8vw'}} className={'text-black font-medium text-left'}>
@@ -76,7 +76,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 							<div style={{width:'31vw', marginRight:'6vw', padding:'3.9vw', paddingLeft:'2.9vw'}} className={'h-auto'}>
 								<Draw2 />
 							</div>
-							<div style= {{top:'10px', width:'10.5vw',height:'10.5vw',right:'-5vw'}} className ={'animate-bounce rounded-full flex items-center justify-center absolute bg-blueviolet'} />
+							<div style= {{bottom:'-10%', width:'10.5vw',height:'10.5vw',right:'-6.3vw'}} className ={'animate-bounce absolute rounded-full flex items-center justify-center bg-blueviolet'} />
 						</section>
 						<section style= {{marginTop:'1.8vw'}} className={'relative flex w-full place-content-between'}>
 							<div style={{width:'32vw', marginLeft:'4.8vw', padding:'3.9vw', marginTop:'1vw'}} className={'h-auto'}>
@@ -89,14 +89,14 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 									<NavLink locale={localization.locale} openAboutModal={() => setModalOpened(true)}/>
 								</section>
 							</div>
-							<div style= {{top:'10px', width:'10.5vw',height:'10.5vw',left:'-5vw'}} className ={' animate-bounce rounded-full flex items-center justify-center absolute bg-red-400'} />
+							<div style= {{bottom:'-35%', width:'10.5vw',height:'10.5vw',left:'-5vw'}} className ={' animate-bounce rounded-full flex items-center justify-center absolute bg-red-400'} />
 						</section>
 						<section style={{ height: '68vh' }} className={`w-full  bg-white  flex `}>
 							<div style={{ height: '53vh', marginTop:'8.6vh' }} className={`w-full  bg-gray-800 block object-center flex `}>
 								<section className={'relative w-full flex flex-col items-center justify-center'}>
-									<div style={{width:'55vw', fontSize:'2.3vw', padding:'3.2vw', lineHeight:'2.4vw'}} className={'text-yellow-300 font-black   h-auto  flex flex-col items-center justify-center'}>
+									<div style={{width:'57vw', fontSize:'2.3vw', padding:'3.2vw', lineHeight:'2.4vw'}} className={'text-yellow-300 font-black   h-auto  flex flex-col items-center justify-center'}>
 										{ localization.translations['titreEnd'] }
-										<section style={{fontSize:'1.5vw', marginTop:'2.5vw', marginBottom:'2vw'}} className={'text-white font-medium text-center flex justify-between flex flex-col items-center justify-center'}>
+										<section style={{fontSize:'1.5vw', marginTop:'2.5vw', marginBottom:'2vw'}} className={'text-white  font-medium text-center flex justify-between flex flex-col items-center justify-center'}>
 											{ localization.translations['textEnd'] }
 											<RegisterButton locale={localization.locale}/>
 										</section>
