@@ -1,6 +1,5 @@
-import React, {FC,useState} from 'react'
+import React, {FC} from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
@@ -18,12 +17,10 @@ import Draw3 from '@/modules/home/components/Draw3';
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>,) => {
 	const { goTo } = useRoutePush()
-	const [aboutModalOpened, setModalOpened] = useState(false)
 
 	const goToTeachers = async () => {
 		await goTo(localization.locale, 'teachers')
 	}
-
 
 	return (
 		<LanguageProvider localization={localization}>
@@ -60,7 +57,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 								{ localization.translations['titreDraw1'] }
 								<section style={{fontSize:'1.5vw', marginTop:'2.2vw'}} className={'text-black font-medium text-left'}>
 									{ localization.translations['textDraw1'] }
-									<NavLink locale={localization.locale} openAboutModal={() => setModalOpened(true)}/>
+									<NavLink locale={localization.locale} />
 								</section>
 							</div>
  							<div style= {{bottom:'-37%', width:'11vw',height:'11vw',left:'-4.7vw'}} className ={'animate-bounce absolute rounded-full flex items-center justify-center  bg-yellow-300'} />
@@ -70,7 +67,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 								{ localization.translations['titreDraw2'] }
 								<section style={{fontSize:'1.5vw', marginTop:'1.8vw'}} className={'text-black font-medium text-left'}>
 									{ localization.translations['textDraw2'] }
-									<NavLink locale={localization.locale} openAboutModal={() => setModalOpened(true)}/>
+									<NavLink locale={localization.locale}/>
 								</section>
 							</div>
 							<div style={{width:'31vw', marginRight:'6vw', padding:'3.9vw', paddingLeft:'2.9vw'}} className={'h-auto'}>
@@ -86,7 +83,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 								{ localization.translations['titreDraw3'] }
 								<section style={{fontSize:'1.5vw', marginTop:'2.2vw'}} className={'text-black font-medium text-left'}>
 									{ localization.translations['textDraw3'] }
-									<NavLink locale={localization.locale} openAboutModal={() => setModalOpened(true)}/>
+									<NavLink locale={localization.locale} />
 								</section>
 							</div>
 							<div style= {{bottom:'-35%', width:'10.5vw',height:'10.5vw',left:'-5vw'}} className ={' animate-bounce rounded-full flex items-center justify-center absolute bg-red-400'} />
