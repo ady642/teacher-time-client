@@ -1,49 +1,17 @@
-import {FunctionComponent, useState} from "react";
-import PESelect from "@/common/components/Selects/Select";
-import TeacherFiltersModel from "@/modules/Teachers/models/TeacherFiltersModel";
-import useRoutePush from "@/common/hooks/useRoutePush";
-import useTranslation from "@/common/hooks/useTranslation";
-import styles from '@/modules/Teachers/styles/TeacherFilters.module.scss'
-import {Menu} from "@material-ui/icons";
-import {MenuItem} from "@material-ui/core";
+import {FunctionComponent} from "react";
 import FieldSelector from "@/modules/Teachers/components/TeacherFilters/FieldSelector/FieldSelector";
+import ChipFilters from "@/modules/Teachers/components/TeacherFilters/ChipFilters/ChipFilters";
 
 interface TeacherFiltersProps {
 }
 
 const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
-	const [filters, setFilters] = useState(new TeacherFiltersModel())
-	const { locale } = useTranslation()
-	const { goTo } = useRoutePush()
-
-	const handleChangeMatiere = (matiere: string) => {
-		const newFilters = {...filters}
-		newFilters.matiere = matiere
-		setFilters(newFilters)
-	}
-
-	const goToContact = async () => {
-		await goTo(locale, 'contact')
-	}
-
-
-	const matiereItems = [{
-		value: 'maths',
-		label: 'Mathématiques'
-	}, {
-		value: 'french',
-		label: 'Français'
-	}, {
-		value: 'spanish',
-		label: 'Espagnol'
-	}, {
-		value: 'english',
-		label: 'Anglais'
-	}]
-
-	return <div className={`flex flex-col mb-4 p-8`}>
+	return <div className={`flex flex-col mb-4 mt-12`}>
 		<div className="flex justify-center">
 			<FieldSelector />
+		</div>
+		<div className={'mt-10'}>
+			<ChipFilters />
 		</div>
 	</div>
 }
