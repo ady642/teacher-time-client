@@ -1,5 +1,6 @@
 import React, {FC} from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
 
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
@@ -10,10 +11,9 @@ import styles from '@/common/styles/WhiteHeader.module.scss'
 import WorkingWoman from '@/modules/home/components/WorkingWoman';
 import Draw1 from '@/modules/home/components/Draw1';
 import Draw2 from '@/modules/home/components/Draw2';
-import NavLink from '@/modules/home/components/NavLink';
+import HomeButton from '@/modules/home/components/HomeButton';
 import RegisterButton from '@/modules/home/components/RegisterButton';
 import Draw3 from '@/modules/home/components/Draw3';
-
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>,) => {
 	const { goTo } = useRoutePush()
@@ -57,7 +57,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 								{ localization.translations['titreDraw1'] }
 								<section style={{fontSize:'1.5vw', marginTop:'2.2vw'}} className={'text-black font-medium text-left'}>
 									{ localization.translations['textDraw1'] }
-									<NavLink locale={localization.locale} />
+									<HomeButton url={'teachers'} text={localization.translations.common['findAteacher']} />
 								</section>
 							</div>
  							<div style= {{bottom:'-37%', width:'11vw',height:'11vw',left:'-4.7vw'}} className ={'animate-bounce absolute rounded-full flex items-center justify-center  bg-yellow-300'} />
@@ -66,8 +66,21 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 							<div style={{width:'59vw', fontSize:'2vw', padding:'3.9vw', lineHeight:'2.4vw', marginTop:'4.8vw', marginLeft:'5vw'}} className={' relative text-black font-black  justify-self-end h-auto'}>
 								{ localization.translations['titreDraw2'] }
 								<section style={{fontSize:'1.5vw', marginTop:'1.8vw'}} className={'text-black font-medium text-left'}>
-									{ localization.translations['textDraw2'] }
-									<NavLink locale={localization.locale}/>
+									<div className={'flex flex-col'}>
+										<span className={'flex items-center'}>
+											<Image src={'/img/blackboard.jpg'} width={26} height={27} alt="blackboard" />
+											<span className={'ml-2'}>
+												{ localization.translations['textDraw2a'] }
+											</span>
+										</span>
+										<span>
+											✅ { localization.translations['textDraw2b'] }
+										</span>
+										<span>
+											🔑 { localization.translations['textDraw2c'] }
+										</span>
+									</div>
+									<HomeButton url={'room/create'} text={localization.translations.common['createRoom']} />
 								</section>
 							</div>
 							<div style={{width:'31vw', marginRight:'6vw', padding:'3.9vw', paddingLeft:'2.9vw'}} className={'h-auto'}>
@@ -83,7 +96,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 								{ localization.translations['titreDraw3'] }
 								<section style={{fontSize:'1.5vw', marginTop:'2.2vw'}} className={'text-black font-medium text-left'}>
 									{ localization.translations['textDraw3'] }
-									<NavLink locale={localization.locale} />
+									<HomeButton url={'teachers'} text={localization.translations.common['findAteacher']} />
 								</section>
 							</div>
 							<div style= {{bottom:'-35%', width:'10.5vw',height:'10.5vw',left:'-5vw'}} className ={' animate-bounce rounded-full flex items-center justify-center absolute bg-red-400'} />

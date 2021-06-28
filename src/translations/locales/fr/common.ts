@@ -9,6 +9,7 @@ const common = {
 	tutoring: "Soutien Scolaire Instantané",
 	for: 'pour',
 	findAteacher: 'trouver un professeur',
+	createRoom: 'Créer sa room',
 	buyMinutes: 'Acheter des minutes',
 	giveClasses: 'donner des cours',
 	teachersList: 'Liste des professeurs'
