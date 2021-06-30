@@ -33,7 +33,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
 		<UserInfos
 			className={'justify-start'}
 			userType={'Teacher'}
-			name={'Yohan Lanszlo'}
+			name={'Adrien HM'}
 		/>
 		<TimeInfos
 			count={count}

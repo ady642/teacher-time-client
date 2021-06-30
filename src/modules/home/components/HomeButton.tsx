@@ -16,7 +16,7 @@ const HomeButton: FC<HomeButtonProps> = ({ text, url}) => {
 	}
 
 	return (
-		<button onClick={() => onClick()} style={{fontSize:'1.5vw', marginTop: '2vw'}} className={`flex items-center font-bold lg:flex text-blue-900 cursor-pointer capitalize hover:text-green-500 transition`}>
+		<button onClick={() => onClick()} style={{fontSize:'1.5vw', marginTop: '2vw'}} className={`flex items-center font-bold lg:flex text-blue-900 cursor-pointer hover:text-green-500 transition`}>
 			{ text }
 		</button>
 

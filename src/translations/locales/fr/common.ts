@@ -8,7 +8,7 @@ const common = {
 	facebook: "Facebook",
 	tutoring: "Soutien Scolaire Instantané",
 	for: 'pour',
-	findAteacher: 'trouver un professeur',
+	findAteacher: 'Trouver un professeur',
 	createRoom: 'Créer sa room',
 	buyMinutes: 'Acheter des minutes',
 	giveClasses: 'donner des cours',

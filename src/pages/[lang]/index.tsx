@@ -57,7 +57,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 								{ localization.translations['titreDraw1'] }
 								<section style={{fontSize:'1.5vw', marginTop:'2.2vw'}} className={'text-black font-medium text-left'}>
 									{ localization.translations['textDraw1'] }
-									<HomeButton url={'teachers'} text={localization.translations.common['findAteacher']} />
+									<HomeButton url={'teachers'} text={localization.translations['teacherList']} />
 								</section>
 							</div>
  							<div style= {{bottom:'-37%', width:'11vw',height:'11vw',left:'-4.7vw'}} className ={'animate-bounce absolute rounded-full flex items-center justify-center  bg-yellow-300'} />
@@ -68,8 +68,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 								<section style={{fontSize:'1.5vw', marginTop:'1.8vw'}} className={'text-black font-medium text-left'}>
 									<div className={'flex flex-col'}>
 										<span className={'flex items-center'}>
-											<Image src={'/img/blackboard.jpg'} width={26} height={27} alt="blackboard" />
-											<span className={'ml-2'}>
+											<span>
 												{ localization.translations['textDraw2a'] }
 											</span>
 										</span>
@@ -77,7 +76,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 											✅ { localization.translations['textDraw2b'] }
 										</span>
 										<span>
-											🔑 { localization.translations['textDraw2c'] }
+											💯 { localization.translations['textDraw2c'] }
 										</span>
 									</div>
 									<HomeButton url={'room/create'} text={localization.translations.common['createRoom']} />
