@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
-import TeacherFilters from "@/modules/Teachers/components/TeacherFilters";
+import TeacherFilters from "@/modules/Teachers/components/TeacherFilters/TeacherFilters";
 import TeacherList from "@/modules/Teachers/components/TeacherList/TeacherList";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import {getInitialLocale} from "@/translations/getInitialLocale";
@@ -39,14 +39,14 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 			</Head>
 			<WhiteHeaderLayout
 				locale={locale}
-				className={'h-full'}
+				className={'h-full bg-customgray'}
 			>
-				<main className={'flex flex-col justify-start'}>
+				<main className={'flex p-8 px-36 flex-col justify-start'}>
 					<TeacherFilters />
 					<TeacherList
 						teachers={teachers}
 						noRooms={noRooms}
-						onClickOnTeacherCall={callTeacher}
+						onCall={callTeacher}
 					/>
 				</main>
 				<NoRoomModal open={noRoomModalOpened} handleClose={() => setNoRoomModalOpened(false)} />
@@ -58,7 +58,7 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const token = ctx.query?.token ?? ''
 
-	const localization = getLocalizationProps(ctx, "home");
+	const localization = getLocalizationProps(ctx, "teachers");
 
 	try {
 		//const { data: teachers } = await client('').get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
@@ -70,8 +70,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 				rating: 5,
 				hasDiploma: true,
 				description: 'Professeur de mathématiques. Pour toutes questions mathématiques',
-				avatar: '/img/avatar.png',
-				name: 'Yohan'
+				avatar: '/img/teachers-bg.png',
+				name: 'Jon Smith',
+				languages: ['es', 'fr']
 			}
 		]
 		return {

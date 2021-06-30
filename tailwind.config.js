@@ -7,12 +7,21 @@ module.exports = {
 		backgroundColor: theme => ({
 			...theme('colors'),
 			'orange': '#fa5a5f',
-			'blueviolet': '#454e9e'
+			'blueviolet': '#454e9e',
+			'customgray': '#f9f8f8'
 		}),
 		textColor: theme => ({
 			...theme('colors'),
-			'blueviolet': '#454e9e'
-		})
+			'orange': '#fa5a5f',
+			'blueviolet': '#454e9e',
+			'customgray': '#f9f8f8'
+		}),
+		borderColor: theme => ({
+			...theme('colors'),
+			'orange': '#fa5a5f',
+			'blueviolet': '#454e9e',
+			'customgray': '#f9f8f8'
+		}),
 	},
 	variants: {
 		extend: {},

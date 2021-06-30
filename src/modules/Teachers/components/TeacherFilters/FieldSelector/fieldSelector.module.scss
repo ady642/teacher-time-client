@@ -1,0 +1,15 @@
+.fieldSelector {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 21px 38px;
+  font-size: 18px;
+  width: 353px;
+  display: flex;
+  justify-content: space-between;
+
+  &Label {
+    color: #fa5a5f;
+  }
+}

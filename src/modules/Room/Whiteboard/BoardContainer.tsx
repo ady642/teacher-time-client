@@ -12,7 +12,6 @@ import Header from "@/modules/Room/Whiteboard/components/Header/Header";
 interface BoardContainerProps {
 	socket: any;
 	roomID: string
-
 }
 
 const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, roomID }) => {
