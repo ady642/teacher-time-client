@@ -8,7 +8,8 @@ const home = {
 	allWorld: "around the world",
 	teacherTimeDesc: "After acceptance, the conversation begin and you can ask your questions to the teacher",
 	startConv: "After acceptance, the conversation begin",
-	teacherAnswer: "and you can ask your questions to the teacher"
+	teacherAnswer: "and you can ask your questions to the teacher",
+	register: "Register"
 };
 
 export default home;

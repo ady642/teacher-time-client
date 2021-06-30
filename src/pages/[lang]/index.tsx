@@ -108,7 +108,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 										{ localization.translations['titreEnd'] }
 										<section style={{fontSize:'1.5vw', marginTop:'2.5vw', marginBottom:'2vw'}} className={'text-white  font-medium text-center flex justify-between flex flex-col items-center justify-center'}>
 											{ localization.translations['textEnd'] }
-											<RegisterButton locale={localization.locale}/>
+											<RegisterButton text={localization.translations['register']}/>
 										</section>
 									</div>
 								</section>

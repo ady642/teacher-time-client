@@ -17,8 +17,9 @@ const home = {
 	textDraw2c: 'En accès libre ou  restreint',
 	titreDraw3:	"Simplicité, efficacité",
 	textDraw3:	"A l'aide d'un tableau interactif et d'un micro, un professeur donne toutes les explications",
-	titreEnd: "Vous voulez devenir professeur?",
-	textEnd: "Maintenant, vous pouvez travailler n'importe quand depuis votre domicile. Pas d'intermédiaire, ni d'emploi du temps, aussi simple que de se connecter et de commencer à enseigner. Rencontrez des élèves en soif d'apprentissage à travers le monde et gagner de l'argent en échange",
+	titreEnd: "Libre et sans intermédiaire",
+	textEnd: "Etudiants, Professeurs, pour rejoindre l'équipe des enseignants en ligne",
+	register: "Inscription"
 };
 
 export default home;
