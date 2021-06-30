@@ -6,14 +6,15 @@ import useTranslation from "@/common/hooks/useTranslation";
 interface TeacherListProps {
     teachers: Teacher[];
     onCall: (id: string) => void;
+    onOpenProfile: (id: string) => void;
     noRooms: boolean;
 }
 
-const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onCall, noRooms }) => {
+const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onCall, onOpenProfile, noRooms }) => {
 	const { t } = useTranslation();
 
 	return <div className={'w-full h-full'}>
-		{ noRooms && <h2 className={'text-l uppercase text-gray-500'}>Aucuns professeurs n'est disponible pour l'instant</h2>}
+		{ noRooms && <h2 className={'text-l uppercase text-gray-500'}>Aucuns professeurs n'est disponible pour le moment</h2>}
 		{ !noRooms &&
 			<>
 				<section className={'flex flex-wrap justify-between mt-6'}>
@@ -22,6 +23,7 @@ const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onCall, no
 							key={teacher._id}
 							teacher={teacher}
 							onCall={onCall}
+							onOpenProfile={onOpenProfile}
 						/>)
 					}
 				</section>

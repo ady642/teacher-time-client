@@ -16,6 +16,10 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 
 	const { noRooms, noRoomModalOpened, setNoRoomModalOpened, callTeacher } = useRoom(localization.locale)
 
+	const openProfile = (id: string) => {
+		console.log('go to teacher profile', id)
+	}
+
 	/*	const fetchBalance = useCallback(async () => {
 		if(!token && !tokenCtx) {
 			return
@@ -47,6 +51,7 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 						teachers={teachers}
 						noRooms={noRooms}
 						onCall={callTeacher}
+						onOpenProfile={openProfile}
 					/>
 				</main>
 				<NoRoomModal open={noRoomModalOpened} handleClose={() => setNoRoomModalOpened(false)} />

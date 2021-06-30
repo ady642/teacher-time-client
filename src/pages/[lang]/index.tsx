@@ -1,6 +1,5 @@
 import React, {FC} from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
