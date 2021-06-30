@@ -5,7 +5,7 @@ interface TeacherCardDescriptionProps {
 }
 
 const TeacherCardDescription: FunctionComponent<TeacherCardDescriptionProps> = ({ description }) => {
-	return <span className="text-md">
+	return <span className="text-xs text-gray-700">
 		{ description }
 	</span>
 }

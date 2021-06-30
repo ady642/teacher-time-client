@@ -7,7 +7,7 @@ interface TeacherCardSecondLineProps {
 }
 
 const TeacherCardSecondLine: FunctionComponent<TeacherCardSecondLineProps> = ({ description }) => {
-	return <div>
+	return <div className={'leading-3 mt-5'}>
 		<TeacherCardDescription description={description} />
 	</div>
 }

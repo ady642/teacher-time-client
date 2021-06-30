@@ -6,13 +6,14 @@ import TeacherCardButtons
 
 interface TeacherCardThirdLineProps {
     onCall: (id: string) => void;
+    onOpenProfile: (id: string) => void;
     languages: string[];
 }
 
-const TeacherCardThirdLine: FunctionComponent<TeacherCardThirdLineProps> = ({ onCall, languages }) => {
-	return <div className={'flex justify-between'}>
+const TeacherCardThirdLine: FunctionComponent<TeacherCardThirdLineProps> = ({ onCall, onOpenProfile, languages }) => {
+	return <div className={'flex items-center justify-between mt-10'}>
 		<TeacherCardLanguages languages={languages}/>
-		<TeacherCardButtons onCall={onCall}/>
+		<TeacherCardButtons onCall={onCall} onOpenProfile={onOpenProfile}/>
 	</div>
 }
 

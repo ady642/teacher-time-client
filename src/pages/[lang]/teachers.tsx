@@ -58,7 +58,7 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const token = ctx.query?.token ?? ''
 
-	const localization = getLocalizationProps(ctx, "home");
+	const localization = getLocalizationProps(ctx, "teachers");
 
 	try {
 		//const { data: teachers } = await client('').get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 				description: 'Professeur de mathématiques. Pour toutes questions mathématiques',
 				avatar: '/img/teachers-bg.png',
 				name: 'Jon Smith',
-				languages: ['fr', 'es']
+				languages: ['es', 'fr']
 			}
 		]
 		return {
