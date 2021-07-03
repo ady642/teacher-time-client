@@ -26,7 +26,7 @@ const BottomBar: FunctionComponent<BottomBarProps> = ({ locale }) => {
 		}}
 		showLabels
 		color={'primary'}
-		className={'sm:hidden fixed bottom-0 z-50 w-full'}
+		className={'md:hidden fixed bottom-0 z-50 w-full'}
 	>
 		<BottomNavigationAction onClick={goToTeachersList} label={'Home'} icon={<House />} />
 		<BottomNavigationAction onClick={goToContact} label="Contact" icon={<MailOutline />} />

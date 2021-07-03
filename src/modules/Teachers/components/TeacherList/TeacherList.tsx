@@ -11,8 +11,6 @@ interface TeacherListProps {
 }
 
 const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onCall, onOpenProfile, noRooms }) => {
-	const { t } = useTranslation();
-
 	return <div className={'w-full h-full'}>
 		{ noRooms && <h2 className={'text-l uppercase text-gray-500'}>Aucuns professeurs n'est disponible pour le moment</h2>}
 		{ !noRooms &&

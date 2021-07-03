@@ -45,7 +45,7 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 				locale={locale}
 				className={'h-full bg-customgray'}
 			>
-				<main className={'flex p-8 px-36 flex-col justify-start'}>
+				<main className={'flex p-8 sm:px-36 flex-col justify-start'}>
 					<TeacherFilters />
 					<TeacherList
 						teachers={teachers}
@@ -75,8 +75,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 				rating: 5,
 				hasDiploma: true,
 				description: 'Professeur de mathématiques. Pour toutes questions mathématiques',
-				avatar: '/img/teachers-bg.png',
-				name: 'Jon Smith',
+				avatar: '/img/einstein.jpg',
+				name: 'Adrien HM',
 				languages: ['es', 'fr']
 			}
 		]
