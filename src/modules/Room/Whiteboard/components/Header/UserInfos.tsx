@@ -16,7 +16,7 @@ const UserInfos: FunctionComponent<UserInfosProps> = ({ className = '', userType
 			{userType}:
 		</span>
 		<div className="mx-4">
-			<Image width={48} height={48} className="rounded-full border border-solid border-red-600" src="/img/avatar.png" alt='microphone muted' />
+			<Image objectFit={'contain'} width={48} height={48} className="rounded-full border border-solid border-red-600" src="/img/einstein.jpg" alt='microphone muted' />
 		</div>
 		<span className="text-gray-800">
 			{name}

@@ -45,7 +45,7 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal}) => {
 	]
 
 	return (
-		<div className={'flex items-center sm:px-6 sm:pt-4 sm:pb-2 p-2 bg-white justify-between'}>
+		<div className={'flex items-center sm:px-6 sm:pt-6 sm:pb-3 p-2 bg-white justify-between'}>
 			<div className={'cursor-pointer opacity-100 w-44 max-w-sm'} onClick={goToHome}>
 				<Logo height={40} width={180}/>
 			</div>
