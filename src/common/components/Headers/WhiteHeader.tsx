@@ -5,7 +5,7 @@ import useRoutePush from "@/common/hooks/useRoutePush";
 
 import NavItem from "@/common/components/Headers/NavItem";
 
-import LogoTeacherTime from '@/modules/home/components/LogoTeacherTime';
+import Logo from "@/common/components/Logos/Logo";
 
 interface HeaderProps {
     locale: string;
@@ -13,7 +13,7 @@ interface HeaderProps {
     dark?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({ locale, openAboutModal, dark = false }) => {
+const Header: FC<HeaderProps> = ({ locale, openAboutModal}) => {
 	const { t } = useTranslation()
 	const { goTo } = useRoutePush()
 
@@ -27,14 +27,6 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal, dark = false }) => {
 
 	const goToHome = async () => {
 		await goTo(locale, '/')
-	}
-
-	const goToAbout = async () => {
-		await goTo(locale, 'about')
-	}
-
-	const goToGiveClasses = async () => {
-		await goTo(locale, 'give_classes')
 	}
 
 	const navItems = [
@@ -53,19 +45,19 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal, dark = false }) => {
 	]
 
 	return (
-		<div style={{height: '8.5vh'}} className={'w-auto flex items-center   p-1 px-4 bg-white'}>
-			<div style={{width:'14%'}} className={'cursor-pointer opacity-100'} onClick={goToHome}>
-			<LogoTeacherTime/>
+		<div className={'flex items-center sm:px-6 sm:pt-4 sm:pb-2 p-2 bg-white justify-between'}>
+			<div className={'cursor-pointer opacity-100 w-44 max-w-sm'} onClick={goToHome}>
+				<Logo height={40} width={180}/>
 			</div>
-			<div className={'flex ml-10 justify-between  flex-1'}>
-				<nav style={{marginTop:'1vh'}} className={'flex items-center'}>
-					<ul style={{marginLeft:'1.6vw', fontSize:'1.8vh'}} className={`flex items-center font-bold  lg:flex  ${dark ? 'text-white' : 'text-gray-600'}`}>
-						{ navItems.map(({ onClick, translationKey }) => <NavItem margin={3} key={translationKey} onClick={onClick}>
+			<div className={'ml-10 justify-between flex md:flex-1'}>
+				<nav className={'md:flex hidden items-center'}>
+					<ul className={`flex items-center font-bold lg:flex text-gray-600 lg:text-lg text-xs`}>
+						{ navItems.map(({ onClick, translationKey }) => <NavItem key={translationKey} onClick={onClick}>
 							{ t(translationKey) }
 						</NavItem>) }
 					</ul>
 				</nav>
-				<button onClick={goToContact} style= {{marginTop:'0.5vw', fontSize:'2vh'}} className={`rounded-3xl transition bg-orange hover:bg-red-700 text-white font-bold   md:px-4 md:p-2 p-1`}>
+				<button onClick={goToContact} className={`rounded-3xl lg:text-lg sm:text-sm text-xs transition bg-orange hover:bg-red-700 text-white font-bold md:px-3 md:py-2 px-2 py-1`}>
 					{ t('common.teachers') }
 				</button>
 			</div>

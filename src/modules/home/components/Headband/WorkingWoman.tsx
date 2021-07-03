@@ -6,6 +6,7 @@ const WorkingWoman = () => {
 		alt={'WorkingWoman'}
 		width={800}
 		height={600}
+		objectFit={'contain'}
 	/>
 }
 
