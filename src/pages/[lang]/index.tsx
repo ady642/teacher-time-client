@@ -13,6 +13,7 @@ import Draw2 from '@/modules/home/components/Draw2';
 import HomeButton from '@/modules/home/components/HomeButton';
 import RegisterButton from '@/modules/home/components/RegisterButton';
 import Draw3 from '@/modules/home/components/Draw3';
+import HeadBand from "@/modules/home/components/Headband/HeadBand";
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>,) => {
 	const { goTo } = useRoutePush()
@@ -31,21 +32,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 				locale={localization.locale}
 				className={`${styles.page}`}
 			>
-				<div style={{ height: '75vh' }} className={`w-full overflow-hidden bg-blueviolet text-white  flex justify-between items-center  `}>
-					<section className={'relative'} style={{marginLeft:'11vw', marginBottom:'3.1vw'}}>
-						<div style={{width:'36vw', fontSize:'2.4vw', paddingBottom:'1.4vw'}} className={'leading-relaxed'}>
-							{ localization.translations['teacherTimeWorld'] }
-						</div>
-						<button style= {{ fontSize:'2vh'}} onClick={goToTeachers} className={'animate-pulse bg-orange text-white flex justify-center hover:bg-red-700 transition-all  w-auto font-bold  rounded-3xl sm:px-6 sm:p-3 p-2'}>
-							<span className={'mr-2 capitalize'}>
-								{ localization.translations.common['findAteacher'] }
-							</span>
-						</button>
-					</section>
-					<section style={{marginRight:'3.5vw', width:'43%', marginTop:'3.9vh'}} className={'object-left h-auto'}>
-						<WorkingWoman/>
-					</section>
-				</div>
+				<HeadBand goToTeachers={goToTeachers} />
 				<div style={{ height: '75vh' }} className={`w-full  bg-white flew-wrap  `}>
 					<section className={'overflow-hidden'} >
 						<section className={'relative flex w-full place-content-between'}>
