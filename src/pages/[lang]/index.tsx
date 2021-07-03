@@ -7,7 +7,6 @@ import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import useRoutePush from "@/common/hooks/useRoutePush";
 
 import styles from '@/common/styles/WhiteHeader.module.scss'
-import WorkingWoman from '@/modules/home/components/WorkingWoman';
 import Draw1 from '@/modules/home/components/Draw1';
 import Draw2 from '@/modules/home/components/Draw2';
 import HomeButton from '@/modules/home/components/HomeButton';
