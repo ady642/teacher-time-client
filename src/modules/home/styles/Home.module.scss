@@ -41,8 +41,7 @@
   }
 
   &__text {
-    //lg:pl-36 lg:pr-32 md:pl-16 md:pr-12 pl-5 sm:pb-2 pr-5
-    font-size: clamp(10px, 2.4vw, 50px);
+    font-size: clamp(14px, 2.4vw, 50px);
   }
 
   &__image {
@@ -69,5 +68,9 @@
       width: 100%;
       padding: 5px 20px;
     }
+  }
+
+  &__textEnd {
+    font-size: clamp(14px, 2.4vw, 50px);
   }
 }

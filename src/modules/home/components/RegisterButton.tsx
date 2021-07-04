@@ -15,11 +15,9 @@ const RegisterButton: FC<RegisterButtonProps> = ({ text }) => {
 		await goTo(locale, 'contact')
 	}
 
-	return (
-		<button onClick={goToContact} style= {{width:'15vw', marginTop:'4.5vw', fontSize:'1.2vw', marginRight:'1vw'}} className={`rounded-3xl transition bg-orange hover:bg-red-700 text-white font-medium   md:px-4 md:p-2 p-1`}>
-			{ text }
-		</button>
-	)
+	return 	<button onClick={goToContact} className={`rounded-3xl lg:text-lg sm:text-sm transition bg-orange hover:bg-red-700 text-white font-bold px-6 py-2 mt-8`}>
+		{ text }
+	</button>
 }
 
 export default  RegisterButton

@@ -19,7 +19,8 @@ const home = {
 	titreDraw3:	"Simplicité, efficacité",
 	textDraw3:	"A l'aide d'un tableau interactif et d'un micro, un professeur donne toutes les explications",
 	titreEnd: "Libre et sans intermédiaire",
-	textEnd: "Etudiants, Professeurs, pour rejoindre l'équipe des enseignants en ligne",
+	titreEndSubtitle: "Gagner son temps",
+	textEnd: "Etudiants, Professeurs, pour rejoindre l'ensemble des enseignants en ligne",
 	register: "Inscription",
 	teacherList: "Liste des professeurs en ligne"
 };

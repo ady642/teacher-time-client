@@ -75,7 +75,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 				rating: 5,
 				hasDiploma: true,
 				description: 'Professeur de mathématiques. Pour toutes questions mathématiques',
-				avatar: '/img/einstein.jpg',
+				avatar: '/img/drawbg.jpg',
 				name: 'Adrien HM',
 				languages: ['es', 'fr']
 			}

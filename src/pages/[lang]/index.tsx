@@ -10,9 +10,9 @@ import styles from '@/common/styles/WhiteHeader.module.scss'
 import Draw1 from '@/modules/home/components/Draw1';
 import Draw2 from '@/modules/home/components/Draw2';
 import HomeButton from '@/modules/home/components/HomeButton';
-import RegisterButton from '@/modules/home/components/RegisterButton';
 import Draw3 from '@/modules/home/components/Draw3';
 import HeadBand from "@/modules/home/components/Headband/HeadBand";
+import TextEnd from "@/modules/home/components/TextEnd/TextEnd";
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>,) => {
 	const { goTo } = useRoutePush()
@@ -85,19 +85,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 							</div>
 							<div style= {{bottom:'-35%', width:'10.5vw',height:'10.5vw',left:'-5vw'}} className ={' animate-bounce rounded-full flex items-center justify-center absolute bg-red-400'} />
 						</section>
-						<section style={{ height: '68vh' }} className={`w-full  bg-white  flex `}>
-							<div style={{ height: '53vh', marginTop:'8.6vh' }} className={`w-full  bg-gray-800 block object-center flex `}>
-								<section className={'relative w-full flex flex-col items-center justify-center'}>
-									<div style={{width:'57vw', fontSize:'2.3vw', padding:'3.2vw', lineHeight:'2.4vw'}} className={'text-yellow-300 font-black   h-auto  flex flex-col items-center justify-center'}>
-										{ localization.translations['titreEnd'] }
-										<section style={{fontSize:'1.5vw', marginTop:'2.5vw', marginBottom:'2vw'}} className={'text-white  font-medium text-center flex justify-between flex flex-col items-center justify-center'}>
-											{ localization.translations['textEnd'] }
-											<RegisterButton text={localization.translations['register']}/>
-										</section>
-									</div>
-								</section>
-							</div>
-						</section>
+						<TextEnd />
 					</section>
 				</div>
 			</WhiteHeaderLayout>
