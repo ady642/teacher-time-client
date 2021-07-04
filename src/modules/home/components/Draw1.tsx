@@ -1,14 +1,11 @@
-import Image from "next/image";
+import styles from "@/modules/home/styles/Home.module.scss"
 
 const Draw1  = () => {
-	return <section style={{marginTop:'1vw', width:'100%'}} className={' h-auto'}>
-		<Image
-			src={'/img/workingstudent.png'}
-			alt={'Logo'}
-			width={568}
-			height={513}
-		/>
-	</section>
+	return <img
+		className={`${styles.draws__image}`}
+		src={'/img/home/workingstudent.png'}
+		alt={'Logo'}
+	/>
 }
 
 export default Draw1

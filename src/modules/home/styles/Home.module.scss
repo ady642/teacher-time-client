@@ -74,3 +74,24 @@
     font-size: clamp(14px, 2.4vw, 50px);
   }
 }
+
+.home {
+  &__text {
+    font-size: clamp(14px, 2.4vw, 50px);
+  }
+}
+
+.draws {
+  &__image {
+    width: 250px;
+    height: auto;
+    margin-top: 0;
+    margin-left: 0;
+
+    @media (min-width: 768px) {
+      width: 310px;
+      margin-top: -38px;
+      margin-left: -5px;
+    }
+  }
+}
