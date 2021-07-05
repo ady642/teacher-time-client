@@ -1,16 +1,7 @@
-import Image from "next/image";
+import Draw from "@/modules/home/components/Draw";
 
-const Draw2  = () => {
-	return <>
-		<section style={{marginTop:'1vw', width:'100%'}} className={' h-auto'}>
-			<Image
-				src={'/img/workingwomandraw.png'}
-				alt={'Logo'}
-				width={612}
-				height={534}
-			/>
-		</section>
-	</>
-}
+const Draw2  = () => <Draw
+	src={'/img/workingwomandraw.png'}
+/>
 
 export default Draw2
