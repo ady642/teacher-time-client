@@ -16,6 +16,7 @@ import TextEnd from "@/modules/home/components/TextEnd/TextEnd";
 import TextDraw1 from "@/modules/home/components/TextDraws/TextDraw1";
 import TextDraw2 from "@/modules/home/components/TextDraws/TextDraw2";
 import TextDraw3 from "@/modules/home/components/TextDraws/TextDraw3";
+import Bounce from "@/modules/home/components/Bounce";
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>,) => {
 	const { goTo } = useRoutePush()
@@ -37,10 +38,13 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 				<HeadBand goToTeachers={goToTeachers} />
 				<div style={{ height: '75vh' }} className={`w-full  bg-white flew-wrap  `}>
 					<section className={'overflow-hidden'} >
-						<div className="xl:px-40 lg:px-20 md:px-10 px-5">
+						<div className="xl:px-40 lg:px-20 md:px-10 px-5 relative">
 							<TextDraw1 />
 							<TextDraw2 />
 							<TextDraw3 />
+							<Bounce className={'bg-yellow-300'} bottom={'61%'} left={'-6%'} />
+							<Bounce className={'bg-blueviolet'} bottom={'32%'} left={'95%'} />
+							<Bounce className={'bg-red-400'} bottom={'-18%'} left={'-6%'} />
 						</div>
 						<TextEnd />
 					</section>

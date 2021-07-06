@@ -13,7 +13,7 @@ const TextDraw1: FunctionComponent = () => {
 		textTo={t('teacherList')}
 		classBounce={'bg-yellow-300'}
 		bottomBounce={'-85%'}
-		leftBounce={'-17%'}
+		leftBounce={'-300px'}
 	/>
 }
 
