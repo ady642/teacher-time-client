@@ -45,7 +45,7 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 				locale={locale}
 				className={'h-full bg-customgray'}
 			>
-				<main className={'flex p-8 sm:px-36 flex-col justify-start'}>
+				<main className={'flex lg:px-36 md:px-20 p-8 flex-col justify-start'}>
 					<TeacherFilters />
 					<TeacherList
 						teachers={teachers}

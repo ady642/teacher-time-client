@@ -6,7 +6,7 @@ interface TeacherFiltersProps {
 }
 
 const TeacherFilters: FunctionComponent<TeacherFiltersProps> = () => {
-	return <div className={`flex flex-col mb-4 mt-12`}>
+	return <div className={`flex flex-col mb-4 md:mt-6 sm:mt-12 mt-3`}>
 		<div className="flex justify-center">
 			<FieldSelector />
 		</div>
