@@ -1,14 +1,8 @@
-import Image from "next/image";
+import {FunctionComponent} from "react";
+import Draw from "@/modules/home/components/Draw";
 
-const Draw1  = () => {
-	return <section style={{marginTop:'1vw', width:'100%'}} className={' h-auto'}>
-		<Image
-			src={'/img/workingstudent.png'}
-			alt={'Logo'}
-			width={568}
-			height={513}
-		/>
-	</section>
-}
+const Draw1: FunctionComponent = () => <Draw
+	src={'/img/home/workingstudent.png'}
+/>
 
 export default Draw1

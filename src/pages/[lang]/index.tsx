@@ -13,6 +13,10 @@ import HomeButton from '@/modules/home/components/HomeButton';
 import Draw3 from '@/modules/home/components/Draw3';
 import HeadBand from "@/modules/home/components/Headband/HeadBand";
 import TextEnd from "@/modules/home/components/TextEnd/TextEnd";
+import TextDraw1 from "@/modules/home/components/TextDraws/TextDraw1";
+import TextDraw2 from "@/modules/home/components/TextDraws/TextDraw2";
+import TextDraw3 from "@/modules/home/components/TextDraws/TextDraw3";
+import Bounce from "@/modules/home/components/Bounce";
 
 const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>,) => {
 	const { goTo } = useRoutePush()
@@ -34,57 +38,14 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 				<HeadBand goToTeachers={goToTeachers} />
 				<div style={{ height: '75vh' }} className={`w-full  bg-white flew-wrap  `}>
 					<section className={'overflow-hidden'} >
-						<section className={'relative flex w-full place-content-between'}>
-							<div style={{width:'29vw', marginLeft:'6vw', padding:'3.9vw'}} className={'h-auto'}>
-								<Draw1 />
-							</div>
-							<div style={{width:'55vw', fontSize:'2vw', padding:'3.9vw', lineHeight:'2.4vw', marginTop:'3.6vw', marginRight:'5vw'}} className={' relative text-black font-black  justify-self-end h-auto'}>
-								{ localization.translations['titreDraw1'] }
-								<section style={{fontSize:'1.5vw', marginTop:'2.2vw'}} className={'text-black font-medium text-left'}>
-									{ localization.translations['textDraw1'] }
-									<HomeButton url={'teachers'} text={localization.translations['teacherList']} />
-								</section>
-							</div>
- 							<div style= {{bottom:'-37%', width:'11vw',height:'11vw',left:'-4.7vw'}} className ={'animate-bounce absolute rounded-full flex items-center justify-center  bg-yellow-300'} />
-						</section>
-						<section style= {{marginTop:'1.8vw'}} className={'relative flex w-full place-content-between'}>
-							<div style={{width:'59vw', fontSize:'2vw', padding:'3.9vw', lineHeight:'2.4vw', marginTop:'4.8vw', marginLeft:'5vw'}} className={' relative text-black font-black  justify-self-end h-auto'}>
-								{ localization.translations['titreDraw2'] }
-								<section style={{fontSize:'1.5vw', marginTop:'1.8vw'}} className={'text-black font-medium text-left'}>
-									<div className={'flex flex-col'}>
-										<span className={'flex items-center'}>
-											<span>
-												{ localization.translations['textDraw2a'] }
-											</span>
-										</span>
-										<span>
-											✅ { localization.translations['textDraw2b'] }
-										</span>
-										<span>
-											💯 { localization.translations['textDraw2c'] }
-										</span>
-									</div>
-									<HomeButton url={'room/create'} text={localization.translations.common['createRoom']} />
-								</section>
-							</div>
-							<div style={{width:'31vw', marginRight:'6vw', padding:'3.9vw', paddingLeft:'2.9vw'}} className={'h-auto'}>
-								<Draw2 />
-							</div>
-							<div style= {{bottom:'-10%', width:'10.5vw',height:'10.5vw',right:'-6.3vw'}} className ={'animate-bounce absolute rounded-full flex items-center justify-center bg-blueviolet'} />
-						</section>
-						<section style= {{marginTop:'1.8vw'}} className={'relative flex w-full place-content-between'}>
-							<div style={{width:'32vw', marginLeft:'4.8vw', padding:'3.9vw', marginTop:'1vw'}} className={'h-auto'}>
-								<Draw3 />
-							</div>
-							<div style={{width:'55vw', fontSize:'2vw', padding:'3.9vw', lineHeight:'2.4vw', marginTop:'3.6vw', marginRight:'5vw'}} className={' relative text-black font-black  justify-self-end h-auto'}>
-								{ localization.translations['titreDraw3'] }
-								<section style={{fontSize:'1.5vw', marginTop:'2.2vw'}} className={'text-black font-medium text-left'}>
-									{ localization.translations['textDraw3'] }
-									<HomeButton url={'teachers'} text={localization.translations.common['findAteacher']} />
-								</section>
-							</div>
-							<div style= {{bottom:'-35%', width:'10.5vw',height:'10.5vw',left:'-5vw'}} className ={' animate-bounce rounded-full flex items-center justify-center absolute bg-red-400'} />
-						</section>
+						<div className="xl:px-40 lg:px-20 md:px-10 px-5 relative">
+							<TextDraw1 />
+							<TextDraw2 />
+							<TextDraw3 />
+							<Bounce className={'bg-yellow-300'} bottom={'61%'} left={'-6%'} />
+							<Bounce className={'bg-blueviolet'} bottom={'32%'} left={'95%'} />
+							<Bounce className={'bg-red-400'} bottom={'-18%'} left={'-6%'} />
+						</div>
 						<TextEnd />
 					</section>
 				</div>
