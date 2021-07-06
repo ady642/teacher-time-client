@@ -93,5 +93,9 @@
       margin-top: -38px;
       margin-left: -5px;
     }
+
+    @media (min-width: 1024px) {
+      width: 400px;
+    }
   }
 }

@@ -9,12 +9,10 @@ const Subtitle2: FunctionComponent<Subtitle2Props> = () => {
 	const { t } = useTranslation()
 
 	return <div className={'flex flex-col'}>
-		<span className={'flex items-center'}>
-			<span>
-				{ t('textDraw2a') }
-			</span>
-		</span>
 		<span>
+			{ t('textDraw2a') }
+		</span>
+		<span className={'lg:my-2 my-1'}>
             ✅ { t('textDraw2b') }
 		</span>
 		<span>

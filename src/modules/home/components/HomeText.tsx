@@ -10,9 +10,9 @@ interface HomeTextProps {
 }
 
 const HomeText: FunctionComponent<HomeTextProps> = ({ reverse = false, title, subtitle, urlTo, textTo }) => {
-	return <div className={`text-black flex flex-col ${reverse ? 'lg:mr-72 md:mr-10 ml-0' : 'lg:ml-44 md:ml-10' } ml-0`}>
-		<span className="md:text-3xl text-xl font-black md:mt-0 mt-4">{ title }</span>
-		<span className="md:text-2xl text-lg md:mt-8 mt-3">{ subtitle }</span>
+	return <div className={`max-w-4xl text-black flex flex-col ${reverse ? 'xl:mr-20 md:mr-10 ml-0' : 'xl:ml-20 md:ml-10' } ml-0`}>
+		<span className="lg:text-4xl md:text-3xl text-xl font-black md:mt-0 mt-4">{ title }</span>
+		<span className="lg:text-3xl md:text-2xl text-lg md:mt-8 mt-3">{ subtitle }</span>
 		<HomeButton url={urlTo} text={textTo} />
 	</div>
 }

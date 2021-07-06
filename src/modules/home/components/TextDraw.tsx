@@ -16,8 +16,8 @@ interface TextDrawProps {
 }
 
 const TextDraw: FunctionComponent<TextDrawProps> = ({ reverse = false, srcDraw, bottomBounce, classBounce, leftBounce, title, subtitle, urlTo, textTo }) => {
-	return <section className={`relative flex sm:my-28 sm:mb-48 my-16 md:ml-16`}>
-		<div className={`flex ${reverse ? 'md:flex-row-reverse': 'md:flex-row' } flex-col items-center justify-between`}>
+	return <section className={`relative flex sm:my-28 sm:mb-48 my-16 w-full`}>
+		<div className={`flex ${reverse ? 'md:flex-row-reverse': 'md:flex-row' } flex-col items-center justify-between w-full`}>
 			<Draw src={srcDraw} />
 			<HomeText title={title} subtitle={subtitle} urlTo={urlTo} textTo={textTo} reverse={reverse} />
 		</div>

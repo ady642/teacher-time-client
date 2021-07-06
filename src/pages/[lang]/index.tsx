@@ -37,7 +37,7 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 				<HeadBand goToTeachers={goToTeachers} />
 				<div style={{ height: '75vh' }} className={`w-full  bg-white flew-wrap  `}>
 					<section className={'overflow-hidden'} >
-						<div className="lg:px-20 md:px-10 px-5">
+						<div className="xl:px-40 lg:px-20 md:px-10 px-5">
 							<TextDraw1 />
 							<TextDraw2 />
 							<TextDraw3 />
