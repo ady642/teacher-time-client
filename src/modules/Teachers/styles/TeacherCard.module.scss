@@ -9,5 +9,17 @@
   min-height: 340px;
   max-height: 350px;
   position: relative;
-  background: white
+  background: white;
+
+  @media (min-width: 0px) {
+    flex-basis: 100%;
+  }
+
+  @media (min-width: 768px) {
+    flex-basis: 50%;
+  }
+
+  @media (min-width: 900px) {
+    flex-basis: 30%;
+  }
 }

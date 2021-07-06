@@ -1,7 +1,6 @@
 import {FunctionComponent} from "react";
 import TeacherCard from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCard";
 import Teacher from "@/modules/Teachers/models/Teacher";
-import useTranslation from "@/common/hooks/useTranslation";
 
 interface TeacherListProps {
     teachers: Teacher[];
