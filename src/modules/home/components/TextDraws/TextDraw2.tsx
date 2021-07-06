@@ -12,9 +12,6 @@ const TextDraw1: FunctionComponent = () => {
 		subtitle={<Subtitle2 />}
 		urlTo={'room/create'}
 		textTo={t('common.createRoom')}
-		classBounce={'bg-blueviolet'}
-		bottomBounce={'-50%'}
-		leftBounce={'105%'}
 		reverse
 	/>
 }

@@ -11,9 +11,6 @@ const TextDraw1: FunctionComponent = () => {
 		subtitle={t('textDraw1')}
 		urlTo={'teachers'}
 		textTo={t('teacherList')}
-		classBounce={'bg-yellow-300'}
-		bottomBounce={'-85%'}
-		leftBounce={'-300px'}
 	/>
 }
 

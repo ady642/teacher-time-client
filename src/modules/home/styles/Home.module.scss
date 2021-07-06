@@ -99,3 +99,28 @@
     }
   }
 }
+
+.bounce1 {
+  bottom: 61%;
+  left: -6%
+}
+
+.bounce2 {
+  bottom: 30%;
+  left: 95%
+}
+
+.bounce3 {
+  @media (min-width: 0px) {
+    bottom: -6%;
+    left: -6%
+  }
+
+
+  @media (min-width: 640px) {
+    bottom: -18%;
+    left: -6%
+  }
+}
+
+
