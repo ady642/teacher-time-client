@@ -5,11 +5,58 @@
   cursor: pointer;
   padding: 21px 38px;
   font-size: 18px;
-  width: 353px;
   display: flex;
   justify-content: space-between;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &Active {
+    box-shadow: 0px 0px 1px 4px rgba(249, 146, 149, 0.26);
+    border: 2px solid rgba(250, 90, 95, 0.47)
+  }
 
   &Label {
     color: #fa5a5f;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 353px;
+    position: relative;
+    min-height: 74px;
+  }
+
+  &__list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 80px;
+    border-radius: 15px;
+    border: none;
+    padding: 0;
+    transition: padding 0.2s ease-in-out , max-height .2s ease-in-out, background .4s ease-in-out, border .1s linear;
+    max-height: 0;
+    overflow: hidden;
+
+    &Opened {
+      padding: 7px 5px;
+      background: #FFF;
+      border: 2px solid rgba(193, 193, 193, 0.95);
+      max-height: 230px;
+    }
+
+    &__element {
+      padding: 7px 14px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      color: rgb(101, 101, 101);
+
+      &:hover {
+        background: rgba(223, 223, 223, 0.58);
+        border-radius: 10px;
+        color: #7795f8;
+      }
+    }
   }
 }

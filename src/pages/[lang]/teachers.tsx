@@ -9,12 +9,14 @@ import {getInitialLocale} from "@/translations/getInitialLocale";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import NoRoomModal from "@/modules/Room/components/NoRoomModal";
 import useRoom from "@/modules/Room/hooks/useRoom";
+import useFieldSelector from "@/modules/Teachers/components/TeacherFilters/dropdownValues";
 
 
 const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [locale, setLocale] = useState('')
 
 	const { noRooms, noRoomModalOpened, setNoRoomModalOpened, callTeacher } = useRoom(localization.locale)
+	const { fieldSelectorValue, fieldSelectorValues, setFieldSelectorValue } = useFieldSelector()
 
 	const openProfile = (id: string) => {
 		console.log('go to teacher profile', id)
@@ -31,9 +33,15 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 
 
 	useEffect(() => {
+		// TODO: fetch teachers after filters change
+	}, [fieldSelectorValue])
+
+	useEffect(() => {
 		setLocale(getInitialLocale())
 		//fetchBalance()
 	}, [])
+
+
 
 	return (
 		<LanguageProvider localization={localization}>
@@ -46,7 +54,11 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 				className={'h-full bg-customgray'}
 			>
 				<main className={'flex lg:px-36 md:px-20 p-8 flex-col justify-start'}>
-					<TeacherFilters />
+					<TeacherFilters
+					 	fieldSelectorValues={fieldSelectorValues}
+					 	fieldSelectorValue={fieldSelectorValue}
+						setFieldSelectorValue={setFieldSelectorValue}
+					/>
 					<TeacherList
 						teachers={teachers}
 						noRooms={noRooms}

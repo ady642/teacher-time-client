@@ -1,4 +1,4 @@
-import {FunctionComponent, useEffect, useState} from "react";
+import {FunctionComponent, useState} from "react";
 import ContactField from "@/modules/Contact/components/ContactForm/ContactField";
 import ContactFieldDropdownElement from "@/modules/Contact/components/ContactForm/ContactFieldDropdownElement";
 import styles from "@/modules/Contact/styles/contact.module.scss";
