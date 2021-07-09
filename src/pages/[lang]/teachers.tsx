@@ -9,14 +9,17 @@ import {getInitialLocale} from "@/translations/getInitialLocale";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import NoRoomModal from "@/modules/Room/components/NoRoomModal";
 import useRoom from "@/modules/Room/hooks/useRoom";
-import useFieldSelector from "@/modules/Teachers/components/TeacherFilters/dropdownValues";
-
+import useFieldSelector from "@/modules/Teachers/components/TeacherFilters/FieldSelector/useFieldSelector";
+import useLanguageSelector from "@/modules/Teachers/components/TeacherFilters/ChipFilters/LanguageSelector/useLanguageSelector";
+import useLevelSelector from "@/modules/Teachers/components/TeacherFilters/ChipFilters/LevelSelector/useLevelSelector";
 
 const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [locale, setLocale] = useState('')
 
 	const { noRooms, noRoomModalOpened, setNoRoomModalOpened, callTeacher } = useRoom(localization.locale)
 	const { fieldSelectorValue, fieldSelectorValues, setFieldSelectorValue } = useFieldSelector()
+	const { languageValue, setLanguageValue, languageValues } = useLanguageSelector()
+	const { levels, level, setLevelValue: setLevel } = useLevelSelector()
 
 	const openProfile = (id: string) => {
 		console.log('go to teacher profile', id)
@@ -55,9 +58,9 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 			>
 				<main className={'flex lg:px-36 md:px-20 p-8 flex-col justify-start'}>
 					<TeacherFilters
-					 	fieldSelectorValues={fieldSelectorValues}
-					 	fieldSelectorValue={fieldSelectorValue}
-						setFieldSelectorValue={setFieldSelectorValue}
+					 	fieldSelectorValues={fieldSelectorValues} fieldSelectorValue={fieldSelectorValue} setFieldSelectorValue={setFieldSelectorValue}
+						setLanguage={setLanguageValue} language={languageValue} languages={languageValues}
+						levels={levels} level={level} setLevel={setLevel}
 					/>
 					<TeacherList
 						teachers={teachers}

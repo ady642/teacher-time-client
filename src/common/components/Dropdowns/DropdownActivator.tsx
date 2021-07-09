@@ -2,13 +2,13 @@ import {FunctionComponent} from "react";
 import styles from "./fieldSelector.module.scss"
 import Image from 'next/image'
 
-interface FieldSelectorActivatorProps {
+interface DropdownActivatorProps {
 	onClick: () => void;
 	active: boolean;
 	label: string
 }
 
-const FieldSelectorActivator: FunctionComponent<FieldSelectorActivatorProps> = ({ onClick, active, label }) => {
+const DropdownActivator: FunctionComponent<DropdownActivatorProps> = ({ onClick, active, label }) => {
 	return <div onClick={onClick} className={`${styles.fieldSelector} ${active ? styles.fieldSelectorActive: ''}`}>
 		<span className={styles.fieldSelectorLabel}>
 			{ label ? label : 'Choisissez une matière' }
@@ -19,4 +19,4 @@ const FieldSelectorActivator: FunctionComponent<FieldSelectorActivatorProps> = (
 	</div>
 }
 
-export default FieldSelectorActivator
+export default DropdownActivator

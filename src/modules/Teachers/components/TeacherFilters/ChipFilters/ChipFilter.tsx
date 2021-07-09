@@ -1,12 +1,14 @@
 import {FunctionComponent} from "react";
 
 interface ChipFilterProps {
+    onClick: () => void;
+    active: boolean;
+    label: string;
     className?: string;
-    children: any;
 }
 
-const ChipFilter: FunctionComponent<ChipFilterProps> = ({ className= '', children }) => {
-	return <div className={`rounded-3xl flex-1 bg-white border border-solid border-orange px-2 py-1 flex justify-center items-center font-bold text-orange ${className}`}>
+const ChipFilter: FunctionComponent<ChipFilterProps> = ({onClick, className= '', children }) => {
+	return <div onClick={() => onClick()} className={`rounded-3xl cursor-pointer flex-1 bg-white border border-solid border-orange px-2 py-1 flex justify-center items-center font-bold text-orange ${className}`}>
 		{ children }
 	</div>
 }
