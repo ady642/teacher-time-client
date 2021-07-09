@@ -10,7 +10,7 @@ interface TeacherListProps {
 }
 
 const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onCall, onOpenProfile, noRooms }) => {
-	return <div className={'w-full h-full'}>
+	return <div className={'w-full h-full z-0'}>
 		{ noRooms && <h2 className={'text-l uppercase text-gray-500'}>Aucuns professeurs n'est disponible pour le moment</h2>}
 		{ !noRooms &&
 			<>

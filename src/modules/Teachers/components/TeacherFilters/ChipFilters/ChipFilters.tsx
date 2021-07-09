@@ -8,7 +8,7 @@ const ChipFilters: FunctionComponent<ChipFiltersProps> = ({
 	languages, language, setLanguage,
 	levels, setLevel, level
 }) => {
-	return <section className={'flex w-1/5'}>
+	return <section className={'flex'}>
 		<div className="mr-4">
 			<LanguageSelector languages={languages} language={language} setLanguage={setLanguage} />
 		</div>
