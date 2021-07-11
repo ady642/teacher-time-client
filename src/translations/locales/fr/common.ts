@@ -12,7 +12,8 @@ const common = {
 	createRoom: 'Créer sa room',
 	buyMinutes: 'Acheter des minutes',
 	giveClasses: 'donner des cours',
-	teachersList: 'Liste des professeurs'
+	teachersList: 'Liste des professeurs',
+	register: 'Inscription'
 };
 
 export default common;

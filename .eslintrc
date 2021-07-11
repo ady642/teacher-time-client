@@ -12,7 +12,8 @@
     "react/prop-types": "off",
     "indent": ["error", "tab"],
     "no-mixed-spaces-and-tabs": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "no-undef": "off"
   },
   "env": {
     "browser": true,

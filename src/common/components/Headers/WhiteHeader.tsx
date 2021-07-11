@@ -6,6 +6,7 @@ import useRoutePush from "@/common/hooks/useRoutePush";
 import NavItem from "@/common/components/Headers/NavItem";
 
 import Logo from "@/common/components/Logos/Logo";
+import AuthButtons from "@/modules/Auth/components/Buttons/AuthButtons";
 
 interface HeaderProps {
     locale: string;
@@ -57,9 +58,7 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal}) => {
 						</NavItem>) }
 					</ul>
 				</nav>
-				<button onClick={goToContact} className={`rounded-3xl lg:text-lg sm:text-sm text-xs transition bg-orange hover:bg-red-700 text-white font-bold md:px-3 md:py-2 px-2 py-1`}>
-					{ t('common.teachers') }
-				</button>
+				<AuthButtons />
 			</div>
 		</div>
 	)

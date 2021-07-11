@@ -21,7 +21,10 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 
 	return (
 		<div className={`${className}`}>
-			<WhiteHeader dark={dark} locale={locale} openAboutModal={() => setModalOpened(true)} />
+			<WhiteHeader
+				dark={dark} locale={locale}
+				openAboutModal={() => setModalOpened(true)}
+			/>
 			{children}
 			<BottomBar locale={locale} />
 			<LoadingModal open={appLoading} handleClose={() => setAppLoading(false)} />
