@@ -15,4 +15,12 @@ export default class RegistrationValidator implements RegistrationFormInterface 
     isEmailValid(): boolean {
     	return emailRegex.test(this.email)
     }
+
+    isPasswordValid(): boolean {
+    	return this.password.length > 5
+    }
+
+    isConfirmationPasswordValid(): boolean {
+    	return this.confirmationPassword === this.password
+    }
 }
