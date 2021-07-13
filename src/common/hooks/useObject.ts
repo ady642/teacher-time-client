@@ -1,17 +1,9 @@
-type objectType<T> = {
-    [Property in keyof T]: any;
-}
-
-type setValueType<T> = (newValue: T) => T
+type setValueType<T> = (newValue: T) => void
 
 type propertyType<T> = keyof T
 
-type useObjectType<T> = (property: propertyType<T>, value: unknown, object: objectType<T>, setValue: setValueType<T>) => {
-    setObject: (property: propertyType<unknown>, object: objectType<unknown>) => void
-}
-
-const useObject: useObjectType<unknown> = (property, value, object, setValue) => {
-    const setObject = (property: propertyType<T>, object: objectType<unknown>) => {
+const useObject = () => {
+    const setObject = <T>(property: string, value: any, object: T, setValue: setValueType<T>) => {
         setValue({
             ...object,
             [property]: value

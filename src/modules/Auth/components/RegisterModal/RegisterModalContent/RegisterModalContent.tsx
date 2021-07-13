@@ -5,7 +5,12 @@ import AuthService from "@/modules/Auth/services/AuthService";
 import useTranslation from "@/common/hooks/useTranslation";
 import EmailInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/EmailInput";
 
-const RegisterModalContent: FunctionComponent = () => {
+interface RegisterModalContentProps {
+	email: string;
+	setEmail: (email: string) => void;
+}
+
+const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({ email, setEmail }) => {
 	const authService = new AuthService('')
 	const { t } = useTranslation()
 
