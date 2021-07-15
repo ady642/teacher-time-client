@@ -1,10 +1,10 @@
 import RegistrationForm, {RegistrationFormInterface} from "@/modules/Auth/models/RegistrationForm";
 import {emailRegex} from "@/common/utils/string";
 
-export default class RegistrationValidator implements RegistrationFormInterface {
-    email: string;
-    password: string;
-    confirmationPassword: string;
+export default class RegistrationValidator {
+    private email: string
+    private password: string
+    private confirmationPassword: string
 
     constructor(registrationForm: RegistrationFormInterface = new RegistrationForm()) {
     	this.email = registrationForm.email
