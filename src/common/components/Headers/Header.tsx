@@ -3,8 +3,7 @@ import {AppBar, Toolbar, Link} from "@material-ui/core";
 
 import TextButton from '@/common/components/Buttons/TextButton'
 import PaymentModal from "@/modules/Payment/components/PaymentModal";
-import SignInModal from "@/modules/Auth/SignInModal/SignInModal";
-import SignOutButton from "@/modules/Auth/Buttons/SignOutButton";
+import LoginModal from "@/modules/Auth/LoginModal/SignInModal";
 import LogoBook from "@/common/components/Logos/LogoBook";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
@@ -16,7 +15,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ locale }) => {
 	const [paymentModalOpened, setPaymentModalOpened] = useState(false)
-	const { openSignInModal, closeSignInModal, resetToken } = useAuthReducers()
+	const { openSignInModal, closeSignInModal } = useAuthReducers()
 	const { signInModalOpened, token } = useAuthGetters()
 	const { t } = useTranslation()
 
@@ -49,10 +48,9 @@ const Header: FC<HeaderProps> = ({ locale }) => {
 						</div>
 						<SimpleButton size={'small'} onClick={openPaymentModal} text={'Buy Credits'}/>*/}
 						<div className={'ml-3'}>
-							<SignOutButton onClick={resetToken} />
 						</div>
 					</div>}
-					{!token && <SignInModal
+					{!token && <LoginModal
 						opened={signInModalOpened}
 						handleOpen={openSignInModal}
 						handleClose={closeSignInModal}

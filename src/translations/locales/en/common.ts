@@ -11,7 +11,8 @@ const common = {
 	findAteacher: 'find a teacher',
 	buyMinutes: 'buy minutes',
 	giveClasses: 'give classes',
-	teachersList: 'Teachers List'
+	teachersList: 'Teachers List',
+	register: 'Register',
 };
 
 export default common;

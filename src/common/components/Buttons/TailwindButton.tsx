@@ -1,13 +1,10 @@
-import React, {FunctionComponent} from "react";
+import {FunctionComponent} from "react";
+import {ButtonProps} from "@/common/types/button";
 
-interface TailwindButtonProps {
-    onClick?: () => void;
-    children?: any;
-    className?: string
-}
+export interface TailwindButtonProps extends ButtonProps {}
 
 const TailwindButton: FunctionComponent<TailwindButtonProps> = ({ onClick, children, className = '' }) => {
-	return <button onClick={onClick} className={`rounded-3xl transition bg-orange hover:bg-red-700 text-white font-bold md:text-lg text-sm md:px-4 md:p-2 p-1 ${className}`}>
+	return <button onClick={onClick} className={`rounded-3xl transition bg-orange hover:bg-red-700 text-white font-bold ${className}`}>
 		{ children }
 	</button>
 }

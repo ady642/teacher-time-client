@@ -1,5 +1,5 @@
 import {FunctionComponent} from "react";
-import styles from '@/modules/Auth/Buttons/GoogleButton.module.scss'
+import styles from '@/modules/Auth/components/Buttons/GoogleButton.module.scss'
 import useTranslation from "@/common/hooks/useTranslation";
 
 interface GoogleButtonProps {

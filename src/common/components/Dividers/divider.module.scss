@@ -1,0 +1,24 @@
+$color: rgba(129, 128, 120, 0.54);
+
+.divider {
+  text-align: center;
+  width: 120%;
+}
+.divider:before, .divider:after {
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+.divider:before {
+  background: linear-gradient(to right, transparent, $color);
+  right: .5em;
+  margin-left: -50%;
+}
+.divider:after {
+  background: linear-gradient(to right, $color, transparent);
+  left: .5em;
+  margin-right: -50%;
+}
