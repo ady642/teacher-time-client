@@ -29,7 +29,8 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
 	useEffect(() => {
 		setOpened(false)
 	}, [DDvalue.value])
-	useClickOutside(fieldSelectorRef, () => setOpened(false))
+
+	useClickOutside([fieldSelectorRef], () => setOpened(false))
 
 	return <div ref={fieldSelectorRef} className={className}>
 		{ activator }

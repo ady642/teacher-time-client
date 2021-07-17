@@ -1,0 +1,55 @@
+.loading-modal * {
+  background: blue;
+}
+
+.modalMask {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000000A1;
+  z-index: 12;
+  transition: ease all 500ms;
+
+  &.hide {
+    opacity: 0;
+    display: none
+  }
+
+  &.show {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  position: relative;
+  transition: ease all 500ms;
+
+  &.hide {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  &.show {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 18px;
+  color: #c4c4c4;
+  cursor: pointer;
+  transition: ease-in 300ms;
+
+  &:hover {
+    color: black
+  }
+}

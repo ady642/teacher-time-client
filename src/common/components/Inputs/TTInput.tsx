@@ -6,10 +6,17 @@ export interface InputProps {
     value: string;
     placeholder?: string;
     setValue: (value: string) => void;
+    className?: string
 }
 
-const TTInput: FunctionComponent<InputProps> = ({ label, setValue, value, placeholder = '',type ='text' }) => {
-	return <div className="flex flex-col">
+const TTInput: FunctionComponent<InputProps> = ({
+	label,
+	setValue, value,
+	placeholder = '',
+	type ='text',
+	className = ''
+}) => {
+	return <div className={`flex flex-col w-full ${className}`}>
 		<label className={'font-bold'}>{label}</label>
 		<div className={`border border-1 rounded-md p-2 border-gray-300 focus-within:border-black`}>
 			<input
