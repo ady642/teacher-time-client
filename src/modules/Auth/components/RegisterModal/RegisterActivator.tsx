@@ -2,7 +2,7 @@ import React, {FunctionComponent, MutableRefObject} from "react";
 import useTranslation from "@/common/hooks/useTranslation";
 import {ButtonProps} from "@/common/types/button";
 
-type RegisterButtonProps = ButtonProps & { registerActivatorRef: MutableRefObject<HTMLButtonElement> }
+type RegisterButtonProps = Omit<ButtonProps, 'children'> & { registerActivatorRef: MutableRefObject<HTMLButtonElement> }
 
 const RegisterActivator: FunctionComponent<RegisterButtonProps> = ({ onClick, registerActivatorRef }) => {
 	const { t } = useTranslation()

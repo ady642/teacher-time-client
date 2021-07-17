@@ -1,4 +1,4 @@
-import {FC, useRef, useState} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 import RegisterActivator from "@/modules/Auth/components/RegisterModal/RegisterActivator";
 import RegisterModalContent from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterModalContent";
 import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
@@ -12,6 +12,11 @@ const RegisterModal: FC = () => {
 	const registerModalContentRef = useRef<HTMLDivElement>(null)
 	const registerActivatorRef = useRef<HTMLButtonElement>(null)
 
+	useEffect(() => {
+		setRegistrationValidator(new RegistrationValidator(registrationForm))
+		console.table({ 'email': registrationValidator.isEmailValid(), password: registrationValidator.isPasswordValid(), confirmationPassword: registrationValidator.isConfirmationPasswordValid()})
+	}, [registrationForm])
+
 	return <>
 		<Modal
 			className={'rounded-xl'}
@@ -19,8 +24,6 @@ const RegisterModal: FC = () => {
 			<RegisterModalContent
 				registrationForm={registrationForm}
 				setRegistrationForm={setRegistrationForm}
-				registrationValidator={registrationValidator}
-				setRegistrationValidator={setRegistrationValidator}
 				refContent={registerModalContentRef}
 			/>
 		</Modal>

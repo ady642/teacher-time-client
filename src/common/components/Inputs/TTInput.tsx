@@ -6,7 +6,8 @@ export interface InputProps {
     value: string;
     placeholder?: string;
     setValue: (value: string) => void;
-    className?: string
+    className?: string;
+    autoComplete?: string
 }
 
 const TTInput: FunctionComponent<InputProps> = ({
@@ -14,12 +15,14 @@ const TTInput: FunctionComponent<InputProps> = ({
 	setValue, value,
 	placeholder = '',
 	type ='text',
-	className = ''
+	className = '',
+	autoComplete= ''
 }) => {
 	return <div className={`flex flex-col w-full ${className}`}>
 		<label className={'font-bold'}>{label}</label>
-		<div className={`border border-1 rounded-md p-2 border-gray-300 focus-within:border-black`}>
+		<div className={`border border-1 rounded-md p-2 border-gray-300 transition focus-within:border-black`}>
 			<input
+				autoComplete={autoComplete}
 				placeholder={placeholder}
 				type={type}
 				name={label}
