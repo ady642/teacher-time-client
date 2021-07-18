@@ -7,7 +7,8 @@ export interface InputProps {
     placeholder?: string;
     setValue: (value: string) => void;
     className?: string;
-    autoComplete?: string
+    autoComplete?: string;
+    exception?: string;
 }
 
 const TTInput: FunctionComponent<InputProps> = ({
@@ -16,9 +17,10 @@ const TTInput: FunctionComponent<InputProps> = ({
 	placeholder = '',
 	type ='text',
 	className = '',
-	autoComplete= ''
+	autoComplete= '',
+	exception= ''
 }) => {
-	return <div className={`flex flex-col w-full ${className}`}>
+	return <div className={`flex relative flex-col w-full ${className}`}>
 		<label className={'font-bold'}>{label}</label>
 		<div className={`border border-1 rounded-md p-2 border-gray-300 transition focus-within:border-black`}>
 			<input
@@ -30,6 +32,7 @@ const TTInput: FunctionComponent<InputProps> = ({
 				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
 			/>
 		</div>
+		<span className={`text-red-700 absolute -bottom-5 transition-all text-xs pt-1 ${exception ? 'text-opacity-100': 'text-opacity-0'}`}>{ exception }</span>
 	</div>
 }
 

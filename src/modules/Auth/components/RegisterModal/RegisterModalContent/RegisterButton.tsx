@@ -8,7 +8,7 @@ interface RegisterButtonProps extends Omit<ButtonProps, 'children'> {}
 const RegisterButton: FunctionComponent<RegisterButtonProps> = ({ className, onClick }) => {
 	const { t } = useTranslation()
 
-	return <TailwindButton onClick={onClick} className={`px-16 py-1 text-lg mt-3 ${className}`}>
+	return <TailwindButton type={'button'} onClick={onClick} className={`px-16 py-1 text-lg mt-3 ${className}`}>
 		{ t('common.register') }
 	</TailwindButton>
 }

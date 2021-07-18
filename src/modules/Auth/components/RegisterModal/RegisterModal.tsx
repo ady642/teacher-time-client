@@ -9,13 +9,16 @@ const RegisterModal: FC = () => {
 	const [openedRegisterModal, setOpenedRegisterModalState] = useState(false)
 	const [registrationForm, setRegistrationForm] = useState(new RegistrationForm())
 	const [registrationValidator, setRegistrationValidator] = useState(new RegistrationValidator(registrationForm))
+	const [submitAttempt, setSubmitAttempt] = useState(false)
 	const registerModalContentRef = useRef<HTMLDivElement>(null)
 	const registerActivatorRef = useRef<HTMLButtonElement>(null)
 
 	useEffect(() => {
-		setRegistrationValidator(new RegistrationValidator(registrationForm))
-		console.table({ 'email': registrationValidator.isEmailValid(), password: registrationValidator.isPasswordValid(), confirmationPassword: registrationValidator.isConfirmationPasswordValid()})
-	}, [registrationForm])
+		if(submitAttempt) {
+			setRegistrationValidator(new RegistrationValidator(registrationForm))
+			registrationValidator.validate()
+		}
+	}, [registrationForm, submitAttempt])
 
 	return <>
 		<Modal
@@ -24,7 +27,9 @@ const RegisterModal: FC = () => {
 			<RegisterModalContent
 				registrationForm={registrationForm}
 				setRegistrationForm={setRegistrationForm}
+				exceptions={registrationValidator.exceptions}
 				refContent={registerModalContentRef}
+				submitRegistration={() => setSubmitAttempt(true)}
 			/>
 		</Modal>
 		<RegisterActivator registerActivatorRef={registerActivatorRef} onClick={() => setOpenedRegisterModalState(true)}/>
