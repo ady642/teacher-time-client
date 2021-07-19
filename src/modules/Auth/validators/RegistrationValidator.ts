@@ -58,6 +58,10 @@ export default class RegistrationValidator {
         return this.exceptions.size === 0
     }
 
+    isFilled(): boolean {
+        return this.email.length > 0 && this.password.length > 0 && this.confirmationPassword.length > 0
+    }
+
     resetExceptions(): void {
         this.exceptions.clear()
     }

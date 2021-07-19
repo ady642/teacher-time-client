@@ -19,7 +19,7 @@ interface RegisterModalContentProps {
 	setRegistrationForm: (registrationForm: RegistrationForm) => void;
 	refContent: MutableRefObject<HTMLDivElement>;
 	exceptions: Map<string, string>;
-	submitRegistration: () => void
+	submitRegistration: () => void;
 }
 
 const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
@@ -49,16 +49,16 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 	return (
 		<div ref={refContent} className={`flex flex-col p-4 bg-white ${styles.registerModalContent}`}>
 			<p className="my-4 font-bold text-xl text-center">{ t('common.register') }</p>
-			<form className="flex flex-col items-center w-full px-20 mt-5">
+			<form className="flex flex-col items-center w-full px-16 mt-5">
 				<EmailInput
 					exception={exceptions.get('email')}
-					className={'mb-4'}
+					className={'mb-6'}
 					label={'E-mail'}
 					value={registrationForm.email} setValue={setEmail}
 				/>
 				<PasswordInput
 					exception={exceptions.get('password')}
-					className={'mb-4'}
+					className={'mb-6'}
 					label={'Mot de passe'}
 					value={registrationForm.password} setValue={setPassword}
 				/>
@@ -72,7 +72,7 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 				<AlreadyAccount onConnectClick={() => console.log('open sign in modal')} />
 				<TTDivider text="ou"/>
 			</form>
-			<section className="mt-8 w-full">
+			<section className="my-4 px-16 w-full">
 				<GoogleButton onClick={() => signIn('google')} />
 				<div className="mt-5">
 					<FacebookButton onClick={() => signIn('facebook')} />
