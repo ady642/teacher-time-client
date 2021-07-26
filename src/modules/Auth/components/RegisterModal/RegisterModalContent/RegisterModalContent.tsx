@@ -1,7 +1,6 @@
 import {FunctionComponent, MutableRefObject, useEffect} from 'react';
 import GoogleButton from '@/modules/Auth/components/Buttons/GoogleButton';
 import FacebookButton from '@/modules/Auth/components/Buttons/FacebookButton';
-import AuthService from "@/modules/Auth/services/AuthService";
 import useTranslation from "@/common/hooks/useTranslation";
 import EmailInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/EmailInput";
 import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
@@ -13,6 +12,7 @@ import styles from '@/modules/Auth/components/RegisterModal/registerModal.module
 import RegisterButton from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterButton";
 import AlreadyAccount from "@/modules/Auth/components/RegisterModal/RegisterModalContent/AlreadyAccount";
 import TTDivider from "@/common/components/Dividers/Divider";
+import ErrorMessage from "@/common/components/Errors/ErrorMessage";
 
 interface RegisterModalContentProps {
 	registrationForm: RegistrationForm;
@@ -20,21 +20,18 @@ interface RegisterModalContentProps {
 	refContent: MutableRefObject<HTMLDivElement>;
 	exceptions: Map<string, string>;
 	submitRegistration: () => void;
+	registrationStatus: string
 }
 
 const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 	registrationForm, setRegistrationForm,
 	refContent,
 	submitRegistration,
-	exceptions
+	exceptions,
+	registrationStatus
 }) => {
-	const authService = new AuthService('')
 	const { t } = useTranslation()
 	const { setObject } = useObject()
-
-	const signIn = (provider: string) => {
-		authService.signIn(provider)
-	}
 
 	const setEmail = (email: string) => {
 		setObject('email', email, registrationForm, setRegistrationForm)
@@ -68,14 +65,20 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 					label={'Confirmation'}
 					value={registrationForm.confirmationPassword} setValue={setConfirmationPassword}
 				/>
-				<RegisterButton className={'mt-6'} onClick={() => { submitRegistration() }} />
+				<div className={'flex flex-col items-center'}>
+					{ registrationStatus === 'ERROR' ? <ErrorMessage className={'text-lg'} exception={'Cet utilisateur existe déjà'} /> : <div style={{ minHeight: 32 }}/> }
+					<RegisterButton
+						onClick={() => { submitRegistration() }}
+						registrationStatus={registrationStatus}
+					/>
+				</div>
 				<AlreadyAccount onConnectClick={() => console.log('open sign in modal')} />
 				<TTDivider text="ou"/>
 			</form>
 			<section className="my-4 px-16 w-full">
-				<GoogleButton onClick={() => signIn('google')} />
+				<GoogleButton onClick={() => console.log('google')} />
 				<div className="mt-5">
-					<FacebookButton onClick={() => signIn('facebook')} />
+					<FacebookButton onClick={() => console.log('facebook')} />
 				</div>
 			</section>
 		</div>

@@ -11,6 +11,7 @@ const RegisterModal: FC = () => {
 	const [registrationForm, setRegistrationForm] = useState(new RegistrationForm())
 	const [registrationValidator, setRegistrationValidator] = useState(new RegistrationValidator(registrationForm))
 	const [submitAttempt, setSubmitAttempt] = useState(false)
+	const [registrationStatus, setRegistrationStatus] = useState('')
 	const registerModalContentRef = useRef<HTMLDivElement>(null)
 	const registerActivatorRef = useRef<HTMLButtonElement>(null)
 
@@ -19,7 +20,17 @@ const RegisterModal: FC = () => {
 	const submitRegistration = async () => {
 		setSubmitAttempt(true)
 		if(registrationValidator.validate() && registrationValidator.isFilled()) {
-			await authClient.register(registrationForm)
+			try {
+				setRegistrationStatus('PENDING')
+				await authClient.register(registrationForm)
+				setTimeout(() => {
+					setRegistrationStatus('OK')
+				}, 2000)
+			} catch (e) {
+				setTimeout(() => {
+					setRegistrationStatus('ERROR')
+				}, 2000)
+			}
 		}
 	}
 
@@ -40,6 +51,7 @@ const RegisterModal: FC = () => {
 				exceptions={registrationValidator.exceptions}
 				refContent={registerModalContentRef}
 				submitRegistration={submitRegistration}
+				registrationStatus={registrationStatus}
 			/>
 		</Modal>
 		<RegisterActivator registerActivatorRef={registerActivatorRef} onClick={() => setOpenedRegisterModalState(true)}/>
