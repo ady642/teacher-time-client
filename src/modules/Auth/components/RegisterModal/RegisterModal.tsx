@@ -5,6 +5,7 @@ import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
 import RegistrationValidator from "@/modules/Auth/validators/RegistrationValidator";
 import Modal from "@/common/components/Modals/Modal";
 import AuthClient from "@/modules/Auth/services/AuthService";
+import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 
 const RegisterModal: FC = () => {
 	const [openedRegisterModal, setOpenedRegisterModalState] = useState(false)
@@ -14,17 +15,21 @@ const RegisterModal: FC = () => {
 	const [registrationStatus, setRegistrationStatus] = useState('')
 	const registerModalContentRef = useRef<HTMLDivElement>(null)
 	const registerActivatorRef = useRef<HTMLButtonElement>(null)
+	const { setToken, setUser } =  useAuthReducers()
 
 	const authClient = new AuthClient()
 
 	const submitRegistration = async () => {
 		setSubmitAttempt(true)
-		if(registrationValidator.validate() && registrationValidator.isFilled()) {
+		if(registrationValidator.validate()) {
 			try {
 				setRegistrationStatus('PENDING')
-				await authClient.register(registrationForm)
+				const data = await authClient.register(registrationForm)
 				setTimeout(() => {
 					setRegistrationStatus('OK')
+					setToken(data.token)
+					setUser(data.user)
+					setOpenedRegisterModalState(false)
 				}, 2000)
 			} catch (e) {
 				setTimeout(() => {

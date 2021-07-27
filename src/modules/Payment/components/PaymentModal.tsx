@@ -24,7 +24,7 @@ const PaymentModal: FunctionComponent<PaymentModalProps> = ({ open, handleClose 
         <div className={'flex justify-center md:p-10 bg-gray-100 h-full'}>
             <div className="flex flex-col">
                 <TailwindCard className={"px-4 pb-3 mb-5 h-min"}>
-                    <h1 className={"text-gray-600 text-xl m-5"}>How many credits do you want ?</h1>
+                    <h1 className={"text-gray-600 text-xl m-5"}>Combien de crédits souhaitez vous ?</h1>
                     <CreditList
                         creditsChosen={creditsChosen}
                         onCreditChange={onCreditChange}
