@@ -1,7 +1,7 @@
 import {FunctionComponent} from "react";
 import TTInput, {InputProps} from "@/common/components/Inputs/TTInput";
 
-interface EmailInputProps extends Omit<InputProps, 'type'> {}
+export interface EmailInputProps extends Omit<InputProps, 'type' | 'autoComplete' | 'placeholder'> {}
 
 const EmailInput: FunctionComponent<EmailInputProps> = ({
 	value,setValue,label, className, exception

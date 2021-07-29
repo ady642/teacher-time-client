@@ -21,7 +21,7 @@ const RegisterModal: FC = () => {
 
 	const submitRegistration = async () => {
 		setSubmitAttempt(true)
-		if(registrationValidator.validate()) {
+		if(registrationValidator.isFilled() && registrationValidator.validate()) {
 			try {
 				setRegistrationStatus('PENDING')
 				const data = await authClient.register(registrationForm)

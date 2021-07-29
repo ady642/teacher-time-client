@@ -61,7 +61,7 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal}) =>
 							{ t(translationKey) }
 						</NavItem>) }
 					</ul>
-				</nav>{ !token ? <AuthButtons /> : <ConnectedComponent openPaymentModal={openPaymentModal}/>}
+				</nav>{ token ? <ConnectedComponent openPaymentModal={openPaymentModal}/> : <AuthButtons />  }
 			</div>
 		</div>
 	)

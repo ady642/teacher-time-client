@@ -120,7 +120,7 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
 		</fieldset>
 		{error && <ErrorMessage>{error.message}</ErrorMessage>}
 		<SubmitButton processing={processing} error={error} disabled={!stripe}>
-                Buy {creditsChosen}€ credits
+                Acheter {creditsChosen}€ crédits
 		</SubmitButton>
 	</form>
 };

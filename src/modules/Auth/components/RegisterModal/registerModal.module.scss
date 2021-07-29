@@ -1,7 +1,6 @@
-.registerModal {
+.authModal {
   &Content {
     min-width: 300px;
-    min-height: 500px;
 
     @media (min-width: 0px) {
       width: auto;
@@ -12,7 +11,6 @@
 
     @media (min-width: 1000px) {
       width: 40vw;
-      height: 68vh;
       max-width: 512px;
       max-height: 900px;
     }

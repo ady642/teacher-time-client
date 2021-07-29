@@ -2,6 +2,7 @@ require("dotenv").config();
 const Webpackbar = require('webpackbar')
 
 module.exports = {
+	reactStrictMode: false,
 	env: {
 		PUBLIC_STRIPE_KEY: process.env.PUBLIC_STRIPE_KEY,
 		BASE_URL: process.env.BASE_URL,

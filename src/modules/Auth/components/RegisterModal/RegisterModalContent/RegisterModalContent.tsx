@@ -1,11 +1,9 @@
-import {FunctionComponent, MutableRefObject, useEffect} from 'react';
+import {FunctionComponent, MutableRefObject} from 'react';
 import GoogleButton from '@/modules/Auth/components/Buttons/GoogleButton';
 import FacebookButton from '@/modules/Auth/components/Buttons/FacebookButton';
 import useTranslation from "@/common/hooks/useTranslation";
-import EmailInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/EmailInput";
 import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
 import useObject from "@/common/hooks/useObject";
-import PasswordInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/PasswordInput";
 import ConfirmationPasswordInput
 	from "@/modules/Auth/components/RegisterModal/RegisterModalContent/ConfirmationPasswordInput";
 import styles from '@/modules/Auth/components/RegisterModal/registerModal.module.scss'
@@ -13,6 +11,8 @@ import RegisterButton from "@/modules/Auth/components/RegisterModal/RegisterModa
 import AlreadyAccount from "@/modules/Auth/components/RegisterModal/RegisterModalContent/AlreadyAccount";
 import TTDivider from "@/common/components/Dividers/Divider";
 import ErrorMessage from "@/common/components/Errors/ErrorMessage";
+import RegisterEmailInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterEmailInput";
+import RegisterPasswordInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterPasswordInput";
 
 interface RegisterModalContentProps {
 	registrationForm: RegistrationForm;
@@ -44,16 +44,16 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 	}
 
 	return (
-		<div ref={refContent} className={`flex flex-col p-4 bg-white ${styles.registerModalContent}`}>
+		<div ref={refContent} className={`flex flex-col p-4 bg-white ${styles.authModalContent}`}>
 			<p className="my-4 font-bold text-xl text-center">{ t('common.register') }</p>
 			<form className="flex flex-col items-center w-full px-16 mt-5">
-				<EmailInput
+				<RegisterEmailInput
 					exception={exceptions.get('email')}
 					className={'mb-6'}
 					label={'E-mail'}
 					value={registrationForm.email} setValue={setEmail}
 				/>
-				<PasswordInput
+				<RegisterPasswordInput
 					exception={exceptions.get('password')}
 					className={'mb-6'}
 					label={'Mot de passe'}
