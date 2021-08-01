@@ -14,6 +14,10 @@ const useAuthServices = () => {
 
 	const authClient = new AuthClient()
 
+	const loginWithGoogle = async () => {
+		await authClient.loginWithGoogle('google')
+	}
+
 	const submitLogin = async (
 		loginForm: LoginForm,
 		loginValidator: LoginValidator,
@@ -62,6 +66,7 @@ const useAuthServices = () => {
 	}
 
 	return {
+		loginWithGoogle,
 		submitLogin,
 		submitRegister,
 		loginStatus,

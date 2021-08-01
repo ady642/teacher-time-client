@@ -12,7 +12,7 @@ const LoginModal: FC = () => {
 	const [openedLoginModal, setOpenedLoginModalState] = useState(false)
 	const [loginForm, setLoginForm] = useState(new LoginForm())
 	const [loginValidator, setLoginValidator] = useState(new LoginValidator(loginForm))
-	const { loginStatus, submitLogin, submitAttempt } = useAuthServices()
+	const { loginStatus, submitLogin, submitAttempt, loginWithGoogle } = useAuthServices()
 	const { signInModalOpened } = useAuthGetters()
 	const { openRegisterModal, closeSignInModal, openSignInModal } = useAuthReducers()
 
@@ -53,6 +53,7 @@ const LoginModal: FC = () => {
 				submitLogin={login}
 				loginStatus={loginStatus}
 				clickOnNoAccount={clickOnNoAccount}
+				onGoogleButtonClick={loginWithGoogle}
 			/>
 		</Modal>
 		<LoginActivator onClick={() => setOpenedLoginModalState(true)}/>

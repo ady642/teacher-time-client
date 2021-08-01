@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 import GoogleButton from '@/modules/Auth/components/Buttons/GoogleButton';
-import FacebookButton from '@/modules/Auth/components/Buttons/FacebookButton';
 import useTranslation from "@/common/hooks/useTranslation";
 import LoginEmailInput from "@/modules/Auth/components/LoginModal/LoginModalContent/LoginEmailInput";
 import LoginPasswordInput from "@/modules/Auth/components/LoginModal/LoginModalContent/LoginPasswordInput";
@@ -17,7 +16,8 @@ interface LoginModalContentProps {
 	exceptions: Map<string, string>;
 	submitLogin: () => void;
 	loginStatus: string;
-	clickOnNoAccount: () => void
+	clickOnNoAccount: () => void;
+	onGoogleButtonClick: () => void;
 }
 
 const LoginModalContent: FunctionComponent<LoginModalContentProps> = ({
@@ -26,7 +26,8 @@ const LoginModalContent: FunctionComponent<LoginModalContentProps> = ({
 	setLoginForm,
 	submitLogin,
 	loginStatus,
-	clickOnNoAccount
+	clickOnNoAccount,
+	onGoogleButtonClick
 }) => {
 	const { t } = useTranslation()
 
@@ -59,7 +60,7 @@ const LoginModalContent: FunctionComponent<LoginModalContentProps> = ({
 				<TTDivider text="ou"/>
 			</form>
 			<section className="my-4 px-16 w-full">
-				<GoogleButton onClick={() => console.log('google')} />
+				<GoogleButton onClick={onGoogleButtonClick} />
 			</section>
 		</div>
 	);
