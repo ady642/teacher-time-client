@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {FC, useEffect} from 'react'
 import Head from 'next/head'
 
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
@@ -14,9 +14,19 @@ import TextDraw2 from "@/modules/home/components/TextDraws/TextDraw2";
 import TextDraw3 from "@/modules/home/components/TextDraws/TextDraw3";
 import Bounce from "@/modules/home/components/Bounce";
 import homeStyles from "@/modules/home/styles/Home.module.scss"
+import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 
-const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>,) => {
+const Home: FC = ({ localization, token }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
+	const { setToken } = useAuthReducers()
+
+	useEffect(() => {
+		if(token) {
+			setToken(token)
+		}
+
+		//fetchBalance()
+	}, [])
 
 	const goToTeachers = async () => {
 		await goTo(localization.locale, 'teachers')
@@ -53,8 +63,9 @@ const Home: FC = ({ localization }: InferGetServerSidePropsType<typeof getServer
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const localization = getLocalizationProps(ctx, "home");
+	const token = ctx.query?.token ?? ''
 
-	return { props: { localization } }
+	return { props: { localization, token } }
 }
 
 export default Home

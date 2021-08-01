@@ -3,19 +3,19 @@ import SubmitButton from "@/modules/Auth/components/Buttons/SubmitButton";
 import {SubmitButtonProps} from "@/modules/Auth/components/Buttons/SubmitButton";
 import useTranslation from "@/common/hooks/useTranslation";
 
-interface RegisterButtonProps extends Omit<SubmitButtonProps, 'submitStatus' | 'label'> {
-	registrationStatus: string;
+interface LoginButtonProps extends Omit<SubmitButtonProps, 'submitStatus' | 'label'> {
+	loginStatus: string;
 }
 
-const RegisterButton: FunctionComponent<RegisterButtonProps> = ({ className, onClick, registrationStatus }) => {
+const LoginButton: FunctionComponent<LoginButtonProps> = ({ className, onClick, loginStatus }) => {
 	const { t } = useTranslation()
 
 	return <SubmitButton
-		submitStatus={registrationStatus}
+		submitStatus={loginStatus}
 		onClick={onClick}
 		className={className}
-		label={t('commin.register')}
+		label={t('common.login')}
 	/>
 }
 
-export default RegisterButton
+export default LoginButton

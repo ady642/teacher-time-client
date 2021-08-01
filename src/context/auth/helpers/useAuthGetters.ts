@@ -1,20 +1,22 @@
-import jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import {useAppContext} from "@/context";
-import UserSession from "@/common/types/UserSession";
 import Cookies from "js-cookie";
+import User from "@/modules/Auth/types/User";
 
 const useAuthGetters = () => {
 	const { state } = useAppContext()
 
 	const signInModalOpened = state.auth.signInModalOpened
+	const registerModalOpened = state.auth.registerModalOpened
 	const token = state.auth.token || Cookies.get('token')
-	let user: UserSession = null
+	let user: User = null
 	if(token) {
-		user = jwt_decode(token);
+		user = state.auth.user ?? jwtDecode(token)
 	}
 
 	return {
 		signInModalOpened,
+		registerModalOpened,
 		token,
 		user
 	}

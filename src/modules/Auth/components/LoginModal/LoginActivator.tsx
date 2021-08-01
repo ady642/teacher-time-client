@@ -2,7 +2,7 @@ import React, {FunctionComponent} from "react";
 import useTranslation from "@/common/hooks/useTranslation";
 import {ButtonProps} from "@/common/types/button";
 
-type LoginButtonProps = ButtonProps
+type LoginButtonProps = Omit<ButtonProps, 'children'>
 
 const LoginActivator: FunctionComponent<LoginButtonProps> = ({ onClick }) => {
 	const { t } = useTranslation()

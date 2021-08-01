@@ -4,30 +4,63 @@ import RegisterModalContent from "@/modules/Auth/components/RegisterModal/Regist
 import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
 import RegistrationValidator from "@/modules/Auth/validators/RegistrationValidator";
 import Modal from "@/common/components/Modals/Modal";
+import useAuthServices from "@/modules/Auth/services/useAuthServices";
+import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 const RegisterModal: FC = () => {
-	const [openedRegisterModal, setOpenedRegisterModalState] = useState(false)
+	const [openedRegisterModal, setOpenedRegisterModal] = useState(false)
 	const [registrationForm, setRegistrationForm] = useState(new RegistrationForm())
 	const [registrationValidator, setRegistrationValidator] = useState(new RegistrationValidator(registrationForm))
 	const registerModalContentRef = useRef<HTMLDivElement>(null)
 	const registerActivatorRef = useRef<HTMLButtonElement>(null)
+	const { registrationStatus, submitRegister, submitAttempt } = useAuthServices()
+	const { openSignInModal, closeRegisterModal, openRegisterModal } = useAuthReducers()
+	const { registerModalOpened } = useAuthGetters()
+
+	const clickOnAlreadyExists = () => {
+		setOpenedRegisterModal(false)
+		closeRegisterModal()
+		openSignInModal()
+	}
 
 	useEffect(() => {
-		setRegistrationValidator(new RegistrationValidator(registrationForm))
-		console.table({ 'email': registrationValidator.isEmailValid(), password: registrationValidator.isPasswordValid(), confirmationPassword: registrationValidator.isConfirmationPasswordValid()})
-	}, [registrationForm])
+		setOpenedRegisterModal(registerModalOpened)
+	}, [registerModalOpened])
+
+	useEffect(() => {
+		openedRegisterModal ? openRegisterModal() : closeRegisterModal()
+	}, [openedRegisterModal])
+
+	const register = async () => {
+		if(registrationValidator.validate()) {
+			await submitRegister(registrationForm, registrationValidator, setOpenedRegisterModal)
+			setOpenedRegisterModal(false)
+		}
+	}
+
+	useEffect(() => {
+		if(submitAttempt) {
+			setRegistrationValidator(new RegistrationValidator(registrationForm))
+			registrationValidator.validate()
+		}
+	}, [registrationForm, submitAttempt])
 
 	return <>
 		<Modal
 			className={'rounded-xl'}
-			open={openedRegisterModal} handleClose={() => setOpenedRegisterModalState(false)}>
+			open={openedRegisterModal} handleClose={() => setOpenedRegisterModal(false)}>
 			<RegisterModalContent
 				registrationForm={registrationForm}
 				setRegistrationForm={setRegistrationForm}
+				exceptions={registrationValidator.exceptions}
 				refContent={registerModalContentRef}
+				submitRegistration={register}
+				registrationStatus={registrationStatus}
+				clickOnAlreadyExists={clickOnAlreadyExists}
 			/>
 		</Modal>
-		<RegisterActivator registerActivatorRef={registerActivatorRef} onClick={() => setOpenedRegisterModalState(true)}/>
+		<RegisterActivator registerActivatorRef={registerActivatorRef} onClick={() => setOpenedRegisterModal(true)}/>
 	</>
 }
 

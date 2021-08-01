@@ -1,4 +1,5 @@
 import {ChangeEvent, FunctionComponent} from "react";
+import ErrorMessage from "@/common/components/Errors/ErrorMessage";
 
 export interface InputProps {
     label: string;
@@ -7,7 +8,8 @@ export interface InputProps {
     placeholder?: string;
     setValue: (value: string) => void;
     className?: string;
-    autoComplete?: string
+    autoComplete?: string;
+    exception?: string;
 }
 
 const TTInput: FunctionComponent<InputProps> = ({
@@ -16,12 +18,14 @@ const TTInput: FunctionComponent<InputProps> = ({
 	placeholder = '',
 	type ='text',
 	className = '',
-	autoComplete= ''
+	autoComplete= '',
+	exception= ''
 }) => {
-	return <div className={`flex flex-col w-full ${className}`}>
+	return <div className={`flex relative flex-col w-full ${className}`}>
 		<label className={'font-bold'}>{label}</label>
-		<div className={`border border-1 rounded-md p-2 border-gray-300 transition focus-within:border-black`}>
+		<div className={`border border-1 rounded-md p-1 border-gray-300 transition focus-within:border-black`}>
 			<input
+				className="w-full p-1"
 				autoComplete={autoComplete}
 				placeholder={placeholder}
 				type={type}
@@ -30,6 +34,7 @@ const TTInput: FunctionComponent<InputProps> = ({
 				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
 			/>
 		</div>
+		<ErrorMessage exception={exception} />
 	</div>
 }
 

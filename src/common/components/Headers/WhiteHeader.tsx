@@ -7,16 +7,20 @@ import NavItem from "@/common/components/Headers/NavItem";
 
 import Logo from "@/common/components/Logos/Logo";
 import AuthButtons from "@/modules/Auth/components/Buttons/AuthButtons";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
+import ConnectedComponent from "@/common/components/Headers/ConnectedComponent";
 
 interface HeaderProps {
     locale: string;
     openAboutModal: () => void;
+	openPaymentModal: () => void;
     dark?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({ locale, openAboutModal}) => {
+const Header: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal}) => {
 	const { t } = useTranslation()
 	const { goTo } = useRoutePush()
+	const { token } = useAuthGetters()
 
 	const goToTeachers = async () => {
 		await goTo(locale, 'teachers')
@@ -57,8 +61,7 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal}) => {
 							{ t(translationKey) }
 						</NavItem>) }
 					</ul>
-				</nav>
-				<AuthButtons />
+				</nav>{ token ? <ConnectedComponent openPaymentModal={openPaymentModal}/> : <AuthButtons />  }
 			</div>
 		</div>
 	)
