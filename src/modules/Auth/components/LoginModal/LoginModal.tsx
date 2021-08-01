@@ -4,41 +4,38 @@ import LoginActivator from "@/modules/Auth/components/LoginModal/LoginActivator"
 import LoginModalContent from "@/modules/Auth/components/LoginModal/LoginModalContent/LoginModalContent";
 import LoginForm from "@/modules/Auth/models/LoginForm";
 import LoginValidator from "@/modules/Auth/validators/LoginValidator";
-import AuthClient from "@/modules/Auth/services/AuthService";
+import useAuthServices from "@/modules/Auth/services/useAuthServices";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
-import RegistrationValidator from "@/modules/Auth/validators/RegistrationValidator";
 
 const LoginModal: FC = () => {
 	const [openedLoginModal, setOpenedLoginModalState] = useState(false)
 	const [loginForm, setLoginForm] = useState(new LoginForm())
 	const [loginValidator, setLoginValidator] = useState(new LoginValidator(loginForm))
-	const [submitAttempt, setSubmitAttempt] = useState(false)
-	const [loginStatus, setLoginStatus] = useState('')
-	const { setToken, setUser } =  useAuthReducers()
+	const { loginStatus, submitLogin, submitAttempt } = useAuthServices()
+	const { signInModalOpened } = useAuthGetters()
+	const { openRegisterModal, closeSignInModal, openSignInModal } = useAuthReducers()
 
-	const authClient = new AuthClient()
+	const clickOnNoAccount = () => {
+		closeSignInModal()
+		openRegisterModal()
+	}
 
-	const submitLogin = async () => {
-		setSubmitAttempt(true)
-		if(loginValidator.validate()) {
-			try {
-				setLoginStatus('PENDING')
-				const data = await authClient.login(loginForm)
-				setTimeout(() => {
-					setLoginStatus('OK')
-					setToken(data.token)
-					setUser(data.user)
-					setTimeout(() => {
-						setOpenedLoginModalState(false)
-					}, 1000)
-				}, 2000)
-			} catch (e) {
-				setTimeout(() => {
-					setLoginStatus('ERROR')
-				}, 2000)
-			}
+	const login = async () => {
+		try {
+			await submitLogin(loginForm, loginValidator, setOpenedLoginModalState)
+		} catch (e) {
+			throw new Error(e)
 		}
 	}
+
+	useEffect(() => {
+		setOpenedLoginModalState(signInModalOpened)
+	}, [signInModalOpened])
+
+	useEffect(() => {
+		openedLoginModal ? openSignInModal() : closeSignInModal()
+	}, [openedLoginModal])
 
 	useEffect(() => {
 		if(submitAttempt) {
@@ -53,8 +50,9 @@ const LoginModal: FC = () => {
 				loginForm={loginForm}
 				setLoginForm={setLoginForm}
 				exceptions={loginValidator.exceptions}
-				submitLogin={submitLogin}
+				submitLogin={login}
 				loginStatus={loginStatus}
+				clickOnNoAccount={clickOnNoAccount}
 			/>
 		</Modal>
 		<LoginActivator onClick={() => setOpenedLoginModalState(true)}/>

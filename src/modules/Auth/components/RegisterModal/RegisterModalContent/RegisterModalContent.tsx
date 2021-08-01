@@ -1,6 +1,5 @@
 import {FunctionComponent, MutableRefObject} from 'react';
 import GoogleButton from '@/modules/Auth/components/Buttons/GoogleButton';
-import FacebookButton from '@/modules/Auth/components/Buttons/FacebookButton';
 import useTranslation from "@/common/hooks/useTranslation";
 import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
 import useObject from "@/common/hooks/useObject";
@@ -20,7 +19,8 @@ interface RegisterModalContentProps {
 	refContent: MutableRefObject<HTMLDivElement>;
 	exceptions: Map<string, string>;
 	submitRegistration: () => void;
-	registrationStatus: string
+	registrationStatus: string;
+	clickOnAlreadyExists: () => void
 }
 
 const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
@@ -28,7 +28,8 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 	refContent,
 	submitRegistration,
 	exceptions,
-	registrationStatus
+	registrationStatus,
+	clickOnAlreadyExists
 }) => {
 	const { t } = useTranslation()
 	const { setObject } = useObject()
@@ -72,14 +73,11 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 						registrationStatus={registrationStatus}
 					/>
 				</div>
-				<AlreadyAccount onConnectClick={() => console.log('open sign in modal')} />
+				<AlreadyAccount onConnectClick={clickOnAlreadyExists} />
 				<TTDivider text="ou"/>
 			</form>
 			<section className="my-4 px-16 w-full">
 				<GoogleButton onClick={() => console.log('google')} />
-				<div className="mt-5">
-					<FacebookButton onClick={() => console.log('facebook')} />
-				</div>
 			</section>
 		</div>
 	);

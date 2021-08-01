@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 import GoogleButton from '@/modules/Auth/components/Buttons/GoogleButton';
 import FacebookButton from '@/modules/Auth/components/Buttons/FacebookButton';
-import Logo from '@/common/components/Logos/Logo';
 import useTranslation from "@/common/hooks/useTranslation";
 import LoginEmailInput from "@/modules/Auth/components/LoginModal/LoginModalContent/LoginEmailInput";
 import LoginPasswordInput from "@/modules/Auth/components/LoginModal/LoginModalContent/LoginPasswordInput";
@@ -18,6 +17,7 @@ interface LoginModalContentProps {
 	exceptions: Map<string, string>;
 	submitLogin: () => void;
 	loginStatus: string;
+	clickOnNoAccount: () => void
 }
 
 const LoginModalContent: FunctionComponent<LoginModalContentProps> = ({
@@ -26,6 +26,7 @@ const LoginModalContent: FunctionComponent<LoginModalContentProps> = ({
 	setLoginForm,
 	submitLogin,
 	loginStatus,
+	clickOnNoAccount
 }) => {
 	const { t } = useTranslation()
 
@@ -54,14 +55,11 @@ const LoginModalContent: FunctionComponent<LoginModalContentProps> = ({
 					value={loginForm.password} setValue={setPassword}
 				/>
 				<LoginButton loginStatus={loginStatus} onClick={() => { submitLogin() }} />
-				<NoAccount onRegisterClick={() => console.log('open register modal')} />
+				<NoAccount onRegisterClick={clickOnNoAccount} />
 				<TTDivider text="ou"/>
 			</form>
 			<section className="my-4 px-16 w-full">
 				<GoogleButton onClick={() => console.log('google')} />
-				<div className="mt-5">
-					<FacebookButton onClick={() => console.log('facebook')} />
-				</div>
 			</section>
 		</div>
 	);

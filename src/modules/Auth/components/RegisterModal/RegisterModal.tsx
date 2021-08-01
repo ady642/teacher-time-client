@@ -4,38 +4,38 @@ import RegisterModalContent from "@/modules/Auth/components/RegisterModal/Regist
 import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
 import RegistrationValidator from "@/modules/Auth/validators/RegistrationValidator";
 import Modal from "@/common/components/Modals/Modal";
-import AuthClient from "@/modules/Auth/services/AuthService";
+import useAuthServices from "@/modules/Auth/services/useAuthServices";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 const RegisterModal: FC = () => {
-	const [openedRegisterModal, setOpenedRegisterModalState] = useState(false)
+	const [openedRegisterModal, setOpenedRegisterModal] = useState(false)
 	const [registrationForm, setRegistrationForm] = useState(new RegistrationForm())
 	const [registrationValidator, setRegistrationValidator] = useState(new RegistrationValidator(registrationForm))
-	const [submitAttempt, setSubmitAttempt] = useState(false)
-	const [registrationStatus, setRegistrationStatus] = useState('')
 	const registerModalContentRef = useRef<HTMLDivElement>(null)
 	const registerActivatorRef = useRef<HTMLButtonElement>(null)
-	const { setToken, setUser } =  useAuthReducers()
+	const { registrationStatus, submitRegister, submitAttempt } = useAuthServices()
+	const { openSignInModal, closeRegisterModal, openRegisterModal } = useAuthReducers()
+	const { registerModalOpened } = useAuthGetters()
 
-	const authClient = new AuthClient()
+	const clickOnAlreadyExists = () => {
+		setOpenedRegisterModal(false)
+		closeRegisterModal()
+		openSignInModal()
+	}
 
-	const submitRegistration = async () => {
-		setSubmitAttempt(true)
-		if(registrationValidator.isFilled() && registrationValidator.validate()) {
-			try {
-				setRegistrationStatus('PENDING')
-				const data = await authClient.register(registrationForm)
-				setTimeout(() => {
-					setRegistrationStatus('OK')
-					setToken(data.token)
-					setUser(data.user)
-					setOpenedRegisterModalState(false)
-				}, 2000)
-			} catch (e) {
-				setTimeout(() => {
-					setRegistrationStatus('ERROR')
-				}, 2000)
-			}
+	useEffect(() => {
+		setOpenedRegisterModal(registerModalOpened)
+	}, [registerModalOpened])
+
+	useEffect(() => {
+		openedRegisterModal ? openRegisterModal() : closeRegisterModal()
+	}, [openedRegisterModal])
+
+	const register = async () => {
+		if(registrationValidator.validate()) {
+			await submitRegister(registrationForm, registrationValidator, setOpenedRegisterModal)
+			setOpenedRegisterModal(false)
 		}
 	}
 
@@ -49,17 +49,18 @@ const RegisterModal: FC = () => {
 	return <>
 		<Modal
 			className={'rounded-xl'}
-			open={openedRegisterModal} handleClose={() => setOpenedRegisterModalState(false)}>
+			open={openedRegisterModal} handleClose={() => setOpenedRegisterModal(false)}>
 			<RegisterModalContent
 				registrationForm={registrationForm}
 				setRegistrationForm={setRegistrationForm}
 				exceptions={registrationValidator.exceptions}
 				refContent={registerModalContentRef}
-				submitRegistration={submitRegistration}
+				submitRegistration={register}
 				registrationStatus={registrationStatus}
+				clickOnAlreadyExists={clickOnAlreadyExists}
 			/>
 		</Modal>
-		<RegisterActivator registerActivatorRef={registerActivatorRef} onClick={() => setOpenedRegisterModalState(true)}/>
+		<RegisterActivator registerActivatorRef={registerActivatorRef} onClick={() => setOpenedRegisterModal(true)}/>
 	</>
 }
 

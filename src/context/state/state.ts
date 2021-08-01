@@ -3,6 +3,7 @@ import User from "@/modules/Auth/types/User";
 export interface StateInterface {
 	auth: {
 		signInModalOpened: boolean,
+		registerModalOpened: boolean,
 		token: string,
 		user: User
 	},
@@ -17,6 +18,7 @@ export interface StateInterface {
 const State: StateInterface = {
 	auth: {
 		signInModalOpened: false,
+		registerModalOpened: false,
 		token: '',
 		user: null
 	},

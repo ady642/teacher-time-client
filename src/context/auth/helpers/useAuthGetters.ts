@@ -7,6 +7,7 @@ const useAuthGetters = () => {
 	const { state } = useAppContext()
 
 	const signInModalOpened = state.auth.signInModalOpened
+	const registerModalOpened = state.auth.registerModalOpened
 	const token = state.auth.token || Cookies.get('token')
 	let user: User = null
 	if(token) {
@@ -15,6 +16,7 @@ const useAuthGetters = () => {
 
 	return {
 		signInModalOpened,
+		registerModalOpened,
 		token,
 		user
 	}
