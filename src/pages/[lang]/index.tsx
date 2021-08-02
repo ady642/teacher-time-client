@@ -15,14 +15,16 @@ import TextDraw3 from "@/modules/home/components/TextDraws/TextDraw3";
 import Bounce from "@/modules/home/components/Bounce";
 import homeStyles from "@/modules/home/styles/Home.module.scss"
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
-const Home: FC = ({ localization, token }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Home: FC = ({ localization, token: tokenQuery }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
-	const { setToken } = useAuthReducers()
+	const { setToken, openRegisterModal } = useAuthReducers()
+	const { token } = useAuthGetters()
 
 	useEffect(() => {
-		if(token) {
-			setToken(token)
+		if(tokenQuery) {
+			setToken(tokenQuery)
 		}
 
 		//fetchBalance()
@@ -47,7 +49,10 @@ const Home: FC = ({ localization, token }: InferGetServerSidePropsType<typeof ge
 					<section className={'overflow-hidden'} >
 						<div className="xl:px-40 lg:px-20 md:px-10 px-5 relative">
 							<TextDraw1 />
-							<TextDraw2 />
+							<TextDraw2
+								token={token}
+								openRegisterModal={openRegisterModal}
+							/>
 							<TextDraw3 />
 							<Bounce className={`bg-yellow-300 ${homeStyles.bounce1}`}  />
 							<Bounce className={`bg-blueviolet ${homeStyles.bounce2}`} />

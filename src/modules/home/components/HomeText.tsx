@@ -7,13 +7,14 @@ interface HomeTextProps {
     urlTo: string;
     textTo: string;
     reverse?: boolean;
+    callback?: () => void
 }
 
-const HomeText: FunctionComponent<HomeTextProps> = ({ reverse = false, title, subtitle, urlTo, textTo }) => {
+const HomeText: FunctionComponent<HomeTextProps> = ({ callback, reverse = false, title, subtitle, urlTo, textTo }) => {
 	return <div className={`max-w-4xl text-black flex flex-col ${reverse ? 'xl:mr-20 md:mr-10 ml-0' : 'xl:ml-20 md:ml-10' } ml-0`}>
 		<span className="lg:text-4xl md:text-3xl text-xl font-black md:mt-0 mt-4">{ title }</span>
 		<span className="lg:text-3xl md:text-2xl text-lg md:mt-8 mt-3">{ subtitle }</span>
-		<HomeButton url={urlTo} text={textTo} />
+		<HomeButton callback={callback} url={urlTo} text={textTo} />
 	</div>
 }
 

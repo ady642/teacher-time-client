@@ -4,15 +4,20 @@ import useTranslation from "@/common/hooks/useTranslation";
 
 interface HomeButtonProps {
 	text: string;
-    url: string;
+    url?: string;
+    callback?: () => void;
 }
 
-const HomeButton: FC<HomeButtonProps> = ({ text, url}) => {
+const HomeButton: FC<HomeButtonProps> = ({ text, url, callback}) => {
 	const { goTo } = useRoutePush()
 	const { locale } = useTranslation()
 
 	const onClick = async () => {
-		await goTo(locale, url)
+		if(url) {
+			await goTo(locale, url)
+		} else {
+			callback()
+		}
 	}
 
 	return (

@@ -6,14 +6,12 @@ import useAppReducers from "@/context/app/helpers/useAppReducers";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
-interface CreateRoomProps {
-
-}
-
-const CreateRoom: FunctionComponent<CreateRoomProps> = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const CreateRoom: FunctionComponent = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
 	const { setAppLoading } = useAppReducers()
+	const { token } = useAuthGetters()
 
 	const createRoom = () => {
 		const roomID = v4()
@@ -22,10 +20,13 @@ const CreateRoom: FunctionComponent<CreateRoomProps> = ({ localization }: InferG
 	}
 
 	useEffect(() => {
+		if(!token) {
+			goTo('fr', '/')
+		}
 		socket.on('on-room-created', async (roomID: string) => {
 			await goTo('fr', `room/${roomID}`)
 		})
-	})
+	}, [])
 
 	return <LanguageProvider localization={localization}>
 		<WhiteHeaderLayout locale={localization.locale}>
