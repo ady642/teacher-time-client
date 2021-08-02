@@ -34,8 +34,11 @@ const RegisterModal: FC = () => {
 
 	const register = async () => {
 		if(registrationValidator.validate()) {
-			await submitRegister(registrationForm, registrationValidator, setOpenedRegisterModal)
-			setOpenedRegisterModal(false)
+			try {
+				await submitRegister(registrationForm, registrationValidator, setOpenedRegisterModal)
+			} catch (e) {
+				throw new Error(e)
+			}
 		}
 	}
 
