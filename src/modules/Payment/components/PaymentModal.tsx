@@ -1,10 +1,15 @@
-import {FunctionComponent, useState} from "react";
+import React, {FunctionComponent, useState} from "react";
 import Modal from "@/common/components/Modals/Modal";
-import TailwindCard from "@/common/components/Cards/TailwindCard";
-import CreditList from "@/modules/Payment/components/CreditList";
-import {Elements} from "@stripe/react-stripe-js";
-import PaymentMethodCard from "@/modules/Payment/components/PaymentMethodCard";
 import {loadStripe} from "@stripe/stripe-js";
+import Logo from "@/common/components/Logos/Logo";
+import styles from '@/modules/Payment/components/payment.module.scss'
+import Titles from "@/modules/Payment/components/LeftColumns/Titles";
+import Square from "@/modules/Payment/components/LeftColumns/Square/Square";
+import CreditList from "@/modules/Payment/components/RightColumn/CreditList";
+import CardForm from "@/modules/Payment/components/CreditCardForm/CardForm";
+import {Elements} from "@stripe/react-stripe-js";
+import PaymentAvailableIcons from "@/modules/Payment/components/PaymentAvailableIcons";
+import Details from "@/modules/Payment/components/LeftColumns/Details";
 
 interface PaymentModalProps {
     open: boolean;
@@ -20,21 +25,24 @@ const PaymentModal: FunctionComponent<PaymentModalProps> = ({ open, handleClose 
 		setCreditsChosen(credit)
 	}
 
-	return <Modal open={open} handleClose={handleClose}>
-		<div className={'flex justify-center md:p-10 bg-gray-100 h-full'}>
-			<div className="flex flex-col">
-				<TailwindCard className={"px-4 pb-3 mb-5 h-min"}>
-					<h1 className={"text-gray-600 text-xl m-5"}>Combien de crédits souhaitez vous ?</h1>
-					<CreditList
-						creditsChosen={creditsChosen}
-						onCreditChange={onCreditChange}
-					/>
-				</TailwindCard>
-				<Elements stripe={stripePromise}>
-					<PaymentMethodCard
-						creditsChosen={creditsChosen}
-					/>
-				</Elements>
+	return <Modal fullScreen className={'p-10'} open={open} handleClose={handleClose}>
+		<div className={'flex justify-between md:p-16 bg-white h-full'}>
+			<div className={styles['payment__aside-information']}>
+				<Logo height={50} width={220} />
+				<Titles />
+				<Square />
+				<Details />
+ 			</div>
+			<div className={styles['payment__credits-information']}>
+				<h3 className={styles['payment__credits-information__title']}>Combien de crédits souhaitez-vous ?</h3>
+				<CreditList creditsChosen={creditsChosen} onCreditChange={onCreditChange} />
+				<div className={styles['payment__credits-information__form']}>
+					<h3 className={`${styles['payment__credits-information__title']} self-start`}>Informations de paiement</h3>
+					<PaymentAvailableIcons />
+					<Elements stripe={stripePromise}>
+						<CardForm creditsChosen={creditsChosen} />
+					</Elements>
+				</div>
 			</div>
 		</div>
 	</Modal>

@@ -1,0 +1,49 @@
+.payment {
+  &__aside-information {
+    width: 44%;
+    &__square {
+      border: 1px solid #C3D1DD;
+      display: flex;
+      flex-direction: column;
+      margin-top: 24px;
+      border-radius: 8px;
+      padding: 16px;
+      &-header {
+        &-title {
+          font-weight: 700;
+          font-size: 24px;
+          color: black;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+    &__title {
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 55px;
+      color: black
+    }
+  }
+
+  &__credits-information {
+    width: 44%;
+    max-width: 442px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__form {
+      padding: 0 12px;
+      margin-top: 20px;
+      width: 100%;
+    }
+    &__title {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 22px;
+      color: #687B8C;
+      display: flex;
+      margin-bottom: 16px;
+    }
+  }
+}

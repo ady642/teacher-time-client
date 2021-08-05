@@ -1,0 +1,39 @@
+.credit {
+  &-list {
+    display: grid;
+    grid-template-rows: 121px 121px 121px;
+    grid-template-columns: 129px 129px 129px;
+    row-gap: 16px;
+    column-gap: 16px;
+  }
+  &-choice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 16px;
+    border: 1px solid #C3D1DD;
+    box-sizing: border-box;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &__little {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 8px;
+      font-weight: bold;
+      color: #687B8C;
+      text-align: center;
+
+      &-price {
+        font-size: 16px;
+        line-height: 22px;
+      }
+      &-text {
+        font-size: 10px;
+        line-height: 14px;
+      }
+    }
+  }
+}

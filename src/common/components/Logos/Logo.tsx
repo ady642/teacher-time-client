@@ -11,7 +11,6 @@ const Logo: FC<LogoProps> = ({ width = 'auto', height = 'auto' }) => {
 		src={'/img/logo/logo_crop.png'}
 		alt="Logo"
 		width={width}
-		layout={'responsive'}
 		height={height}
 	/>
 }

@@ -1,5 +1,5 @@
 import {FunctionComponent} from "react";
-import CreditsNumber from "@/modules/Payment/components/CreditsNumber";
+import CreditsNumber from "@/modules/Payment/components/RightColumn/CreditsNumber";
 import TailwindButton from "@/common/components/Buttons/TailwindButton";
 
 interface ConnectedComponentProps {

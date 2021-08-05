@@ -1,23 +1,24 @@
 import React from "react";
 import {CardElement} from "@stripe/react-stripe-js";
+import {StripeCardElementOptions} from "@stripe/stripe-js";
 
 const iconStyle: ('default' | 'solid') = 'solid'
 
-const CARD_OPTIONS = {
+const CARD_OPTIONS: StripeCardElementOptions = {
 	iconStyle,
 	style: {
 		base: {
 			iconColor: "#479cf3",
 			color: "black",
 			fontWeight: 500,
-			fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+			fontFamily: "Nunito, Open Sans, Segoe UI, sans-serif",
 			fontSize: "16px",
 			fontSmoothing: "antialiased",
 			":-webkit-autofill": {
-				color: "#c2ab37"
+				color: "#687B8C"
 			},
 			"::placeholder": {
-				color: "#808080"
+				color: "#687B8C"
 			}
 		},
 		invalid: {
