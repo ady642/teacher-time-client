@@ -1,6 +1,8 @@
 .payment {
   &__aside-information {
-    width: 44%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
     &__square {
       border: 1px solid #C3D1DD;
       display: flex;
@@ -32,6 +34,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    &__details-subtitle {
+      font-weight: bold;
+      font-size: 14px;
+      color: #687B8C
+    }
+    &__details-subtitle-2 {
+      font-size: 14px;
+      color: #687B8C
+    }
     &__form {
       padding: 0 12px;
       margin-top: 20px;
@@ -40,10 +52,8 @@
     &__title {
       font-weight: bold;
       font-size: 16px;
-      line-height: 22px;
       color: #687B8C;
       display: flex;
-      margin-bottom: 16px;
     }
   }
 }

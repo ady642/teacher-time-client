@@ -9,7 +9,7 @@ const CARD_OPTIONS: StripeCardElementOptions = {
 	style: {
 		base: {
 			iconColor: "#479cf3",
-			color: "black",
+			color: "#687B8C",
 			fontWeight: 500,
 			fontFamily: "Nunito, Open Sans, Segoe UI, sans-serif",
 			fontSize: "16px",

@@ -11,9 +11,6 @@ const Field = ({
 	onChange = (e: any) => {}
 }) => (
 	<div className="FormRow">
-		<label htmlFor={id} className="FormRowLabel">
-			{label}
-		</label>
 		<input
 			className="FormRowInput"
 			id={id}
