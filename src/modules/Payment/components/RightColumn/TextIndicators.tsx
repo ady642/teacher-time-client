@@ -3,10 +3,11 @@ import Lock from "@/common/components/Icons/Lock";
 import styles from "@/modules/Payment/components/payment.module.scss";
 
 interface TextIndicatorsProps {
-    error: any
+    error: any,
+	closePaymentModal: () => void
 }
 
-const TextIndicators: FunctionComponent<TextIndicatorsProps> = ({ error }) => {
+const TextIndicators: FunctionComponent<TextIndicatorsProps> = ({ error, closePaymentModal }) => {
 	return <>
 		<p className={`${error ? 'mt-8' : 'mt-2'} flex justify-center items-center`}>
 			<Lock />
@@ -14,7 +15,7 @@ const TextIndicators: FunctionComponent<TextIndicatorsProps> = ({ error }) => {
                 Les paiements sont cryptés à l'aide du protocole SSL.
 			</span>
 		</p>
-		<div className={`${styles['payment__credits-information__title']} flex justify-center cursor-pointer`}>
+		<div onClick={closePaymentModal} className={`${styles['payment__credits-information__title']} transition hover:text-blue-700 flex justify-center cursor-pointer`}>
             Non, merci
 		</div>
 	</>

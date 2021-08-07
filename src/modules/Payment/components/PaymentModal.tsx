@@ -25,9 +25,12 @@ const PaymentModal: FunctionComponent<PaymentModalProps> = ({ open, handleClose 
 		setCreditsChosen(credit)
 	}
 
+	const closePaymentModal = () => {
+		handleClose()
+	}
 
 	return <Modal fullScreen className={'py-10 px-20'} open={open} handleClose={handleClose}>
-		<div className={'flex justify-between md:p-16 px-20 bg-white h-full'}>
+		<div className={'flex justify-between md:py-16 px-24 bg-white h-full'}>
 			<div className={styles['payment__aside-information']}>
 				<div className={'self-start'}>
 					<Logo height={50} width={220} />
@@ -49,7 +52,7 @@ const PaymentModal: FunctionComponent<PaymentModalProps> = ({ open, handleClose 
 					error={error}
 					setError={setError}
 				/>
-				<TextIndicators error={error} />
+				<TextIndicators closePaymentModal={closePaymentModal} error={error} />
 			</div>
 		</div>
 	</Modal>
