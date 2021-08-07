@@ -16,12 +16,33 @@
     box-sizing: border-box;
     border-radius: 8px;
     cursor: pointer;
+    transition: all 0.2s;
+    &--active {
+      background-color: rgba(20, 155, 180, 0.08) !important;
+      border-color: #149BB4 !important;
+    }
+
+    &--best-choice {
+      background-color: #FFF6E6;
+      border-color: #F9BF58;
+      &__text {
+        background-color: #FFECCB;
+        border-radius: 4px;
+        color: #C68005;
+        font-weight: bold;
+        margin-left: 2px;
+        font-size: 9px;
+        padding: 2px;
+        border-radius: 4px;
+        display: flex;
+      }
+    }
 
     &__little {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 8px;
+      margin-top: 2px;
       font-weight: bold;
       color: #687B8C;
       text-align: center;

@@ -12,6 +12,7 @@ const CreditList: FunctionComponent<CreditListProps> = ({ creditsChosen = 20, on
 
 	return <div className={styles['credit-list']}>
 		{ credits.map((credit: number) => <CreditChoice
+			bestChoice={50 === credit}
 			active={creditsChosen === credit}
 			key={credit}
 			creditNumber={credit}

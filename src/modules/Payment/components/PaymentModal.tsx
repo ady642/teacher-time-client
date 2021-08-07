@@ -7,7 +7,6 @@ import Titles from "@/modules/Payment/components/LeftColumns/Titles";
 import Square from "@/modules/Payment/components/LeftColumns/Square/Square";
 import CreditList from "@/modules/Payment/components/RightColumn/CreditList";
 import Details from "@/modules/Payment/components/LeftColumns/Details";
-import Lock from "@/common/components/Icons/Lock";
 import PaymentForm from "@/modules/Payment/components/RightColumn/PaymentForm";
 import TextIndicators from "@/modules/Payment/components/RightColumn/TextIndicators";
 
@@ -27,8 +26,8 @@ const PaymentModal: FunctionComponent<PaymentModalProps> = ({ open, handleClose 
 	}
 
 
-	return <Modal fullScreen className={'p-10'} open={open} handleClose={handleClose}>
-		<div className={'flex justify-between md:p-16 bg-white h-full'}>
+	return <Modal fullScreen className={'py-10 px-20'} open={open} handleClose={handleClose}>
+		<div className={'flex justify-between md:p-16 px-20 bg-white h-full'}>
 			<div className={styles['payment__aside-information']}>
 				<div className={'self-start'}>
 					<Logo height={50} width={220} />
