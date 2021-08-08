@@ -30,7 +30,7 @@ const PaymentModal: FunctionComponent<PaymentModalProps> = ({ open, handleClose 
 	}
 
 	return <Modal fullScreen className={'py-10 px-20'} open={open} handleClose={handleClose}>
-		<div className={'flex justify-between md:py-16 px-24 bg-white h-full'}>
+		<div className={'flex lg:flex-row flex-col justify-between md:py-16 py-4 px-24 bg-white h-full'}>
 			<div className={styles['payment__aside-information']}>
 				<div className={'self-start'}>
 					<Logo height={50} width={220} />

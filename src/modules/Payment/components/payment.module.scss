@@ -1,6 +1,5 @@
 .payment {
   &__aside-information {
-    width: 44%;
     display: flex;
     flex-direction: column;
     &__square {
@@ -29,8 +28,6 @@
   }
 
   &__credits-information {
-    width: 44%;
-    max-width: 442px;
     display: flex;
     flex-direction: column;
     align-items: center;
