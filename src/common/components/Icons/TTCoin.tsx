@@ -1,11 +1,11 @@
 import {FunctionComponent} from "react";
 
 interface TTCoinProps {
-
+	className?: string
 }
 
-const TTCoin: FunctionComponent<TTCoinProps> = () => {
-	return <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+const TTCoin: FunctionComponent<TTCoinProps> = ({ className }) => {
+	return <svg width="16" className={className} height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<rect y="0.5" width="16" height="16" fill="url(#pattern0)"/>
 		<defs>
 			<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">

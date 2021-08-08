@@ -1,5 +1,6 @@
 import {FunctionComponent} from "react";
 import styles from "@/modules/Payment/components/payment.module.scss";
+import TTCoin from "@/common/components/Icons/TTCoin";
 
 interface TitlesProps {
 	creditsChosen: number
@@ -22,8 +23,8 @@ const Titles: FunctionComponent<TitlesProps> = ({ creditsChosen }) => {
 		<h1 className={styles['payment__aside-information__title']}>
 			{ mapTextsWithCredits[creditsChosen] }
 		</h1>
-		<h2 className="mt-2">
-			{ mapTextsWithCredits[creditsChosen] }
+		<h2 className="mt-2 flex items-baseline">
+			Le choix de <strong className={'font-bold text-lg ml-1'}>{ creditsChosen }</strong> <TTCoin className={'mx-1'} /> vous permettra :
 		</h2>
 	</div>
 }
