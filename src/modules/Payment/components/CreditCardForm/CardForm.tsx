@@ -11,10 +11,13 @@ import usePaymentReducers from "@/context/payment/helpers/usePaymentReducers";
 import usePaymentGetters from "@/context/payment/helpers/usePaymentGetters";
 
 interface CardFormProps {
-    creditsChosen: number
+    creditsChosen: number,
+	error: { message: string },
+	setError: (error: any) => void
+
 }
 
-const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
+const CardForm: FC<CardFormProps> = ({ creditsChosen, error, setError }) => {
 	const stripe = useStripe();
 	const { token } = useAuthGetters();
 	const elements = useElements();
@@ -22,7 +25,6 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
 	const {setBalance} = usePaymentReducers()
 	const { balance } = usePaymentGetters()
 
-	const [error, setError] = useState(null);
 	const [cardComplete, setCardComplete] = useState(false);
 	const [processing, setProcessing] = useState(false);
 	const [paymentMethod, setPaymentMethod] = useState(null);
@@ -98,10 +100,9 @@ const CardForm: FC<CardFormProps> = ({ creditsChosen }) => {
 	/> : <form className="Form" onSubmit={pay}>
 		<fieldset className="FormGroup">
 			<Field
-				label="Nom"
 				id="name"
 				type="text"
-				placeholder="Proust"
+				placeholder="Nom sur la carte"
 				required
 				autoComplete="name"
 				value={billingDetails.name}

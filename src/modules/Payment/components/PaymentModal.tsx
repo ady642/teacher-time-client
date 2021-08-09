@@ -1,10 +1,14 @@
-import {FunctionComponent, useState} from "react";
+import React, {FunctionComponent, useState} from "react";
 import Modal from "@/common/components/Modals/Modal";
-import TailwindCard from "@/common/components/Cards/TailwindCard";
-import CreditList from "@/modules/Payment/components/CreditList";
-import {Elements} from "@stripe/react-stripe-js";
-import PaymentMethodCard from "@/modules/Payment/components/PaymentMethodCard";
 import {loadStripe} from "@stripe/stripe-js";
+import Logo from "@/common/components/Logos/Logo";
+import styles from '@/modules/Payment/components/payment.module.scss'
+import Titles from "@/modules/Payment/components/LeftColumns/Titles";
+import Square from "@/modules/Payment/components/LeftColumns/Square/Square";
+import CreditList from "@/modules/Payment/components/RightColumn/CreditList";
+import Details from "@/modules/Payment/components/LeftColumns/Details";
+import PaymentForm from "@/modules/Payment/components/RightColumn/PaymentForm";
+import TextIndicators from "@/modules/Payment/components/RightColumn/TextIndicators";
 
 interface PaymentModalProps {
     open: boolean;
@@ -15,26 +19,40 @@ const stripePromise = loadStripe(process.env.PUBLIC_STRIPE_KEY);
 
 const PaymentModal: FunctionComponent<PaymentModalProps> = ({ open, handleClose }) => {
 	const [creditsChosen, setCreditsChosen] = useState(20);
+	const [error, setError] = useState(null);
 
 	const onCreditChange = (credit: number) => {
 		setCreditsChosen(credit)
 	}
 
-	return <Modal open={open} handleClose={handleClose}>
-		<div className={'flex justify-center md:p-10 bg-gray-100 h-full'}>
-			<div className="flex flex-col">
-				<TailwindCard className={"px-4 pb-3 mb-5 h-min"}>
-					<h1 className={"text-gray-600 text-xl m-5"}>Combien de crédits souhaitez vous ?</h1>
-					<CreditList
-						creditsChosen={creditsChosen}
-						onCreditChange={onCreditChange}
-					/>
-				</TailwindCard>
-				<Elements stripe={stripePromise}>
-					<PaymentMethodCard
-						creditsChosen={creditsChosen}
-					/>
-				</Elements>
+	const closePaymentModal = () => {
+		handleClose()
+	}
+
+	return <Modal fullScreen className={'py-10 px-20'} open={open} handleClose={handleClose}>
+		<div className={'flex lg:flex-row flex-col justify-between md:py-16 py-4 px-24 bg-white h-full'}>
+			<div className={styles['payment__aside-information']}>
+				<div className={'self-start'}>
+					<Logo height={50} width={220} />
+				</div>
+				<Titles
+					creditsChosen={creditsChosen}
+				/>
+				<Square
+					creditsChosen={creditsChosen}
+				/>
+				<Details />
+ 			</div>
+			<div className={styles['payment__credits-information']}>
+				<h3 className={styles['payment__credits-information__title']}>Combien de crédits souhaitez-vous ?</h3>
+				<CreditList creditsChosen={creditsChosen} onCreditChange={onCreditChange} />
+				<PaymentForm
+					stripePromise={stripePromise}
+					creditsChosen={creditsChosen}
+					error={error}
+					setError={setError}
+				/>
+				<TextIndicators closePaymentModal={closePaymentModal} error={error} />
 			</div>
 		</div>
 	</Modal>

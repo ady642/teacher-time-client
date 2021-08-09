@@ -7,17 +7,17 @@ interface PaymentMethodListProps {
 }
 
 const PaymentMethodList: FunctionComponent<PaymentMethodListProps> = ({ handleItemClick }) => {
-    return <List className={'w-full'}>
-        <ListItem button>
-            <ListItemAvatar>
-                <Avatar>
-                    <CreditCardIcon />
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText onClick={() => handleItemClick()} primary="Carte de crédit/débit" secondary="Ajouter une nouvelle carte" />
-        </ListItem>
-        <Divider variant="middle" component="li" />
-    </List>
+	return <List className={'w-full'}>
+		<ListItem button>
+			<ListItemAvatar>
+				<Avatar>
+					<CreditCardIcon />
+				</Avatar>
+			</ListItemAvatar>
+			<ListItemText onClick={() => handleItemClick()} primary="Carte de crédit/débit" secondary="Ajouter une nouvelle carte" />
+		</ListItem>
+		<Divider variant="middle" component="li" />
+	</List>
 }
 
 export default PaymentMethodList
