@@ -31,6 +31,7 @@ const useTouchEvents = (
 		if(e.touches.length === 0) {
 			return
 		}
+
 		if (!drawing || tool.name == 'TextBox') { return; }
 		drawLine(chalkParams.x, chalkParams.y, e.touches[0].pageX, e.touches[0].pageY, chalkParams.color, chalkParams.width, true);
 		setChalkParams({

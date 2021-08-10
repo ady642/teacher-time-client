@@ -56,6 +56,8 @@ const useMouseEvents = (
 	}
 
 	const onMouseMove = (e: any): void => {
+		console.log('je move')
+
 		if (!drawing || tool.name === 'TextBox') { return; }
 
 		if((('button' in e ) && e.button === 0)) {
@@ -80,18 +82,18 @@ const useMouseEvents = (
 	}
 
 	const onMouseUp = (e: any) => {
-		if((('button' in e ) && e.button !== 0) || ('touches' in e) && e.touches.length === 0 || tool.name == 'TextBox') {
+		if((('button' in e ) && e.button !== 0) || ('touches' in e) && e.nativeEvent.changedTouches.length === 0 || tool.name == 'TextBox') {
 			return
 		}
 
 		setChalkParams({
 			...chalkParams,
-			x: e.pageX||e.touches[0].pageX,
-			y: e.pageY||e.touches[0].pageY,
+			x: e.pageX||e.nativeEvent.changedTouches[0].pageX,
+			y: e.pageY||e.nativeEvent.changedTouches[0].pageY,
 		})
 
 		if(!rightClickActivated && drawing) {
-			drawLine(chalkParams.x, chalkParams.y, e.pageX||e.touches[0].pageX, e.pageY||e.touches[0].pageY, chalkParams.color, chalkParams.width, true);
+			drawLine(chalkParams.x, chalkParams.y, e.pageX||e.nativeEvent.changedTouches[0].pageX, e.pageY||e.nativeEvent.changedTouches[0].pageY, chalkParams.color, chalkParams.width, true);
 		}
 		setDrawing(false);
 		clearPoints()
