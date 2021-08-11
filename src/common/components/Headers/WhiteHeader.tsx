@@ -8,7 +8,9 @@ import NavItem from "@/common/components/Headers/NavItem";
 import Logo from "@/common/components/Logos/Logo";
 import AuthButtons from "@/modules/Auth/components/Buttons/AuthButtons";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
-import ConnectedComponent from "@/common/components/Headers/ConnectedComponent";
+import dynamic from "next/dynamic";
+
+const ConnectedComponent = dynamic(() => import('@/common/components/Headers/ConnectedComponent'))
 
 interface HeaderProps {
     locale: string;

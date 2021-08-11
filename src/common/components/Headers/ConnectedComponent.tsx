@@ -7,12 +7,13 @@ interface ConnectedComponentProps {
 	openPaymentModal: () => void
 }
 
-const ConnectedComponent: FunctionComponent<ConnectedComponentProps> = ({ openPaymentModal }) => <>
-	<button onClick={openPaymentModal} className={'px-4 rounded-md transition-all bg-bluegreen hover:shadow-lg text-white font-bold '}>
+const ConnectedComponent: FunctionComponent<ConnectedComponentProps> = ({ openPaymentModal }) => <div className={"flex"}>
+	<CreditsNumber credits={2000}/>
+	<TailwindButton onClick={openPaymentModal} className={'px-4'}>
 		<span>Acheter des crédits</span>
-	</button>
+	</TailwindButton>
 	<UserProfileButton />
-</>
+</div>
 
 
 export default ConnectedComponent
