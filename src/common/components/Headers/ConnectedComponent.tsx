@@ -9,8 +9,8 @@ interface ConnectedComponentProps {
 
 const ConnectedComponent: FunctionComponent<ConnectedComponentProps> = ({ openPaymentModal }) => <div className={"flex"}>
 	<CreditsNumber credits={2000}/>
-	<TailwindButton onClick={openPaymentModal} className={'px-4'}>
-		<span>Acheter des crédits</span>
+	<TailwindButton onClick={openPaymentModal} className={'px-4 py-1 mx-3'}>
+		<span className={'uppercase'}>Acheter des crédits</span>
 	</TailwindButton>
 	<UserProfileButton />
 </div>
