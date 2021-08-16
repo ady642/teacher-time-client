@@ -86,9 +86,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 				hourlyRate: 30,
 				rating: 5,
 				hasDiploma: true,
-				description: 'Professeur de mathématiques. Pour toutes questions mathématiques',
+				description: 'Révision pour les élèves  entrant en terminale. à 15h  et à 17h tous les jours :Les dérivées : équation de la tangente : questions réponses',
 				avatar: '/img/drawbg.jpg',
-				name: 'Adrien HM',
+				name: 'Adrien HM MATHEMATIQUES',
 				languages: ['es', 'fr']
 			}
 		]
