@@ -9,7 +9,7 @@ const TailwindButton: FunctionComponent<TailwindButtonProps> = ({
 	className = '',
 	type = 'button'
 }) => {
-	return <button type={type} onClick={onClick} className={`rounded-md transition-all bg-bluegreen hover:shadow-lg text-white font-bold ${className}`}>
+	return <button type={type} onClick={onClick} className={`rounded-md transition-all bg-bluegreen hover:bg-green-700 hover:shadow-lg text-white font-bold ${className}`}>
 		{ children }
 	</button>
 }

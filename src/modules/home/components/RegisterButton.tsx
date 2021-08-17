@@ -1,23 +1,15 @@
-import useTranslation from "@/common/hooks/useTranslation";
-import useRoutePush from "@/common/hooks/useRoutePush";
 import React, {FC} from 'react'
-
+import TailwindButton from "@/common/components/Buttons/TailwindButton";
 
 interface RegisterButtonProps {
-	text: string
+	text: string;
+	onClick: () => void;
 }
 
-const RegisterButton: FC<RegisterButtonProps> = ({ text }) => {
-	const { locale } = useTranslation()
-	const { goTo } = useRoutePush()
-
-	const goToContact = async () => {
-		await goTo(locale, 'contact')
-	}
-
-	return 	<button onClick={goToContact} className={`rounded-3xl lg:text-lg sm:text-sm transition bg-orange hover:bg-red-700 text-white font-bold px-6 py-2 mt-8`}>
+const RegisterButton: FC<RegisterButtonProps> = ({ text, onClick }) => {
+	return <TailwindButton onClick={onClick} className={`rounded-3xl lg:text-lg sm:text-sm transition hover:bg-green-700 text-white font-bold px-6 py-2 mt-8`}>
 		{ text }
-	</button>
+	</TailwindButton>
 }
 
 export default  RegisterButton
