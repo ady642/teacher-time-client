@@ -1,8 +1,8 @@
 import {FunctionComponent} from "react";
 import TeacherCardLanguages
-	from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardLanguages";
+	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardLanguages";
 import TeacherCardButtons
-	from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardButtons";
+	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardButtons";
 
 interface TeacherCardThirdLineProps {
     onCall: (id: string) => void;

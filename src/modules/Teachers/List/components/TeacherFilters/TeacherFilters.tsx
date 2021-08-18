@@ -1,8 +1,8 @@
 import {FunctionComponent} from "react";
-import FieldSelector from "@/modules/Teachers/components/TeacherFilters/FieldSelector/FieldSelector";
-import ChipFilters from "@/modules/Teachers/components/TeacherFilters/ChipFilters/ChipFilters";
+import FieldSelector from "@/modules/Teachers/List/components/TeacherFilters/FieldSelector/FieldSelector";
+import ChipFilters from "@/modules/Teachers/List/components/TeacherFilters/ChipFilters/ChipFilters";
 import {dropdownValue, dropdownValues, setDropdownValue} from "@/common/types/dropdown";
-import {LevelSelectorProps} from "@/modules/Teachers/components/TeacherFilters/ChipFilters/LevelSelector/LevelSelector";
+import {LevelSelectorProps} from "@/modules/Teachers/List/components/TeacherFilters/ChipFilters/LevelSelector/LevelSelector";
 
 type TeacherFiltersProps = {
 	fieldSelectorValues: dropdownValues;

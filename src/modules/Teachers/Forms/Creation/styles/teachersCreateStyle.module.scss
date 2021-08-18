@@ -1,0 +1,13 @@
+.teachers-create {
+  &__layout {
+    display: flex;
+  }
+
+  &__left {
+    flex-basis: 50%;
+  }
+
+  &__right {
+    flex-basis: 50%;
+  }
+}

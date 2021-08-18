@@ -31,7 +31,7 @@ const Home: FC = ({ localization, token: tokenQuery }: InferGetServerSidePropsTy
 	}, [])
 
 	const goToTeachers = async () => {
-		await goTo(localization.locale, 'teachers')
+		await goTo(localization.locale, 'teachers/list')
 	}
 
 	return (

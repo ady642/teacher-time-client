@@ -1,13 +1,13 @@
 import {FunctionComponent} from "react";
-import styles from '@/modules/Teachers/styles/TeacherCard.module.scss'
-import Teacher from "@/modules/Teachers/models/Teacher";
-import TeacherCardAvatar from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardAvatar";
+import styles from '@/modules/Teachers/List/styles/TeacherCard.module.scss'
+import Teacher from "@/modules/Teachers/List/models/Teacher";
+import TeacherCardAvatar from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardAvatar";
 import TeacherCardFirstLine
-	from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardFirstLine/TeacherCardFirstLine";
+	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardFirstLine/TeacherCardFirstLine";
 import TeacherCardSecondLine
-	from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardSecondLine/TeacherCardSecondLine";
+	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardSecondLine/TeacherCardSecondLine";
 import TeacherCardThirdLine
-	from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardThirdLine";
+	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardThirdLine";
 
 interface TeacherCardProps {
     teacher: Teacher;

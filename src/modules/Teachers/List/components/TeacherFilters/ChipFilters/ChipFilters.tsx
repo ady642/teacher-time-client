@@ -1,5 +1,5 @@
 import {FunctionComponent} from "react";
-import LevelSelector, {LevelSelectorProps} from "@/modules/Teachers/components/TeacherFilters/ChipFilters/LevelSelector/LevelSelector";
+import LevelSelector, {LevelSelectorProps} from "@/modules/Teachers/List/components/TeacherFilters/ChipFilters/LevelSelector/LevelSelector";
 
 type ChipFiltersProps = LevelSelectorProps
 

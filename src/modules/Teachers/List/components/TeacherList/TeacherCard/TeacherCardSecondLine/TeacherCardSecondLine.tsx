@@ -1,6 +1,6 @@
 import {FunctionComponent} from "react";
 import TeacherCardDescription
-	from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardSecondLine/TeacherCardDescription";
+	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardSecondLine/TeacherCardDescription";
 
 interface TeacherCardSecondLineProps {
     description: string

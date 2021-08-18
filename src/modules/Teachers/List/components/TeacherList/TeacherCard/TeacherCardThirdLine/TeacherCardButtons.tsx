@@ -1,8 +1,8 @@
 import {FunctionComponent} from "react";
 import TeacherCardCallButton
-	from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardCallButton";
+	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardCallButton";
 import TeacherCardProfileButton
-	from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardProfileButton";
+	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardProfileButton";
 
 interface TeacherCardButtonsProps {
     onCall: (id: string) => void;

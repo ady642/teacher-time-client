@@ -1,6 +1,6 @@
 import {FunctionComponent} from "react";
 import TeacherCardLanguage
-	from "@/modules/Teachers/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardLanguage";
+	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardLanguage";
 
 interface TeacherCardLanguagesProps {
     languages: string[];

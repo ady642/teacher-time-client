@@ -25,11 +25,11 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal}) =>
 	const { token } = useAuthGetters()
 
 	const goToTeachers = async () => {
-		await goTo(locale, 'teachers')
+		await goTo(locale, 'teachers/list')
 	}
 
-	const goToContact = async () => {
-		await goTo(locale, 'contact')
+	const goToCreationTeacher = async () => {
+		await goTo(locale, 'teachers/create')
 	}
 
 	const goToHome = async () => {
@@ -46,7 +46,7 @@ const Header: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal}) =>
 			translationKey: 'common.about'
 		},
 		{
-			onClick: () => goToContact(),
+			onClick: () => goToCreationTeacher(),
 			translationKey: 'common.giveClasses'
 		}
 	]

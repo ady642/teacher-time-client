@@ -1,6 +1,6 @@
 import {FunctionComponent, useState} from "react";
 import Dropdown from "@/common/components/Dropdowns/Dropdown";
-import ChipFilter from "@/modules/Teachers/components/TeacherFilters/ChipFilters/ChipFilter";
+import ChipFilter from "@/modules/Teachers/List/components/TeacherFilters/ChipFilters/ChipFilter";
 import {dropdownValue, dropdownValues, setDropdownValue} from "@/common/types/dropdown";
 
 export interface LevelSelectorProps {

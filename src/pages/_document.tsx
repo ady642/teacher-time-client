@@ -6,7 +6,6 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head >
-					<title>Teacher Time</title>
 					<meta name="description" content="Tu bloques sur un exercice ? Go teacher-time.com pour trouver un professeur qui répondra à ta question en un click" />
 					<script
 						async

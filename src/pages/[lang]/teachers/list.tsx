@@ -2,15 +2,15 @@ import React, {FC, useEffect, useState} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
-import TeacherFilters from "@/modules/Teachers/components/TeacherFilters/TeacherFilters";
-import TeacherList from "@/modules/Teachers/components/TeacherList/TeacherList";
+import TeacherFilters from "@/modules/Teachers/List/components/TeacherFilters/TeacherFilters";
+import TeacherList from "@/modules/Teachers/List/components/TeacherList/TeacherList";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import {getInitialLocale} from "@/translations/getInitialLocale";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import NoRoomModal from "@/modules/Room/components/NoRoomModal";
 import useRoom from "@/modules/Room/hooks/useRoom";
-import useFieldSelector from "@/modules/Teachers/components/TeacherFilters/FieldSelector/useFieldSelector";
-import useLevelSelector from "@/modules/Teachers/components/TeacherFilters/ChipFilters/LevelSelector/useLevelSelector";
+import useFieldSelector from "@/modules/Teachers/List/components/TeacherFilters/FieldSelector/useFieldSelector";
+import useLevelSelector from "@/modules/Teachers/List/components/TeacherFilters/ChipFilters/LevelSelector/useLevelSelector";
 
 const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [locale, setLocale] = useState('')

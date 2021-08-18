@@ -9,7 +9,7 @@ const TextDraw1: FunctionComponent = () => {
 		srcDraw={'/img/home/workingstudent.png'}
 		title={t('titreDraw1')}
 		subtitle={t('textDraw1')}
-		urlTo={'teachers'}
+		urlTo={'teachers/list'}
 		textTo={t('teacherList')}
 	/>
 }
