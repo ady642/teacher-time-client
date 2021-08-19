@@ -1,0 +1,16 @@
+.teachers-create__text {
+  &__title {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: -1px;
+  }
+  &__subtitle {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+  }
+}

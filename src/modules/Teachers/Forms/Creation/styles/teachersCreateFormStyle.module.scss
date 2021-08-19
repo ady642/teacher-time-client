@@ -1,0 +1,9 @@
+.teachers-create__form {
+  &__title {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+}
