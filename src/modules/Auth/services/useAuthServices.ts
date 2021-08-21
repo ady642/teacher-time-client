@@ -26,13 +26,13 @@ const useAuthServices = () => {
 		setSubmitAttempt(true)
 		if(loginValidator.validate()) {
 			try {
-				setLoginStatus('PENDING')
+				setLoginStatus('LOADING')
 				const data = await authClient.login(loginForm)
+				setLoginStatus('OK')
 				setTimeout(() => {
-					setLoginStatus('OK')
 					setToken(data.token)
 					setUser(data.user)
-					setOpenedLoginModalState(false)
+					//setOpenedLoginModalState(false)
 				}, 2000)
 			} catch (e) {
 				setTimeout(() => {
@@ -44,19 +44,15 @@ const useAuthServices = () => {
 	const submitRegister = async (
 		registrationForm: RegistrationForm,
 		registrationValidator: RegistrationValidator,
-		setOpenedRegisterModal: (opened: boolean) => void
 	) => {
 		setSubmitAttempt(true)
 		if(registrationValidator.isFilled() && registrationValidator.validate()) {
 			try {
-				setRegistrationStatus('PENDING')
+				setRegistrationStatus('LOADING')
 				const data = await authClient.register(registrationForm)
-				setTimeout(() => {
-					setRegistrationStatus('OK')
-					setToken(data.token)
-					setUser(data.user)
-					setOpenedRegisterModal(false)
-				}, 2000)
+				setRegistrationStatus('OK')
+				setToken(data.token)
+				setUser(data.user)
 			} catch (e) {
 				setTimeout(() => {
 					setRegistrationStatus('ERROR')

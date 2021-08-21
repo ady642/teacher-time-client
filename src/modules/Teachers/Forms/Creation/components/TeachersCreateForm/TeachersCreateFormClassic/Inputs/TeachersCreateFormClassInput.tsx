@@ -5,13 +5,14 @@ interface TeachersCreateFormClassInputProps extends Omit<InputProps, 'label'> {
 
 }
 
-const TeachersCreateFormClassInput: FunctionComponent<TeachersCreateFormClassInputProps> = ({ setValue, value, className, autoComplete, placeholder }) => {
+const TeachersCreateFormClassInput: FunctionComponent<TeachersCreateFormClassInputProps> = ({ setValue, value, className, type, placeholder }) => {
 	return <TTInput
 		className={`mb-4 ${className}`}
 		setValue={setValue}
 		value={value}
 		placeholder={placeholder}
 		withLabel={false}
+		type={type}
 	/>
 }
 

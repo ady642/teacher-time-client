@@ -3,6 +3,7 @@ import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import TeachersConnection from "@/modules/Teachers/Forms/Creation/views/TeachersConnection";
+import TeachersCreationForm from "@/modules/Teachers/Forms/Creation/TeachersCreationForm";
 
 interface createProps {
 
@@ -12,7 +13,7 @@ const CreateTeacher: FunctionComponent<createProps> = ({ localization }: InferGe
 
 	return <LanguageProvider localization={localization} >
 		<WhiteHeaderLayout locale={localization.locale}>
-			<TeachersConnection />
+			<TeachersCreationForm />
 		</WhiteHeaderLayout>
 	</LanguageProvider>
 }

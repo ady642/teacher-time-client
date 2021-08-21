@@ -1,14 +1,11 @@
 import {FunctionComponent} from "react";
 import styles from '@/modules/Auth/components/Buttons/GoogleButton.module.scss'
-import useTranslation from "@/common/hooks/useTranslation";
 
 interface GoogleButtonProps {
     onClick: () => void
 }
 
 const GoogleButton: FunctionComponent<GoogleButtonProps> = ({ onClick }) => {
-	const { t } = useTranslation()
-
 	return <div onClick={onClick} className={styles.googleBtn}>
 		<div className={styles.googleIconWrapper}>
 			<img className={styles.googleIcon}
@@ -16,7 +13,7 @@ const GoogleButton: FunctionComponent<GoogleButtonProps> = ({ onClick }) => {
 				alt="google-button"
 			/>
 		</div>
-		<p className={styles.btnText}>{ t('common.google') }</p>
+		<p className={styles.btnText}>Inscription avec Google</p>
 	</div>
 
 }

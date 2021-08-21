@@ -9,9 +9,10 @@ const TeachersCreateFormClassButton: FunctionComponent<TeachersCreateFormClassBu
 	const { t } = useTranslation()
 
 	const submitMapping = {
-		'PENDING': -21,
-		'ERROR': -10,
-		'OK': -9
+		'OK': 11,
+		'ERROR': -17,
+		'LOADING': -49,
+		'PENDING': -81
 	}
 	return <SubmitButton
 		className="w-full h-14"

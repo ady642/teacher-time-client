@@ -13,7 +13,7 @@ import ErrorMessage from "@/common/components/Errors/ErrorMessage";
 import RegisterEmailInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterEmailInput";
 import RegisterPasswordInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterPasswordInput";
 
-interface RegisterModalContentProps {
+export interface RegisterModalContentProps {
 	registrationForm: RegistrationForm;
 	setRegistrationForm: (registrationForm: RegistrationForm) => void;
 	refContent: MutableRefObject<HTMLDivElement>;

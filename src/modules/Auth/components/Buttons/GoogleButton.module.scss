@@ -15,20 +15,19 @@ $button-active-blue: #1669F2;
   align-items: center;
   transition: all 0.3s;
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
   }
   .googleIconWrapper {
-    margin-top: 1px;
-    margin-left: 1px;
     width: 40px;
     height: 40px;
     border-radius: 2px;
     background-color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:1px
   }
   .googleIcon {
-    position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
     width: 18px;
     height: 18px;
   }
@@ -39,8 +38,9 @@ $button-active-blue: #1669F2;
     color: $white;
     font-size: 14px;
     letter-spacing: 0.2px;
-    font-family: "Roboto";
+    font-weight: bold;
     width: 100%;
+    margin-right: 30px;
   }
   &:hover {
     box-shadow: 0 0 6px $google-blue;
