@@ -8,43 +8,53 @@ import {Check, ErrorOutline} from "@material-ui/icons";
 export interface SubmitButtonProps extends Omit<ButtonProps, 'children'> {
 	submitStatus: string;
 	label: string;
+	submitMapping?: Record<string, number>;
 }
 
 const SubmitButton: FunctionComponent<SubmitButtonProps> = ({
 	className,
 	onClick,
 	submitStatus,
+	submitMapping= {
+		'PENDING': -32,
+		'ERROR': -21,
+		'OK': -65
+	},
 	label
 }) => {
 	const [lastTop, setLastTop] = useState(-65)
 
+	function makeId(length: number) {
+		let result           = '';
+		const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+		const charactersLength = characters.length;
+		for ( let i = 0; i < length; i++ ) {
+			result += characters.charAt(Math.floor(Math.random() *
+				charactersLength));
+		}
+		return result;
+	}
+
+	const [buttonId, setButtonId] = useState('test')  // generate random string
+
+	useEffect(() => {
+		setButtonId(makeId(10))
+	}, [])
+
 	useEffect(() => {
 		let top = lastTop
-		gsap.from(`#submit-button__content`, { top });
+		gsap.from(`#${buttonId}`, { top });
 
-		switch (submitStatus) {
-		case 'PENDING':
-			top = -32
-			break
-		case 'ERROR':
-			top = 1
-			break
-		case 'OK':
-			top = 1
-			break
-		default:
-			top = -65
-			break
-		}
+		top = submitMapping[submitStatus] ?? submitMapping['OK']
 
 		setLastTop(top)
-		gsap.to(`#submit-button__content`, { top, ease: 'ease-in' });
+		gsap.to(`#${buttonId}`, { top, ease: 'ease-in' });
 
 	}, [submitStatus])
 
 
 	return <TailwindButton type={'button'} onClick={onClick} className={`w-40 flex overflow-hidden justify-center py-1 h-8 text-lg relative mt-3 ${className}`}>
-		<div id={'submit-button__content'} className={`flex flex-col items-center absolute`}>
+		<div id={buttonId} className={`flex flex-col items-center absolute`}>
 			<span>{ submitStatus === 'OK' ? <Check fontSize={'medium'} /> : <ErrorOutline fontSize={'medium'}  /> }</span>
 			<span><TTLoader /></span>
 			<span>{ label }</span>

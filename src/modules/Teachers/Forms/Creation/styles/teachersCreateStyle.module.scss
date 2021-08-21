@@ -1,10 +1,12 @@
 .teachers-create {
   &__layout {
     display: flex;
+    padding: 30px 70px;
   }
 
   &__left {
     flex-basis: 50%;
+    margin-right: 90px;
   }
 
   &__right {

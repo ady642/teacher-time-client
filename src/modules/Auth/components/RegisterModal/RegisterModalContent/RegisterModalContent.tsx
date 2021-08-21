@@ -51,13 +51,11 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 				<RegisterEmailInput
 					exception={exceptions.get('email')}
 					className={'mb-6'}
-					label={'E-mail'}
 					value={registrationForm.email} setValue={setEmail}
 				/>
 				<RegisterPasswordInput
 					exception={exceptions.get('password')}
 					className={'mb-6'}
-					label={'Mot de passe'}
 					value={registrationForm.password} setValue={setPassword}
 				/>
 				<ConfirmationPasswordInput

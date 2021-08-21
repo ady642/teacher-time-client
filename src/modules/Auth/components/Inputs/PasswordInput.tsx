@@ -1,13 +1,13 @@
 import {FunctionComponent} from "react";
 import TTInput, {InputProps} from "@/common/components/Inputs/TTInput";
 
-export interface PasswordInputProps extends Omit<InputProps, 'type' | 'placeholder' | 'autoComplete'> {}
+export interface PasswordInputProps extends Omit<InputProps, 'type' | 'placeholder' | 'autoComplete' | 'label'> {}
 
-const PasswordInput: FunctionComponent<PasswordInputProps> = ({exception, value,setValue,label, className}) => {
+const PasswordInput: FunctionComponent<PasswordInputProps> = ({exception, value,setValue, className}) => {
 	return <TTInput
 		autoComplete={'new-password'}
 		className={className}
-		label={label}
+		label={'Mot de passe'}
 		type={'password'}
 		value={value}
 		setValue={setValue}
