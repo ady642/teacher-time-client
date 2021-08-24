@@ -12,6 +12,9 @@ import TTDivider from "@/common/components/Dividers/Divider";
 import ErrorMessage from "@/common/components/Errors/ErrorMessage";
 import RegisterEmailInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterEmailInput";
 import RegisterPasswordInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterPasswordInput";
+import RegisterFirstNameInput
+	from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterFirstNameInput";
+import RegisterLastNameInput from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterLastNameInput";
 
 export interface RegisterModalContentProps {
 	registrationForm: RegistrationForm;
@@ -34,6 +37,12 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 	const { t } = useTranslation()
 	const { setObject } = useObject()
 
+	const setFirstName = (firstName: string) => {
+		setObject('firstName', firstName, registrationForm, setRegistrationForm)
+	}
+	const setLastName = (lastName: string) => {
+		setObject('lastName', lastName, registrationForm, setRegistrationForm)
+	}
 	const setEmail = (email: string) => {
 		setObject('email', email, registrationForm, setRegistrationForm)
 	}
@@ -48,6 +57,16 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 		<div ref={refContent} className={`flex flex-col p-4 bg-white ${styles.authModalContent}`}>
 			<p className="my-4 font-bold text-xl text-center">{ t('common.register') }</p>
 			<form className="flex flex-col items-center w-full px-16 mt-5">
+				<RegisterFirstNameInput
+					exception={exceptions.get('firstName')}
+					className={'mb-6'}
+					value={registrationForm.firstName} setValue={setFirstName}
+				/>
+				<RegisterLastNameInput
+					exception={exceptions.get('lastName')}
+					className={'mb-6'}
+					value={registrationForm.lastName} setValue={setLastName}
+				/>
 				<RegisterEmailInput
 					exception={exceptions.get('email')}
 					className={'mb-6'}

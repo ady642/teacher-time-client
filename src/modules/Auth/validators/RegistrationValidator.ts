@@ -1,18 +1,42 @@
 import RegistrationForm, {RegistrationFormInterface} from "@/modules/Auth/models/RegistrationForm";
-import { emailRegex } from "@/common/utils/string";
+import { emailRegex, nameRegex } from "@/common/utils/string";
 
 export default class RegistrationValidator {
     exceptions: Map<string, string>
+    private firstName: string
+    private lastName: string
     private email: string
     private password: string
     private confirmationPassword: string
 
     constructor(registrationForm: RegistrationFormInterface = new RegistrationForm()) {
+        this.firstName = registrationForm.firstName
+        this.lastName = registrationForm.lastName
     	this.email = registrationForm.email
     	this.password = registrationForm.password
     	this.confirmationPassword = registrationForm.confirmationPassword
         this.exceptions = new Map<string, string>()
         this.validate()
+    }
+
+    isFirstNameValid(): boolean {
+        if(!nameRegex.test(this.firstName)) {
+            this.exceptions.set('firstName', 'Ce prénom n\'est pas valide')
+
+            return false
+        }
+
+        return true
+    }
+
+    isLastNameValid(): boolean {
+        if(!nameRegex.test(this.lastName)) {
+            this.exceptions.set('lastName', 'Ce nom n\'est pas valide')
+
+            return false
+        }
+
+        return true
     }
 
     isEmailValid(): boolean {

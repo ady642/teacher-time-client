@@ -1,7 +1,7 @@
 import {FunctionComponent} from "react";
 import CreditsNumber from "@/modules/Payment/components/RightColumn/CreditsNumber";
 import TailwindButton from "@/common/components/Buttons/TailwindButton";
-import UserProfileButton from "@/common/components/Headers/UserProfileButton";
+import UserProfileDropdown from "@/modules/User/components/UserProfileDropdown/UserProfileDropdown";
 
 interface ConnectedComponentProps {
 	openPaymentModal: () => void
@@ -12,7 +12,7 @@ const ConnectedComponent: FunctionComponent<ConnectedComponentProps> = ({ openPa
 	<TailwindButton onClick={openPaymentModal} className={'px-4 text-sm h-8 mx-3'}>
 		<span className={'uppercase'}>Acheter des crédits</span>
 	</TailwindButton>
-	<UserProfileButton />
+	<UserProfileDropdown firstName={'Adrien'} lastName={'Haik'} />
 </div>
 
 

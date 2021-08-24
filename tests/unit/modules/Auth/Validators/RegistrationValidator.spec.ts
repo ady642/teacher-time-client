@@ -4,7 +4,7 @@ import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
 let registrationValidator: RegistrationValidator = new RegistrationValidator()
 
 describe('RegistrationValidator', () => {
-	test.only.each([
+	test.each([
 		{email:'ady@gmail', expected:false},
 		{email:'ady@', expected:false},
 		{email:'ady642@gmail.com', expected:true}
@@ -15,7 +15,7 @@ describe('RegistrationValidator', () => {
 		expect(registrationValidator.isEmailValid()).toBe(expected)
 	});
 
-	test.only.each([
+	test.each([
 		{password:'test', expected:false},
 		{password:'testtest', expected:true},
 		{password:'testtest!', expected:true}
@@ -26,7 +26,7 @@ describe('RegistrationValidator', () => {
 		expect(registrationValidator.isPasswordValid()).toBe(expected)
 	});
 
-	test.only.each([
+	test.each([
 		{password:'test', confirmationPassword: 'ady', expected:false},
 		{password:'testtest', confirmationPassword: 'testtest', expected:true},
 		{password:'testtest!', confirmationPassword: 'testtest!', expected:true}

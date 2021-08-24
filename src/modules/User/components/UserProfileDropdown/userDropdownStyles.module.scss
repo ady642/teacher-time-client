@@ -1,0 +1,10 @@
+.text {
+  font-size: 18px;
+  line-height: 25px;
+  margin-left: 5px;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
