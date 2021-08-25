@@ -9,7 +9,6 @@ import teachersCreateFormStyle from '@/modules/Teachers/Forms/Creation/styles/te
 import TTDivider from "@/common/components/Dividers/Divider";
 import {RegisterModalContentProps} from "@/modules/Auth/components/RegisterModal/RegisterModalContent/RegisterModalContent";
 
-
 export interface TeachersCreateFormProps extends Omit<RegisterModalContentProps, 'clickOnAlreadyExists' | 'refContent'> {}
 
 const TeachersCreateForm: FunctionComponent<TeachersCreateFormProps> = (

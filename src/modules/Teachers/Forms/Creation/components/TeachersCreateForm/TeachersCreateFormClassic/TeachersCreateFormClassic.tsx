@@ -25,13 +25,16 @@ const TeachersCreateFormClassic: FunctionComponent<TeachersCreateFormClassicProp
 	const setPassword = (password: string) => {
 		setObject('password', password, registrationForm, setRegistrationForm)
 	}
-	const setConfirmationPassword = (confirmationPassword: string) => {
-		setObject('confirmationPassword', confirmationPassword, registrationForm, setRegistrationForm)
+	const setFirstName = (firstName: string) => {
+		setObject('firstName', firstName, registrationForm, setRegistrationForm)
+	}
+	const setLastName = (lastName: string) => {
+		setObject('lastName', lastName, registrationForm, setRegistrationForm)
 	}
 
 	return <form>
-		<TeachersCreateFormClassFirstName value={'Adrien'} setValue={() => console.log('set email')} />
-		<TeachersCreateFormClassLastName value={'HM'} setValue={() => console.log('set last name')} />
+		<TeachersCreateFormClassFirstName value={registrationForm.firstName} setValue={setFirstName} />
+		<TeachersCreateFormClassLastName value={registrationForm.lastName} setValue={setLastName} />
 		<TeachersCreateFormClassEmail value={registrationForm.email}  setValue={setEmail}/>
 		<TeachersCreateFormClassPassword value={registrationForm.password} setValue={setPassword} />
 		<TeachersCreateFormClassButton registrationStatus={registrationStatus} onClick={submitRegistration} />

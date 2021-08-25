@@ -21,7 +21,6 @@ const useAuthServices = () => {
 	const submitLogin = async (
 		loginForm: LoginForm,
 		loginValidator: LoginValidator,
-		setOpenedLoginModalState: (opened: boolean) => void
 	) => {
 		setSubmitAttempt(true)
 		if(loginValidator.validate()) {
@@ -32,7 +31,6 @@ const useAuthServices = () => {
 				setTimeout(() => {
 					setToken(data.token)
 					setUser(data.user)
-					//setOpenedLoginModalState(false)
 				}, 2000)
 			} catch (e) {
 				setTimeout(() => {
@@ -46,7 +44,7 @@ const useAuthServices = () => {
 		registrationValidator: RegistrationValidator,
 	) => {
 		setSubmitAttempt(true)
-		if(registrationValidator.isFilled() && registrationValidator.validate()) {
+		if(registrationValidator.validate()) {
 			try {
 				setRegistrationStatus('LOADING')
 				const data = await authClient.register(registrationForm)

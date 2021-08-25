@@ -11,7 +11,7 @@ const TeachersCreateFormClassFirstName: FunctionComponent<TeachersCreateFormClas
 	return <TeachersCreateFormClassInput
 		setValue={setValue}
 		value={value}
-		label={'Prénom'}
+		placeholder={'Prénom'}
 	/>
 }
 

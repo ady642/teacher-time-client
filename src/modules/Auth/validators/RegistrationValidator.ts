@@ -3,10 +3,10 @@ import { emailRegex, nameRegex } from "@/common/utils/string";
 
 export default class RegistrationValidator {
     exceptions: Map<string, string>
-    private firstName: string
-    private lastName: string
-    private email: string
-    private password: string
+    protected firstName: string
+    protected lastName: string
+    protected email: string
+    protected password: string
     private confirmationPassword: string
 
     constructor(registrationForm: RegistrationFormInterface = new RegistrationForm()) {

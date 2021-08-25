@@ -8,7 +8,7 @@ interface TeachersCreateFormClassPasswordProps extends EmailInputProps{
 }
 
 const TeachersCreateFormClassPassword: FunctionComponent<TeachersCreateFormClassPasswordProps> = ({ value, setValue }) => {
-	return <TeachersCreateFormClassInput type="password" setValue={setValue} value={value}/>
+	return <TeachersCreateFormClassInput type="password" setValue={setValue} value={value} placeholder={'Mot de passe'}/>
 }
 
 export default TeachersCreateFormClassPassword
