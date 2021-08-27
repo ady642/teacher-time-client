@@ -23,7 +23,10 @@ const useAuthServices = () => {
 		loginValidator: LoginValidator,
 	) => {
 		setSubmitAttempt(true)
-		if(loginValidator.validate()) {
+		const loginFormValid = loginValidator.validate()
+		console.log(loginFormValid)
+		if(loginFormValid) {
+			console.log('je suis dans le if du loginFormValid')
 			try {
 				setLoginStatus('LOADING')
 				const data = await authClient.login(loginForm)
@@ -44,7 +47,8 @@ const useAuthServices = () => {
 		registrationValidator: RegistrationValidator,
 	) => {
 		setSubmitAttempt(true)
-		if(registrationValidator.validate()) {
+		const registrationFormValid = registrationValidator.validate()
+		if(registrationFormValid) {
 			try {
 				setRegistrationStatus('LOADING')
 				const data = await authClient.register(registrationForm)

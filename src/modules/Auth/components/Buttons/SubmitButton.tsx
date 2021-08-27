@@ -6,7 +6,7 @@ import gsap from "gsap";
 import {Check, ErrorOutline} from "@material-ui/icons";
 import {makeId} from "@/common/utils/string";
 
-export interface SubmitButtonProps extends Omit<ButtonProps, 'children'> {
+export interface SubmitButtonProps extends Omit<ButtonProps, 'children' | 'type'> {
 	submitStatus: string;
 	label: string;
 	submitMapping?: Record<string, number>;
@@ -43,7 +43,7 @@ const SubmitButton: FunctionComponent<SubmitButtonProps> = ({
 
 	}, [submitStatus])
 
-	return <TailwindButton type={'button'} onClick={onClick} className={`w-40 flex overflow-hidden justify-center py-1 h-8 text-lg relative mt-3 ${className}`}>
+	return <TailwindButton type={'submit'} onClick={onClick} className={`w-40 flex overflow-hidden justify-center py-1 h-8 text-lg relative mt-3 ${className}`}>
 		<div id={buttonId} className={`flex flex-col items-center absolute`}>
 			<span className={`${submitStatus === 'OK' ? 'visible': 'invisible'}`}><Check fontSize={'medium'} /></span>
 			<span className={`${submitStatus === 'ERROR' ? 'visible': 'invisible'}`}><ErrorOutline fontSize={'medium'}  /></span>

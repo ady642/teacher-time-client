@@ -7,8 +7,13 @@ interface TeachersCreateFormClassEmailProps extends EmailInputProps{
 
 }
 
-const TeachersCreateFormClassEmail: FunctionComponent<TeachersCreateFormClassEmailProps> = ({ value, setValue }) => {
-	return <TeachersCreateFormClassInput setValue={setValue} value={value} placeholder={'Email'}/>
+const TeachersCreateFormClassEmail: FunctionComponent<TeachersCreateFormClassEmailProps> = ({ exception, value, setValue }) => {
+	return <TeachersCreateFormClassInput
+		exception={exception}
+		setValue={setValue}
+		value={value}
+		placeholder={'Email'}
+	/>
 }
 
 export default TeachersCreateFormClassEmail

@@ -1,0 +1,54 @@
+import {FunctionComponent, useEffect, useState} from "react";
+import TeachersCreateFormClassEmail
+	from "@/modules/Teachers/Forms/Creation/components/TeachersCreateForm/TeachersCreateFormClassic/Inputs/TeachersCreateFormClassEmail";
+import TeachersCreateFormClassPassword
+	from "@/modules/Teachers/Forms/Creation/components/TeachersCreateForm/TeachersCreateFormClassic/Inputs/TeachersCreateFormClassPassword";
+import useObject from "@/common/hooks/useObject";
+import TeachersConnectFormButton
+	from "@/modules/Teachers/Forms/Creation/components/TeachersConnectForm/TeachersConnectFormButton";
+import LoginForm from "@/modules/Auth/models/LoginForm";
+import useAuthServices from "@/modules/Auth/services/useAuthServices";
+import LoginValidator from "@/modules/Auth/validators/LoginValidator";
+
+interface TeachersConnectFormProps {
+}
+
+const TeachersConnectForm: FunctionComponent<TeachersConnectFormProps> = () => {
+	const { setObject } = useObject()
+
+	const { loginStatus, submitLogin, submitAttempt } = useAuthServices()
+
+	const [loginForm, setLoginForm] = useState(new LoginForm())
+	const [loginValidator, setLoginValidator] = useState(new LoginValidator(loginForm))
+
+	const login = async (e: Event) => {
+		e.preventDefault(); // remove refresh when click on submit button
+		try {
+			await submitLogin(loginForm, loginValidator)
+		} catch (e) {
+			throw new Error(e)
+		}
+	}
+
+	useEffect(() => {
+		if(submitAttempt) {
+			setLoginValidator(new LoginValidator(loginForm))
+			loginValidator.validate()
+		}
+	}, [loginForm, submitAttempt])
+
+	const setEmail = (email: string) => {
+		setObject('email', email, loginForm, setLoginForm)
+	}
+	const setPassword = (password: string) => {
+		setObject('password', password, loginForm, setLoginForm)
+	}
+
+	return <form>
+		<TeachersCreateFormClassEmail exception={loginValidator.exceptions.get('email')} value={loginForm.email} setValue={setEmail}/>
+		<TeachersCreateFormClassPassword exception={loginValidator.exceptions.get('password')} value={loginForm.password} setValue={setPassword} />
+		<TeachersConnectFormButton loginStatus={loginStatus} onClick={login} />
+	</form>
+}
+
+export default TeachersConnectForm

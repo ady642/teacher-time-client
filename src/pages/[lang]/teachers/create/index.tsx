@@ -1,19 +1,25 @@
-import {FunctionComponent} from "react";
+import React, {FunctionComponent} from "react";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
+import { Switch, Case } from "react-switch-case-module"
 import TeachersConnection from "@/modules/Teachers/Forms/Creation/views/TeachersConnection";
-import TeachersCreationForm from "@/modules/Teachers/Forms/Creation/TeachersCreationForm";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
+import TeachersFormInfos from "@/modules/Teachers/Forms/Creation/views/TeachersFormInfos";
 
-interface createProps {
+interface CreateTeacherProps {
 
 }
 
-const CreateTeacher: FunctionComponent<createProps> = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const CreateTeacher: FunctionComponent<CreateTeacherProps> = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+	const { token } = useAuthGetters()
 
 	return <LanguageProvider localization={localization} >
 		<WhiteHeaderLayout locale={localization.locale}>
-			<TeachersCreationForm />
+			<Switch componentName={token ? 'TeachersFormInfos': 'TeachersConnection'} defaultComponent={<TeachersConnection />}>
+				<Case value={'TeachersConnection'}><TeachersConnection /></Case>
+				<Case value={'TeachersFormInfos'}><TeachersFormInfos /></Case>
+			</Switch>
 		</WhiteHeaderLayout>
 	</LanguageProvider>
 }

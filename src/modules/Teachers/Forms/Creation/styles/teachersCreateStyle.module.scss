@@ -1,7 +1,21 @@
 .teachers-create {
   &__layout {
-    display: flex;
-    padding: 30px 70px;
+    @media (min-width: 0px) {
+      display: flex;
+      flex-direction: column-reverse;
+      padding: 20px;
+    }
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+      padding: 40px;
+      flex-direction: row;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 30px 70px;
+    }
+
   }
 
   &__left {

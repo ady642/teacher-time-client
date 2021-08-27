@@ -12,11 +12,12 @@ interface TeachersConnectionProps {
 }
 
 const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
-	const { registrationStatus, submitRegister, submitAttempt } = useAuthServices()
+	const { registrationStatus, submitRegister, submitAttempt, loginWithGoogle } = useAuthServices()
 	const [registrationForm, setRegistrationForm] = useState(new RegistrationForm())
 	const [registrationValidator, setRegistrationValidator] = useState(new TeachersConnectionFormValidator(registrationForm))
 
-	const register = async () => {
+	const register = async (e: Event) => {
+		e.preventDefault(); // remove refresh when click on submit button
 		try {
 			await submitRegister(registrationForm, registrationValidator)
 		} catch (e) {
@@ -33,14 +34,14 @@ const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
 
 	return <TeachersCreateLayout
 		left={<TeachersCreateText />}
-		right={
-			<TeachersCreateForm
-				registrationForm={registrationForm}
-				setRegistrationForm={setRegistrationForm}
-				exceptions={registrationValidator.exceptions}
-				submitRegistration={() => register()}
-				registrationStatus={registrationStatus}
-			/>}
+		right={<TeachersCreateForm
+			registrationForm={registrationForm}
+			setRegistrationForm={setRegistrationForm}
+			exceptions={registrationValidator.exceptions}
+			submitRegistration={register}
+			registrationStatus={registrationStatus}
+			onGoogleButtonClick={loginWithGoogle}
+		/>}
 	/>
 }
 

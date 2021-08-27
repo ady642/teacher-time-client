@@ -14,7 +14,7 @@ const RegisterModal: FC = () => {
 	const [registrationValidator, setRegistrationValidator] = useState(new RegistrationValidator(registrationForm))
 	const registerModalContentRef = useRef<HTMLDivElement>(null)
 	const registerActivatorRef = useRef<HTMLButtonElement>(null)
-	const { registrationStatus, submitRegister, submitAttempt } = useAuthServices()
+	const { registrationStatus, submitRegister, submitAttempt, loginWithGoogle } = useAuthServices()
 	const { openSignInModal, closeRegisterModal, openRegisterModal } = useAuthReducers()
 	const { registerModalOpened } = useAuthGetters()
 
@@ -64,6 +64,7 @@ const RegisterModal: FC = () => {
 				submitRegistration={register}
 				registrationStatus={registrationStatus}
 				clickOnAlreadyExists={clickOnAlreadyExists}
+				onGoogleButtonClick={loginWithGoogle}
 			/>
 		</Modal>
 		<RegisterActivator registerActivatorRef={registerActivatorRef} onClick={() => setOpenedRegisterModal(true)}/>

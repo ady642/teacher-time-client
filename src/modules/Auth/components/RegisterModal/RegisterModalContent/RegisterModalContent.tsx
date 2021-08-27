@@ -21,9 +21,10 @@ export interface RegisterModalContentProps {
 	setRegistrationForm: (registrationForm: RegistrationForm) => void;
 	refContent: MutableRefObject<HTMLDivElement>;
 	exceptions: Map<string, string>;
-	submitRegistration: () => void;
+	submitRegistration: (e?: Event) => void;
 	registrationStatus: string;
-	clickOnAlreadyExists: () => void
+	clickOnAlreadyExists: () => void;
+	onGoogleButtonClick: () => void;
 }
 
 const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
@@ -32,7 +33,8 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 	submitRegistration,
 	exceptions,
 	registrationStatus,
-	clickOnAlreadyExists
+	clickOnAlreadyExists,
+	onGoogleButtonClick
 }) => {
 	const { t } = useTranslation()
 	const { setObject } = useObject()
@@ -94,7 +96,7 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 				<TTDivider text="ou"/>
 			</form>
 			<section className="my-4 px-16 w-full">
-				<GoogleButton onClick={() => console.log('google')} />
+				<GoogleButton onClick={onGoogleButtonClick} />
 			</section>
 		</div>
 	);

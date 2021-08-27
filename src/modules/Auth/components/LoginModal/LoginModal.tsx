@@ -23,7 +23,7 @@ const LoginModal: FC = () => {
 
 	const login = async () => {
 		try {
-			await submitLogin(loginForm, loginValidator, setOpenedLoginModalState)
+			await submitLogin(loginForm, loginValidator)
 		} catch (e) {
 			throw new Error(e)
 		}

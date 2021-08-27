@@ -3,9 +3,11 @@ import {RegisterButtonProps} from "@/modules/Auth/components/RegisterModal/Regis
 import SubmitButton from "@/modules/Auth/components/Buttons/SubmitButton";
 import useTranslation from "@/common/hooks/useTranslation";
 
-interface TeachersCreateFormClassButtonProps extends RegisterButtonProps {}
+interface TeachersCreateFormClassButtonProps extends Omit<RegisterButtonProps, 'registrationStatus'> {
+	loginStatus: string
+}
 
-const TeachersCreateFormClassButton: FunctionComponent<TeachersCreateFormClassButtonProps> = ({ onClick, registrationStatus }) => {
+const TeachersCreateFormClassButton: FunctionComponent<TeachersCreateFormClassButtonProps> = ({ onClick, loginStatus }) => {
 	const { t } = useTranslation()
 
 	const submitMapping = {
@@ -14,12 +16,11 @@ const TeachersCreateFormClassButton: FunctionComponent<TeachersCreateFormClassBu
 		'LOADING': -60,
 		'PENDING': -81
 	}
-
 	return <SubmitButton
 		className="w-full h-14"
-		submitStatus={registrationStatus}
+		submitStatus={loginStatus}
 		onClick={onClick}
-		label={t('commin.register')}
+		label={t('commin.login')}
 		submitMapping={submitMapping}
 	/>
 }
