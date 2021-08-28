@@ -16,7 +16,7 @@ interface TeachersConnectFormProps {
 const TeachersConnectForm: FunctionComponent<TeachersConnectFormProps> = () => {
 	const { setObject } = useObject()
 
-	const { loginStatus, submitLogin, submitAttempt } = useAuthServices()
+	const { loginStatus, submitLogin } = useAuthServices()
 
 	const [loginForm, setLoginForm] = useState(new LoginForm())
 	const [loginValidator, setLoginValidator] = useState(new LoginValidator(loginForm))
@@ -31,11 +31,9 @@ const TeachersConnectForm: FunctionComponent<TeachersConnectFormProps> = () => {
 	}
 
 	useEffect(() => {
-		if(submitAttempt) {
-			setLoginValidator(new LoginValidator(loginForm))
-			loginValidator.validate()
-		}
-	}, [loginForm, submitAttempt])
+		setLoginValidator(new LoginValidator(loginForm))
+		loginValidator.validate()
+	}, [loginForm])
 
 	const setEmail = (email: string) => {
 		setObject('email', email, loginForm, setLoginForm)

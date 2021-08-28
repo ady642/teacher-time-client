@@ -24,9 +24,7 @@ const useAuthServices = () => {
 	) => {
 		setSubmitAttempt(true)
 		const loginFormValid = loginValidator.validate()
-		console.log(loginFormValid)
 		if(loginFormValid) {
-			console.log('je suis dans le if du loginFormValid')
 			try {
 				setLoginStatus('LOADING')
 				const data = await authClient.login(loginForm)
@@ -47,7 +45,7 @@ const useAuthServices = () => {
 		registrationValidator: RegistrationValidator,
 	) => {
 		setSubmitAttempt(true)
-		const registrationFormValid = registrationValidator.validate()
+		const registrationFormValid = registrationValidator.validate() && registrationValidator.isFilled()
 		if(registrationFormValid) {
 			try {
 				setRegistrationStatus('LOADING')
@@ -59,6 +57,7 @@ const useAuthServices = () => {
 				setTimeout(() => {
 					setRegistrationStatus('ERROR')
 				}, 2000)
+				throw new Error('this user already exists')
 			}
 		}
 	}

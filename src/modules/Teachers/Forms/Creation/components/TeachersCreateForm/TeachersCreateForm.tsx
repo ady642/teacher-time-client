@@ -31,7 +31,7 @@ const TeachersCreateForm: FunctionComponent<TeachersCreateFormProps> = (
 				</>
 			</Case>
 			<Case value={'TeachersCreateForm'}>
-				<>
+				<div className={'flex flex-col'}>
 					<TeachersCreateFormClassic
 						registrationForm={registrationForm}
 						setRegistrationForm={setRegistrationForm}
@@ -40,8 +40,8 @@ const TeachersCreateForm: FunctionComponent<TeachersCreateFormProps> = (
 						exceptions={exceptions}
 						onGoogleButtonClick={onGoogleButtonClick}
 					/>
-					<AlreadyAccount onConnectClick={() => setHasAccount(true)} />
-				</>
+					<AlreadyAccount className={'self-center'} onConnectClick={() => setHasAccount(true)} />
+				</div>
 			</Case>
 		</Switch>
 

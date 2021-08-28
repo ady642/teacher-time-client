@@ -1,0 +1,26 @@
+.teachers-form-infos__stepper {
+  &__item {
+    border: 1px solid #C3D1DD;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 16px 24px;
+    &.active {
+      background: rgba(20, 155, 180, 0.08);
+      border-radius: 8px;
+    }
+    &__title {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 33px;
+      text-transform: capitalize;
+      &.active {
+        color: #149BB4
+      }
+    }
+    &__subtitle {
+      font-size: 14px;
+      line-height: 19px;
+      color: #323232;
+    }
+  }
+}

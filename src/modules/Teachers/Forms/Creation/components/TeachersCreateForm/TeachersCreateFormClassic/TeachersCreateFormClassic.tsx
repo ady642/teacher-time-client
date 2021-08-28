@@ -11,6 +11,7 @@ import TeachersCreateFormClassButton
 	from "@/modules/Teachers/Forms/Creation/components/TeachersCreateForm/TeachersCreateFormClassic/Buttons/TeachersCreateFormClassButton";
 import {TeachersCreateFormProps} from "@/modules/Teachers/Forms/Creation/components/TeachersCreateForm/TeachersCreateForm";
 import useObject from "@/common/hooks/useObject";
+import ErrorMessage from "@/common/components/Errors/ErrorMessage";
 
 interface TeachersCreateFormClassicProps extends TeachersCreateFormProps{}
 
@@ -32,11 +33,12 @@ const TeachersCreateFormClassic: FunctionComponent<TeachersCreateFormClassicProp
 		setObject('lastName', lastName, registrationForm, setRegistrationForm)
 	}
 
-	return <form>
+	return <form className={'flex flex-col'}>
 		<TeachersCreateFormClassFirstName value={registrationForm.firstName} setValue={setFirstName} />
 		<TeachersCreateFormClassLastName value={registrationForm.lastName} setValue={setLastName} />
 		<TeachersCreateFormClassEmail value={registrationForm.email}  setValue={setEmail}/>
 		<TeachersCreateFormClassPassword value={registrationForm.password} setValue={setPassword} />
+		{ registrationStatus === 'ERROR' ? <ErrorMessage className={'text-lg self-center'} exception={'Cet utilisateur existe déjà'} /> : <div /> }
 		<TeachersCreateFormClassButton registrationStatus={registrationStatus} onClick={submitRegistration} />
 	</form>
 }

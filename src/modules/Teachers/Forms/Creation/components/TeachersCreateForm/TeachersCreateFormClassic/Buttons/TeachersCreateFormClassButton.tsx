@@ -11,7 +11,7 @@ const TeachersCreateFormClassButton: FunctionComponent<TeachersCreateFormClassBu
 	const submitMapping = {
 		'OK': 11,
 		'ERROR': -17,
-		'LOADING': -60,
+		'LOADING': -47,
 		'PENDING': -81
 	}
 

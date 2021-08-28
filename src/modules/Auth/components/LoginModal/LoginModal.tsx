@@ -21,7 +21,8 @@ const LoginModal: FC = () => {
 		openRegisterModal()
 	}
 
-	const login = async () => {
+	const login = async (e: Event) => {
+		e.preventDefault();
 		try {
 			await submitLogin(loginForm, loginValidator)
 		} catch (e) {

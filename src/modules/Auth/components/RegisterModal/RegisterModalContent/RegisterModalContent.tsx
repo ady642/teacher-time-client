@@ -88,7 +88,7 @@ const RegisterModalContent: FunctionComponent<RegisterModalContentProps> = ({
 				<div className={'flex flex-col items-center'} style={{ minHeight: 32 }}>
 					{ registrationStatus === 'ERROR' ? <ErrorMessage className={'text-lg'} exception={'Cet utilisateur existe déjà'} /> : <div /> }
 					<RegisterButton
-						onClick={() => { submitRegistration() }}
+						onClick={submitRegistration}
 						registrationStatus={registrationStatus}
 					/>
 				</div>

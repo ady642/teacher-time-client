@@ -12,7 +12,7 @@ interface TeachersConnectionProps {
 }
 
 const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
-	const { registrationStatus, submitRegister, submitAttempt, loginWithGoogle } = useAuthServices()
+	const { registrationStatus, submitRegister, loginWithGoogle } = useAuthServices()
 	const [registrationForm, setRegistrationForm] = useState(new RegistrationForm())
 	const [registrationValidator, setRegistrationValidator] = useState(new TeachersConnectionFormValidator(registrationForm))
 
@@ -21,16 +21,14 @@ const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
 		try {
 			await submitRegister(registrationForm, registrationValidator)
 		} catch (e) {
-			throw new Error(e)
+			console.warn('this user already has a registration')
 		}
 	}
 
 	useEffect(() => {
-		if(submitAttempt) {
-			setRegistrationValidator(new TeachersConnectionFormValidator(registrationForm))
-			registrationValidator.validate()
-		}
-	}, [registrationForm, submitAttempt])
+		setRegistrationValidator(new TeachersConnectionFormValidator(registrationForm))
+		registrationValidator.validate()
+	}, [registrationForm])
 
 	return <TeachersCreateLayout
 		left={<TeachersCreateText />}

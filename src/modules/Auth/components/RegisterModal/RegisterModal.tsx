@@ -32,7 +32,8 @@ const RegisterModal: FC = () => {
 		openedRegisterModal ? openRegisterModal() : closeRegisterModal()
 	}, [openedRegisterModal])
 
-	const register = async () => {
+	const register = async (e: Event) => {
+		e.preventDefault(); // remove refresh when click on submit button
 		if(registrationValidator.validate()) {
 			try {
 				await submitRegister(registrationForm, registrationValidator)
@@ -40,17 +41,15 @@ const RegisterModal: FC = () => {
 					setOpenedRegisterModal(false)
 				}, 2000)
 			} catch (e) {
-				throw new Error(e)
+				console.warn('Failed to submit registration')
 			}
 		}
 	}
 
 	useEffect(() => {
-		if(submitAttempt) {
-			setRegistrationValidator(new RegistrationValidator(registrationForm))
-			registrationValidator.validate()
-		}
-	}, [registrationForm, submitAttempt])
+		setRegistrationValidator(new RegistrationValidator(registrationForm))
+		registrationValidator.validate()
+	}, [registrationForm])
 
 	return <>
 		<Modal
