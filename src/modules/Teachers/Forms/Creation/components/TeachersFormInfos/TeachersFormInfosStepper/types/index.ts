@@ -5,5 +5,8 @@ export type StepperProps = {
 
 export enum Step {
     FIELD,
-    DESCRIPTION
+    DESCRIPTION,
+    NIVEAU,
+    HOURLY_RATE,
+    DIPLOMA
 }

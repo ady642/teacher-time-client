@@ -1,19 +1,25 @@
 .teachers-form-infos__stepper {
+  background-color: #FAFCFE;
   &__item {
     border: 1px solid #C3D1DD;
     box-sizing: border-box;
     border-radius: 8px;
     padding: 16px 24px;
-    &.active {
+    margin-bottom: 24px;
+    max-width: 561px;
+    cursor: pointer;
+    transition: all 0.7s;
+    &--active {
       background: rgba(20, 155, 180, 0.08);
-      border-radius: 8px;
+      border: none;
+      border-left: 14px solid #149BB4
     }
     &__title {
       font-weight: bold;
       font-size: 24px;
       line-height: 33px;
       text-transform: capitalize;
-      &.active {
+      &--active {
         color: #149BB4
       }
     }

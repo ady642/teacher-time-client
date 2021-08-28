@@ -17,11 +17,26 @@ const TeacherFormInfosStepper: FunctionComponent<TeacherFormInfosStepperProps> =
 			title: "étape 1. Votre spécialité",
 			subtitle: 'Choisissez la matière que vous souhaitez enseigner. Vous pouvez en choisir plusieurs',
 			onClick: () => setStep(Step.FIELD)
-		},  {
+		}, {
 			active: step === Step.DESCRIPTION,
 			title: "étape 2. Titre de votre annonce",
 			subtitle: "La description permet de vous présenter rapidement aux élèves lorsqu'ils cherchent un professeur",
 			onClick: () => setStep(Step.DESCRIPTION)
+		}, {
+			active: step === Step.NIVEAU,
+			title: "étape 3. Le niveau enseigné",
+			subtitle: 'Choisissez les classes auxquelles vous souhaitez enseigner.',
+			onClick: () => setStep(Step.NIVEAU)
+		}, {
+			active: step === Step.HOURLY_RATE,
+			title: "étape 4. Prix par heure",
+			subtitle: "Indiquez le prix par heure que vous souhaitez faire facturer aux élèves. Si une session dure moins de 1H elle sera facturé au prorata.",
+			onClick: () => setStep(Step.HOURLY_RATE)
+		}, {
+			active: step === Step.DIPLOMA,
+			title: "étape 5. Vos diplomes",
+			subtitle: "Indiquez votre parcours universitaire ou vos diplomes.",
+			onClick: () => setStep(Step.DIPLOMA)
 		}
 	]
 

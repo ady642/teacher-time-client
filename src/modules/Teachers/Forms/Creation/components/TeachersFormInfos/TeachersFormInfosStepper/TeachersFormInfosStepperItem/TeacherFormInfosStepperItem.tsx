@@ -9,8 +9,11 @@ export interface TeacherFormInfosStepperItemProps {
 }
 
 const TeacherFormInfosStepperItem: FunctionComponent<TeacherFormInfosStepperItemProps> = ({ onClick, title, subtitle, active }) => {
-	return <div onClick={(e) => onClick(e)} className={teachersFormInfosStepperStyle[`teachers-form-infos__stepper__item ${active ? "active" : ''}`]}>
-		<aside className={teachersFormInfosStepperStyle[`teachers-form-infos__stepper__item__title ${active ? "active" : ''} test`]}>
+	return <div
+		onClick={(e) => onClick(e)}
+		className={`${teachersFormInfosStepperStyle[`teachers-form-infos__stepper__item`]} ${active ? teachersFormInfosStepperStyle[`teachers-form-infos__stepper__item--active`] : ''}`}
+	>
+		<aside className={`${teachersFormInfosStepperStyle[`teachers-form-infos__stepper__item__title`]} ${active ? teachersFormInfosStepperStyle[`teachers-form-infos__stepper__item__title--active`]: ''}`}>
 			{ title }
 		</aside>
 		<p className={teachersFormInfosStepperStyle['teachers-form-infos__stepper__item__subtitle']}>

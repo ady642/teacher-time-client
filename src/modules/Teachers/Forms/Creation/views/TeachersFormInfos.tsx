@@ -11,7 +11,7 @@ const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
 	const [step, setStep] = useState(0)
 
 	return <TeachersCreateLayout
-		left={<div><TeacherFormInfosStepper setStep={setStep} step={step}/></div>}
+		left={<TeacherFormInfosStepper setStep={setStep} step={step}/>}
 		right={<div>Test Right</div>}
 	/>
 }
