@@ -1,5 +1,5 @@
 import {FunctionComponent, MouseEvent} from "react";
-import teachersFormInfosStepperStyle from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosStepper/teachersFormInfosStepper.module.scss"
+import teachersFormInfosStepperStyle from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosStepper/styles/teachersFormInfosStepper.module.scss"
 
 export interface TeacherFormInfosStepperItemProps {
     active: boolean;

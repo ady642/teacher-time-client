@@ -4,6 +4,8 @@ import {
 	Step,
 	StepperProps
 } from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosStepper/types";
+import TeachersFormInfosStepperImage
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosStepper/TeachersFormInfosStepperImage";
 
 
 interface TeacherFormInfosStepperProps extends StepperProps {
@@ -41,6 +43,7 @@ const TeacherFormInfosStepper: FunctionComponent<TeacherFormInfosStepperProps> =
 	]
 
 	return <>
+		<TeachersFormInfosStepperImage />
 		{ stepperItems.map((stepperItem) =>
 			<TeacherFormInfosStepperItem
 				key={stepperItem.title}

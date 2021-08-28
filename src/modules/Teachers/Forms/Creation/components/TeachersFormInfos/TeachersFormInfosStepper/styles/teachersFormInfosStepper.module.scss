@@ -1,5 +1,8 @@
 .teachers-form-infos__stepper {
   background-color: #FAFCFE;
+  &__image {
+    margin-bottom: 24px;
+  }
   &__item {
     border: 1px solid #C3D1DD;
     box-sizing: border-box;
