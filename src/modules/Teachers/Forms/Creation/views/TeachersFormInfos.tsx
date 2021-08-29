@@ -2,6 +2,8 @@ import {FunctionComponent, useState} from "react";
 import TeachersCreateLayout from "@/modules/Teachers/Forms/Creation/layout/TeachersCreateLayout";
 import TeacherFormInfosStepper
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosStepper/TeacherFormInfosStepper";
+import TeachersFormInfosFields
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/TeachersFormInfosFields";
 
 interface TeachersConnectionProps {
 
@@ -12,7 +14,7 @@ const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
 
 	return <TeachersCreateLayout
 		left={<TeacherFormInfosStepper setStep={setStep} step={step}/>}
-		right={<div>Test Right</div>}
+		right={<TeachersFormInfosFields />}
 	/>
 }
 
