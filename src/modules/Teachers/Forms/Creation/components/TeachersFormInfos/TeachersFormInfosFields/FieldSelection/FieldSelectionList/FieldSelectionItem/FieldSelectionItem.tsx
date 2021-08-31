@@ -1,12 +1,14 @@
 import {FunctionComponent} from "react";
 import fieldSelectionStyles from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/styles/fieldSelection.module.scss"
 import FieldSelectionItemCheckbox
-	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionList/FieldSelectionItemCheckbox";
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionList/FieldSelectionItem/FieldSelectionItemCheckbox";
+import FieldSelectionItemIcon
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionList/FieldSelectionItem/FieldSelectionItemIcon";
 
 export interface FieldSelectionItemProps {
     active: boolean;
     label: string;
-    icon: any;
+    icon: string;
     onClick: () => void
 }
 
@@ -23,8 +25,10 @@ const FieldSelectionItem: FunctionComponent<FieldSelectionItemProps> = ({
 			value={active}
 			setValue={onClick}
 		/>
-		{ icon }
-		{ label }
+		<FieldSelectionItemIcon src={icon}/>
+		<div className={fieldSelectionStyles['field-selection__list__item__label']}>
+			{ label }
+		</div>
 	</li>
 }
 

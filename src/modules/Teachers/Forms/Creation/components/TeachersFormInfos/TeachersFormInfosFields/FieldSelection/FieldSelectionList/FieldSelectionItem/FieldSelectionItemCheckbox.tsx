@@ -7,7 +7,7 @@ interface FieldSelectionItemCheckboxProps {
 }
 
 const FieldSelectionItemCheckbox: FunctionComponent<FieldSelectionItemCheckboxProps> = ({ value, setValue }) => {
-	return <TTCheckbox value={value} setValue={setValue} />;
+	return <TTCheckbox value={value} setValue={setValue} />
 }
 
 export default FieldSelectionItemCheckbox

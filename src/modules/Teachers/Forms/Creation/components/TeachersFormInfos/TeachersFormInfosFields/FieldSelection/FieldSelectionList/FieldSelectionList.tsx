@@ -1,7 +1,6 @@
-import {FunctionComponent, createElement} from "react";
+import {FunctionComponent} from "react";
 import FieldSelectionItem
-, {FieldSelectionItemProps} from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionList/FieldSelectionItem";
-import FunctionsIcon from '@material-ui/icons/Functions';
+, {FieldSelectionItemProps} from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionList/FieldSelectionItem/FieldSelectionItem";
 
 interface FieldSelectionListProps {
 	selectedFields: Set<number>;
@@ -11,6 +10,8 @@ interface FieldSelectionListProps {
 
 enum Fields {
 	MATHS,
+	ENGLISH,
+	FRENCH
 }
 
 const FieldSelectionList: FunctionComponent<FieldSelectionListProps> = ({ selectedFields, addField, removeField }) => {
@@ -18,8 +19,20 @@ const FieldSelectionList: FunctionComponent<FieldSelectionListProps> = ({ select
 		{
 			active: selectedFields.has(Fields.MATHS),
 			label: "Mathématiques",
-			icon: createElement(FunctionsIcon),
+			icon: '/img/icon/pi.svg',
 			onClick: () => selectedFields.has(Fields.MATHS) ? removeField(Fields.MATHS): addField(Fields.MATHS)
+		},
+		{
+			active: selectedFields.has(Fields.ENGLISH),
+			label: "Anglais",
+			icon: '/img/icon/ingles.svg',
+			onClick: () => selectedFields.has(Fields.ENGLISH) ? removeField(Fields.ENGLISH): addField(Fields.ENGLISH)
+		},
+		{
+			active: selectedFields.has(Fields.FRENCH),
+			label: "Français",
+			icon: '/img/icon/francia.png',
+			onClick: () => selectedFields.has(Fields.FRENCH) ? removeField(Fields.FRENCH): addField(Fields.FRENCH)
 		}
 	]
 

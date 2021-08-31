@@ -42,8 +42,6 @@ const useMouseEvents = (
 			InputSetCoords(e.pageX, e.pageY);
 			setTextBoxParams({...textBoxParams, cpt: true})
 			textBoxRef.current.style.display = "block";
-
-			console.log("cpt mis a", textBoxParams.cpt)
 		}
 
 		setRightClickActivated(false)
@@ -56,8 +54,6 @@ const useMouseEvents = (
 	}
 
 	const onMouseMove = (e: any): void => {
-		console.log('je move')
-
 		if (!drawing || tool.name === 'TextBox') { return; }
 
 		if((('button' in e ) && e.button === 0)) {

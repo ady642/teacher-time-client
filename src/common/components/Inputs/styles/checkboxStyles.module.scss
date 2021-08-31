@@ -1,8 +1,8 @@
 .tt-input--checkbox {
   position: relative;
-  & label {
+  label {
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 2px solid #C3D1DD;
     border-radius: 50%;
     cursor: pointer;
     height: 28px;
@@ -16,24 +16,23 @@
       border-right: none;
       content: "";
       height: 6px;
-      left: 7px;
-      opacity: 0;
+      left: 6px;
+      opacity: 1;
       position: absolute;
       top: 8px;
       transform: rotate(-45deg);
       width: 12px;
     }
-    input[type="checkbox"] {
-      visibility: hidden;
+  }
+  input[type="checkbox"] {
+    visibility: hidden;
 
-      &:checked + label {
-        background-color: #66bb6a;
-        border-color: #66bb6a;
-        :after {
-          opacity: 1;
-        }
+    &:checked + label {
+      background-color: #149BB4;
+      border-color: #C3D1DD;
+      :after {
+        opacity: 1;
       }
     }
-
   }
 }

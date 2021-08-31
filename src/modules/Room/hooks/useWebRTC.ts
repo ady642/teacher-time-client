@@ -22,15 +22,12 @@ const useWebRTC = ({
 		userStream.current.getTracks().forEach(track => peers.current[newStudent].addTrack(track, userStream.current));
 
 		const offer: RTCSessionDescriptionInit = await peers.current[newStudent].createOffer();
-		console.log('je set loffer as localDescription')
 		await peers.current[newStudent].setLocalDescription(new RTCSessionDescription(offer));
-		console.log('je send loffer à', newStudent)
 
 		socket.emit('offer', { offer, newStudent: newStudent });
 	}
 
 	const answerToOffer = async ({ offer, offerSender } : { offer: RTCSessionDescriptionInit, offerSender: string } ) => {
-		console.log('je set loffer as RemoteDescription')
 		peers.current[offerSender] = createPeer()
 
 		userStream.current.getTracks().forEach(track => peers.current[offerSender].addTrack(track, userStream.current));
@@ -43,7 +40,6 @@ const useWebRTC = ({
 	}
 
 	const setAnswerAsRemoteDescription = async ({ answer, newStudent }: { answer: RTCSessionDescriptionInit, newStudent: string }) => {
-		console.log('je set lanswser as remotedescription')
 		await peers.current[newStudent].setRemoteDescription(new RTCSessionDescription(answer))
 	}
 

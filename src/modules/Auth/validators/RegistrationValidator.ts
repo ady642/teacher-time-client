@@ -70,8 +70,6 @@ export default class RegistrationValidator {
     }
 
     validate(): boolean {
-        console.log(this)
-
         if(this.firstName)
             this.isFirstNameValid()
 
