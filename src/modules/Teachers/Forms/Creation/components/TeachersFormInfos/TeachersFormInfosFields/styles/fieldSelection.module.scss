@@ -18,4 +18,28 @@
     color: #323232;
     margin-bottom: 16px;
   }
+  &__list {
+    &__item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      padding: 16px;
+
+      border: 1px solid #C3D1DD;
+      box-sizing: border-box;
+      border-radius: 8px;
+      &--active {
+        background: rgba(20, 155, 180, 0.1);
+      }
+
+      &__checkbox {
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        width:22px;
+        height:22px;
+        appearance: auto;
+      }
+    }
+  }
 }

@@ -1,8 +1,7 @@
-import {FunctionComponent} from "react";
-import TeachersFormInfosStepperImage
-	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosStepper/TeachersFormInfosStepperImage";
+import {FunctionComponent, createElement} from "react";
 import FieldSelectionItem
 , {FieldSelectionItemProps} from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionList/FieldSelectionItem";
+import FunctionsIcon from '@material-ui/icons/Functions';
 
 interface FieldSelectionListProps {
 	selectedFields: Set<number>;
@@ -19,19 +18,16 @@ const FieldSelectionList: FunctionComponent<FieldSelectionListProps> = ({ select
 		{
 			active: selectedFields.has(Fields.MATHS),
 			label: "Mathématiques",
-			icon: '',
+			icon: createElement(FunctionsIcon),
 			onClick: () => selectedFields.has(Fields.MATHS) ? removeField(Fields.MATHS): addField(Fields.MATHS)
 		}
 	]
 
 	return <>
-		{ fields.map((field) =>
+		{ fields.map((field, index) =>
 			<FieldSelectionItem
 				key={field.label}
-				active={field.active}
-				label={field.label}
-				icon={field.icon}
-				onClick={field.onClick}
+				{ ...fields[index] }
 			/>
 		)
 		}
