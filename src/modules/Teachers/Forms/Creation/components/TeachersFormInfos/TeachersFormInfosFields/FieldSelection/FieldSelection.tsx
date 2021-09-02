@@ -1,8 +1,8 @@
 import {FunctionComponent, useState} from "react";
-import FieldSelectionTitle
-	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionTitle";
+import FieldTitle
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Common/FieldTitle";
 import FieldSelectionSubtitle
-	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionSubtitle";
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Common/FieldSubtitle";
 import FieldSelectionSelectedItemCount
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionSelectedItemCount";
 import FieldSelectionList
@@ -31,8 +31,6 @@ const FieldSelection: FunctionComponent<FieldSelectionProps> = () => {
 
 
 	return <div>
-		<FieldSelectionTitle />
-		<FieldSelectionSubtitle />
 		<FieldSelectionSelectedItemCount selectedFieldCount={selectedFields.size} />
 		<FieldSelectionList
 			selectedFields={selectedFields}

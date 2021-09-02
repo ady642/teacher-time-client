@@ -2,13 +2,13 @@ import {FunctionComponent} from "react";
 import fieldSelectionStyles from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/styles/fieldSelection.module.scss"
 
 interface FieldSelectionTitleProps {
-
+	title: string
 }
 
-const FieldSelectionTitle: FunctionComponent<FieldSelectionTitleProps> = () => {
+const FieldTitle: FunctionComponent<FieldSelectionTitleProps> = ({ title }) => {
 	return <h1 className={fieldSelectionStyles['field-selection__title']}>
-        Sélectionner votre spécialité
+		{ title }
 	</h1>
 }
 
-export default FieldSelectionTitle
+export default FieldTitle

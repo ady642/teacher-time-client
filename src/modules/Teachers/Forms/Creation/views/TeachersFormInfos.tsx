@@ -13,8 +13,8 @@ const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
 	const [step, setStep] = useState(0)
 
 	return <TeachersCreateLayout
-		left={<TeacherFormInfosStepper setStep={setStep} step={step}/>}
-		right={<TeachersFormInfosFields />}
+		left={<TeacherFormInfosStepper setStep={setStep} step={step} />}
+		right={<TeachersFormInfosFields setStep={setStep} step={step} />}
 	/>
 }
 

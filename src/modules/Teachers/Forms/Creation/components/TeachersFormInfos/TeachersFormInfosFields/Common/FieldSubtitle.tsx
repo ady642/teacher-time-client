@@ -1,14 +1,14 @@
 import {FunctionComponent} from "react";
 import fieldSelectionStyles from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/styles/fieldSelection.module.scss"
 
-interface FieldSelectionTitleProps {
-
+interface FieldSubtitleProps {
+	subtitle: string
 }
 
-const FieldSelectionTitle: FunctionComponent<FieldSelectionTitleProps> = () => {
+const FieldSubtitle: FunctionComponent<FieldSubtitleProps> = ({ subtitle }) => {
 	return <h4 className={fieldSelectionStyles['field-selection__subtitle']}>
-        Choisissez les matières que vous souhaitez enseigner. Vous pouvez en choisir plusieurs
+		{ subtitle }
 	</h4>
 }
 
-export default FieldSelectionTitle
+export default FieldSubtitle
