@@ -1,12 +1,15 @@
 import { useContext } from "react";
 import { LanguageContext } from "@/context/LanguageContext";
 
+const resolvePath = (object: Record<string, any>, path: string, defaultValue = '') => path
+	.split('.')
+	.reduce((o, p) => o ? o[p] : defaultValue, object)
+
 export default function useTranslation() {
 	const { localization } = useContext(LanguageContext);
 	function t(key: string): string {
 
-		// @ts-ignore
-		const translation = localization.translations[key] || localization.translations.common[key.split('.')[1]] || "";
+		const translation = resolvePath(localization.translations, key) || localization.translations.common[key.split('.')[1]];
 
 		if (!translation) {
 			console.warn(

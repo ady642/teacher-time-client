@@ -10,7 +10,7 @@ interface TeachersConnectionProps {
 }
 
 const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
-	const [step, setStep] = useState(0)
+	const [step, setStep] = useState(1)
 
 	return <TeachersCreateLayout
 		left={<TeacherFormInfosStepper setStep={setStep} step={step} />}

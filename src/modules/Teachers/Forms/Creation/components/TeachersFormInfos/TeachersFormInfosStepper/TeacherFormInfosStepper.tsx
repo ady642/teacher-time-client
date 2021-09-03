@@ -25,10 +25,10 @@ const TeacherFormInfosStepper: FunctionComponent<TeacherFormInfosStepperProps> =
 			subtitle: "La description permet de vous présenter rapidement aux élèves lorsqu'ils cherchent un professeur",
 			onClick: () => setStep(Step.DESCRIPTION)
 		}, {
-			active: step === Step.NIVEAU,
+			active: step === Step.LEVEL,
 			title: "étape 3. Le niveau enseigné",
 			subtitle: 'Choisissez les classes auxquelles vous souhaitez enseigner.',
-			onClick: () => setStep(Step.NIVEAU)
+			onClick: () => setStep(Step.LEVEL)
 		}, {
 			active: step === Step.HOURLY_RATE,
 			title: "étape 4. Prix par heure",
