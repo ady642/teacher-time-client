@@ -1,0 +1,19 @@
+.stepper-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 40px;
+
+  &__container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__next {
+    margin-left: 20px;
+  }
+  &__previous {
+    background-color: #EBF2F7 !important;
+    color: black ! important;
+  }
+}

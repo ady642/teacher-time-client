@@ -3,6 +3,7 @@ import NextButton
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Common/TeachersFormInfosFieldsButtons/NextButton";
 import PreviousButton
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Common/TeachersFormInfosFieldsButtons/PreviousButton";
+import buttonsStyle from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Common/TeachersFormInfosFieldsButtons/styles/buttonsStyle.module.scss"
 
 interface TeachersFormInfosFieldsButtonProps {
     nextStep: () => void;
@@ -10,9 +11,9 @@ interface TeachersFormInfosFieldsButtonProps {
 }
 
 const TeachersFormInfosFieldsButtons: FunctionComponent<TeachersFormInfosFieldsButtonProps> = ({ nextStep, previousStep }) => {
-	return <div>
-		<NextButton onClick={nextStep} />
+	return <div className={buttonsStyle['stepper-button__container']}>
 		<PreviousButton onClick={previousStep} />
+		<NextButton onClick={nextStep} />
 	</div>
 }
 

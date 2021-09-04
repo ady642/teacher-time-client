@@ -1,4 +1,7 @@
 .field-selection {
+  &__content {
+    min-height: 400px;
+  }
   &__title {
     font-weight: bold;
     font-size: 32px;

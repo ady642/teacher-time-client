@@ -11,7 +11,8 @@ interface FieldSelectionListProps {
 enum Fields {
 	MATHS,
 	ENGLISH,
-	FRENCH
+	FRENCH,
+	SPANISH
 }
 
 const FieldSelectionList: FunctionComponent<FieldSelectionListProps> = ({ selectedFields, addField, removeField }) => {
@@ -33,6 +34,12 @@ const FieldSelectionList: FunctionComponent<FieldSelectionListProps> = ({ select
 			label: "Français",
 			icon: '/img/icon/francia.png',
 			onClick: () => selectedFields.has(Fields.FRENCH) ? removeField(Fields.FRENCH): addField(Fields.FRENCH)
+		},
+		{
+			active: selectedFields.has(Fields.SPANISH),
+			label: "Espagnol",
+			icon: '/img/icon/espana.png',
+			onClick: () => selectedFields.has(Fields.SPANISH) ? removeField(Fields.SPANISH): addField(Fields.SPANISH)
 		}
 	]
 

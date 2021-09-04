@@ -1,5 +1,6 @@
 import {FunctionComponent} from "react";
 import {ButtonProps} from "@/common/types/button";
+import buttonsStyle from '@/common/components/Buttons/styles/buttons.module.scss'
 
 export interface TailwindButtonProps extends ButtonProps {}
 
@@ -9,7 +10,11 @@ const TailwindButton: FunctionComponent<TailwindButtonProps> = ({
 	className = '',
 	type = 'button'
 }) => {
-	return <button type={type} onClick={onClick} className={`rounded-md transition-all bg-bluegreen hover:bg-green-700 hover:shadow-lg text-white font-bold ${className}`}>
+	return <button
+		type={type}
+		onClick={() => onClick()}
+		className={`${className} ${buttonsStyle['tt-button']}`}
+	>
 		{ children }
 	</button>
 }

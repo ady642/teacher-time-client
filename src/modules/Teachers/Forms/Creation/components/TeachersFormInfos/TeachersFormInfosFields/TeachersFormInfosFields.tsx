@@ -13,6 +13,8 @@ import FieldSubtitle
 import TeachersFormInfosFieldsButtons
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Common/TeachersFormInfosFieldsButtons/TeachersFormInfosFieldsButtons";
 import useTranslation from "@/common/hooks/useTranslation";
+import fieldSelectionStyles
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/styles/fieldSelection.module.scss";
 
 interface TeachersFormInfosFieldsProps extends StepperProps {
 
@@ -67,7 +69,7 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 			<FieldTitle title={t(title)} />
 			<FieldSubtitle subtitle={t(subtitle)} />
 		</header>
-		<section>
+		<section className={fieldSelectionStyles['field-selection__content']}>
 			<Switch defaultComponent={<FieldSelection />} componentName={componentName}>
 				<Case value={'Field'}><FieldSelection /></Case>
 				<Case value={'Description'}><textarea name="description"/></Case>
