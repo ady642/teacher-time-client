@@ -5,9 +5,9 @@ import inputStyles from '@/common/components/Inputs/styles/inputStyles.module.sc
 export interface InputProps {
     label?: string;
     type?: string;
-    value: string;
+    value: string | number;
     placeholder?: string;
-    setValue: (value: string) => void;
+    setValue: (value: string | number) => void;
     className?: string;
     autoComplete?: string;
     withLabel?: boolean;
