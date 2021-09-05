@@ -12,7 +12,7 @@ const TailwindButton: FunctionComponent<TailwindButtonProps> = ({
 }) => {
 	return <button
 		type={type}
-		onClick={() => onClick()}
+		onClick={(e) => onClick(e)}
 		className={`${className} ${buttonsStyle['tt-button']}`}
 	>
 		{ children }

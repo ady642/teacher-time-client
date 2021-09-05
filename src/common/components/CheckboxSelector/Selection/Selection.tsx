@@ -8,7 +8,7 @@ interface FieldSelectionProps {
 
 }
 
-const FieldSelection: FunctionComponent<FieldSelectionProps> = () => {
+const Selection: FunctionComponent<FieldSelectionProps> = () => {
 	const [selectedFields, setSelectedFields] = useState<Set<number>>(() => new Set());
 
 	const addField = (field: number) => {
@@ -36,4 +36,4 @@ const FieldSelection: FunctionComponent<FieldSelectionProps> = () => {
 	</div>
 }
 
-export default FieldSelection
+export default Selection

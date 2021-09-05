@@ -1,3 +1,15 @@
+.description {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  max-height: 400px;
+  padding: 10px;
+  border: none;
+  background: #EBF2F7;
+  outline: none;
+  border-radius: 8px;
+}
+
 .field-selection {
   &__content {
     min-height: 400px;

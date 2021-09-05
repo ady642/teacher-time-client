@@ -15,6 +15,10 @@ import TeachersFormInfosFieldsButtons
 import useTranslation from "@/common/hooks/useTranslation";
 import fieldSelectionStyles
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/styles/fieldSelection.module.scss";
+import Description
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Description/Description";
+import TeacherCreationForm
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/models/TeacherCreationForm";
 
 interface TeachersFormInfosFieldsProps extends StepperProps {
 
@@ -25,6 +29,7 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 	const [subtitle, setSubtitle] = useState('form.creation.fields.subtitle')
 	const [componentName, setComponentName] = useState('Field')
 	const { t } = useTranslation()
+	const [teacherCreationForm, setTeacherCreationForm] = useState(new TeacherCreationForm())
 
 	interface stepMappingComponentInterface {
 		componentName: string;
@@ -72,7 +77,12 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 		<section className={fieldSelectionStyles['field-selection__content']}>
 			<Switch defaultComponent={<FieldSelection />} componentName={componentName}>
 				<Case value={'Field'}><FieldSelection /></Case>
-				<Case value={'Description'}><textarea name="description"/></Case>
+				<Case value={'Description'}>
+					<Description
+						setTeacherCreationForm={setTeacherCreationForm}
+						teacherCreationForm={teacherCreationForm}
+					/>
+				</Case>
 			</Switch>
 		</section>
 		<footer>
