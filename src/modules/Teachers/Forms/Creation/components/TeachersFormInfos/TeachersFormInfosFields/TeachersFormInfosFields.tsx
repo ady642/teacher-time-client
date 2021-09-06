@@ -60,7 +60,7 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 	}
 
 	const nextStep = () => {
-		if(step < 5)
+		if(step < 4)
 			setStep(step + 1)
 	}
 

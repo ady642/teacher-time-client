@@ -34,11 +34,6 @@ const TeacherFormInfosStepper: FunctionComponent<TeacherFormInfosStepperProps> =
 			title: "étape 4. Prix par heure",
 			subtitle: "Indiquez le prix par heure que vous souhaitez faire facturer aux élèves. Si une session dure moins de 1H elle sera facturé au prorata.",
 			onClick: () => setStep(Step.HOURLY_RATE)
-		}, {
-			active: step === Step.DIPLOMA,
-			title: "étape 5. Vos diplomes",
-			subtitle: "Indiquez votre parcours universitaire ou vos diplomes.",
-			onClick: () => setStep(Step.DIPLOMA)
 		}
 	]
 

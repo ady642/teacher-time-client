@@ -1,5 +1,8 @@
 .TTInput {
   &__input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: #EBF2F7;
     border-radius: 8px;
     font-size: 16px;
@@ -8,5 +11,4 @@
     color: #687B8C;
     padding: 17px 26px;
   }
-
 }

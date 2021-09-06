@@ -3,6 +3,7 @@ import TTInput from "@/common/components/Inputs/TTInput";
 import TeacherCreationForm
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/models/TeacherCreationForm";
 import useObject from "@/common/hooks/useObject";
+import {Euro} from "@material-ui/icons";
 
 interface HourlyRateInputProps {
     teacherCreationForm: TeacherCreationForm;
@@ -16,7 +17,12 @@ const HourlyRateInput: FunctionComponent<HourlyRateInputProps> = ({ teacherCreat
 		setObject('hourlyRate', hourlyRate, teacherCreationForm, setTeacherCreationForm)
 	}
 
-	return <TTInput type={'number'} value={teacherCreationForm.hourlyRate} setValue={setHourlyRate} />
+	return <TTInput
+		type={'number'}
+		value={teacherCreationForm.hourlyRate}
+		setValue={setHourlyRate}
+		appendIcon={<Euro color={'primary'} fontSize={'small'}/>}
+	/>
 }
 
 export default HourlyRateInput

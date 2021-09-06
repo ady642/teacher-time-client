@@ -12,6 +12,7 @@ export interface InputProps {
     autoComplete?: string;
     withLabel?: boolean;
     exception?: string;
+	appendIcon?: JSX.Element;
 }
 
 const TTInput: FunctionComponent<InputProps> = ({
@@ -22,7 +23,8 @@ const TTInput: FunctionComponent<InputProps> = ({
 	className = '',
 	autoComplete= '',
 	exception= '',
-	withLabel= true
+	withLabel= true,
+	appendIcon = false,
 }) => {
 	return <div className={`flex relative flex-col w-full ${className}`}>
 		{ withLabel && <label className={'font-bold'}>{label}</label> }
@@ -36,6 +38,7 @@ const TTInput: FunctionComponent<InputProps> = ({
 				value={value}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
 			/>
+			{ appendIcon }
 		</div>
 		<ErrorMessage exception={exception} />
 	</div>
