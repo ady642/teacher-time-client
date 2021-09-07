@@ -1,19 +1,24 @@
-import {FunctionComponent, useState} from "react";
+import {FunctionComponent, useEffect, useState} from "react";
 import CheckboxSelector from "@/common/components/CheckboxSelector/CheckboxSelector";
 import {SelectionItemProps} from "@/common/components/CheckboxSelector/SelectionList/SelectionItem/SelectionItem";
+import useObject from "@/common/hooks/useObject";
+import TeacherCreationForm
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/models/TeacherCreationForm";
 
 interface LevelSelectionProps {
-
+	teacherCreationForm: TeacherCreationForm;
+	setTeacherCreationForm: (teacherCreationForm: TeacherCreationForm) => void
 }
 
-const FieldSelection: FunctionComponent<LevelSelectionProps> = () => {
-	const [selectedLevels, setSelectedLevels] = useState<Set<number>>(() => new Set());
+const FieldSelection: FunctionComponent<LevelSelectionProps> = ({ teacherCreationForm, setTeacherCreationForm}) => {
+	const [selectedLevels, setSelectedLevels] = useState<Set<string>>(() => new Set(teacherCreationForm.levels));
+	const { setObject } = useObject()
 
-	const addLevel = (level: number) => {
+	const addLevel = (level: string) => {
 		setSelectedLevels((prev) => new Set(prev).add(level));
 	}
 
-	const removeLevel = (level: number) => {
+	const removeLevel = (level: string) => {
 		setSelectedLevels(prev => {
 			const next = new Set(prev);
 
@@ -24,11 +29,15 @@ const FieldSelection: FunctionComponent<LevelSelectionProps> = () => {
 	}
 
 	enum Levels {
-		PRIMAIRE,
-		COLLEGE,
-		LYCEE,
-		SUPERIEUR
+		PRIMAIRE = 'primaire',
+		COLLEGE = 'college',
+		LYCEE = 'lycee',
+		SUPERIEUR = 'superieur'
 	}
+
+	useEffect(() =>{
+		setObject('levels', selectedLevels, teacherCreationForm, setTeacherCreationForm)
+	}, [selectedLevels])
 
 	const fields: SelectionItemProps[] = [
 		{

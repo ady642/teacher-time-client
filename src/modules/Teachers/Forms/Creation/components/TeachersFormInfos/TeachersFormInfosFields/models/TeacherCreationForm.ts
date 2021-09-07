@@ -1,11 +1,18 @@
 export default class TeacherCreationForm {
-    field: string;
+    fields: Set<string>;
     description: string;
-    hourlyRate: number
+    hourlyRate: number;
+    levels: Set<string>;
 
-    constructor({ field = '', description = '', hourlyRate = 20 } = {}) {
-    	this.field = field
+    constructor({
+    	fields = new Set<string>(),
+    	description = '',
+    	hourlyRate = 20,
+    	levels = new Set<string>()
+    } = {}) {
+    	this.fields = fields
     	this.description = description
     	this.hourlyRate = hourlyRate
+    	this.levels = levels
     }
 }

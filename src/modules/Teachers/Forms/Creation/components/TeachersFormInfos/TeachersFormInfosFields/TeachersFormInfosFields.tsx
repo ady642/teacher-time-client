@@ -81,15 +81,25 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 			<FieldSubtitle subtitle={t(subtitle)} />
 		</header>
 		<section className={fieldSelectionStyles['field-selection__content']}>
-			<Switch defaultComponent={<FieldSelection />} componentName={componentName}>
-				<Case value={'Field'}><FieldSelection /></Case>
+			<Switch defaultComponent={<div/>} componentName={componentName}>
+				<Case value={'Field'}>
+					<FieldSelection
+						teacherCreationForm={teacherCreationForm}
+						setTeacherCreationForm={setTeacherCreationForm}
+					/>
+				</Case>
 				<Case value={'Description'}>
 					<Description
 						setTeacherCreationForm={setTeacherCreationForm}
 						teacherCreationForm={teacherCreationForm}
 					/>
 				</Case>
-				<Case value={'Level'}><LevelSelection /></Case>
+				<Case value={'Level'}>
+					<LevelSelection
+						teacherCreationForm={teacherCreationForm}
+						setTeacherCreationForm={setTeacherCreationForm}
+					/>
+				</Case>
 				<Case value={'HourlyRate'}>
 					<HourlyRateInput
 						setTeacherCreationForm={setTeacherCreationForm}

@@ -1,19 +1,24 @@
-import {FunctionComponent, useState} from "react";
+import {FunctionComponent, useEffect, useState} from "react";
 import CheckboxSelector from "@/common/components/CheckboxSelector/CheckboxSelector";
 import {SelectionItemProps} from "@/common/components/CheckboxSelector/SelectionList/SelectionItem/SelectionItem";
+import TeacherCreationForm
+	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/models/TeacherCreationForm";
+import useObject from "@/common/hooks/useObject";
 
 interface FieldSelectionProps {
-
+	setTeacherCreationForm: (teacherCreationForm: TeacherCreationForm) => void;
+	teacherCreationForm: TeacherCreationForm
 }
 
-const FieldSelection: FunctionComponent<FieldSelectionProps> = () => {
-	const [selectedFields, setSelectedFields] = useState<Set<number>>(() => new Set());
+const FieldSelection: FunctionComponent<FieldSelectionProps> = ({ teacherCreationForm, setTeacherCreationForm }) => {
+	const [selectedFields, setSelectedFields] = useState<Set<string>>(() => teacherCreationForm.fields);
+	const { setObject } = useObject()
 
-	const addField = (field: number) => {
+	const addField = (field: string) => {
 		setSelectedFields((prev) => new Set(prev).add(field));
 	}
 
-	const removeField = (field: number) => {
+	const removeField = (field: string) => {
 		setSelectedFields(prev => {
 			const next = new Set(prev);
 
@@ -24,11 +29,15 @@ const FieldSelection: FunctionComponent<FieldSelectionProps> = () => {
 	}
 
 	enum Fields {
-		MATHS,
-		ENGLISH,
-		FRENCH,
-		SPANISH
+		MATHS = 'maths',
+		ENGLISH = 'english',
+		FRENCH = 'french',
+		SPANISH = 'spanish'
 	}
+
+	useEffect(() =>{
+		setObject('fields', selectedFields, teacherCreationForm, setTeacherCreationForm)
+	}, [selectedFields])
 
 	const fields: SelectionItemProps[] = [
 		{
