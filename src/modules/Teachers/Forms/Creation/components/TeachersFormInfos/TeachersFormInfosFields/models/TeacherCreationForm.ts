@@ -15,4 +15,13 @@ export default class TeacherCreationForm {
     	this.hourlyRate = hourlyRate
     	this.levels = levels
     }
+
+    transformForAPI() {
+    	return {
+    		fields: this.fields.values(),
+    		levels: this.levels.values(),
+    		description: this.description,
+    		hourlyRate: this.hourlyRate
+    	}
+    }
 }

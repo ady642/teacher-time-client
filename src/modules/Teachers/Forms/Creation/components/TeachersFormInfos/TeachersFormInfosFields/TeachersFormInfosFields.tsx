@@ -23,6 +23,8 @@ import LevelSelection
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Level/LevelSelection";
 import HourlyRateInput
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/HourlyRate/HourlyRateInput";
+import TeacherClient from "@/modules/Teachers/Forms/Creation/services/TeacherClient";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 interface TeachersFormInfosFieldsProps extends StepperProps {
 
@@ -34,6 +36,12 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 	const [componentName, setComponentName] = useState('Field')
 	const { t } = useTranslation()
 	const [teacherCreationForm, setTeacherCreationForm] = useState(new TeacherCreationForm())
+	const { token } = useAuthGetters()
+	const teacherClient = new TeacherClient(token)
+
+	const createTeacher = async () => {
+		await teacherClient.createTeacher(teacherCreationForm)
+	}
 
 	interface stepMappingComponentInterface {
 		componentName: string;
@@ -109,7 +117,12 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 			</Switch>
 		</section>
 		<footer>
-			<TeachersFormInfosFieldsButtons nextStep={nextStep} previousStep={previousStep}/>
+			<TeachersFormInfosFieldsButtons
+				step={step}
+				submitCreation={createTeacher}
+				nextStep={nextStep}
+				previousStep={previousStep}
+			/>
 		</footer>
 	</>
 }
