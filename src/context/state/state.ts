@@ -1,4 +1,5 @@
 import User from "@/modules/Auth/types/User";
+import {Teacher} from "@/modules/Teachers/models/Entity/Teacher";
 
 export interface StateInterface {
 	auth: {
@@ -12,6 +13,9 @@ export interface StateInterface {
 	},
 	app: {
 		loading: boolean
+	},
+	user: {
+		teacher: Teacher
 	}
 }
 
@@ -27,6 +31,9 @@ const State: StateInterface = {
 	},
 	app: {
 		loading: false
+	},
+	user: {
+		teacher: null
 	}
 }
 

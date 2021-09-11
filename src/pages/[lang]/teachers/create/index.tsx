@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react";
+import React, {FunctionComponent, useEffect} from "react";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
@@ -6,6 +6,9 @@ import { Switch, Case } from "react-switch-case-module"
 import TeachersConnection from "@/modules/Teachers/Forms/Creation/views/TeachersConnection";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import TeachersFormInfos from "@/modules/Teachers/Forms/Creation/views/TeachersFormInfos";
+import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
+import useUserGetters from "@/context/user/helpers/useUserGetters";
+import useRoutePush from "@/common/hooks/useRoutePush";
 
 interface CreateTeacherProps {
 
@@ -13,6 +16,21 @@ interface CreateTeacherProps {
 
 const CreateTeacher: FunctionComponent<CreateTeacherProps> = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { token } = useAuthGetters()
+	const { teacher } = useUserGetters()
+	const { getTeacher } = useTeacherClient()
+	const { goTo } =  useRoutePush()
+
+	useEffect(() => {
+		getTeacher().then(() => {
+
+		})
+	}, [])
+
+	useEffect(() => {
+		if(teacher) {
+			goTo(localization.locale, '/')
+		}
+	}, [teacher])
 
 	return <LanguageProvider localization={localization} >
 		<WhiteHeaderLayout locale={localization.locale}>

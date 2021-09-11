@@ -18,8 +18,8 @@ export default class TeacherCreationForm {
 
     transformForAPI() {
     	return {
-    		fields: this.fields.values(),
-    		levels: this.levels.values(),
+    		fields: [...this.fields],
+    		levels: [...this.levels],
     		description: this.description,
     		hourlyRate: this.hourlyRate
     	}
