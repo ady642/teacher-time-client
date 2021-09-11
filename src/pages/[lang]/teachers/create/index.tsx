@@ -16,23 +16,8 @@ interface CreateTeacherProps {
 
 const CreateTeacher: FunctionComponent<CreateTeacherProps> = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { token } = useAuthGetters()
-	const { teacher } = useUserGetters()
-	const { getTeacher } = useTeacherClient()
-	const { goTo } =  useRoutePush()
 
-	useEffect(() => {
-		getTeacher().then(() => {
-
-		})
-	}, [])
-
-	useEffect(() => {
-		if(teacher) {
-			goTo(localization.locale, '/')
-		}
-	}, [teacher])
-
-	return <LanguageProvider localization={localization} >
+	return <LanguageProvider localization={localization}>
 		<WhiteHeaderLayout locale={localization.locale}>
 			<Switch componentName={token ? 'TeachersFormInfos': 'TeachersConnection'} defaultComponent={<TeachersConnection />}>
 				<Case value={'TeachersConnection'}><TeachersConnection /></Case>
