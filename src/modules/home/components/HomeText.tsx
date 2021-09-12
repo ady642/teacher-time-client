@@ -4,8 +4,8 @@ import HomeButton from "@/modules/home/components/HomeButton";
 interface HomeTextProps {
     title: string;
 	subtitle: string | ReactElement | Element;
-    urlTo: string;
-    textTo: string;
+    urlTo?: string;
+    textTo: string | JSX.Element;
     reverse?: boolean;
     callback?: () => void
 }

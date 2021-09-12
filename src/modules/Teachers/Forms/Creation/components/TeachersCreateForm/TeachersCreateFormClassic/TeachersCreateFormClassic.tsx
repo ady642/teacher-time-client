@@ -26,6 +26,9 @@ const TeachersCreateFormClassic: FunctionComponent<TeachersCreateFormClassicProp
 	const setPassword = (password: string) => {
 		setObject('password', password, registrationForm, setRegistrationForm)
 	}
+	const setConfirmationPassword = (confirmationPassword: string) => {
+		setObject('confirmationPassword', confirmationPassword, registrationForm, setRegistrationForm)
+	}
 	const setFirstName = (firstName: string) => {
 		setObject('firstName', firstName, registrationForm, setRegistrationForm)
 	}
@@ -38,8 +41,9 @@ const TeachersCreateFormClassic: FunctionComponent<TeachersCreateFormClassicProp
 		<TeachersCreateFormClassLastName value={registrationForm.lastName} setValue={setLastName} />
 		<TeachersCreateFormClassEmail value={registrationForm.email}  setValue={setEmail}/>
 		<TeachersCreateFormClassPassword value={registrationForm.password} setValue={setPassword} />
+		<TeachersCreateFormClassPassword value={registrationForm.confirmationPassword} setValue={setConfirmationPassword} />
 		{ registrationStatus === 'ERROR' ? <ErrorMessage className={'text-lg self-center'} exception={'Cet utilisateur existe déjà'} /> : <div /> }
-		<TeachersCreateFormClassButton registrationStatus={registrationStatus} onClick={submitRegistration} />
+		<TeachersCreateFormClassButton registrationStatus={registrationStatus} onClick={(e) => submitRegistration(e)} />
 	</form>
 }
 

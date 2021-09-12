@@ -16,7 +16,7 @@ const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
 	const [registrationForm, setRegistrationForm] = useState(new RegistrationForm())
 	const [registrationValidator, setRegistrationValidator] = useState(new TeachersConnectionFormValidator(registrationForm))
 
-	const register = async (e: Event) => {
+	const register = async (e: any) => {
 		e.preventDefault(); // remove refresh when click on submit button
 		try {
 			await submitRegister(registrationForm, registrationValidator)

@@ -21,7 +21,7 @@ export interface RegisterModalContentProps {
 	setRegistrationForm: (registrationForm: RegistrationForm) => void;
 	refContent: MutableRefObject<HTMLDivElement>;
 	exceptions: Map<string, string>;
-	submitRegistration: (e?: Event) => void;
+	submitRegistration: (e?: any) => void;
 	registrationStatus: string;
 	clickOnAlreadyExists: () => void;
 	onGoogleButtonClick: () => void;

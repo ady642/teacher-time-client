@@ -21,7 +21,7 @@ const TeachersConnectForm: FunctionComponent<TeachersConnectFormProps> = () => {
 	const [loginForm, setLoginForm] = useState(new LoginForm())
 	const [loginValidator, setLoginValidator] = useState(new LoginValidator(loginForm))
 
-	const login = async (e: Event) => {
+	const login = async (e: any) => {
 		e.preventDefault(); // remove refresh when click on submit button
 		try {
 			await submitLogin(loginForm, loginValidator)
@@ -45,7 +45,7 @@ const TeachersConnectForm: FunctionComponent<TeachersConnectFormProps> = () => {
 	return <form>
 		<TeachersCreateFormClassEmail exception={loginValidator.exceptions.get('email')} value={loginForm.email} setValue={setEmail}/>
 		<TeachersCreateFormClassPassword exception={loginValidator.exceptions.get('password')} value={loginForm.password} setValue={setPassword} />
-		<TeachersConnectFormButton loginStatus={loginStatus} onClick={login} />
+		<TeachersConnectFormButton loginStatus={loginStatus} onClick={(e) => login(e)} />
 	</form>
 }
 

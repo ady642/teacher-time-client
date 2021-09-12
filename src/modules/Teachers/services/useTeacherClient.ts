@@ -21,11 +21,9 @@ const useTeacherClient = () => {
 	}
 
 	const getTeacher = async () => {
-		try {
+		if(user?.id) {
 			const teacher: Teacher = await teacherClient.getTeacher(user.id)
 			setTeacher(teacher)
-		} catch (error) {
-			setError('Ce profil professeur n\'existe pas')
 		}
 	}
 

@@ -2,7 +2,7 @@ import {MutableRefObject, useEffect} from "react";
 
 const useOutsideClick = (refs: MutableRefObject<HTMLElement>[], callback: Function) => {
 	const handleClick = (e: any) => {
-		const clickOnRefs = refs.some((ref: MutableRefObject<HTMLElement>) => ref.current.contains(e.target))
+		const clickOnRefs = refs.some((ref: MutableRefObject<HTMLElement>) => ref?.current?.contains(e.target))
 
 		if (!clickOnRefs) {
 			callback();
