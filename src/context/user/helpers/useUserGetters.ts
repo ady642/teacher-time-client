@@ -5,9 +5,11 @@ const useUserGetters = () => {
 	const { state } = useAppContext()
 
 	const teacher: Teacher = state.user.teacher
+	const available: boolean = state.user.available
 
 	return {
-		teacher
+		teacher,
+		available
 	}
 }
 

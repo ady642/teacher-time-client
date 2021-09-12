@@ -15,7 +15,8 @@ export interface StateInterface {
 		loading: boolean
 	},
 	user: {
-		teacher: Teacher
+		teacher: Teacher,
+		available: boolean
 	}
 }
 
@@ -33,7 +34,8 @@ const State: StateInterface = {
 		loading: false
 	},
 	user: {
-		teacher: null
+		teacher: null,
+		available: false
 	}
 }
 
