@@ -1,8 +1,8 @@
-export const defaultLocale = "fr" as const;
+export const defaultLocale = "fr"
 
-export const locales = ["en", "fr"] as const;
+export const locales = ["en", "fr"];
 
 export const languageNames = {
-    en: "English",
-    fr: "Français",
+	en: "English",
+	fr: "Français",
 };

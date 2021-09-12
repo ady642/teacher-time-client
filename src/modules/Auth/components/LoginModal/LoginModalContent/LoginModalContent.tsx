@@ -14,7 +14,7 @@ interface LoginModalContentProps {
 	loginForm: LoginForm;
 	setLoginForm: (loginForm: LoginForm) => void;
 	exceptions: Map<string, string>;
-	submitLogin: () => void;
+	submitLogin: (e?: Event) => void;
 	loginStatus: string;
 	clickOnNoAccount: () => void;
 	onGoogleButtonClick: () => void;
@@ -47,15 +47,13 @@ const LoginModalContent: FunctionComponent<LoginModalContentProps> = ({
 				<LoginEmailInput
 					exception={exceptions.get('email')}
 					className={'mb-6'}
-					label={'E-mail'}
 					value={loginForm.email} setValue={setEmail}
 				/>
 				<LoginPasswordInput
 					className={'mb-6'}
-					label={'Mot de passe'}
 					value={loginForm.password} setValue={setPassword}
 				/>
-				<LoginButton loginStatus={loginStatus} onClick={() => { submitLogin() }} />
+				<LoginButton loginStatus={loginStatus} onClick={submitLogin} />
 				<NoAccount onRegisterClick={clickOnNoAccount} />
 				<TTDivider text="ou"/>
 			</form>

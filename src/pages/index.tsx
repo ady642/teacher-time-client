@@ -3,6 +3,7 @@ import Head from "next/head";
 import { getInitialLocale } from "@/translations/getInitialLocale";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 
+
 const Index: React.FC = ({ token }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	React.useEffect(() => {
 		const tokenQuery = token ? `?token=${token}`: ''

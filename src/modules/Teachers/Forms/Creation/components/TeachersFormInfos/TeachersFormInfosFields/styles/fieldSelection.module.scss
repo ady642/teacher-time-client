@@ -1,0 +1,33 @@
+.description {
+  width: 100%;
+  resize: none;
+  height: 400px;
+  padding: 10px;
+  border: none;
+  background: #EBF2F7;
+  outline: none;
+  border-radius: 8px;
+}
+
+.field-selection {
+  &__content {
+    min-height: 400px;
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 44px;
+
+    text-transform: capitalize;
+
+    color: #149BB4;
+    margin-bottom: 16px;
+  }
+  &__subtitle {
+    font-size: 14px;
+    line-height: 19px;
+
+    color: #323232;
+    margin-bottom: 16px;
+  }
+}

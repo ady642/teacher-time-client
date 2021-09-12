@@ -1,4 +1,4 @@
-import React, {ReactNode, FC, useState} from 'react'
+import React, {ReactNode, FC, useState, useEffect} from 'react'
 import BottomBar from "@/common/components/BottomNavigation/BottomNavigation";
 import WhiteHeader from "@/common/components/Headers/WhiteHeader";
 import useAppGetters from "@/context/app/helpers/useAppGetters";
@@ -6,6 +6,9 @@ import useAppReducers from "@/context/app/helpers/useAppReducers";
 import LoadingModal from "@/common/components/Modals/LoadingModal";
 import AboutModal from "@/common/components/Modals/AboutModal";
 import PaymentModal from "@/modules/Payment/components/PaymentModal";
+import useUserGetters from "@/context/user/helpers/useUserGetters";
+import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
+import useRoutePush from "@/common/hooks/useRoutePush";
 
 type LayoutProps = {
     children: ReactNode;
@@ -20,6 +23,17 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 
 	const [aboutModalOpened, setModalOpened] = useState(false)
 	const [paymentModalOpened, setPaymentModalOpened] = useState(false)
+
+	const { teacher } = useUserGetters()
+	const { getTeacher } = useTeacherClient()
+
+	useEffect(() => {
+		const asyncGetTeacher = async () => {
+			await getTeacher()
+		}
+
+		asyncGetTeacher()
+	}, [])
 
 	return (
 		<div className={`${className}`}>

@@ -1,12 +1,16 @@
 import Document, {Html, Head, Main, NextScript} from 'next/document'
 import React from "react";
+import { NextSeo } from 'next-seo';
 
 class MyDocument extends Document {
 	render() {
 		return (
 			<Html>
+				<NextSeo
+					title="Teacher-time.com"
+					description="Tu bloques sur un exercice ? Go teacher-time.com pour trouver un professeur qui répondra à ta question en un click"
+				/>
 				<Head >
-					<title>Teacher Time</title>
 					<meta name="description" content="Tu bloques sur un exercice ? Go teacher-time.com pour trouver un professeur qui répondra à ta question en un click" />
 					<script
 						async

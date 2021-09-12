@@ -3,7 +3,7 @@ import React, {FC} from 'react'
 import useTranslation from "@/common/hooks/useTranslation";
 
 interface HomeButtonProps {
-	text: string;
+	text: string | JSX.Element;
     url?: string;
     callback?: () => void;
 }

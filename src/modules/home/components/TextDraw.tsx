@@ -5,8 +5,8 @@ import Draw from "@/modules/home/components/Draw";
 interface TextDrawProps {
 	title: string;
 	subtitle: string | ReactElement | Element;
-	urlTo: string;
-	textTo: string;
+	urlTo?: string;
+	textTo: string | JSX.Element;
 	srcDraw: string;
 	reverse ?: boolean;
 	callback?: () => void;

@@ -1,15 +1,18 @@
 import {ChangeEvent, FunctionComponent} from "react";
 import ErrorMessage from "@/common/components/Errors/ErrorMessage";
+import inputStyles from '@/common/components/Inputs/styles/inputStyles.module.scss'
 
 export interface InputProps {
-    label: string;
+    label?: string;
     type?: string;
-    value: string;
+    value: string | number;
     placeholder?: string;
-    setValue: (value: string) => void;
+    setValue: (value: string | number) => void;
     className?: string;
     autoComplete?: string;
+    withLabel?: boolean;
     exception?: string;
+	appendIcon?: JSX.Element;
 }
 
 const TTInput: FunctionComponent<InputProps> = ({
@@ -19,13 +22,15 @@ const TTInput: FunctionComponent<InputProps> = ({
 	type ='text',
 	className = '',
 	autoComplete= '',
-	exception= ''
+	exception= '',
+	withLabel= true,
+	appendIcon = false,
 }) => {
 	return <div className={`flex relative flex-col w-full ${className}`}>
-		<label className={'font-bold'}>{label}</label>
-		<div className={`border border-1 rounded-md p-1 border-gray-300 transition focus-within:border-black`}>
+		{ withLabel && <label className={'font-bold'}>{label}</label> }
+		<div className={inputStyles['TTInput__input-container']}>
 			<input
-				className="w-full p-1"
+				className="w-full bg-transparent"
 				autoComplete={autoComplete}
 				placeholder={placeholder}
 				type={type}
@@ -33,6 +38,7 @@ const TTInput: FunctionComponent<InputProps> = ({
 				value={value}
 				onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
 			/>
+			{ appendIcon }
 		</div>
 		<ErrorMessage exception={exception} />
 	</div>

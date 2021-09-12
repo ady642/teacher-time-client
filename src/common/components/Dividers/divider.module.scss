@@ -3,6 +3,7 @@ $color: rgba(129, 128, 120, 0.54);
 .divider {
   text-align: center;
   width: 120%;
+  align-self: center;
 }
 .divider:before, .divider:after {
   content: "";

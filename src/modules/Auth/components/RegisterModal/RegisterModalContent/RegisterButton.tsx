@@ -3,7 +3,7 @@ import SubmitButton from "@/modules/Auth/components/Buttons/SubmitButton";
 import {SubmitButtonProps} from "@/modules/Auth/components/Buttons/SubmitButton";
 import useTranslation from "@/common/hooks/useTranslation";
 
-interface RegisterButtonProps extends Omit<SubmitButtonProps, 'submitStatus' | 'label'> {
+export interface RegisterButtonProps extends Omit<SubmitButtonProps, 'submitStatus' | 'label'> {
 	registrationStatus: string;
 }
 

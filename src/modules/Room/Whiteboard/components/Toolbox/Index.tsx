@@ -1,4 +1,4 @@
-import {createElement, FunctionComponent, useEffect, useState} from "react";
+import { FunctionComponent, useEffect, useState} from "react";
 import Tool from "@/modules/Room/Whiteboard/components/Toolbox/Tool";
 import {Delete} from "@material-ui/icons";
 import styles from '@/modules/Room/Whiteboard/components/Toolbox/tools.module.scss'

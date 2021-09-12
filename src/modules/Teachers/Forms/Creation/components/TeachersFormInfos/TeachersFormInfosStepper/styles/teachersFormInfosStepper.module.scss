@@ -1,0 +1,36 @@
+.teachers-form-infos__stepper {
+  background-color: #FAFCFE;
+  &__image {
+    margin-bottom: 24px;
+  }
+  &__item {
+    border: 1px solid #C3D1DD;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+    max-width: 561px;
+    min-height: 105px;
+    cursor: pointer;
+    transition: all 0.7s;
+    &--active {
+      background: rgba(20, 155, 180, 0.08);
+      border: none;
+      border-left: 14px solid #149BB4
+    }
+    &__title {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 33px;
+      text-transform: capitalize;
+      &--active {
+        color: #149BB4
+      }
+    }
+    &__subtitle {
+      font-size: 14px;
+      line-height: 19px;
+      color: #323232;
+    }
+  }
+}
