@@ -16,7 +16,7 @@ const authReducer = (state: StateInterface, action: { payload: any, type: string
 		return { ...state, auth: { ...state.auth, user: action.payload  }};
 	case RESET_TOKEN:
 		Cookies.remove('token')
-		return {...state, auth: { ...state.auth, token: '' }}
+		return {...state, auth: { ...state.auth, token: '' }, user: { ...state.user, teacher: null}}
 	case SET_TOKEN:
 		Cookies.set('token', action.payload);
 		return {...state, auth: { ...state.auth, token: action.payload }}
