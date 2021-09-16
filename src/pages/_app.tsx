@@ -11,16 +11,6 @@ type AppLayoutProps = {
 }
 
 const MyApp = ({Component, pageProps}: AppLayoutProps)  => {
-
-	useEffect(() => {
-		socket.on('on-room-created', async () => {
-			console.log('room created')
-		})
-		socket.on('on-room-deleted', async () => {
-			console.log('ROOM DELETED')
-		})
-	})
-
 	return <ContextProvider>
 		<Component {...pageProps} />
 	</ContextProvider>

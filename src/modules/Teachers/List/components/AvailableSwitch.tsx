@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState} from "react";
+import React, {FunctionComponent, useState} from "react";
 import { Switch } from "@material-ui/core";
 import useUserGetters from "@/context/user/helpers/useUserGetters";
 import useUserReducers from "@/context/user/helpers/useUserReducers";

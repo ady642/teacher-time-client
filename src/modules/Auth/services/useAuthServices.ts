@@ -32,8 +32,7 @@ const useAuthServices = () => {
 				const data = await authClient.login(loginForm)
 				setLoginStatus('OK')
 				setUser(data.user)
-				await getTeacher()
-				setTimeout(() => {
+				setTimeout(async () => {
 					setToken(data.token)
 				}, 2000)
 			} catch (e) {
@@ -58,7 +57,8 @@ const useAuthServices = () => {
 
 				setTimeout(() => {
 					setToken(data.token)
-				}, 2000)			} catch (e) {
+				}, 2000)			}
+			catch (e) {
 				setTimeout(() => {
 					setRegistrationStatus('ERROR')
 				}, 2000)

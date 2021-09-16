@@ -63,7 +63,7 @@ export const LanguageProvider: React.FC<{ localization: Localization }> = ({
 
 export const getLocalizationProps = (ctx: any, namespace: string) => {
     const lang: Locale = (ctx.params?.lang as Locale) || "fr";
-    const locale: Record<string, any> = locales[lang];
+    const locale = locales[lang];
     const strings: any = locale[namespace];
     const translations = {
         common: locales[lang].common,
