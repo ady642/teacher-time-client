@@ -1,6 +1,7 @@
 const teachers = {
 	call: "Appeler",
 	profile: "Profil",
+	test: 'mytest',
 	form: {
 		creation: {
 			fields: {

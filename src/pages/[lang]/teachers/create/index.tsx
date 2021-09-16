@@ -14,16 +14,15 @@ interface CreateTeacherProps {
 }
 
 const CreateTeacher: FunctionComponent<CreateTeacherProps> = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const { token } = useAuthGetters()
+	const { token} = useAuthGetters()
 	const { teacher } = useUserGetters()
 	const { goTo } =  useRoutePush()
-
 
 	useEffect(() => {
 		if(teacher) {
 			goTo(localization.locale, '/')
 		}
-	})
+	}, [teacher])
 
 	return <LanguageProvider localization={localization}>
 		<WhiteHeaderLayout locale={localization.locale}>

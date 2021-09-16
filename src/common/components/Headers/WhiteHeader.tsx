@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {FC, useState} from 'react'
 
 import useTranslation from "@/common/hooks/useTranslation";
 import useRoutePush from "@/common/hooks/useRoutePush";
@@ -10,7 +10,6 @@ import AuthButtons from "@/modules/Auth/components/Buttons/AuthButtons";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import dynamic from "next/dynamic";
 import useUserGetters from "@/context/user/helpers/useUserGetters";
-import {FormControlLabel, Switch} from "@material-ui/core";
 import AvailableSwitch from "@/modules/Teachers/List/components/AvailableSwitch";
 
 const ConnectedComponent = dynamic(() => import('@/common/components/Headers/ConnectedComponent'))
@@ -28,7 +27,7 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal
 	const { token } = useAuthGetters()
 	const { teacher } = useUserGetters()
 
-	const [navItems, setNavItems] = useState([
+	const [navItems] = useState([
 		{
 			onClick: () => goToTeachers(),
 			translationKey: 'common.teachersList'
@@ -36,25 +35,8 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal
 		{
 			onClick: () => openAboutModal(),
 			translationKey: 'common.about'
-		},
-		{
-			onClick: () => goToCreationTeacher(),
-			translationKey: 'common.giveClasses'
 		}
 	])
-
-	useEffect(() => {
-		if(teacher) {
-			setNavItems([{
-				onClick: () => goToTeachers(),
-				translationKey: 'common.teachersList'
-			},
-			{
-				onClick: () => openAboutModal(),
-				translationKey: 'common.about'
-			}])
-		}
-	}, [teacher])
 
 	const goToTeachers = async () => {
 		await goTo(locale, 'teachers/list')
@@ -79,8 +61,11 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal
 						{ navItems.map(({ onClick, translationKey }) => <NavItem key={translationKey} onClick={onClick}>
 							{ t(translationKey) }
 						</NavItem>) }
+						{ teacher ? <AvailableSwitch />: <NavItem onClick={goToCreationTeacher}>
+							{ t('common.giveClasses') }
+						</NavItem> }
 					</ul>
-					{ teacher ? <AvailableSwitch />: null }
+
 				</nav>{ token ? <ConnectedComponent openPaymentModal={openPaymentModal}/> : <AuthButtons />  }
 			</div>
 		</div>

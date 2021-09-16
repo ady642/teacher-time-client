@@ -5,7 +5,7 @@ export interface PasswordInputProps extends Omit<InputProps, 'type' | 'placehold
 
 const PasswordInput: FunctionComponent<PasswordInputProps> = ({exception, value,setValue, className}) => {
 	return <TTInput
-		autoComplete={'new-password'}
+		autoComplete={'password'}
 		className={className}
 		label={'Mot de passe'}
 		type={'password'}

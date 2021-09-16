@@ -25,6 +25,9 @@ import HourlyRateInput
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/HourlyRate/HourlyRateInput";
 import ErrorMessage from "@/common/components/Errors/ErrorMessage";
 import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
+import useRoutePush from "@/common/hooks/useRoutePush";
+import useUserGetters from "@/context/user/helpers/useUserGetters";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 interface TeachersFormInfosFieldsProps extends StepperProps {
 
@@ -36,7 +39,10 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 	const [componentName, setComponentName] = useState('Field')
 	const { t } = useTranslation()
 	const [teacherCreationForm, setTeacherCreationForm] = useState(new TeacherCreationForm())
-	const { createTeacher, error } = useTeacherClient()
+	const { createTeacher, error, getTeacher } = useTeacherClient()
+	const { token, user } = useAuthGetters()
+	const { teacher } = useUserGetters()
+	const { goTo } = useRoutePush()
 
 	interface stepMappingComponentInterface {
 		componentName: string;
@@ -77,6 +83,16 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 		setTitle(stepMappingComponent[step].title)
 		setSubtitle(stepMappingComponent[step].subtitle)
 	}, [step])
+
+	useEffect(() => {
+
+	}, [token])
+
+	useEffect(() => {
+		if(teacher) {
+			goTo('fr', '/')
+		}
+	}, [teacher])
 
 	return <>
 		<header>

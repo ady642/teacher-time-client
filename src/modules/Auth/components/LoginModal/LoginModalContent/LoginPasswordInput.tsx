@@ -3,10 +3,9 @@ import PasswordInput, {PasswordInputProps} from "@/modules/Auth/components/Input
 
 interface RegisterPasswordInputProps extends PasswordInputProps {}
 
-const LoginPasswordInput: FunctionComponent<RegisterPasswordInputProps> = ({exception, value,setValue,label, className}) => {
+const LoginPasswordInput: FunctionComponent<RegisterPasswordInputProps> = ({exception, value,setValue, className}) => {
 	return <PasswordInput
 		className={className}
-		label={label}
 		value={value}
 		setValue={setValue}
 		exception={exception}

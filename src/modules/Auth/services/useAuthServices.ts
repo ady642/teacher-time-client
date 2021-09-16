@@ -5,12 +5,14 @@ import LoginForm from "@/modules/Auth/models/LoginForm";
 import LoginValidator from "@/modules/Auth/validators/LoginValidator";
 import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
 import RegistrationValidator from "../validators/RegistrationValidator";
+import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
 
 const useAuthServices = () => {
 	const [submitAttempt, setSubmitAttempt] = useState(false)
 	const [loginStatus, setLoginStatus] = useState('')
 	const [registrationStatus, setRegistrationStatus] = useState('')
 	const { setToken, setUser } =  useAuthReducers()
+	const { getTeacher } = useTeacherClient()
 
 	const authClient = new AuthClient()
 
@@ -29,9 +31,9 @@ const useAuthServices = () => {
 				setLoginStatus('LOADING')
 				const data = await authClient.login(loginForm)
 				setLoginStatus('OK')
-				setTimeout(() => {
+				setUser(data.user)
+				setTimeout(async () => {
 					setToken(data.token)
-					setUser(data.user)
 				}, 2000)
 			} catch (e) {
 				setTimeout(() => {
@@ -51,9 +53,12 @@ const useAuthServices = () => {
 				setRegistrationStatus('LOADING')
 				const data = await authClient.register(registrationForm)
 				setRegistrationStatus('OK')
-				setToken(data.token)
 				setUser(data.user)
-			} catch (e) {
+
+				setTimeout(() => {
+					setToken(data.token)
+				}, 2000)			}
+			catch (e) {
 				setTimeout(() => {
 					setRegistrationStatus('ERROR')
 				}, 2000)

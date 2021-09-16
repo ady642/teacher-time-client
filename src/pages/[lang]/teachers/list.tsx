@@ -11,6 +11,7 @@ import NoRoomModal from "@/modules/Room/components/NoRoomModal";
 import useRoom from "@/modules/Room/hooks/useRoom";
 import useFieldSelector from "@/modules/Teachers/List/components/TeacherFilters/FieldSelector/useFieldSelector";
 import useLevelSelector from "@/modules/Teachers/List/components/TeacherFilters/ChipFilters/LevelSelector/useLevelSelector";
+import {socket} from "@/common/utils/client";
 
 const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [locale, setLocale] = useState('')
@@ -39,6 +40,16 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 
 	useEffect(() => {
 		setLocale(getInitialLocale())
+		socket.emit('get-rooms', (rooms: any) => {
+			console.log(rooms)
+		})
+		socket.on('on-room-created', (rooms) => {
+			console.log(rooms)
+		})
+		socket.on('on-room-deleted', (rooms) => {
+			console.log(rooms)
+		})
+
 		//fetchBalance()
 	}, [])
 

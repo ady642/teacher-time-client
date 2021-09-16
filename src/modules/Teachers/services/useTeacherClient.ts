@@ -21,10 +21,9 @@ const useTeacherClient = () => {
 	}
 
 	const getTeacher = async () => {
-		if(user?.id) {
-			const teacher: Teacher = await teacherClient.getTeacher(user.id)
-			setTeacher(teacher)
-		}
+		console.log(token)
+		const teacher: Teacher = await teacherClient.getTeacher(user._id)
+		setTeacher(teacher)
 	}
 
 	return {

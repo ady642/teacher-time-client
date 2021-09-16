@@ -9,6 +9,7 @@ import PaymentModal from "@/modules/Payment/components/PaymentModal";
 import useUserGetters from "@/context/user/helpers/useUserGetters";
 import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
 import useRoutePush from "@/common/hooks/useRoutePush";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 type LayoutProps = {
     children: ReactNode;
@@ -26,14 +27,16 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 
 	const { teacher } = useUserGetters()
 	const { getTeacher } = useTeacherClient()
+	const { token, user} = useAuthGetters()
 
 	useEffect(() => {
 		const asyncGetTeacher = async () => {
 			await getTeacher()
 		}
 
-		asyncGetTeacher()
-	}, [])
+		if(!teacher && token && user._id)
+			asyncGetTeacher()
+	}, [token, user?._id])
 
 	return (
 		<div className={`${className}`}>
