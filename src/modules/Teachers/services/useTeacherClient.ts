@@ -21,7 +21,6 @@ const useTeacherClient = () => {
 	}
 
 	const getTeacher = async () => {
-		console.log(token)
 		const teacher: Teacher = await teacherClient.getTeacher(user._id)
 		setTeacher(teacher)
 	}

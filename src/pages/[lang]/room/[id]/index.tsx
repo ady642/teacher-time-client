@@ -1,9 +1,8 @@
-import React, {FC, useEffect, useRef, useState} from "react";
+import React, {FC, useEffect, useRef} from "react";
 import {socket} from "@/common/utils/client";
 import {withRouter} from 'next/router'
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import ModalAcceptation from "@/modules/Room/components/ModalAcceptation";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import useWebRTC from "@/modules/Room/hooks/useWebRTC";
@@ -13,10 +12,7 @@ interface RoomProps {
 }
 
 const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const [displayAcceptModal, setDisplayAcceptModal] = useState(false)
-	const [studentID, setStudentID] = useState('')
 	const { goTo } = useRoutePush()
-	const llamadaRef = useRef<HTMLAudioElement>(null)
 	/*	const [muted, setMuted] = useState(false)
 
 	const toggleMute = () => {
@@ -43,54 +39,19 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		//window.location.replace(`${process.env.BASE_URL}/${localization.locale}/room/create`)
 	}
 
-	const beep = async () => {
-		if(!llamadaRef.current)
-			return
-
-		llamadaRef.current.src = '/sound/tonoDeLlamada.mp3';
-		await llamadaRef.current.play()
-	}
-
-	const joinIntent = async (id: string) => {
-		setStudentID(id)
-		setDisplayAcceptModal(true)
-		await beep()
-	}
-
-	const closeModalAcceptation = async () => {
-		setDisplayAcceptModal(false)
-		await llamadaRef.current.pause()
-	}
-
-	const acceptStudent = async () => {
-		socket.emit('accept-student', { studentID, roomID })
-	}
-
-	const rejectStudent = async () => {
-		socket.emit('reject-student', studentID)
-		setStudentID('')
-		setDisplayAcceptModal(false)
-		await llamadaRef.current.pause()
-	}
-
 	const setStudent = async (newStudent: string) => {
-		await llamadaRef.current.pause()
 		await sendOffer(newStudent)
-		setDisplayAcceptModal(false)
 	}
 
 	useEffect(() => {
 		navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream => {
 			userStream.current = stream
 
+			console.log(roomID);
 			socket.emit('join-room', roomID)
-
-			socket.on('on-join-intent', joinIntent)
-			socket.on('on-student-already-accepted', closeModalAcceptation)
 			socket.on('on-student-joined', setStudent)
 
 			socket.on('on-answer', setAnswerAsRemoteDescription)
-
 			socket.on('on-offer', answerToOffer)
 			socket.on('on-ice-candidate-offer', setICECandidateMsg)
 
@@ -121,13 +82,6 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 				socket={socket}
 				roomID={roomID}
 			/>
-			<ModalAcceptation
-				displayAcceptModal={displayAcceptModal}
-				handleClose={() => setDisplayAcceptModal(false)}
-				acceptStudent={acceptStudent}
-				rejectStudent={rejectStudent}
-			/>
-			<audio loop ref={llamadaRef} />
 		</div>
 	</LanguageProvider>
 }
