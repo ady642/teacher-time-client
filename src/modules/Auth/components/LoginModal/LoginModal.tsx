@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect, useState, MouseEvent} from "react";
 import Modal from "@/common/components/Modals/Modal";
 import LoginActivator from "@/modules/Auth/components/LoginModal/LoginActivator";
 import LoginModalContent from "@/modules/Auth/components/LoginModal/LoginModalContent/LoginModalContent";
@@ -21,7 +21,7 @@ const LoginModal: FC = () => {
 		openRegisterModal()
 	}
 
-	const login = async (e: Event) => {
+	const login = async (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		try {
 			await submitLogin(loginForm, loginValidator)

@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, MouseEvent  } from 'react';
 import GoogleButton from '@/modules/Auth/components/Buttons/GoogleButton';
 import useTranslation from "@/common/hooks/useTranslation";
 import LoginEmailInput from "@/modules/Auth/components/LoginModal/LoginModalContent/LoginEmailInput";
@@ -14,7 +14,7 @@ interface LoginModalContentProps {
 	loginForm: LoginForm;
 	setLoginForm: (loginForm: LoginForm) => void;
 	exceptions: Map<string, string>;
-	submitLogin: (e?: Event) => void;
+	submitLogin: (e?: MouseEvent<HTMLButtonElement>) => void;
 	loginStatus: string;
 	clickOnNoAccount: () => void;
 	onGoogleButtonClick: () => void;

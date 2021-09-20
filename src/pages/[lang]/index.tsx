@@ -16,7 +16,6 @@ import Bounce from "@/modules/home/components/Bounce";
 import homeStyles from "@/modules/home/styles/Home.module.scss"
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
-import useRoomManagement from "@/modules/Room/hooks/useRoomManagement";
 
 const Home: FC = ({ localization, token: tokenQuery }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()

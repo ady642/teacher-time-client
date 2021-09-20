@@ -4,10 +4,9 @@ import EmailInput, {EmailInputProps} from "@/modules/Auth/components/Inputs/Emai
 interface LoginEmailInputProps extends EmailInputProps {}
 
 const LoginEmailInput: FunctionComponent<LoginEmailInputProps> = ({
-	value,setValue,label, className, exception
+	value,setValue, className, exception
 }) => {
 	return <EmailInput
-		label={label}
 		value={value}
 		setValue={setValue}
 		className={className}
