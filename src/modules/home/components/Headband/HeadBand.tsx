@@ -11,10 +11,13 @@ interface HeadBandProps {
 const HeadBand: FunctionComponent<HeadBandProps> = ({ goToTeachers }) => {
 	const { t } = useTranslation()
 
-	return <div className={`${styles.headBand} bg-blueviolet text-white flex justify-between items-center`}>
+	return <div className={`${styles.headBand} bg-white text-black flex justify-between items-center`}>
 		<section className={styles.headBand__left}>
 			<span className={`${styles.headBand__text} font-bold leading-relaxed`}>
 				{ t('teacherTimeWorld') }
+			</span>
+			<span className={`${styles.headBand__text__subhead}`}>
+				{ t('freeCall') }
 			</span>
 			<TailwindButton onClick={goToTeachers} className={`${styles.headBand__button} animate-pulse mt-5 text-white flex justify-center transition-all font-bold`}>
 				<span className={`mr-2 capitalize `}>

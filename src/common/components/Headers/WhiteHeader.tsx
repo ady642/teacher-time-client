@@ -30,11 +30,7 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal
 	const [navItems] = useState([
 		{
 			onClick: () => goToTeachers(),
-			translationKey: 'common.teachersList'
-		},
-		{
-			onClick: () => openAboutModal(),
-			translationKey: 'common.about'
+			translationKey: 'common.findAteacher'
 		}
 	])
 
@@ -51,7 +47,7 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal
 	}
 
 	return (
-		<div className={'flex items-center sm:px-6 sm:pt-6 sm:pb-3 p-2 bg-white justify-between'}>
+		<div className={'flex items-center sm:px-16 sm:pt-6 sm:pb-3 p-2 justify-between'}>
 			<div className={'cursor-pointer opacity-100 w-44 max-w-sm'} onClick={goToHome}>
 				<Logo height={40} width={180}/>
 			</div>

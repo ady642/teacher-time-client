@@ -41,7 +41,12 @@
   }
 
   &__text {
-    font-size: clamp(14px, 2.4vw, 50px);
+    font-size: clamp(14px, 2.7vw, 60px);
+
+    &__subhead {
+      font-size: clamp(6px, 1vw, 20px);
+      color: #7f7f7f;
+    }
   }
 
   &__image {
