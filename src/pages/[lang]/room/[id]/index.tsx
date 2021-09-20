@@ -47,7 +47,6 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream => {
 			userStream.current = stream
 
-			console.log(roomID);
 			socket.emit('join-room', roomID)
 			socket.on('on-student-joined', setStudent)
 

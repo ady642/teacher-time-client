@@ -6,10 +6,8 @@ interface TeacherCardCallButtonProps {
 }
 
 const TeacherCardCallButton: FunctionComponent<TeacherCardCallButtonProps> = ({ onClick }) => {
-	const { t } = useTranslation()
-
 	return <button className={`rounded-3xl transition bg-orange hover:bg-red-700 text-white px-5 text-sm font-bold py-1`} onClick={() => onClick()}>
-		Participer
+		Poser sa question
 	</button>
 }
 

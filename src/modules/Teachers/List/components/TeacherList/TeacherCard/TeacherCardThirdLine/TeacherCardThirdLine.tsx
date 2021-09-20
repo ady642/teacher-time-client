@@ -1,6 +1,4 @@
 import {FunctionComponent} from "react";
-import TeacherCardLanguages
-	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardLanguages";
 import TeacherCardButtons
 	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardThirdLine/TeacherCardButtons";
 
@@ -12,7 +10,6 @@ interface TeacherCardThirdLineProps {
 
 const TeacherCardThirdLine: FunctionComponent<TeacherCardThirdLineProps> = ({ onCall, onOpenProfile, languages }) => {
 	return <div className={'flex items-center justify-between mt-10'}>
-		<TeacherCardLanguages languages={languages}/>
 		<TeacherCardButtons onCall={onCall} onOpenProfile={onOpenProfile}/>
 	</div>
 }

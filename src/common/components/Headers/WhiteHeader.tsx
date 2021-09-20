@@ -21,7 +21,7 @@ interface HeaderProps extends AvailableSwitchProps {
 	dark?: boolean;
 }
 
-const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal, createRoom, deleteRoom}) => {
+const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal}) => {
 	const { t } = useTranslation()
 	const { goTo } = useRoutePush()
 	const { token } = useAuthGetters()
@@ -61,9 +61,7 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal
 						{ navItems.map(({ onClick, translationKey }) => <NavItem key={translationKey} onClick={onClick}>
 							{ t(translationKey) }
 						</NavItem>) }
-						{ teacher ? <AvailableSwitch
-							createRoom={createRoom}
-							deleteRoom={deleteRoom}/>:
+						{ teacher ? <AvailableSwitch />:
 							<NavItem onClick={goToCreationTeacher}>
 								{ t('common.giveClasses') }
 							</NavItem> }

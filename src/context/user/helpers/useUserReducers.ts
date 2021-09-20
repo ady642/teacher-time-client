@@ -1,7 +1,7 @@
 import {useAppContext} from "@/context";
 import {Teacher} from "@/modules/Teachers/models/Entity/Teacher";
 import {SET_TEACHER, SET_TEACHER_AVAILABLE} from "@/context/user/reducers/reducersTypes";
-//import useUserGetters from "@/context/user/helpers/useUserGetters";
+//import useRoomGetters from "@/context/user/helpers/useRoomGetters";
 
 const useUserReducers = () => {
 	const {dispatch} = useAppContext()

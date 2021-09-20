@@ -6,13 +6,12 @@ interface TeacherListProps {
     teachers: Teacher[];
     onCall: (id: string) => void;
     onOpenProfile: (id: string) => void;
-    noRooms: boolean;
 }
 
-const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onCall, onOpenProfile, noRooms }) => {
+const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onCall, onOpenProfile }) => {
 	return <div className={'w-full h-full z-0'}>
-		{ noRooms && <h2 className={'text-l uppercase text-gray-500'}>Aucuns professeurs n'est disponible pour le moment</h2>}
-		{ !noRooms &&
+		{ teachers.length === 0 && <h2 className={'text-l uppercase text-gray-500'}>Aucuns professeurs n'est disponible pour le moment</h2>}
+		{ teachers.length > 0 &&
 			<>
 				<section className={'flex flex-wrap justify-between mt-6'}>
 					{
