@@ -1,6 +1,14 @@
+import Teacher from "@/modules/Teachers/List/models/Teacher";
+
 export interface RoomUsers {
     teacherID: string,
     studentID: string
+}
+
+export interface Room {
+    id: string;
+    teacher: Teacher;
+    students: string[];
 }
 
 export interface OfferIcePayload {

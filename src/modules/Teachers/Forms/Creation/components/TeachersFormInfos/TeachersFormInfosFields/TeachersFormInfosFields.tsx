@@ -39,8 +39,8 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 	const [componentName, setComponentName] = useState('Field')
 	const { t } = useTranslation()
 	const [teacherCreationForm, setTeacherCreationForm] = useState(new TeacherCreationForm())
-	const { createTeacher, error, getTeacher } = useTeacherClient()
-	const { token, user } = useAuthGetters()
+	const { createTeacher, error } = useTeacherClient()
+	const { token } = useAuthGetters()
 	const { teacher } = useUserGetters()
 	const { goTo } = useRoutePush()
 

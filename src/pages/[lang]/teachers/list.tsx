@@ -1,24 +1,25 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {FC, useEffect, useMemo} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
 import TeacherFilters from "@/modules/Teachers/List/components/TeacherFilters/TeacherFilters";
 import TeacherList from "@/modules/Teachers/List/components/TeacherList/TeacherList";
 import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
-import {getInitialLocale} from "@/translations/getInitialLocale";
 import WhiteHeaderLayout from "@/common/layouts/WhiteHeaderLayout";
 import NoRoomModal from "@/modules/Room/components/NoRoomModal";
 import useRoom from "@/modules/Room/hooks/useRoom";
 import useFieldSelector from "@/modules/Teachers/List/components/TeacherFilters/FieldSelector/useFieldSelector";
 import useLevelSelector from "@/modules/Teachers/List/components/TeacherFilters/ChipFilters/LevelSelector/useLevelSelector";
+import useRoomGetters from "@/context/room/helpers/useRoomGetters";
 import {socket} from "@/common/utils/client";
 
-const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const [locale, setLocale] = useState('')
-
-	const { noRooms, noRoomModalOpened, setNoRoomModalOpened, callTeacher } = useRoom(localization.locale)
+const ListPage: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+	const { noRoomModalOpened, setNoRoomModalOpened, callTeacher } = useRoom(localization.locale)
 	const { fieldSelectorValue, fieldSelectorValues, setFieldSelectorValue } = useFieldSelector()
 	const { levels, level, setLevelValue: setLevel } = useLevelSelector()
+	const { rooms } = useRoomGetters()
+
+	const teachers = useMemo(() => rooms.map((room) => room.teacher), [rooms])
 
 	const openProfile = (id: string) => {
 		console.log('go to teacher profile', id)
@@ -31,29 +32,12 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 
 		let balance = await paymentClient.getBalance()
 		setBalance(balance)
-	}, [])*/
-
-
-	useEffect(() => {
-		// TODO: fetch teachers after filters change
-	}, [fieldSelectorValue])
+	}, []) */
 
 	useEffect(() => {
-		setLocale(getInitialLocale())
-		socket.emit('get-rooms', (rooms: any) => {
-			console.log(rooms)
-		})
-		socket.on('on-room-created', (rooms) => {
-			console.log(rooms)
-		})
-		socket.on('on-room-deleted', (rooms) => {
-			console.log(rooms)
-		})
-
+		socket.emit('get-rooms')
 		//fetchBalance()
 	}, [])
-
-
 
 	return (
 		<LanguageProvider localization={localization}>
@@ -62,7 +46,7 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<WhiteHeaderLayout
-				locale={locale}
+				locale={localization.locale}
 				className={'h-full bg-customgray'}
 			>
 				<main className={'flex lg:px-36 md:px-20 p-8 flex-col justify-start'}>
@@ -72,7 +56,6 @@ const Home: FC = ({ teachers, localization }: InferGetServerSidePropsType<typeof
 					/>
 					<TeacherList
 						teachers={teachers}
-						noRooms={noRooms}
 						onCall={callTeacher}
 						onOpenProfile={openProfile}
 					/>
@@ -89,26 +72,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const localization = getLocalizationProps(ctx, "teachers");
 
 	try {
-		//const { data: teachers } = await client('').get(`${process.env.BASE_URL}/api/teachers/get_online_teachers`)
-
-		const teachers = [
-			{
-				_id: '60bb3e699ba3676bb91d4e31',
-				hourlyRate: 30,
-				rating: 5,
-				hasDiploma: true,
-				description: 'Révision pour les élèves  entrant en terminale. à 16h  et à 18h tous les jours :Les dérivées : équation de la tangente : questions réponses',
-				avatar: '/img/drawbg.jpg',
-				name: 'Adrien HM MATHEMATIQUES',
-				languages: ['es', 'fr']
-			}
-		]
 		return {
-			props: { teachers, token, localization }
+			props: { token, localization }
 		}
 	} catch (e) {
 		throw new Error(e)
 	}
 }
 
-export default Home
+export default ListPage

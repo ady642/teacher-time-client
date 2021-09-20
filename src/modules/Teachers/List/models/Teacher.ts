@@ -1,30 +1,47 @@
+import User from "@/modules/Auth/types/User";
+import { Teacher as TeacherEntity } from "@/modules/Teachers/models/Entity/Teacher"
+
 export default class Teacher {
     _id: string
     name: string
-    avatar: string
+    avatar: string | undefined
     description: string
-    hasDiploma: boolean
     rating: number
 	hourlyRate: number
+	levels: string[]
+	fields: string[]
 	languages: string[]
+	socketId: string | undefined
 
 	constructor({
 		_id= '',
 		name = '',
-		avatar = '',
 		description = '',
-		hasDiploma = false,
-		rating = 1,
 		hourlyRate = 0,
-		languages = new Array<string>()
+		levels = new Array<string>(),
+		fields = new Array<string>(),
+		socketId = ''
 	} = {}) {
 		this._id = _id
 		this.name = name
-		this.avatar = avatar
+		this.levels = levels
+		this.fields = fields
 		this.description = description
-		this.hasDiploma = hasDiploma
-		this.rating = rating
+		this.rating = 5
 		this.hourlyRate = hourlyRate
-		this.languages = languages
+		this.languages = ["fr", "es"]
+		this.socketId = socketId
+	}
+
+	static fromUserAndTeacher(user: User, teacher: TeacherEntity) {
+		return new Teacher(
+			{
+				_id: teacher._id,
+				name: `${user.firstName} ${user.lastName.charAt(0)}.`,
+				description: teacher.description,
+				hourlyRate: teacher.hourlyRate,
+				levels: teacher.levels,
+				fields: teacher.fields,
+			})
 	}
 }

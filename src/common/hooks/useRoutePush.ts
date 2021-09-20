@@ -8,7 +8,7 @@ const useRoutePush = () => {
 
 	const goTo = async (locale: string, url: string, query?: any) => {
 		setAppLoading(true)
-		await router.push({ pathname: `/${locale}/${url}`, query })
+		await router.push({ pathname: `/${locale}/${url}`, query }, null, { shallow: true })
 		setAppLoading(false)
 	}
 

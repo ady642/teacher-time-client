@@ -10,15 +10,15 @@ import AuthButtons from "@/modules/Auth/components/Buttons/AuthButtons";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import dynamic from "next/dynamic";
 import useUserGetters from "@/context/user/helpers/useUserGetters";
-import AvailableSwitch from "@/modules/Teachers/List/components/AvailableSwitch";
+import AvailableSwitch, { AvailableSwitchProps } from "@/modules/Teachers/List/components/AvailableSwitch";
 
 const ConnectedComponent = dynamic(() => import('@/common/components/Headers/ConnectedComponent'))
 
-interface HeaderProps {
-    locale: string;
-    openAboutModal: () => void;
+interface HeaderProps extends AvailableSwitchProps {
+	locale: string;
+	openAboutModal: () => void;
 	openPaymentModal: () => void;
-    dark?: boolean;
+	dark?: boolean;
 }
 
 const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal}) => {
@@ -61,9 +61,10 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal
 						{ navItems.map(({ onClick, translationKey }) => <NavItem key={translationKey} onClick={onClick}>
 							{ t(translationKey) }
 						</NavItem>) }
-						{ teacher ? <AvailableSwitch />: <NavItem onClick={goToCreationTeacher}>
-							{ t('common.giveClasses') }
-						</NavItem> }
+						{ teacher ? <AvailableSwitch />:
+							<NavItem onClick={goToCreationTeacher}>
+								{ t('common.giveClasses') }
+							</NavItem> }
 					</ul>
 
 				</nav>{ token ? <ConnectedComponent openPaymentModal={openPaymentModal}/> : <AuthButtons />  }

@@ -1,7 +1,6 @@
 import {FunctionComponent} from "react";
 import styles from '@/modules/Teachers/List/styles/TeacherCard.module.scss'
 import Teacher from "@/modules/Teachers/List/models/Teacher";
-import TeacherCardAvatar from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardAvatar";
 import TeacherCardFirstLine
 	from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCardFirstLine/TeacherCardFirstLine";
 import TeacherCardSecondLine
@@ -17,7 +16,6 @@ interface TeacherCardProps {
 
 const TeacherCard: FunctionComponent<TeacherCardProps> = ({onCall, onOpenProfile, teacher}) => {
 	return <div className={styles.card}>
-		<TeacherCardAvatar avatar={teacher.avatar} />
 		<div className={'p-5'}>
 			<TeacherCardFirstLine name={teacher.name} rating={teacher.rating} />
 			<TeacherCardSecondLine description={teacher.description} />

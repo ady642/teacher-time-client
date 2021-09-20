@@ -6,10 +6,11 @@ import useAppReducers from "@/context/app/helpers/useAppReducers";
 import LoadingModal from "@/common/components/Modals/LoadingModal";
 import AboutModal from "@/common/components/Modals/AboutModal";
 import PaymentModal from "@/modules/Payment/components/PaymentModal";
-import useUserGetters from "@/context/user/helpers/useUserGetters";
-import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
-import useRoutePush from "@/common/hooks/useRoutePush";
-import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
+import ModalAcceptation from "@/modules/Room/components/ModalAcceptation";
+import useRoomManagement from "@/modules/Room/hooks/useRoomManagement";
+import {socket} from "@/common/utils/client";
+import {Room} from "@/modules/Room/types";
+import useRoomReducers from "@/context/room/helpers/useRoomReducers";
 
 type LayoutProps = {
     children: ReactNode;
@@ -25,18 +26,25 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 	const [aboutModalOpened, setModalOpened] = useState(false)
 	const [paymentModalOpened, setPaymentModalOpened] = useState(false)
 
-	const { teacher } = useUserGetters()
-	const { getTeacher } = useTeacherClient()
-	const { token, user} = useAuthGetters()
+	const {
+		acceptStudent, rejectStudent,
+		displayAcceptModal, closeModalAcceptation,
+		llamadaRef
+	} = useRoomManagement()
+
+	const { setRooms } = useRoomReducers()
 
 	useEffect(() => {
-		const asyncGetTeacher = async () => {
-			await getTeacher()
-		}
+		socket.on('on-get-rooms', (rooms: Room[]) => {
+			setRooms(rooms)
+		})
+		socket.on('on-room-created', (rooms) => {
+		})
+		socket.on('on-room-deleted', (rooms) => {
+		})
 
-		if(!teacher && token && user._id)
-			asyncGetTeacher()
-	}, [token, user?._id])
+		//fetchBalance()
+	}, [])
 
 	return (
 		<div className={`${className}`}>
@@ -50,6 +58,13 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 			<LoadingModal open={appLoading} handleClose={() => setAppLoading(false)} />
 			<AboutModal open={aboutModalOpened} handleClose={() => setModalOpened(false)} />
 			<PaymentModal open={paymentModalOpened} handleClose={() => setPaymentModalOpened(false)} />
+			<ModalAcceptation
+				displayAcceptModal={displayAcceptModal}
+				handleClose={closeModalAcceptation}
+				acceptStudent={acceptStudent}
+				rejectStudent={rejectStudent}
+			/>
+			<audio loop ref={llamadaRef} />
 		</div>
 	)
 }

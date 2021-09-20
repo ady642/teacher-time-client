@@ -3,7 +3,6 @@ import {useAppContext} from "@/context";
 import Cookies from "js-cookie";
 import User from "@/modules/Auth/types/User";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
-import {useCallback} from "react";
 
 type Token = {
 	firstName: string;

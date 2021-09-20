@@ -11,7 +11,16 @@ export default class TeacherClient extends Client{
 		);
 	}
 	getTeacher = async (userId: string): Promise<Teacher> => {
-		const { data } = await this.client.get(`${process.env.SERVER_URL}/teachers/${userId}`)
+		try {
+			const { data } = await this.client.get(`${process.env.SERVER_URL}/teachers/${userId}`)
+
+			return data
+		} catch (e) {
+			throw new Error(e)
+		}
+	}
+	getTeacherInfo = async (userId: string): Promise<Teacher> => {
+		const { data } = await this.client.get(`${process.env.SERVER_URL}/teachers/info/${userId}`)
 
 		return data
 	}

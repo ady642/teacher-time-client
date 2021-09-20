@@ -1,5 +1,6 @@
 import User from "@/modules/Auth/types/User";
 import {Teacher} from "@/modules/Teachers/models/Entity/Teacher";
+import {Room} from "@/modules/Room/types";
 
 export interface StateInterface {
 	auth: {
@@ -17,6 +18,10 @@ export interface StateInterface {
 	user: {
 		teacher: Teacher,
 		available: boolean
+	},
+	room: {
+		rooms: Room[],
+		roomID: string
 	}
 }
 
@@ -36,6 +41,10 @@ const State: StateInterface = {
 	user: {
 		teacher: null,
 		available: false
+	},
+	room: {
+		rooms: new Array<Room>(),
+		roomID: null
 	}
 }
 
