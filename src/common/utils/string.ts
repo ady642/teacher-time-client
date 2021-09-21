@@ -12,3 +12,6 @@ export const makeId = (length: number) => {
 	}
 	return result;
 }
+
+export const trimAndLowerCase = (str: string) => str.toLocaleLowerCase().trim()
+

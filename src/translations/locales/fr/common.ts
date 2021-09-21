@@ -13,7 +13,11 @@ const common = {
 	buyMinutes: 'Acheter des minutes',
 	giveClasses: 'donner des cours',
 	teachersList: 'Liste des professeurs',
-	register: 'Inscription'
+	register: 'Inscription',
+	join: "Un étudiant veut rejoindre la salle, acceptez vous ?",
+	accept: "Accepter",
+	reject: "Refuser",
+	studentEntry: 'Etudiant'
 };
 
 export default common;

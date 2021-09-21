@@ -58,7 +58,7 @@ const Home: FC = ({ localization, token: tokenQuery }: InferGetServerSidePropsTy
 							<Bounce className={`bg-blueviolet ${homeStyles.bounce2}`} />
 							<Bounce className={`bg-red-400 ${homeStyles.bounce3}`}  />
 						</div>
-						<TextEnd userConnected={Boolean(token)} openRegisterModal={openRegisterModal}/>
+						<TextEnd userConnected={Boolean(token)} />
 					</section>
 				</div>
 			</WhiteHeaderLayout>

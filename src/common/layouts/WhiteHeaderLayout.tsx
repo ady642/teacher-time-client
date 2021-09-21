@@ -23,7 +23,6 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 	const { appLoading } = useAppGetters()
 	const { setAppLoading } = useAppReducers()
 
-	const [aboutModalOpened, setModalOpened] = useState(false)
 	const [paymentModalOpened, setPaymentModalOpened] = useState(false)
 
 	const {
@@ -50,13 +49,11 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 		<div className={`${className}`}>
 			<WhiteHeader
 				dark={dark} locale={locale}
-				openAboutModal={() => setModalOpened(true)}
 				openPaymentModal={() => setPaymentModalOpened(true)}
 			/>
 			{children}
 			<BottomBar locale={locale} />
 			<LoadingModal open={appLoading} handleClose={() => setAppLoading(false)} />
-			<AboutModal open={aboutModalOpened} handleClose={() => setModalOpened(false)} />
 			<PaymentModal open={paymentModalOpened} handleClose={() => setPaymentModalOpened(false)} />
 			<ModalAcceptation
 				displayAcceptModal={displayAcceptModal}

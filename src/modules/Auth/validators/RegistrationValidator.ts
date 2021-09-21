@@ -20,21 +20,21 @@ export default class RegistrationValidator {
     }
 
     isFirstNameValid(): boolean {
-        if(!nameRegex.test(this.firstName)) {
+/*        if(!nameRegex.test(this.firstName)) {
             this.exceptions.set('firstName', 'Ce prénom n\'est pas valide')
 
             return false
-        }
+        }*/
 
         return true
     }
 
     isLastNameValid(): boolean {
-        if(!nameRegex.test(this.lastName)) {
+/*        if(!nameRegex.test(this.lastName)) {
             this.exceptions.set('lastName', 'Ce nom n\'est pas valide')
 
             return false
-        }
+        }*/
 
         return true
     }

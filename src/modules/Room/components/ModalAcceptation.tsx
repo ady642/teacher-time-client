@@ -15,15 +15,15 @@ const ModalAcceptation: FunctionComponent<ModalAcceptationProps> = ({ displayAcc
 	const { t } = useTranslation()
 
 	return <Modal open={displayAcceptModal} handleClose={handleClose} >
-		<DialogTitle id="alert-dialog-title">{t('studentEntry')}</DialogTitle>
+		<DialogTitle id="alert-dialog-title">{t('common.studentEntry')}</DialogTitle>
 		<DialogContent>
 			<DialogContentText id="alert-dialog-description">
-				{ t('join') }
+				{ t('common.join') }
 			</DialogContentText>
 		</DialogContent>
 		<DialogActions>
-			<SimpleButton onClick={rejectStudent} text={t('reject')} size='small' />
-			<SimpleButton onClick={acceptStudent} text={t('accept')} size='small' />
+			<SimpleButton onClick={rejectStudent} text={t('common.reject')} size='small' />
+			<SimpleButton onClick={acceptStudent} text={t('common.accept')} size='small' />
 		</DialogActions>
 	</Modal>
 }

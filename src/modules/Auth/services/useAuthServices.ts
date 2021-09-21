@@ -12,7 +12,6 @@ const useAuthServices = () => {
 	const [loginStatus, setLoginStatus] = useState('')
 	const [registrationStatus, setRegistrationStatus] = useState('')
 	const { setToken, setUser } =  useAuthReducers()
-	const { getTeacher } = useTeacherClient()
 
 	const authClient = new AuthClient()
 
@@ -29,7 +28,7 @@ const useAuthServices = () => {
 		if(loginFormValid) {
 			try {
 				setLoginStatus('LOADING')
-				const data = await authClient.login(loginForm)
+				const data = await authClient.login(new LoginForm(loginForm))
 				setLoginStatus('OK')
 				setUser(data.user)
 				setTimeout(async () => {
@@ -51,7 +50,7 @@ const useAuthServices = () => {
 		if(registrationFormValid) {
 			try {
 				setRegistrationStatus('LOADING')
-				const data = await authClient.register(registrationForm)
+				const data = await authClient.register(new RegistrationForm(registrationForm))
 				setRegistrationStatus('OK')
 				setUser(data.user)
 

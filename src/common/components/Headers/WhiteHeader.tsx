@@ -16,12 +16,11 @@ const ConnectedComponent = dynamic(() => import('@/common/components/Headers/Con
 
 interface HeaderProps extends AvailableSwitchProps {
 	locale: string;
-	openAboutModal: () => void;
 	openPaymentModal: () => void;
 	dark?: boolean;
 }
 
-const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal}) => {
+const WhiteHeader: FC<HeaderProps> = ({ locale, openPaymentModal}) => {
 	const { t } = useTranslation()
 	const { goTo } = useRoutePush()
 	const { token } = useAuthGetters()
@@ -47,7 +46,7 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal
 	}
 
 	return (
-		<div className={'flex items-center sm:px-16 sm:pt-6 sm:pb-3 p-2 justify-between'}>
+		<div className={'flex items-center sm:px-32 sm:pt-6 sm:pb-3 p-2 justify-between'}>
 			<div className={'cursor-pointer opacity-100 w-44 max-w-sm'} onClick={goToHome}>
 				<Logo height={40} width={180}/>
 			</div>
@@ -63,7 +62,7 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openAboutModal, openPaymentModal
 							</NavItem> }
 					</ul>
 
-				</nav>{ token ? <ConnectedComponent openPaymentModal={openPaymentModal}/> : <AuthButtons />  }
+				</nav>{ token ? <ConnectedComponent openPaymentModal={openPaymentModal}/> : ''  }
 			</div>
 		</div>
 	)

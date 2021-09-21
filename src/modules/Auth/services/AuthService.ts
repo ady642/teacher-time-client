@@ -8,11 +8,11 @@ export default class AuthClient extends Client{
     	document.location.href = `${process.env.SERVER_URL}/${provider}`
 	}
 	async register(registrationForm: RegistrationForm): Promise<{ token: string, user: User }> {
-		const { data } = await this.client.post(`${process.env.SERVER_URL}/register`, registrationForm)
+		const { data } = await this.client.post(`${process.env.SERVER_URL}/register`, registrationForm.transformForAPI())
 		return data
 	}
 	async login(loginForm: LoginForm): Promise<{ token: string, user: User }> {
-		const { data } = await this.client.post(`${process.env.SERVER_URL}/login`, loginForm)
+		const { data } = await this.client.post(`${process.env.SERVER_URL}/login`, loginForm.transformForAPI())
 		return data
 	}
 }

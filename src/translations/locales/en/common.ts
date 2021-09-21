@@ -13,6 +13,10 @@ const common = {
 	giveClasses: 'give classes',
 	teachersList: 'Teachers List',
 	register: 'Register',
+	join: "A student wants to ask you a question",
+	accept: "Accept",
+	reject: "Reject",
+	studentEntry: 'Student'
 };
 
 export default common;
