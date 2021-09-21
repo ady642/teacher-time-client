@@ -6,7 +6,6 @@ import useRoutePush from "@/common/hooks/useRoutePush";
 import NavItem from "@/common/components/Headers/NavItem";
 
 import Logo from "@/common/components/Logos/Logo";
-import AuthButtons from "@/modules/Auth/components/Buttons/AuthButtons";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import dynamic from "next/dynamic";
 import useUserGetters from "@/context/user/helpers/useUserGetters";
@@ -62,7 +61,7 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openPaymentModal}) => {
 							</NavItem> }
 					</ul>
 
-				</nav>{ token ? <ConnectedComponent openPaymentModal={openPaymentModal}/> : ''  }
+				</nav>{ token ? <ConnectedComponent /> : ''  }
 			</div>
 		</div>
 	)

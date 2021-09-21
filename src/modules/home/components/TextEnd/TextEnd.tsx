@@ -26,7 +26,9 @@ const TextEnd: FunctionComponent<TextEndProps> = ({ userConnected }) => {
 				<TailwindButton onClick={goToGiveClasses} className={'text-xl mt-8 px-6 py-2'}>Donner des cours</TailwindButton>
 			</Case>
 			<Case value={'AvailableSwitch'}>
-				<AvailableSwitch />
+				<div className={'text-white mt-4 text-lg border-2 border-solid border-white p-2 rounded-lg'}>
+					<AvailableSwitch />
+				</div>
 			</Case>
 		</Switch>
 	</section>
