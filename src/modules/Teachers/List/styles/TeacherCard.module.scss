@@ -11,13 +11,18 @@
 
   @media (min-width: 0px) {
     flex-basis: 100%;
+    margin-right: 0;
+    margin-top: 20px;
   }
 
   @media (min-width: 768px) {
     flex-basis: 50%;
+    margin-right: 15px;
+    margin-top: 0;
   }
 
   @media (min-width: 900px) {
     flex-basis: 30%;
+    margin-top: 0;
   }
 }

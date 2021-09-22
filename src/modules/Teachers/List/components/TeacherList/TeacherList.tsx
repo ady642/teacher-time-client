@@ -13,7 +13,7 @@ const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onCall, on
 		{ teachers.length === 0 && <h2 className={'text-l uppercase text-gray-500'}>Aucuns professeurs n'est disponible pour le moment</h2>}
 		{ teachers.length > 0 &&
 			<>
-				<section className={'flex flex-wrap justify-between mt-6'}>
+				<section className={'flex flex-wrap mt-6'}>
 					{
 						teachers.map((teacher: Teacher) => <TeacherCard
 							key={teacher._id}
