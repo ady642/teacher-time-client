@@ -10,6 +10,13 @@ interface FieldSelectionProps {
 	teacherCreationForm: TeacherCreationForm
 }
 
+export enum Fields {
+	MATHS = 'maths',
+	ENGLISH = 'english',
+	FRENCH = 'french',
+	SPANISH = 'spanish'
+}
+
 const FieldSelection: FunctionComponent<FieldSelectionProps> = ({ teacherCreationForm, setTeacherCreationForm }) => {
 	const [selectedFields, setSelectedFields] = useState<Set<string>>(() => teacherCreationForm.fields);
 	const { setObject } = useObject()
@@ -26,13 +33,6 @@ const FieldSelection: FunctionComponent<FieldSelectionProps> = ({ teacherCreatio
 
 			return next;
 		});
-	}
-
-	enum Fields {
-		MATHS = 'maths',
-		ENGLISH = 'english',
-		FRENCH = 'french',
-		SPANISH = 'spanish'
 	}
 
 	useEffect(() =>{

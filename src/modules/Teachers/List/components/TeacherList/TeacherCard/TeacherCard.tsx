@@ -19,7 +19,7 @@ const TeacherCard: FunctionComponent<TeacherCardProps> = ({onCall, onOpenProfile
 		<div className={'p-5'}>
 			<TeacherCardFirstLine name={teacher.name} rating={teacher.rating} />
 			<TeacherCardSecondLine description={teacher.description} />
-			<TeacherCardThirdLine onCall={onCall} onOpenProfile={onOpenProfile} languages={teacher.languages} />
+			<TeacherCardThirdLine onCall={onCall} onOpenProfile={onOpenProfile} fields={teacher.fields} languages={teacher.languages} />
 		</div>
 	</div>
 }
