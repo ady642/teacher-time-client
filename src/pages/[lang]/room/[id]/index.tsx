@@ -7,6 +7,7 @@ import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext"
 import useRoutePush from "@/common/hooks/useRoutePush";
 import useWebRTC from "@/modules/Room/hooks/useWebRTC";
 import Head from "next/head";
+import useRoomPermission from "@/modules/Room/hooks/useRoomPermission";
 
 interface RoomProps {
 }
@@ -43,7 +44,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		await sendOffer(newStudent)
 	}
 
-	useEffect(() => {
+	const activateMicrophone = () => {
 		navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream => {
 			userStream.current = stream
 
@@ -59,6 +60,12 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 
 			socket.on('on-ended-room', () => alert('This room does not exist anymore'))
 		})
+	}
+
+	useRoomPermission(activateMicrophone)
+
+	useEffect(() => {
+		activateMicrophone()
 
 		return () => {
 			userStream.current.getTracks().forEach(track => {

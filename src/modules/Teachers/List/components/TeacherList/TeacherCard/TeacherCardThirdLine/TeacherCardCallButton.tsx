@@ -1,5 +1,4 @@
 import {FunctionComponent} from "react";
-import useTranslation from "@/common/hooks/useTranslation";
 
 interface TeacherCardCallButtonProps {
     onClick: Function

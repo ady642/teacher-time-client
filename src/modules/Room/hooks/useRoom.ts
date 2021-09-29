@@ -8,8 +8,8 @@ const useRoom = (locale: string) => {
 	const [noRoomModalOpened, setNoRoomModalOpened] = useState(false)
 	const { goTo } = useRoutePush()
 
-	const callTeacher = async () => {
-		await socket.emit('join-intent')
+	const callTeacher = async (teacherID: string) => {
+		await socket.emit('join-intent', teacherID)
 		setAppLoading(true)
 	}
 
