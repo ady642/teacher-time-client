@@ -15,11 +15,15 @@ interface TeacherCardProps {
 }
 
 const TeacherCard: FunctionComponent<TeacherCardProps> = ({onCall, onOpenProfile, teacher}) => {
+	const callTeacher = () => {
+		onCall(teacher._id)
+	}
+
 	return <div className={styles.card}>
 		<div className={'p-5'}>
 			<TeacherCardFirstLine name={teacher.name} rating={teacher.rating} />
 			<TeacherCardSecondLine description={teacher.description} />
-			<TeacherCardThirdLine onCall={onCall} onOpenProfile={onOpenProfile} fields={teacher.fields} languages={teacher.languages} />
+			<TeacherCardThirdLine onCall={callTeacher} onOpenProfile={onOpenProfile} fields={teacher.fields} languages={teacher.languages} />
 		</div>
 	</div>
 }

@@ -37,7 +37,6 @@ const useRoomManagement = () => {
 	}
 
 	const deleteRoom = () => {
-		console.log('je delete la room')
 		socket.emit('delete-room', roomID)
 	}
 
