@@ -1,12 +1,12 @@
-import Image from "next/image";
+import styles from '@/modules/home/styles/Home.module.scss'
 
 const WorkingWoman = () => {
-	return <Image
-		src={'/img/ttvideo.gif'}
-		alt={'TTvideo'}
+	return <img
+		src={'/img/board.png'}
+		className={styles['headBand__boardImage']}
+		alt={'board'}
 		width={800}
 		height={600}
-		objectFit={'contain'}
 	/>
 }
 
