@@ -9,6 +9,7 @@ import useRoomManagement from "@/modules/Room/hooks/useRoomManagement";
 import {socket} from "@/common/utils/client";
 import {Room} from "@/modules/Room/types";
 import useRoomReducers from "@/context/room/helpers/useRoomReducers";
+import Footer from "@/common/components/Footers/Footer";
 
 type LayoutProps = {
     children: ReactNode;
@@ -35,21 +36,19 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 		socket.on('on-get-rooms', (rooms: Room[]) => {
 			setRooms(rooms)
 		})
-		socket.on('on-room-created', (rooms) => {
-		})
-		socket.on('on-room-deleted', (rooms) => {
-		})
-
 		//fetchBalance()
 	}, [])
 
 	return (
-		<div className={`${className}`}>
-			<WhiteHeader
-				dark={dark} locale={locale}
-				openPaymentModal={() => setPaymentModalOpened(true)}
-			/>
-			{children}
+		<div className={`${className} flex-col flex justify-between`}>
+			<main>
+				<WhiteHeader
+					dark={dark} locale={locale}
+					openPaymentModal={() => setPaymentModalOpened(true)}
+				/>
+				{children}
+			</main>
+			<Footer />
 			{/*
 			<BottomBar locale={locale} />
 			*/}

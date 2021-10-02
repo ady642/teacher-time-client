@@ -45,7 +45,7 @@ const Home: FC = ({ localization, token: tokenQuery }: InferGetServerSidePropsTy
 				className={`${styles.page}`}
 			>
 				<HeadBand goToTeachers={goToTeachers} />
-				<div style={{ height: '75vh' }} className={`w-full bg-white flew-wrap  `}>
+				<div className={'w-full bg-white flew-wrap'}>
 					<section className={'overflow-hidden'} >
 						<div className="xl:px-40 lg:px-20 md:px-10 px-5 relative">
 							<TextDraw1 />

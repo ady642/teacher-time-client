@@ -7,7 +7,7 @@ interface FooterColumnProps {
 }
 
 const FooterColumn: FunctionComponent<FooterColumnProps> = ({ title, children }) => {
-	return <div>
+	return <div className={footerStyles.column}>
 		<h1 className={footerStyles.title}>
 			{ title }
 		</h1>

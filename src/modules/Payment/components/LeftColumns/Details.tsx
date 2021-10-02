@@ -1,5 +1,6 @@
 import {FunctionComponent} from "react";
 import styles from "@/modules/Payment/components/payment.module.scss";
+import MailLink from "@/common/components/Links/MailLink";
 
 interface DetailsProps {
 
@@ -16,7 +17,7 @@ const Details: FunctionComponent<DetailsProps> = () => {
 		</h4>
 		<h5 className={styles['payment__credits-information__details-subtitle-2']}>
 			Pour toutes questions, vous pouvez contacter notre support:
-			<a href="mailto:webmaster@teacher.com" className={'pointer font-bold ml-2 text-blue-400	'}>webmaster@teacher-time.com</a>
+			<MailLink className={'ml-2'} />
 		</h5>
 	</div>
 }
