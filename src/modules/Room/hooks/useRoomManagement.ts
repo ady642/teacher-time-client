@@ -32,7 +32,7 @@ const useRoomManagement = () => {
 	const createRoom = () => {
 		const uuid = v4()
 		setRoomID(uuid)
-		const teacherInfo: Teacher = Teacher.fromUserAndTeacher(user, teacher)
+		const teacherInfo: Teacher = new Teacher(teacher)
 		socket.emit('create-room', {roomID: uuid, teacher: teacherInfo })
 	}
 

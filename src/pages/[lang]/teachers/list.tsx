@@ -10,16 +10,14 @@ import NoRoomModal from "@/modules/Room/components/NoRoomModal";
 import useRoom from "@/modules/Room/hooks/useRoom";
 import useFieldSelector from "@/modules/Teachers/List/components/TeacherFilters/FieldSelector/useFieldSelector";
 import useLevelSelector from "@/modules/Teachers/List/components/TeacherFilters/ChipFilters/LevelSelector/useLevelSelector";
-import useRoomGetters from "@/context/room/helpers/useRoomGetters";
 import {socket} from "@/common/utils/client";
+import TeacherClient from "@/modules/Teachers/services/TeacherClient";
+import Teacher from "@/modules/Teachers/List/models/Teacher";
 
-const ListPage: FC = ({ localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ListPage: FC = ({ localization, teachers }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { noRoomModalOpened, setNoRoomModalOpened, callTeacher } = useRoom(localization.locale)
 	const { fieldSelectorValue, fieldSelectorValues, setFieldSelectorValue } = useFieldSelector()
 	const { levels, level, setLevelValue: setLevel } = useLevelSelector()
-	const { rooms } = useRoomGetters()
-
-	const teachers = useMemo(() => rooms.map((room) => room.teacher), [rooms])
 
 	const openProfile = (id: string) => {
 		console.log('go to teacher profile', id)
@@ -71,9 +69,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 	const localization = getLocalizationProps(ctx, "teachers");
 
+
+	const teacherClient = new TeacherClient()
+	const teachers = await teacherClient.getAll() ?? []
+	const teachersFormatted = teachers.map((teacher) => new Teacher(teacher).toJSON())
+
 	try {
 		return {
-			props: { token, localization }
+			props: { token, localization, teachers: teachersFormatted }
 		}
 	} catch (e) {
 		throw new Error(e)

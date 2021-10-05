@@ -5,7 +5,7 @@ interface TeacherCardNameProps {
 }
 
 const TeacherCardName: FunctionComponent<TeacherCardNameProps> = ({ name }) => {
-	return <span className="text-xl font-bold">
+	return <span className="text-xl font-bold mr-2">
 		{ name }
 	</span>
 }

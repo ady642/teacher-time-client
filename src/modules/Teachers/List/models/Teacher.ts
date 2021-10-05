@@ -1,5 +1,14 @@
 import User from "@/modules/Auth/types/User";
-import { Teacher as TeacherEntity } from "@/modules/Teachers/models/Entity/Teacher"
+
+interface TeacherParams {
+	_id: string,
+	description: string,
+	hourlyRate: number,
+	levels: string[],
+	fields: string[],
+	user: User,
+	socketId?: string
+}
 
 export default class Teacher {
     _id: string
@@ -15,15 +24,16 @@ export default class Teacher {
 
 	constructor({
 		_id= '',
-		name = '',
 		description = '',
 		hourlyRate = 0,
 		levels = new Array<string>(),
 		fields = new Array<string>(),
+		user,
 		socketId = ''
-	} = {}) {
+	}: TeacherParams) {
 		this._id = _id
-		this.name = name
+		this.name = `${user.firstName} ${user.lastName}`
+		this.avatar = ''
 		this.levels = levels
 		this.fields = fields
 		this.description = description
@@ -33,15 +43,7 @@ export default class Teacher {
 		this.socketId = socketId
 	}
 
-	static fromUserAndTeacher(user: User, teacher: TeacherEntity) {
-		return new Teacher(
-			{
-				_id: teacher._id,
-				name: `${user.firstName} ${user.lastName.charAt(0)}.`,
-				description: teacher.description,
-				hourlyRate: teacher.hourlyRate,
-				levels: teacher.levels,
-				fields: teacher.fields,
-			})
+	toJSON() {
+		return { ...this }
 	}
 }

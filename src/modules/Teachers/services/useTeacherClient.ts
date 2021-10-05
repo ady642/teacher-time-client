@@ -36,11 +36,6 @@ const useTeacherClient = () => {
 		}
 	}
 
-	const getTeacherInfo = async (userId: string) => {
-		const teacher: Teacher = await teacherClient.getTeacherInfo(userId)
-		return teacher
-	}
-
 	return {
 		createTeacher,
 		getTeacher,

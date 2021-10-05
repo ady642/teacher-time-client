@@ -24,4 +24,9 @@ export default class TeacherClient extends Client{
 
 		return data
 	}
+	getAll = async (): Promise<Teacher[]> => {
+		const { data } = await this.client.get(`${process.env.SERVER_URL}/teachers`)
+
+		return data
+	}
 }

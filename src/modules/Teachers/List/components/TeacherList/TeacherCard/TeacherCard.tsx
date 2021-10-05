@@ -11,17 +11,18 @@ import TeacherCardThirdLine
 interface TeacherCardProps {
     teacher: Teacher;
 	onCall: (id: string) => void;
-	onOpenProfile: (id: string) => void
+	onOpenProfile: (id: string) => void;
+	online: boolean
 }
 
-const TeacherCard: FunctionComponent<TeacherCardProps> = ({onCall, onOpenProfile, teacher}) => {
+const TeacherCard: FunctionComponent<TeacherCardProps> = ({online, onCall, onOpenProfile, teacher}) => {
 	const callTeacher = () => {
 		onCall(teacher._id)
 	}
 
 	return <div className={styles.card}>
 		<div className={'p-5'}>
-			<TeacherCardFirstLine name={teacher.name} rating={teacher.rating} />
+			<TeacherCardFirstLine online={online} name={teacher.name} rating={teacher.rating} />
 			<TeacherCardSecondLine description={teacher.description} />
 			<TeacherCardThirdLine onCall={callTeacher} onOpenProfile={onOpenProfile} fields={teacher.fields} languages={teacher.languages} />
 		</div>
