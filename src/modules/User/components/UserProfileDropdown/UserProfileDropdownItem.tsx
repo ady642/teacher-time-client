@@ -8,8 +8,8 @@ interface UserProfileDropdownItemProps {
 }
 
 const UserProfileDropdownItem: FunctionComponent<UserProfileDropdownItemProps> = ({ text, icon, onClick }) => {
-	return <div className={'flex cursor-pointer'} onClick={() => onClick()}>
-		{ icon }
+	return <div className={'flex w-full cursor-pointer whitespace-nowrap mb-3 transition hover:text-blueviolet'} onClick={() => onClick()}>
+		<span className={userDropdownStyles.icon}>{ icon }</span>
 		<span className={userDropdownStyles.text}>{text}</span>
 	</div>
 }

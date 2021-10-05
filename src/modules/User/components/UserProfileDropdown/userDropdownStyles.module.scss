@@ -1,10 +1,12 @@
 .text {
   font-size: 18px;
   line-height: 25px;
-  margin-left: 5px;
-  transition: all 0.3s;
+  margin-left: 15px;
+}
 
-  &:hover {
-    transform: scale(1.05);
-  }
+.icon {
+  min-width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

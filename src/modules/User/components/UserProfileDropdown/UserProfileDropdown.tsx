@@ -4,6 +4,8 @@ import UserProfileDropdownList from "@/modules/User/components/UserProfileDropdo
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import useClickOutside from "@/common/hooks/useClickOutside";
 import useRoomManagement from "@/modules/Room/hooks/useRoomManagement";
+import useRoutePush from "@/common/hooks/useRoutePush";
+import useTranslation from "@/common/hooks/useTranslation";
 
 interface UserProfileDropdownProps {
 	firstName: string;
@@ -12,11 +14,13 @@ interface UserProfileDropdownProps {
 
 const UserProfileDropdown: FunctionComponent<UserProfileDropdownProps> = ({ firstName, lastName }) => {
 	const [openedList, setOpenedList] = useState(false)
+	const { goTo } = useRoutePush()
+	const { locale } = useTranslation()
 
 	const { resetToken } = useAuthReducers()
 	const DDref = useRef<HTMLDivElement>(null)
 	useClickOutside([DDref], () => setOpenedList(false))
-	
+
 	const { deleteRoom } = useRoomManagement()
 
 	const logout = () => {
@@ -24,10 +28,17 @@ const UserProfileDropdown: FunctionComponent<UserProfileDropdownProps> = ({ firs
 		deleteRoom()
 	}
 
+	const goToProfile = () => {
+		goTo(locale, 'profile')
+	}
+
 	const onItemClick = (nameAction: string) => {
 		switch(nameAction) {
 		case 'logout':
 			logout()
+			break
+		case 'goToProfile':
+			goToProfile()
 			break
 		default:
 			console.warn('this action is not supported')
