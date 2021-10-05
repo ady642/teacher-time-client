@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useMemo} from 'react'
+import React, {FC, useEffect} from 'react'
 import Head from 'next/head'
 import {GetServerSideProps, InferGetServerSidePropsType} from 'next'
 
