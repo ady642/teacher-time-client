@@ -32,7 +32,7 @@ export default class Teacher {
 		socketId = ''
 	}: TeacherParams) {
 		this._id = _id
-		this.name = `${user.firstName} ${user.lastName}`
+		this.name = `${user.firstName} ${user.lastName.charAt(0)}.`
 		this.avatar = ''
 		this.levels = levels
 		this.fields = fields

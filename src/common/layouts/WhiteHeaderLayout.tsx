@@ -40,7 +40,7 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 	}, [])
 
 	return (
-		<div className={`${className} flex-col flex justify-between`}>
+		<div className={`${className} flex-col flex justify-between h-full`}>
 			<main>
 				<WhiteHeader
 					dark={dark} locale={locale}
