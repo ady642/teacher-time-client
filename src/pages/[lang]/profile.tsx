@@ -12,8 +12,8 @@ const Profile: FC = ({ localization }: InferGetServerSidePropsType<typeof getSer
 
 	return (
 		<LanguageProvider localization={localization}>
-			<WhiteHeaderLayout className={styles['container']}  locale={localization.locale} >
-				<div >
+			<WhiteHeaderLayout className={styles['container']}  locale={localization.locale}>
+				<div className={styles['content']}>
 					<AsideInformations teacher={teacher} />
 				</div>
 			</WhiteHeaderLayout>
