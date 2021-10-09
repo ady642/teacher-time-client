@@ -1,19 +1,19 @@
-import { useContext } from "react";
-import { LanguageContext } from "@/context/LanguageContext";
+import locales from "@/locales"
+import {useRouter} from "next/router";
 
 const resolvePath = (object: Record<string, any>, path: string, defaultValue = '') => path
 	.split('.')
 	.reduce((o, p) => o ? o[p] : defaultValue, object)
 
 export default function useTranslation() {
-	const { localization } = useContext(LanguageContext);
+	const { locale } = useRouter();
 	function t(key: string): string {
 
-		const translation = resolvePath(localization.translations, key) || localization.translations.common[key.split('.')[1]];
+		const translation = resolvePath(locales[locale], key) || locales[locale].common[key.split('.')[1]];
 
 		if (!translation) {
 			console.warn(
-				`Translation '${key}' for locale '${localization.locale}' not found.`
+				`Translation '${key}' for locale '${locale}' not found.`
 			);
 		}
 
@@ -22,6 +22,5 @@ export default function useTranslation() {
 
 	return {
 		t,
-		locale: localization.locale,
 	};
 }

@@ -10,13 +10,13 @@ const Subtitle2: FunctionComponent<Subtitle2Props> = () => {
 
 	return <div className={'flex flex-col'}>
 		<span>
-			{ t('textDraw2a') }
+			{ t('home.textDraw2a') }
 		</span>
 		<span className={'lg:my-2 my-1'}>
-            ✅ { t('textDraw2b') }
+            ✅ { t('home.textDraw2b') }
 		</span>
 		<span>
-			💯 { t('textDraw2c') }
+			💯 { t('home.textDraw2c') }
 		</span>
 	</div>
 }

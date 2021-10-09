@@ -14,12 +14,11 @@ import AvailableSwitch, { AvailableSwitchProps } from "@/modules/Teachers/List/c
 const ConnectedComponent = dynamic(() => import('@/common/components/Headers/ConnectedComponent'))
 
 interface HeaderProps extends AvailableSwitchProps {
-	locale: string;
 	openPaymentModal: () => void;
 	dark?: boolean;
 }
 
-const WhiteHeader: FC<HeaderProps> = ({ locale, openPaymentModal}) => {
+const WhiteHeader: FC<HeaderProps> = ({ openPaymentModal }) => {
 	const { t } = useTranslation()
 	const { goTo } = useRoutePush()
 	const { token } = useAuthGetters()
@@ -33,15 +32,15 @@ const WhiteHeader: FC<HeaderProps> = ({ locale, openPaymentModal}) => {
 	])
 
 	const goToTeachers = async () => {
-		await goTo(locale, 'teachers/list')
+		await goTo( 'teachers/list')
 	}
 
 	const goToCreationTeacher = async () => {
-		await goTo(locale, 'teachers/create')
+		await goTo('teachers/create')
 	}
 
 	const goToHome = async () => {
-		await goTo(locale, '/')
+		await goTo( '')
 	}
 
 	return (

@@ -1,7 +1,7 @@
 import en from "./en";
 import fr from "./fr";
 
-const locales: any = {
+const locales: Record<string, any> = {
 	en, fr
 }
 

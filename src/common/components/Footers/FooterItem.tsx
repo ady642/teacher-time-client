@@ -10,7 +10,7 @@ interface FooterItemProps {
 const FooterItem: FunctionComponent<FooterItemProps> = ({ text, url }) => {
 	const { goTo } = useRoutePush()
 
-	return <p onClick={() => goTo('fr', url)} className={footerStyles.item}>
+	return <p onClick={() => goTo(url)} className={footerStyles.item}>
 		{ text }
 	</p>
 }

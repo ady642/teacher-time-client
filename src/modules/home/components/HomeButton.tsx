@@ -1,6 +1,5 @@
 import useRoutePush from "@/common/hooks/useRoutePush";
 import React, {FC} from 'react'
-import useTranslation from "@/common/hooks/useTranslation";
 
 interface HomeButtonProps {
 	text: string | JSX.Element;
@@ -10,11 +9,10 @@ interface HomeButtonProps {
 
 const HomeButton: FC<HomeButtonProps> = ({ text, url, callback}) => {
 	const { goTo } = useRoutePush()
-	const { locale } = useTranslation()
 
 	const onClick = async () => {
 		if(url) {
-			await goTo(locale, url)
+			await goTo(url)
 		} else {
 			callback()
 		}

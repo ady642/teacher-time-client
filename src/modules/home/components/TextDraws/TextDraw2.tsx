@@ -16,7 +16,7 @@ const TextDraw2: FunctionComponent<TextDraw2Props> = ({ openRegisterModal }) => 
 
 	return <TextDraw
 		srcDraw={'/img/workingwomandraw.png'}
-		title={t('titreDraw2')}
+		title={t('home.titreDraw2')}
 		subtitle={<Subtitle2 />}
 		urlTo={teacher ? null : 'teachers/create'}
 		textTo={teacher ?

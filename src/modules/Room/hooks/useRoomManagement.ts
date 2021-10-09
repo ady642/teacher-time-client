@@ -52,7 +52,7 @@ const useRoomManagement = () => {
 
 	const acceptStudent = async () => {
 		await llamadaRef.current.pause()
-		await goTo('fr', `room/${roomID}`)
+		await goTo(`room/${roomID}`)
 		socket.emit('accept-student', { studentID, roomID: roomID })
 	}
 
