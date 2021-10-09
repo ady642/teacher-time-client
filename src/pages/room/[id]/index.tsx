@@ -11,7 +11,7 @@ import useRoomPermission from "@/modules/Room/hooks/useRoomPermission";
 interface RoomProps {
 }
 
-const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
 	/*	const [muted, setMuted] = useState(false)
 
