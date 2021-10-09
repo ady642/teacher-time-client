@@ -13,12 +13,11 @@ import Footer from "@/common/components/Footers/Footer";
 
 type LayoutProps = {
     children: ReactNode;
-    locale: string;
     className?: string;
     dark?: boolean;
 }
 
-const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, locale }) => {
+const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className }) => {
 	const { appLoading } = useAppGetters()
 	const { setAppLoading } = useAppReducers()
 
@@ -43,7 +42,7 @@ const WhiteHeaderLayout: FC<LayoutProps> = ({ children,dark = false, className, 
 		<div className={`${className} flex-col flex justify-between h-full`}>
 			<main>
 				<WhiteHeader
-					dark={dark} locale={locale}
+					dark={dark}
 					openPaymentModal={() => setPaymentModalOpened(true)}
 				/>
 				{children}

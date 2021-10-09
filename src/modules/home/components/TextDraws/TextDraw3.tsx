@@ -7,8 +7,8 @@ const TextDraw1: FunctionComponent = () => {
 
 	return <TextDraw
 		srcDraw={'/img/virtualexplanation.png'}
-		title={t('titreDraw3')}
-		subtitle={t('textDraw3')}
+		title={t('home.titreDraw3')}
+		subtitle={t('home.textDraw3')}
 		urlTo={'teachers/list'}
 		textTo={t('common.findAteacher')}
 	/>

@@ -3,7 +3,6 @@ import {socket} from "@/common/utils/client";
 import {withRouter} from 'next/router'
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
-import {getLocalizationProps, LanguageProvider} from "@/context/LanguageContext";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import useWebRTC from "@/modules/Room/hooks/useWebRTC";
 import Head from "next/head";
@@ -32,7 +31,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 
 	const handleTeacherDisconnection = async () => {
 		alert('The teacher is gone')
-		await goTo(localization.locale, '/')
+		await goTo('')
 	}
 
 	const handleStudentDisconnection = async () => {
@@ -78,7 +77,7 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 		}
 	}, [])
 
-	return <LanguageProvider localization={localization}>
+	return <>
 		<Head>
 			<title>Teacher-time | Room</title>
 			<link rel="icon" href="/favicon.ico" />
@@ -89,14 +88,13 @@ const Room: FC<RoomProps> = ({ roomID, localization }: InferGetServerSidePropsTy
 				roomID={roomID}
 			/>
 		</div>
-	</LanguageProvider>
+	</>
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const id = ctx.query?.id ?? ''
-	const localization = getLocalizationProps(ctx, "room");
 
-	return { props: { roomID: id, localization } }
+	return { props: { roomID: id } }
 }
 
 export default withRouter(Room)

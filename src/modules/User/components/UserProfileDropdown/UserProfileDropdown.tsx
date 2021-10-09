@@ -5,7 +5,6 @@ import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import useClickOutside from "@/common/hooks/useClickOutside";
 import useRoomManagement from "@/modules/Room/hooks/useRoomManagement";
 import useRoutePush from "@/common/hooks/useRoutePush";
-import useTranslation from "@/common/hooks/useTranslation";
 
 interface UserProfileDropdownProps {
 	firstName: string;
@@ -15,7 +14,6 @@ interface UserProfileDropdownProps {
 const UserProfileDropdown: FunctionComponent<UserProfileDropdownProps> = ({ firstName, lastName }) => {
 	const [openedList, setOpenedList] = useState(false)
 	const { goTo } = useRoutePush()
-	const { locale } = useTranslation()
 
 	const { resetToken } = useAuthReducers()
 	const DDref = useRef<HTMLDivElement>(null)
@@ -29,7 +27,7 @@ const UserProfileDropdown: FunctionComponent<UserProfileDropdownProps> = ({ firs
 	}
 
 	const goToProfile = () => {
-		goTo(locale, 'profile')
+		goTo('profile')
 	}
 
 	const onItemClick = (nameAction: string) => {
