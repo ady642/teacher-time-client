@@ -21,7 +21,8 @@ const CreateTeacher: FunctionComponent<CreateTeacherProps> = () => {
 			await goTo('')
 		}
 
-		(async() => await goAsync())()
+		if(teacher)
+			(async() => await goAsync())()
 	}, [teacher])
 
 	return <WhiteHeaderLayout>
