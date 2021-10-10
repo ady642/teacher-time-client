@@ -22,3 +22,9 @@
     max-width: 400px;
   }
 }
+
+.disabled {
+  &:hover:after {
+    display: none;
+  }
+}
