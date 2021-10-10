@@ -60,7 +60,8 @@ const WhiteHeader: FC<HeaderProps> = ({ openPaymentModal }) => {
 							</NavItem> }
 					</ul>
 
-				</nav>{ token ? <ConnectedComponent /> : ''  }
+				</nav>
+				{ token ? <ConnectedComponent /> : ''  }
 			</div>
 		</div>
 	)

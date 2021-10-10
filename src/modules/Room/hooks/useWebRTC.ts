@@ -76,7 +76,6 @@ const useWebRTC = ({
 			],
 		})
 
-		//peer.createDataChannel('test')
 		peer.onicecandidate = handleICECandidateEvent
 		peer.ontrack = handleTrackEvent
 

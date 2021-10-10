@@ -1,4 +1,4 @@
-import {FC, FunctionComponent, useEffect, useRef} from "react";
+import {FunctionComponent, useEffect, useRef} from "react";
 import {dropdownValue, dropdownValues, setDropdownValue} from "@/common/types/dropdown";
 import useClickOutside from "@/common/hooks/useClickOutside";
 import DropdownList from "@/common/components/Dropdowns/DropdownList";

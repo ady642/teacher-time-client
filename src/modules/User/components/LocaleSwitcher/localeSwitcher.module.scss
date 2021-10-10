@@ -1,0 +1,39 @@
+@mixin flag {
+  border-radius: 6px;
+}
+
+.locale-switcher {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &__activator {
+    @include flag;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #C3D1DD;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  &__list {
+    display: flex;
+    justify-content: flex-end;
+    z-index: 4;
+    overflow: hidden;
+    width: 100%;
+
+    &__item {
+      @include flag;
+      cursor: pointer;
+      margin-left: 10px;
+      opacity: 0.3;
+      transition: all 0.2s ease-in-out;
+
+      &--active {
+        opacity: 1
+      }
+    }
+  }
+}

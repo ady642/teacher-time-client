@@ -43,7 +43,7 @@ const UserProfileDropdown: FunctionComponent<UserProfileDropdownProps> = ({ firs
 		}
 	}
 
-	return <div ref={DDref} className={"relative"}>
+	return <div ref={DDref} className={"relative z-10"}>
 		<UserProfileButton onClick={() => setOpenedList(!openedList)} firstName={firstName} lastName={lastName} />
 		<UserProfileDropdownList openedList={openedList} onClick={onItemClick}/>
 	</div>
