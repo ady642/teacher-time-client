@@ -2,6 +2,9 @@ const teachers = {
 	call: "Appeler",
 	profile: "Profil",
 	test: 'mytest',
+	teacherOffline: 'Le professeur est hors ligne',
+	online: 'En ligne',
+	offline: 'Hors ligne',
 	form: {
 		creation: {
 			fields: {

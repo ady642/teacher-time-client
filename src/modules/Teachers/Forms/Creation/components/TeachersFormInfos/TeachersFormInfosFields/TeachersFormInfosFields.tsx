@@ -34,8 +34,8 @@ interface TeachersFormInfosFieldsProps extends StepperProps {
 }
 
 const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> = ({ setStep, step }) => {
-	const [title, setTitle] = useState('form.creation.fields.title')
-	const [subtitle, setSubtitle] = useState('form.creation.fields.subtitle')
+	const [title, setTitle] = useState('teachers.form.creation.fields.title')
+	const [subtitle, setSubtitle] = useState('teachers.form.creation.fields.subtitle')
 	const [componentName, setComponentName] = useState('Field')
 	const { t } = useTranslation()
 	const [teacherCreationForm, setTeacherCreationForm] = useState(new TeacherCreationForm())
@@ -52,19 +52,19 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 
 	const stepMappingComponent: Record<number, stepMappingComponentInterface> = {
 		[Step.FIELD]: {
-			componentName: 'Field', title: 'form.creation.fields.title', subtitle: 'form.creation.fields.subtitle'
+			componentName: 'Field', title: 'teachers.form.creation.fields.title', subtitle: 'teachers.form.creation.fields.subtitle'
 		},
 		[Step.DESCRIPTION]: {
-			componentName: 'Description', title: 'form.creation.description.title', subtitle: 'form.creation.description.subtitle'
+			componentName: 'Description', title: 'teachers.form.creation.description.title', subtitle: 'teachers.form.creation.description.subtitle'
 		},
 		[Step.LEVEL]: {
-			componentName: 'Level', title: 'form.creation.level.title', subtitle: 'form.creation.level.subtitle'
+			componentName: 'Level', title: 'teachers.form.creation.level.title', subtitle: 'teachers.form.creation.level.subtitle'
 		},
 		[Step.HOURLY_RATE]: {
-			componentName: 'HourlyRate', title: 'form.creation.hourlyRate.title', subtitle: 'form.creation.hourlyRate.subtitle'
+			componentName: 'HourlyRate', title: 'teachers.form.creation.hourlyRate.title', subtitle: 'teachers.form.creation.hourlyRate.subtitle'
 		},
 		[Step.DIPLOMA]: {
-			componentName: 'Field', title: 'form.creation.fields.title', subtitle: 'form.creation.fields.subtitle'
+			componentName: 'Field', title: 'teachers.form.creation.fields.title', subtitle: 'teachers.form.creation.fields.subtitle'
 		}
 	}
 

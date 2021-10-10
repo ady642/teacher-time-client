@@ -4,12 +4,13 @@ import TeacherCardCallButton
 
 interface TeacherCardButtonsProps {
     onCall: (id: string) => void;
-    onOpenProfile: (id: string) => void
+    onOpenProfile: (id: string) => void;
+	online: boolean
 }
 
-const TeacherCardButtons: FunctionComponent<TeacherCardButtonsProps> = ({ onCall }) => {
+const TeacherCardButtons: FunctionComponent<TeacherCardButtonsProps> = ({ onCall, online }) => {
 	return <div className={'flex'}>
-		<TeacherCardCallButton onClick={onCall}/>
+		<TeacherCardCallButton online={online} onClick={onCall}/>
 	</div>
 }
 

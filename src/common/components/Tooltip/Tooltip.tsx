@@ -1,15 +1,15 @@
-import {FunctionComponent, ReactFragment} from "react";
-import {Tooltip as MTooltip} from "@material-ui/core";
+import styles from './tooltip.module.scss'
+import {FunctionComponent, ReactNode } from "react";
 
 interface TooltipProps {
-    title: string | ReactFragment;
-    text: string;
+    children: ReactNode,
+    tooltip: string
 }
 
-const Tooltip: FunctionComponent<TooltipProps> = ({ title, text }) => {
-	return <MTooltip classes={{ tooltip:'text-base p-2' }} arrow className="cursor-pointer mx-1 underline text-blue-500" title={title}>
-		<span>{ text }</span>
-	</MTooltip>
+const Tooltip: FunctionComponent<TooltipProps> = ({ children, tooltip = '' }) => {
+	return <div className={styles.tooltip} data-tooltip={tooltip}>
+		{ children }
+	</div>
 }
 
 export default Tooltip

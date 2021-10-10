@@ -6,7 +6,7 @@ interface EnglishFlagProps {
 }
 
 const EnglishFlag: FunctionComponent<EnglishFlagProps> = ({ className }) => {
-	return <img className={className} width={FLAG_SIZE} height={FLAG_SIZE} src="img/icon/ingles.png" alt={'english flag'} />
+	return <img className={className} width={FLAG_SIZE} height={FLAG_SIZE} src="/img/icon/ingles.png" alt={'english flag'} />
 }
 
 export default EnglishFlag

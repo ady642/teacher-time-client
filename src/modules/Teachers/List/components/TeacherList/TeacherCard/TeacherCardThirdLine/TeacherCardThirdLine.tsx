@@ -6,15 +6,16 @@ import TeacherCardFields
 
 interface TeacherCardThirdLineProps {
     onCall: (id: string) => void;
+	online: boolean;
     onOpenProfile: (id: string) => void;
     languages: string[];
 	fields: string[]
 }
 
-const TeacherCardThirdLine: FunctionComponent<TeacherCardThirdLineProps> = ({ onCall, onOpenProfile, fields }) => {
+const TeacherCardThirdLine: FunctionComponent<TeacherCardThirdLineProps> = ({ online, onCall, onOpenProfile, fields }) => {
 	return <div className={'flex items-center justify-between mt-10'}>
 		<TeacherCardFields fields={fields}/>
-		<TeacherCardButtons onCall={onCall} onOpenProfile={onOpenProfile}/>
+		<TeacherCardButtons online={online} onCall={onCall} onOpenProfile={onOpenProfile}/>
 	</div>
 }
 

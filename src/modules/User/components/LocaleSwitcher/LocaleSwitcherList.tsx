@@ -14,14 +14,14 @@ const LocaleSwitcherList: FunctionComponent<LocaleSwitcherListProps> = () => {
 	const { route, locale } = useRouter()
 
 	return <div id={'localesSwitcherList'} className={styles['locale-switcher__list']}>
-		<Link href={route} locale="en">
-			<div className={`${styles['locale-switcher__list__item']} ${locale === 'en' ? `${styles['locale-switcher__list__item--active']}` : '' }`}>
-				<EnglishFlag />
-			</div>
-		</Link>
 		<Link href={route} locale="fr">
 			<div className={`${styles['locale-switcher__list__item']} ${locale === 'fr' ? `${styles['locale-switcher__list__item--active']}` : '' }`}>
 				<FrenchFlag />
+			</div>
+		</Link>
+		<Link href={route} locale="en">
+			<div className={`${styles['locale-switcher__list__item']} ${locale === 'en' ? `${styles['locale-switcher__list__item--active']}` : '' }`}>
+				<EnglishFlag />
 			</div>
 		</Link>
 	</div>
