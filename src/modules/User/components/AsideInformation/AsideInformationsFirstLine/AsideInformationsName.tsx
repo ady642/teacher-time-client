@@ -1,7 +1,7 @@
 import {FunctionComponent} from "react";
 import styles from '@/modules/User/styles/profile.module.scss'
 
-interface AsideInformationsNameProps {
+export interface AsideInformationsNameProps {
     firstName: string;
     lastName: string;
 }

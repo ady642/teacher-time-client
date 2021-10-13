@@ -11,7 +11,7 @@ const AsideInformationsCertificate: FunctionComponent<AsideInformationsCertifica
 
 	return <div className={styles['certificate']}>
 		<img className={styles['certificate__icon']} src={'/img/icon/valid.svg'} alt="Certificate"/>
-		<span className={styles['certificate__text']}>{ t('certificate') }</span>
+		<span className={styles['certificate__text']}>{ t('profile.certificate') }</span>
 	</div>
 }
 

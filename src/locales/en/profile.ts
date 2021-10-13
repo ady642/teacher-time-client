@@ -1,5 +1,6 @@
 const profile = {
-	certificate: 'Certificate teacher'
+	certificate: 'Certificate teacher',
+	profile: 'Profile'
 };
 
 export default profile;

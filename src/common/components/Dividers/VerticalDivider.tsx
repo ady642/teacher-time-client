@@ -10,8 +10,6 @@ const VerticalDivider: FunctionComponent<VerticalDividerProps> = ({ className = 
 		className={'flex justify-center items-center mx-6'}
 		orientation="vertical" variant="middle" flexItem
 	/>
-
-
 }
 
 export default VerticalDivider
