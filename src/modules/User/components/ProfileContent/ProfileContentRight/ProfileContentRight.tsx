@@ -7,13 +7,14 @@ import ProfileContentDescription
 import styles from '@/modules/User/components/ProfileContent/ProfileContentRight/styles.module.scss'
 
 interface ProfileContentRightProps {
-    teacher: Teacher
+    teacher: Teacher;
+	openEditionModal: (fieldToModify: string) => void
 }
 
-const ProfileContentRight: FunctionComponent<ProfileContentRightProps> = ({ teacher }) => {
+const ProfileContentRight: FunctionComponent<ProfileContentRightProps> = ({ openEditionModal, teacher }) => {
 	return <div className={styles['profile-content-right']}>
-		<ProfileContentHourlyRate hourlyRate={teacher.hourlyRate} />
-		<ProfileContentDescription description={teacher.description} />
+		<ProfileContentHourlyRate openEditionModal={openEditionModal} hourlyRate={teacher.hourlyRate} />
+		<ProfileContentDescription openEditionModal={openEditionModal} description={teacher.description} />
 	</div>
 }
 

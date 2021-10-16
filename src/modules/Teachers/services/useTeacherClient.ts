@@ -36,9 +36,23 @@ const useTeacherClient = () => {
 		}
 	}
 
+	const modifyTeacher = async (teacher: Partial<Teacher>) => {
+		if(!teacher._id) {
+			return
+		}
+
+		try {
+			await teacherClient.modifyTeacher(teacher)
+		} catch (error) {
+			setError(error.message)
+		}
+
+	}
+
 	return {
 		createTeacher,
 		getTeacher,
+		modifyTeacher,
 		error
 	}
 }

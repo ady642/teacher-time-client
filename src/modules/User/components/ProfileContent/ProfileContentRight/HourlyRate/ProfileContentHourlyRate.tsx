@@ -1,20 +1,21 @@
 import {FunctionComponent} from "react";
 import ProfileContentElement from "@/modules/User/components/ProfileContent/ProfileContentElement";
-import ProfileContentTitle from "@/modules/User/components/ProfileContent/ProfileContentTitle";
 
 interface ProfileContentHourlyRateProps {
-    hourlyRate: number
+    hourlyRate: number;
+	openEditionModal: (fieldToModify: string) => void
 }
 
-const ProfileContentHourlyRate: FunctionComponent<ProfileContentHourlyRateProps> = ({ hourlyRate }) => {
-	return <>
-		<ProfileContentElement>
-			<ProfileContentTitle title={'Prix par heure'} />
-		</ProfileContentElement>
+const ProfileContentHourlyRate: FunctionComponent<ProfileContentHourlyRateProps> = ({ openEditionModal, hourlyRate }) => {
+	return <ProfileContentElement
+		onPencilClick={() => openEditionModal('hourlyRate')}
+		title={'Prix par heure'}
+	>
 		<div>
 			{ hourlyRate }
 		</div>
-	</>
+	</ProfileContentElement>
+
 }
 
 export default ProfileContentHourlyRate

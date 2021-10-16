@@ -3,11 +3,11 @@ import {Create} from "@material-ui/icons";
 import styles from '@/modules/User/components/ProfileContent/ProfileContentLeft/styles.module.scss'
 
 interface EditionButtonProps {
-
+	onClick: () => void;
 }
 
-const EditionButton: FunctionComponent<EditionButtonProps> = () => {
-	return <button className={styles['edition-button']}>
+const EditionButton: FunctionComponent<EditionButtonProps> = ({ onClick }) => {
+	return <button onClick={() => onClick()} className={styles['edition-button']}>
 		<Create fontSize={'small'} />
 	</button>
 }

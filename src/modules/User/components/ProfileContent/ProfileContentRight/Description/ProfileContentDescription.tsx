@@ -1,20 +1,21 @@
 import {FunctionComponent} from "react";
 import ProfileContentElement from "@/modules/User/components/ProfileContent/ProfileContentElement";
-import ProfileContentTitle from "@/modules/User/components/ProfileContent/ProfileContentTitle";
 
 interface ProfileContentDescriptionProps {
-    description: string
+    description: string;
+	openEditionModal: (fieldToModify:string) => void
 }
 
-const ProfileContentDescription: FunctionComponent<ProfileContentDescriptionProps> = ({ description }) => {
-	return <>
-		<ProfileContentElement>
-			<ProfileContentTitle title={'Titre de votre annonce'} />
-		</ProfileContentElement>
+const ProfileContentDescription: FunctionComponent<ProfileContentDescriptionProps> = ({ openEditionModal, description }) => {
+	return 	<ProfileContentElement
+		onPencilClick={() => openEditionModal("description")}
+		title={'Titre de votre annonce'}
+	>
 		<div>
 			{ description }
 		</div>
-	</>
+	</ProfileContentElement>
+
 }
 
 export default ProfileContentDescription
