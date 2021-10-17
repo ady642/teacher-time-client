@@ -22,7 +22,7 @@ const TeacherFormInfosStepper: FunctionComponent<TeacherFormInfosStepperProps> =
 		}, {
 			active: step === Step.DESCRIPTION,
 			title: "étape 2. Titre de votre annonce",
-			subtitle: "La description permet de vous présenter rapidement aux élèves lorsqu'ils cherchent un professeur",
+			subtitle: "La description permet de vous présenter rapidement aux élèves lorsque les élèves cherchent un professeur",
 			onClick: () => setStep(Step.DESCRIPTION)
 		}, {
 			active: step === Step.LEVEL,

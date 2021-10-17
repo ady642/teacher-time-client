@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef} from "react";
+import { FunctionComponent } from "react";
 import TeacherCreationForm
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/models/TeacherCreationForm";
 import useObject from "@/common/hooks/useObject";
