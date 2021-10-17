@@ -29,4 +29,7 @@ export default class TeacherClient extends Client{
 
 		return data
 	}
+	modifyTeacher = async(teacher: Partial<Teacher> & { teacherID: string }): Promise<void> => {
+		await this.client.put(`${process.env.SERVER_URL}/teachers`, teacher)
+	}
 }

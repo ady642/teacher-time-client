@@ -1,0 +1,28 @@
+.profile-content {
+  &-left {
+    padding: 20px
+  }
+
+  &-element {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+}
+
+.edition-button {
+  border-radius: 100%;
+  margin-left: 18px;
+  padding: 5px;
+  background-color: #EBF2F7;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  display: flex;
+  justify-content: center;
+
+
+  &:hover {
+    background-color: #cbcece;
+  }
+}
+

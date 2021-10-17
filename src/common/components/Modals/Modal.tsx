@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {Dialog} from "@material-ui/core";
 
-interface ModalProps {
+export interface ModalProps {
     open: boolean;
     handleClose: () => void;
     className?: string;

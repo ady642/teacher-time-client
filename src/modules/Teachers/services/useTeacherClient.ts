@@ -6,13 +6,17 @@ import {useState} from "react";
 import useUserReducers from "@/context/user/helpers/useUserReducers";
 import {Teacher} from "@/modules/Teachers/models/Entity/Teacher";
 import useRoutePush from "@/common/hooks/useRoutePush";
+import constants from "@/common/constants";
+import useUserGetters from "@/context/user/helpers/useUserGetters";
 
 const useTeacherClient = () => {
 	const { token, user } = useAuthGetters()
+	const { teacher } = useUserGetters()
 	const { setTeacher } = useUserReducers()
 	const teacherClient = new TeacherClient(token)
 	const [error, setError] = useState('')
 	const { goTo } = useRoutePush()
+	const [submitStatus, setSubmitStatus] = useState(constants.SUBMIT_STATUS.PENDING)
 
 	const createTeacher = async (teacherCreationForm: TeacherCreationForm) => {
 		try {
@@ -36,10 +40,29 @@ const useTeacherClient = () => {
 		}
 	}
 
+	const modifyTeacher = async (teacherModified: Partial<Teacher>) => {
+		const teacherWithId = {
+			...teacherModified,
+			teacherID: teacher._id
+		}
+
+		try {
+			setSubmitStatus(constants.SUBMIT_STATUS.LOADING)
+			await teacherClient.modifyTeacher(teacherWithId)
+			setSubmitStatus(constants.SUBMIT_STATUS.OK)
+			setTeacher({ ...teacher, ...teacherModified })
+		} catch (error) {
+			setError(error.message)
+			setSubmitStatus(constants.SUBMIT_STATUS.ERROR)
+		}
+	}
+
 	return {
 		createTeacher,
 		getTeacher,
-		error
+		modifyTeacher,
+		error,
+		submitStatus
 	}
 }
 

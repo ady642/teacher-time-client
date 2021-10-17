@@ -1,0 +1,13 @@
+.tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
+  cursor: pointer;
+  color: #687B8C;
+
+  &--active {
+    border-bottom: 4px solid #149BB4;
+    color: #149BB4
+  }
+}
