@@ -10,6 +10,13 @@ interface LevelSelectionProps {
 	setTeacherCreationForm: (teacherCreationForm: TeacherCreationForm) => void
 }
 
+export enum Levels {
+	PRIMAIRE = 'primaire',
+	COLLEGE = 'college',
+	LYCEE = 'lycee',
+	SUPERIEUR = 'superieur'
+}
+
 const FieldSelection: FunctionComponent<LevelSelectionProps> = ({ teacherCreationForm, setTeacherCreationForm}) => {
 	const [selectedLevels, setSelectedLevels] = useState<Set<string>>(() => new Set(teacherCreationForm.levels));
 	const { setObject } = useObject()
@@ -26,13 +33,6 @@ const FieldSelection: FunctionComponent<LevelSelectionProps> = ({ teacherCreatio
 
 			return next;
 		});
-	}
-
-	enum Levels {
-		PRIMAIRE = 'primaire',
-		COLLEGE = 'college',
-		LYCEE = 'lycee',
-		SUPERIEUR = 'superieur'
 	}
 
 	useEffect(() =>{
