@@ -1,5 +1,5 @@
 import {FunctionComponent} from "react";
-import {Fields} from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelection";
+import { Fields } from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionIntegration";
 
 interface TeacherCardFieldsProps {
     fields: string[]

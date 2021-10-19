@@ -11,6 +11,7 @@ import FieldTitle
 import FieldSubtitle
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Common/FieldSubtitle";
 import useTranslation from "@/common/hooks/useTranslation";
+import LevelsModification from "@/modules/User/components/ProfileContent/ProfileContentEditionModal/LevelsModification";
 
 interface ProfileContentEditionModalProps extends Pick<ModalProps, 'open' | 'handleClose'> {
 	fieldToModify: string
@@ -81,7 +82,18 @@ const ProfileContentEditionModal: FunctionComponent<ProfileContentEditionModalPr
 					/>
 				</Case>
 				<Case value="fields">
-					<FieldsModification initFields={new Set(teacher.fields)} />
+					<FieldsModification
+						initFields={new Set(teacher.fields)}
+						modifyFields={modifyTeacher}
+						submitStatus={submitStatus}
+					/>
+				</Case>
+				<Case value="levels">
+					<LevelsModification
+						initLevels={new Set(teacher.levels)}
+						modifyLevels={modifyTeacher}
+						submitStatus={submitStatus}
+					/>
 				</Case>
 			</Switch>
 		</div>
