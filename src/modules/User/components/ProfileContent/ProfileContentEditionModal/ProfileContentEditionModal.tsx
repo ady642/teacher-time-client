@@ -12,6 +12,10 @@ import FieldSubtitle
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Common/FieldSubtitle";
 import useTranslation from "@/common/hooks/useTranslation";
 import LevelsModification from "@/modules/User/components/ProfileContent/ProfileContentEditionModal/LevelsModification";
+import HourlyRateModification
+	from "@/modules/User/components/ProfileContent/ProfileContentEditionModal/HourlyRateModification";
+import NameModification from "@/modules/User/components/ProfileContent/ProfileContentEditionModal/NameModification";
+import useUserClient from "@/modules/User/services/useUserClient";
 
 interface ProfileContentEditionModalProps extends Pick<ModalProps, 'open' | 'handleClose'> {
 	fieldToModify: string
@@ -19,6 +23,7 @@ interface ProfileContentEditionModalProps extends Pick<ModalProps, 'open' | 'han
 
 const ProfileContentEditionModal: FunctionComponent<ProfileContentEditionModalProps> = ({ open, handleClose, fieldToModify }) => {
 	const { modifyTeacher, submitStatus } = useTeacherClient()
+	const { modifyUser, submitStatus: submitUserStatus } = useUserClient()
 	const { teacher } = useUserGetters()
 	const [title, setTitle] = useState('teachers.form.creation.fields.title')
 	const [subtitle, setSubtitle] = useState('teachers.form.creation.fields.subtitle')
@@ -93,6 +98,21 @@ const ProfileContentEditionModal: FunctionComponent<ProfileContentEditionModalPr
 						initLevels={new Set(teacher.levels)}
 						modifyLevels={modifyTeacher}
 						submitStatus={submitStatus}
+					/>
+				</Case>
+				<Case value="hourlyRate">
+					<HourlyRateModification
+						hourlyRateInit={teacher.hourlyRate}
+						modifyHourlyRate={modifyTeacher}
+						submitStatus={submitStatus}
+					/>
+				</Case>
+				<Case value="name">
+					<NameModification
+						initFirstName={teacher.user.firstName}
+						initLastName={teacher.user.lastName}
+						modifyNames={modifyUser}
+						submitStatus={submitUserStatus}
 					/>
 				</Case>
 			</Switch>

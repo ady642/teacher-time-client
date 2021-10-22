@@ -1,5 +1,6 @@
 import {FunctionComponent} from "react";
 import ProfileContentElement from "@/modules/User/components/ProfileContent/ProfileContentElement";
+import Tag from "@/common/components/Tags/Tag";
 
 interface ProfileContentHourlyRateProps {
     hourlyRate: number;
@@ -11,9 +12,9 @@ const ProfileContentHourlyRate: FunctionComponent<ProfileContentHourlyRateProps>
 		onPencilClick={() => openEditionModal('hourlyRate')}
 		title={'Prix par heure'}
 	>
-		<div>
-			{ hourlyRate }
-		</div>
+		<Tag>
+			{ hourlyRate } €
+		</Tag>
 	</ProfileContentElement>
 
 }

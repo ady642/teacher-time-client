@@ -3,6 +3,7 @@ import ProfileContentElement from "@/modules/User/components/ProfileContent/Prof
 import Tag from "@/common/components/Tags/Tag";
 import {Fields} from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/FieldSelection/FieldSelectionIntegration";
 import ProfileContentIcon from "@/modules/User/components/ProfileContent/ProfileContentIcon";
+import styles from "@/modules/User/components/ProfileContent/styles.module.scss";
 
 interface ProfileContentFieldsProps {
     fields: string[];
@@ -20,12 +21,14 @@ const ProfileContentFields: FunctionComponent<ProfileContentFieldsProps> = ({ fi
 	}
 
 	return <ProfileContentElement  onPencilClick={() => openEditionModal('fields')} title={'Vos spécialités'}>
-		{ fields.map(field => <Tag key={field}>
-			<div className={'flex items-center'}>
-				<ProfileContentIcon src={`img/icon/fields/${field}.svg`} />
-				{ fieldName[field].label }
-			</div>
-		</Tag>) }
+		<div className={styles['tag-profile-container']}>
+			{ fields.map(field => <Tag key={field}>
+				<div className={'flex items-center'}>
+					<ProfileContentIcon src={`img/icon/fields/${field}.svg`} />
+					{ fieldName[field].label }
+				</div>
+			</Tag>) }
+		</div>
 	</ProfileContentElement>
 }
 

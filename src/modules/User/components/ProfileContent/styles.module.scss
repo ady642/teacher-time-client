@@ -6,4 +6,14 @@
   }
 }
 
+.tag-profile-container {
+  display: grid;
+  grid-auto-columns: 129px 129px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
+}
 

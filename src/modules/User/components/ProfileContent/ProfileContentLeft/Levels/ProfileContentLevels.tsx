@@ -3,6 +3,7 @@ import ProfileContentElement from "@/modules/User/components/ProfileContent/Prof
 import Tag from "@/common/components/Tags/Tag";
 import ProfileContentIcon from "@/modules/User/components/ProfileContent/ProfileContentIcon";
 import { Levels} from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/Level/LevelSelection";
+import styles from "@/modules/User/components/ProfileContent/styles.module.scss";
 
 interface ProfileContentLevelsProps {
     levels: string[];
@@ -20,12 +21,14 @@ const ProfileContentLevels: FunctionComponent<ProfileContentLevelsProps> = ({ le
 	}
 
 	return <ProfileContentElement onPencilClick={() => openEditionModal('levels')} title={'Niveau'}>
-		{ levels.map(level => <Tag className={'mb-2'} key={level}>
-			<div className={'flex items-center'}>
-				<ProfileContentIcon src={`img/icon/levels/${level}.svg`} />
-				{ levelName[level].label }
-			</div>
-		</Tag>) }
+		<div className={styles['tag-profile-container']}>
+			{ levels.map(level => <Tag key={level}>
+				<div className={'flex items-center'}>
+					<ProfileContentIcon src={`img/icon/levels/${level}.svg`} />
+					{ levelName[level].label }
+				</div>
+			</Tag>) }
+		</div>
 	</ProfileContentElement>
 
 }
