@@ -7,7 +7,12 @@
 }
 .content {
   display: flex;
-  padding: 40px;
+  padding: 40px 70px;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    padding: 20px;
+  }
 
   &__main {
     display: flex;
@@ -15,6 +20,11 @@
     box-shadow: 0px 4px 34px rgba(20, 155, 180, 0.15);
     border-radius: 16px;
     width: 100%;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      padding: 10px;
+    }
   }
 }
 .name {
@@ -35,6 +45,12 @@
   }
 }
 .aside-information {
+  margin-right: 40px;
+
+  @media (max-width: 900px) {
+    margin-right: 0
+  }
+
   &__first-line {
     @include line;
   }

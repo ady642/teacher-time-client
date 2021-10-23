@@ -15,9 +15,17 @@ a:hover {
     text-decoration: none!important;
 }
 
-html,body, #__next {
-    height: 100%;
+html {
+    min-height: 100%;
     font-family: 'Nunito', sans-serif;
+}
+
+body {
+    min-height: 100%;
+}
+
+#__next {
+    height: 100vh;
 }
 
 .h-min {
