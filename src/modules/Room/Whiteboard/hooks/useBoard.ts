@@ -6,7 +6,7 @@ import {SocketData} from "@/modules/Room/Whiteboard/types/SocketData";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
-import { linearCurve } from "@/modules/Room/Whiteboard/utils";
+import {bzCurve, bzCurveCustom, linearCurve} from "@/modules/Room/Whiteboard/utils";
 
 const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface, roomID: string, textBoxRef: MutableRefObject<HTMLTextAreaElement>) => {
 	const [drawing, setDrawing] = useState(false)
@@ -50,7 +50,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	}
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
 		const canvas = canvasRef.current
-		//let points = pointsRef.current
+		let points = pointsRef.current
 		const context = canvas.getContext('2d')
 		const rect = canvasRef.current.getBoundingClientRect();
 
@@ -64,12 +64,14 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		context.lineCap = 'round';
 
 		// Saving all the points in an array
-		//points.push({x: x0 - offsetLeft, y: y0 - offsetTop});
+		points.push({x: x0 - offsetLeft, y: y0 - offsetTop});
 
 		// Create curve between points
 		const A = { x: x0 - offsetLeft, y: y0 - offsetTop }
 		const B = { x: x1 - offsetLeft, y: y1 - offsetTop }
-		linearCurve(context, A, B);
+		bzCurveCustom(context, points);
+
+		points = []
 
 		// Data Emission
 		if (!isEmitting) { return; }

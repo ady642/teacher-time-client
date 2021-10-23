@@ -1,6 +1,6 @@
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
 
-function gradient(A: Point, B: Point) {
+export function gradient(A: Point, B: Point) {
 	return (B.y-A.y)/(B.x-A.x);
 }
 
@@ -93,17 +93,14 @@ export function throttle(callback: any, delay: number) {
 export const bzCurveCustom = (context: CanvasRenderingContext2D, points: Point[],) => {
 	context.beginPath();
 	let i = 0
-	context.moveTo(points[0].x, points[0].y);
 
 	for (i; i < points.length - 3; i++) {
-		const A = points[i]
 		const B = points[i + 1]
 		const C = points[i + 2]
 		const D = points[i + 3]
-		const BPrim = findPrim(A, B, C.y)
-		const CPrim = findPrim(C, D, B.y)
+		points[i + 4] = findE()
 
-		context.bezierCurveTo(BPrim.x, BPrim.y, CPrim.x, CPrim.y, D.x, D.y);
+		context.bezierCurveTo(B.x, B.y, C.x, C.y, D.x, D.y);
 	}
 
 	context.stroke();
