@@ -18,6 +18,14 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	const clearPoints = () => {
 		pointsRef.current = []
 	}
+
+	const plotPoints = () => {
+		const canvas = canvasRef.current
+		const context = canvas.getContext('2d')
+
+		bzCurveCustom(context, pointsRef.current)
+	}
+
 	const inputSetCoords = (x0: number, y0: number) => {
 		const textArea = textBoxRef.current;
 		textArea.style.left = ( (x0 - 2) + "px" );
@@ -50,7 +58,6 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	}
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
 		const canvas = canvasRef.current
-		let points = pointsRef.current
 		const context = canvas.getContext('2d')
 		const rect = canvasRef.current.getBoundingClientRect();
 
@@ -64,24 +71,29 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		context.lineCap = 'round';
 
 		// Saving all the points in an array
-		points.push({x: x0 - offsetLeft, y: y0 - offsetTop});
+		pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
 
 		// Create curve between points
-		const A = { x: x0 - offsetLeft, y: y0 - offsetTop }
-		const B = { x: x1 - offsetLeft, y: y1 - offsetTop }
-		bzCurveCustom(context, points);
-
-		points = []
+		//bzCurveCustom(context, pointsRef.current);
 
 		// Data Emission
 		if (!isEmitting) { return; }
 		let w = canvas.offsetWidth;
 		let h = canvas.offsetHeight;
 
-		socket.emit('drawing', { x0: x0 / w, y0: y0 / h, x1: x1 / w, y1: y1 / h, color, width, roomID});
+		//socket.emit('drawing', { x0: x0 / w, y0: y0 / h, x1: x1 / w, y1: y1 / h, color, width, roomID});
 	}
 
-	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut, onRightClick} = useMouseEvents(drawing, setDrawing, chalkParams, setChalkParams, drawLine, clearPoints, setRightClickActivated, rightClickActivated, textBoxParams, setTextBoxParams,tool, inputSetCoords, fillTextBox ,textBoxRef)
+	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut, onRightClick} =
+		useMouseEvents(drawing,
+			setDrawing, chalkParams,
+			setChalkParams, drawLine,
+			clearPoints, setRightClickActivated,
+			rightClickActivated, textBoxParams,
+			setTextBoxParams,tool, inputSetCoords,
+			fillTextBox ,textBoxRef,
+			plotPoints
+		)
 
 	useEffect(() => {
 		setChalkParams({ ...chalkParams, color: tool.color, width: tool.width })

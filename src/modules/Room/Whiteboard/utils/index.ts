@@ -1,7 +1,19 @@
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
 
+const MAX_GRAD = 1000
+
 export function gradient(A: Point, B: Point) {
-	return (B.y-A.y)/(B.x-A.x);
+	const gradient = (B.y-A.y)/(B.x-A.x)
+
+	if (gradient < -MAX_GRAD) {
+		return -MAX_GRAD
+	}
+
+	if(gradient > MAX_GRAD) {
+		return MAX_GRAD
+	}
+
+	return gradient
 }
 
 export const findPrim = (A: Point, B: Point, Cy: number): Point => {
@@ -90,15 +102,31 @@ export function throttle(callback: any, delay: number) {
 	};
 }
 
+export const relocateE = (C: Point, D: Point, E:Point): Point => {
+	const CDGradient: number = gradient(C, D)
+	const DE: number = Math.sqrt(Math.pow(D.x - E.x, 2) + Math.pow((E.y - D.y), 2))
+
+	const coeffTransformation: number = DE / Math.sqrt((1 + Math.pow(CDGradient, 2)))
+
+	return {
+		x: D.x + coeffTransformation,
+		y: D.y + CDGradient * coeffTransformation,
+	}
+}
+
+
 export const bzCurveCustom = (context: CanvasRenderingContext2D, points: Point[],) => {
 	context.beginPath();
 	let i = 0
 
-	for (i; i < points.length - 3; i++) {
-		const B = points[i + 1]
-		const C = points[i + 2]
-		const D = points[i + 3]
-		points[i + 4] = findE()
+	console.log(points)
+	for (i; i < points.length - 9; i+=6) {
+		context.moveTo(points[i].x, points[i].y)
+		const B = points[i + 2]
+		const C = points[i + 4]
+		const D = points[i + 6]
+		const E = points[i + 8]
+		points[i + 8] = relocateE(C, D, E)
 
 		context.bezierCurveTo(B.x, B.y, C.x, C.y, D.x, D.y);
 	}

@@ -16,7 +16,8 @@ const useMouseEvents = (
 	tool: ToolInterface,
 	InputSetCoords: (pageX: number, pageY: number) => void,
 	fillTextBox: (x0: number, y0: number,color: string, size:number,text:string, cpt:boolean) => void,
-	textBoxRef: any
+	textBoxRef: any,
+	plotPoints: () => void
 ) => {
 
 	const onMouseDown = (e: any) => {
@@ -66,6 +67,9 @@ const useMouseEvents = (
 			drawLine(chalkParams.x, chalkParams.y, e.pageX, e.pageY, chalkParams.color, chalkParams.width, true);
 		}
 
+
+		console.log({ x: e.pageX, y: e.pageY })
+
 		if( ('touches' in e) && e.touches.length !== 0) {
 			setChalkParams({
 				...chalkParams,
@@ -92,11 +96,13 @@ const useMouseEvents = (
 			drawLine(chalkParams.x, chalkParams.y, e.pageX||e.nativeEvent.changedTouches[0].pageX, e.pageY||e.nativeEvent.changedTouches[0].pageY, chalkParams.color, chalkParams.width, true);
 		}
 		setDrawing(false);
+		plotPoints()
 		clearPoints()
 	}
 
 	const onMouseOut = () => {
 		setDrawing(false);
+		plotPoints()
 		clearPoints()
 	}
 
