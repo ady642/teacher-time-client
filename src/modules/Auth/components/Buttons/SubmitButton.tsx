@@ -43,7 +43,7 @@ const SubmitButton: FunctionComponent<SubmitButtonProps> = ({
 
 	}, [submitStatus])
 
-	return <TailwindButton type={'submit'} onClick={onClick} className={`w-40 flex overflow-hidden justify-center py-1 h-8 text-lg relative mt-3 ${className}`}>
+	return <TailwindButton type={'submit'} onClick={onClick} className={`w-1/2 flex overflow-hidden justify-center py-1 h-8 text-lg relative mt-3 ${className}`}>
 		<div id={buttonId} className={`flex flex-col items-center absolute`}>
 			<span className={`${submitStatus === 'OK' ? 'visible': 'invisible'}`}><Check fontSize={'medium'} /></span>
 			<span className={`${submitStatus === 'ERROR' ? 'visible': 'invisible'}`}><ErrorOutline fontSize={'medium'}  /></span>

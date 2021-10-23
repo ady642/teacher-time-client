@@ -3,7 +3,6 @@ import footerStyles from '@/common/components/Footers/styles/footerStyles.module
 
 interface FooterColumnProps {
     title: string;
-    children: JSX.Element
 }
 
 const FooterColumn: FunctionComponent<FooterColumnProps> = ({ title, children }) => {

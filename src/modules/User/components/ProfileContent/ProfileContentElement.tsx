@@ -10,7 +10,7 @@ interface ProfileContentElementProps {
 
 const ProfileContentElement: FunctionComponent<ProfileContentElementProps> = ({ onPencilClick, children, title }) => {
 	return <div className={styles['profile-content-element']}>
-		<div className={'flex items-center mb-2'}>
+		<div className={'flex items-center mb-4'}>
 			<ProfileContentTitle title={title} />
 			<EditionButton onClick={onPencilClick}/>
 		</div>
