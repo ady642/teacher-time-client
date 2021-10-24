@@ -83,7 +83,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		textInBox.value = null
 		textInBox.style.display = "none"
 	}
-	
+
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
 		const canvas = canvasRef.current
 		const context = canvas.getContext('2d')
