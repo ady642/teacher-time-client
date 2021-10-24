@@ -17,7 +17,8 @@ const useMouseEvents = (
 	InputSetCoords: (pageX: number, pageY: number) => void,
 	fillTextBox: (x0: number, y0: number,color: string, size:number,text:string, cpt:boolean) => void,
 	textBoxRef: any,
-	plotPoints: () => void
+	roomID: string,
+	socket: any
 ) => {
 
 	const onMouseDown = (e: any) => {
@@ -96,11 +97,12 @@ const useMouseEvents = (
 		setDrawing(false);
 
 		clearPoints()
+		socket.emit("clear-points", roomID)
 	}
 
 	const onMouseOut = () => {
 		setDrawing(false);
-		clearPoints()
+		//clearPoints()
 	}
 
 	const onRightClick = () => {

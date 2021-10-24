@@ -2,6 +2,7 @@ import {FunctionComponent, MutableRefObject} from "react";
 import styles from './style.module.scss'
 import useBoard from "@/modules/Room/Whiteboard/hooks/useBoard";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
+import {Socket} from "socket.io-client";
 
 interface BoardProps {
 	boardContainerRef: MutableRefObject<HTMLDivElement>;
@@ -10,10 +11,11 @@ interface BoardProps {
 	roomID: string;
 	textBoxRef: MutableRefObject<HTMLTextAreaElement>;
 	className?: string;
+	socket: Socket
 }
 
-const Board: FunctionComponent<BoardProps> = ({ className = '', boardContainerRef, canvasRef, tool, roomID, textBoxRef }) => {
-	const { onMouseDown, onMouseMove, onMouseUp, onRightClick, onMouseOut } =  useBoard(boardContainerRef, canvasRef, tool, roomID, textBoxRef)
+const Board: FunctionComponent<BoardProps> = ({ className = '', boardContainerRef, canvasRef, tool, roomID, textBoxRef, socket }) => {
+	const { onMouseDown, onMouseMove, onMouseUp, onRightClick, onMouseOut } =  useBoard(boardContainerRef, canvasRef, tool, roomID, textBoxRef, socket)
 
 	return <canvas
 		className={`${styles.board} ${className}`}

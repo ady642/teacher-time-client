@@ -26,15 +26,6 @@ const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, roomID
 		setCursorClass(cursorClass)
 	}, [tool])
 
-	useEffect(() => {
-		socket.on('on-clear-canvas', clearCanvas)
-	})
-
-	const clearCanvas = () => {
-		const context = canvasRef.current.getContext('2d');
-		context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-	}
-
 	const emitToClear = () => {
 		socket.emit('clear-canvas', roomID)
 	}
@@ -52,6 +43,7 @@ const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, roomID
 					roomID={roomID}
 					textBoxRef={textBoxRef}
 					className={cursorClass}
+					socket={socket}
 				/>
 				<div className="flex w-28 pb-16 pr-2 justify-start items-center">
 					<ZoomIcons />
