@@ -17,7 +17,8 @@ const useMouseEvents = (
 	InputSetCoords: (pageX: number, pageY: number) => void,
 	fillTextBox: (x0: number, y0: number,color: string, size:number,text:string, cpt:boolean) => void,
 	textBoxRef: any,
-	plotPoints: () => void
+	roomID: string,
+	socket: any
 ) => {
 
 	const onMouseDown = (e: any) => {
@@ -68,8 +69,6 @@ const useMouseEvents = (
 		}
 
 
-		console.log({ x: e.pageX, y: e.pageY })
-
 		if( ('touches' in e) && e.touches.length !== 0) {
 			setChalkParams({
 				...chalkParams,
@@ -96,14 +95,14 @@ const useMouseEvents = (
 			drawLine(chalkParams.x, chalkParams.y, e.pageX||e.nativeEvent.changedTouches[0].pageX, e.pageY||e.nativeEvent.changedTouches[0].pageY, chalkParams.color, chalkParams.width, true);
 		}
 		setDrawing(false);
-		plotPoints()
+
 		clearPoints()
+		socket.emit("clear-points", roomID)
 	}
 
 	const onMouseOut = () => {
 		setDrawing(false);
-		plotPoints()
-		clearPoints()
+		//clearPoints()
 	}
 
 	const onRightClick = () => {

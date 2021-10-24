@@ -1,29 +1,57 @@
 import {MutableRefObject, useEffect, useState, useRef} from "react";
 import ChalkParams from "@/modules/Room/Whiteboard/interfaces/ChalkParams";
 import TextBoxParams from "@/modules/Room/Whiteboard/interfaces/TextBoxParams";
-import {socket} from "@/common/utils/client";
 import {SocketData} from "@/modules/Room/Whiteboard/types/SocketData";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
-import {bzCurve, bzCurveCustom, linearCurve} from "@/modules/Room/Whiteboard/utils";
+import {bzCurveCustom, STEP_POINT} from "@/modules/Room/Whiteboard/utils/calculs/cubicBezierCurve";
+import {calculateControlPoints} from "@/modules/Room/Whiteboard/utils/calculs/controlPoints";
+import {Socket} from "socket.io-client";
 
-const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface, roomID: string, textBoxRef: MutableRefObject<HTMLTextAreaElement>) => {
+type emissionPayload = {
+	A: Point;
+	B: Point;
+	chalkParams: Omit<ChalkParams, 'x' | 'y'>;
+	roomID: string
+}
+
+const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface, roomID: string, textBoxRef: MutableRefObject<HTMLTextAreaElement>, socket: Socket) => {
 	const [drawing, setDrawing] = useState(false)
 	const [chalkParams, setChalkParams] = useState<ChalkParams>({ width: tool.width, color: tool.color, x: 0, y: 0})
 	const [textBoxParams, setTextBoxParams] = useState<TextBoxParams>({ size: tool.width, color: tool.color, x: 0, y: 0, cpt:false})
 	const pointsRef: MutableRefObject<Point[]>  = useRef<Point[]>([])
 	const [rightClickActivated, setRightClickActivated] = useState(false)
+	const temporaryPoint = useRef<Point>(null)
+
+	const setTemporaryPoint = (temp: Point) => {
+		temporaryPoint.current = temp
+	}
 
 	const clearPoints = () => {
 		pointsRef.current = []
+		temporaryPoint.current = null
+	}
+
+	const clearCanvas = () => {
+		const context = canvasRef.current.getContext('2d');
+		context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+		clearPoints()
 	}
 
 	const plotPoints = () => {
 		const canvas = canvasRef.current
 		const context = canvas.getContext('2d')
 
-		bzCurveCustom(context, pointsRef.current)
+		bzCurveCustom(context, pointsRef.current, temporaryPoint.current, setTemporaryPoint)
+	}
+
+	const emitPoints = ({ A, B, chalkParams, roomID }: emissionPayload) => {
+		const canvas = canvasRef.current
+		let w = canvas.offsetWidth;
+		let h = canvas.offsetHeight;
+
+		socket.emit('drawing', { x0: A.x / w, y0: A.y / h, x1: B.x / w, y1: B.y / h, color: chalkParams.color, width: chalkParams.width, roomID});
 	}
 
 	const inputSetCoords = (x0: number, y0: number) => {
@@ -33,14 +61,13 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		textArea.style.display="block"
 	}
 
-	const fillTextBox = (x0: number, y0: number,color: string, size:number,text:string,cpt:boolean) => {
+	const fillTextBox = (x0: number, y0: number, color: string, size:number, text:string, cpt:boolean) => {
 		const canvas = canvasRef.current
 
 		const context = canvas.getContext('2d')
 		context.font = "21px Arial";
 
 		const textInBox = textBoxRef.current
-
 
 		const lineheight = 25;
 		const lines = textInBox.value.split('\n');
@@ -56,6 +83,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		textInBox.value = null
 		textInBox.style.display = "none"
 	}
+	
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
 		const canvas = canvasRef.current
 		const context = canvas.getContext('2d')
@@ -64,24 +92,45 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		const offsetLeft = rect.left;
 		const offsetTop = rect.top;
 
-		// Style
 		context.strokeStyle = color;
 		context.fillStyle = color;
 		context.lineWidth = width;
 		context.lineCap = 'round';
 
-		// Saving all the points in an array
-		pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
+		if(pointsRef.current.length <= 3 * STEP_POINT) {
+			pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
 
-		// Create curve between points
-		//bzCurveCustom(context, pointsRef.current);
+			if (isEmitting)
+				emitPoints({
+					A: { x: x0, y: y0 },
+					B: { x: x1, y: y1 },
+					chalkParams: { width, color },
+					roomID
+				})
 
-		// Data Emission
-		if (!isEmitting) { return; }
-		let w = canvas.offsetWidth;
-		let h = canvas.offsetHeight;
+			return
+		}
 
-		//socket.emit('drawing', { x0: x0 / w, y0: y0 / h, x1: x1 / w, y1: y1 / h, color, width, roomID});
+		if(temporaryPoint.current === null) {
+			const { BRight } = calculateControlPoints(
+				pointsRef.current[pointsRef.current.length - 3 * STEP_POINT],
+				pointsRef.current[pointsRef.current.length - 2 * STEP_POINT],
+				pointsRef.current[pointsRef.current.length - STEP_POINT]
+			)
+
+			temporaryPoint.current = BRight
+		} else {
+			pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
+			plotPoints()
+
+			if (isEmitting)
+				emitPoints({
+					A: { x: x0, y: y0 },
+					B: { x: x1, y: y1 },
+					chalkParams: { width, color },
+					roomID
+				})
+		}
 	}
 
 	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut, onRightClick} =
@@ -92,7 +141,8 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 			rightClickActivated, textBoxParams,
 			setTextBoxParams,tool, inputSetCoords,
 			fillTextBox ,textBoxRef,
-			plotPoints
+			roomID,
+			socket
 		)
 
 	useEffect(() => {
@@ -103,6 +153,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		const canvas = canvasRef.current
 		let w = canvas.offsetWidth;
 		let h = canvas.offsetHeight;
+
 		drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color, data.width);
 	}
 	const onFillTextEvent = (data: {text: string , x: string, y:string, roomID:string}): void => {
@@ -125,6 +176,11 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	useEffect(() => {
 		socket.on('drawing', onDrawingEvent);
 		socket.on('on-fill-text', onFillTextEvent);
+		socket.on('on-clear-canvas', clearCanvas);
+		socket.on('on-clear-points', clearPoints);
+	}, [])
+
+	useEffect(() => {
 		window.addEventListener('resize', onResize, false);
 		onResize()
 
