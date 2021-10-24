@@ -6,7 +6,9 @@ import {SocketData} from "@/modules/Room/Whiteboard/types/SocketData";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
-import {bzCurve, bzCurveCustom, linearCurve} from "@/modules/Room/Whiteboard/utils";
+import {bzCurveCustom, STEP_POINT} from "@/modules/Room/Whiteboard/utils/calculs/cubicBezierCurve";
+import {calculateDistanceBetweenTwoPoints} from "@/modules/Room/Whiteboard/utils/calculs/generalCalcul";
+import {calculateControlPoints} from "@/modules/Room/Whiteboard/utils/calculs/controlPoints";
 
 const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef: MutableRefObject<HTMLCanvasElement>, tool: ToolInterface, roomID: string, textBoxRef: MutableRefObject<HTMLTextAreaElement>) => {
 	const [drawing, setDrawing] = useState(false)
@@ -14,6 +16,9 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	const [textBoxParams, setTextBoxParams] = useState<TextBoxParams>({ size: tool.width, color: tool.color, x: 0, y: 0, cpt:false})
 	const pointsRef: MutableRefObject<Point[]>  = useRef<Point[]>([])
 	const [rightClickActivated, setRightClickActivated] = useState(false)
+	const [runningDistance, setRunningDistance] = useState(0)
+	const [temporaryPoint, setTemporaryPoint] = useState<Point>(null)
+	const thresholdDistance = 40
 
 	const clearPoints = () => {
 		pointsRef.current = []
@@ -23,7 +28,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		const canvas = canvasRef.current
 		const context = canvas.getContext('2d')
 
-		bzCurveCustom(context, pointsRef.current)
+		bzCurveCustom(context, pointsRef.current, temporaryPoint, setTemporaryPoint)
 	}
 
 	const inputSetCoords = (x0: number, y0: number) => {
@@ -33,14 +38,13 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		textArea.style.display="block"
 	}
 
-	const fillTextBox = (x0: number, y0: number,color: string, size:number,text:string,cpt:boolean) => {
+	const fillTextBox = (x0: number, y0: number, color: string, size:number, text:string, cpt:boolean) => {
 		const canvas = canvasRef.current
 
 		const context = canvas.getContext('2d')
 		context.font = "21px Arial";
 
 		const textInBox = textBoxRef.current
-
 
 		const lineheight = 25;
 		const lines = textInBox.value.split('\n');
@@ -70,11 +74,35 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		context.lineWidth = width;
 		context.lineCap = 'round';
 
-		// Saving all the points in an array
-		pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
+		if(pointsRef.current.length <= 3 * STEP_POINT) {
+			pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
 
-		// Create curve between points
-		//bzCurveCustom(context, pointsRef.current);
+			return
+		}
+
+		// Saving all the points in an array
+		const previousPointWithoutOffset = {
+			x: pointsRef.current[pointsRef.current.length - 1].x,
+			y: pointsRef.current[pointsRef.current.length - 1].y
+		}
+		const currentPointWithoutOffset = {x: x0, y: y0}
+		setRunningDistance(runningDistance + calculateDistanceBetweenTwoPoints(currentPointWithoutOffset, previousPointWithoutOffset))
+
+		if(runningDistance > thresholdDistance) {
+			if(!temporaryPoint) {
+				const { BRight } = calculateControlPoints(
+					pointsRef.current[pointsRef.current.length - 3 * STEP_POINT],
+					pointsRef.current[pointsRef.current.length - 2 * STEP_POINT],
+					pointsRef.current[pointsRef.current.length - STEP_POINT]
+				)
+
+				setTemporaryPoint(BRight)
+			} else {
+				pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
+				plotPoints()
+				setRunningDistance(0)
+			}
+		}
 
 		// Data Emission
 		if (!isEmitting) { return; }
@@ -125,6 +153,9 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	useEffect(() => {
 		socket.on('drawing', onDrawingEvent);
 		socket.on('on-fill-text', onFillTextEvent);
+	}, [])
+
+	useEffect(() => {
 		window.addEventListener('resize', onResize, false);
 		onResize()
 

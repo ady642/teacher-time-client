@@ -25,3 +25,29 @@ it('Find the E Point', () => {
 	expect(newE.x).toBe(30)
 	expect(newE.y).toBe(0)
 })
+
+
+describe('control points', () => {
+	it('should return the pivot point', () => {
+		// Given I Have A, B and C points
+		const A: Point = {
+			x: 10,
+			y: 0,
+		}
+
+		const B: Point = {
+			x: 20,
+			y: 0,
+		}
+
+		const C: Point = {
+			x: 20,
+			y: 10,
+		}
+
+		const pivotPoint = calculatePivotPoint(A, B, C)
+
+		expect(pivotPoint.x).toBe(10)
+		expect(pivotPoint.y).toBe(44)
+	})
+})

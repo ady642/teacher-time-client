@@ -68,8 +68,6 @@ const useMouseEvents = (
 		}
 
 
-		console.log({ x: e.pageX, y: e.pageY })
-
 		if( ('touches' in e) && e.touches.length !== 0) {
 			setChalkParams({
 				...chalkParams,
@@ -96,13 +94,12 @@ const useMouseEvents = (
 			drawLine(chalkParams.x, chalkParams.y, e.pageX||e.nativeEvent.changedTouches[0].pageX, e.pageY||e.nativeEvent.changedTouches[0].pageY, chalkParams.color, chalkParams.width, true);
 		}
 		setDrawing(false);
-		plotPoints()
+
 		clearPoints()
 	}
 
 	const onMouseOut = () => {
 		setDrawing(false);
-		plotPoints()
 		clearPoints()
 	}
 
