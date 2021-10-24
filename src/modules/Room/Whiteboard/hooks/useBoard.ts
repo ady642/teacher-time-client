@@ -22,19 +22,15 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	const [textBoxParams, setTextBoxParams] = useState<TextBoxParams>({ size: tool.width, color: tool.color, x: 0, y: 0, cpt:false})
 	const pointsRef: MutableRefObject<Point[]>  = useRef<Point[]>([])
 	const [rightClickActivated, setRightClickActivated] = useState(false)
-	const [runningDistance, setRunningDistance] = useState(0)
 	const temporaryPoint = useRef<Point>(null)
-	const thresholdDistance = 40
 
 	const setTemporaryPoint = (temp: Point) => {
-		console.log('je set le temp point')
 		temporaryPoint.current = temp
-		console.log(temporaryPoint)
 	}
 
 	const clearPoints = () => {
 		pointsRef.current = []
-		setTemporaryPoint(null)
+		temporaryPoint.current = null
 	}
 
 	const clearCanvas = () => {
@@ -87,49 +83,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		textInBox.value = null
 		textInBox.style.display = "none"
 	}
-	const drawLineFromEvent = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
-		const rect = canvasRef.current.getBoundingClientRect();
-
-		const offsetLeft = rect.left;
-		const offsetTop = rect.top;
-
-		// Style
-		const canvas = canvasRef.current
-		const context = canvas.getContext('2d')
-
-		context.strokeStyle = color;
-		context.fillStyle = color;
-		context.lineWidth = width;
-		context.lineCap = 'round';
-
-
-		if(pointsRef.current.length <= 3 * STEP_POINT) {
-			pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
-
-			return
-		}
-
-		if(temporaryPoint.current === null) {
-			console.log(pointsRef.current)
-
-			const { BRight } = calculateControlPoints(
-				pointsRef.current[pointsRef.current.length - 3 * STEP_POINT],
-				pointsRef.current[pointsRef.current.length - 2 * STEP_POINT],
-				pointsRef.current[pointsRef.current.length - STEP_POINT]
-			)
-
-			temporaryPoint.current = BRight
-			console.table({ temporaryPoint: temporaryPoint.current, BRight })
-		} else {
-			pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
-			plotPoints()
-			//setRunningDistance(0)
-		}
-
-		pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
-		plotPoints()
-	}
-
+	
 	const drawLine = (x0: number, y0: number, x1: number, y1: number, color: string, width: number, isEmitting = false) => {
 		const canvas = canvasRef.current
 		const context = canvas.getContext('2d')
@@ -138,7 +92,6 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		const offsetLeft = rect.left;
 		const offsetTop = rect.top;
 
-		// Style
 		context.strokeStyle = color;
 		context.fillStyle = color;
 		context.lineWidth = width;
@@ -158,16 +111,6 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 			return
 		}
 
-		// Saving all the points in an array
-		/*const previousPointWithoutOffset = {
-			x: pointsRef.current[pointsRef.current.length - 1].x,
-			y: pointsRef.current[pointsRef.current.length - 1].y
-		}
-		const currentPointWithoutOffset = {x: x0, y: y0}
-		setRunningDistance(runningDistance + calculateDistanceBetweenTwoPoints(currentPointWithoutOffset, previousPointWithoutOffset))
-
-		if(runningDistance > thresholdDistance) { */
-
 		if(temporaryPoint.current === null) {
 			const { BRight } = calculateControlPoints(
 				pointsRef.current[pointsRef.current.length - 3 * STEP_POINT],
@@ -176,23 +119,18 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 			)
 
 			temporaryPoint.current = BRight
-			console.table({ temporaryPoint: temporaryPoint.current, BRight })
 		} else {
 			pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
 			plotPoints()
-			//setRunningDistance(0)
 
-			if (!isEmitting) { return; }
-			emitPoints({
-				A: { x: x0, y: y0 },
-				B: { x: x1, y: y1 },
-				chalkParams: { width, color },
-				roomID
-			})
+			if (isEmitting)
+				emitPoints({
+					A: { x: x0, y: y0 },
+					B: { x: x1, y: y1 },
+					chalkParams: { width, color },
+					roomID
+				})
 		}
-		//}
-
-		// Data Emission
 	}
 
 	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut, onRightClick} =
@@ -216,7 +154,7 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		let w = canvas.offsetWidth;
 		let h = canvas.offsetHeight;
 
-		drawLineFromEvent(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color, data.width);
+		drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color, data.width);
 	}
 	const onFillTextEvent = (data: {text: string , x: string, y:string, roomID:string}): void => {
 		const canvas = canvasRef.current;
