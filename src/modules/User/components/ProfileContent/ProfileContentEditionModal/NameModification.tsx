@@ -26,7 +26,7 @@ const HourlyRateModification: FunctionComponent<HourlyRateModificationProps> = (
 		/>
 		<SubmitButton
 			submitStatus={submitStatus}
-			className="self-end mt-5"
+			className="w-full mt-5"
 			onClick={() => modifyNames({ firstName, lastName })}
 			label={'Modifier les noms'}
 		/>

@@ -8,32 +8,17 @@ import {SelectionItemProps} from "@/common/components/CheckboxSelector/Selection
 interface SelectionProps {
 	itemType: string;
 	selectedItemCount: number;
-	items: SelectionItemProps[]
+	items: SelectionItemProps[];
+	className?: string
 }
 
 const CheckboxSelector: FunctionComponent<SelectionProps> = ({
 	items,
 	selectedItemCount,
-	itemType
+	itemType,
+	className
 }) => {
-/*	const [selectedItems, setSelectedFields] = useState<Set<number>>(() => new Set());
-
-	const addItem = (field: number) => {
-		setSelectedFields((prev) => new Set(prev).add(field));
-	}
-
-	const removeItem = (field: number) => {
-		setSelectedFields(prev => {
-			const next = new Set(prev);
-
-			next.delete(field);
-
-			return next;
-		});
-	}*/
-
-
-	return <div>
+	return <div className={className}>
 		<SelectedItemCount selectedItemCount={selectedItemCount} itemType={itemType} />
 		<SelectionList
 			items={items}

@@ -2,14 +2,13 @@
   &__layout {
     @media (min-width: 0px) {
       display: flex;
-      flex-direction: column-reverse;
-      padding: 20px;
+      flex-direction: column;
+      padding: 15px;
     }
 
-    @media (min-width: 600px) {
+    @media (min-width: 700px) {
       flex-direction: row;
       padding: 40px;
-      flex-direction: row;
     }
 
     @media (min-width: 1024px) {
@@ -21,6 +20,11 @@
   &__left {
     flex-basis: 50%;
     margin-right: 90px;
+
+    @media (max-width: 900px) {
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
   }
 
   &__right {

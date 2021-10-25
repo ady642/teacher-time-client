@@ -15,5 +15,9 @@
     padding: 40px 60px;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 900px) {
+      padding: 20px 30px;
+    }
   }
 }

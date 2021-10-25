@@ -20,7 +20,7 @@ const HourlyRateModification: FunctionComponent<HourlyRateModificationProps> = (
 		/>
 		<SubmitButton
 			submitStatus={submitStatus}
-			className="self-end mt-5"
+			className="w-full mt-5"
 			onClick={() => modifyHourlyRate({ hourlyRate })}
 			label={'Modifier le taux horaire'}
 		/>

@@ -20,7 +20,7 @@ const DescriptionModification: FunctionComponent<DescriptionModificationProps> =
 		/>
 		<SubmitButton
 			submitStatus={submitStatus}
-			className="self-end mt-5"
+			className="w-full mt-5"
 			onClick={() => modifyDescription({ description })}
 			label={'Modifier la description'}
 		/>

@@ -4,7 +4,8 @@ import {SelectionItemProps} from "@/common/components/CheckboxSelector/Selection
 
 interface FieldSelectionIntegrationProps {
 	selectedFields: Set<string>;
-	setSelectedFields: Function
+	setSelectedFields: Function;
+	className?: string
 }
 
 export enum Fields {
@@ -14,7 +15,7 @@ export enum Fields {
     SPANISH = 'spanish'
 }
 
-const FieldSelectionIntegration: FunctionComponent<FieldSelectionIntegrationProps> = ({ selectedFields, setSelectedFields }) => {
+const FieldSelectionIntegration: FunctionComponent<FieldSelectionIntegrationProps> = ({ selectedFields, setSelectedFields, className }) => {
 	const addField = (field: string) => {
 		setSelectedFields((prev: string) => new Set(prev).add(field));
 	}
@@ -57,6 +58,7 @@ const FieldSelectionIntegration: FunctionComponent<FieldSelectionIntegrationProp
 	]
 
 	return <CheckboxSelector
+		className={className}
 		itemType={'Matières'}
 		selectedItemCount={selectedFields.size}
 		items={fields}

@@ -19,7 +19,7 @@ const FieldsModification: FunctionComponent<FieldsModificationProps> = ({ initFi
 		/>
 		<SubmitButton
 			submitStatus={submitStatus}
-			className="self-end mt-5"
+			className="w-full mt-5"
 			onClick={() => modifyFields({ fields: [...selectedFields] })}
 			label={'Modifier les matières'}
 		/>
