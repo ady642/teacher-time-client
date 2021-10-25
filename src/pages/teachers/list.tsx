@@ -42,8 +42,8 @@ const ListPage: FC = ({ teachers }: InferGetServerSidePropsType<typeof getServer
 				<title>Teacher-time | Professeurs</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<WhiteHeaderLayout className={'h-full bg-customgray'}>
-				<main className={'flex lg:px-36 md:px-20 p-8 flex-col justify-start'}>
+			<WhiteHeaderLayout className={'bg-customgray'}>
+				<main className={'flex lg:px-36 md:px-12 p-8 flex-col justify-start'}>
 					<TeacherFilters
 					 	fieldSelectorValues={fieldSelectorValues} fieldSelectorValue={fieldSelectorValue} setFieldSelectorValue={setFieldSelectorValue}
 						levels={levels} level={level} setLevel={setLevel}

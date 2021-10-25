@@ -2,6 +2,7 @@ import {FunctionComponent, useMemo} from "react";
 import TeacherCard from "@/modules/Teachers/List/components/TeacherList/TeacherCard/TeacherCard";
 import Teacher from "@/modules/Teachers/List/models/Teacher";
 import useRoomGetters from "@/context/room/helpers/useRoomGetters";
+import styles from '@/modules/Teachers/List/styles/TeacherCard.module.scss'
 
 interface TeacherListProps {
     teachers: Teacher[];
@@ -18,7 +19,7 @@ const TeacherList: FunctionComponent<TeacherListProps> = ({ teachers, onCall, on
 		{ teachers.length === 0 && <h2 className={'text-l uppercase text-gray-500'}>Aucuns professeurs n'est disponible pour le moment</h2>}
 		{ teachers.length > 0 &&
 			<>
-				<section className={'flex flex-wrap mt-6'}>
+				<section className={styles['teachers-list']}>
 					{
 						teachers.map((teacher: Teacher) => <TeacherCard
 							key={teacher._id}

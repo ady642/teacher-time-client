@@ -44,7 +44,7 @@ const WhiteHeader: FC<HeaderProps> = ({ openPaymentModal }) => {
 	}
 
 	return (
-		<div className={'flex items-center sm:px-32 sm:pt-6 sm:pb-3 p-2 justify-between'}>
+		<div className={'flex items-center lg:px-36 md:px-12 sm:pt-6 sm:pb-3 p-2 justify-between'}>
 			<div className={'cursor-pointer opacity-100 w-44 max-w-sm'} onClick={goToHome}>
 				<Logo height={40} width={180}/>
 			</div>

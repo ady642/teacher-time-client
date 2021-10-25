@@ -12,7 +12,7 @@ const TeacherCardFields: FunctionComponent<TeacherCardFieldsProps> = ({ fields }
 		[Fields.MATHS]: 'Mathématiques',
 	}
 
-	return <div>
+	return <div className={'flex flex-wrap gap-1'}>
 		{fields.map((field) => <span className={'text-blueviolet font-bold py-0.5 px-3 border-2 rounded-xl'} key={field}>{fieldsName[field]}</span>)}
 	</div>
 }
