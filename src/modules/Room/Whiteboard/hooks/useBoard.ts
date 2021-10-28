@@ -5,9 +5,8 @@ import {SocketData} from "@/modules/Room/Whiteboard/types/SocketData";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";
 import useMouseEvents from "@/modules/Room/Whiteboard/hooks/useMouseEvents";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
-import {bzCurveCustom, STEP_POINT} from "@/modules/Room/Whiteboard/utils/calculs/cubicBezierCurve";
-import {calculateControlPoints} from "@/modules/Room/Whiteboard/utils/calculs/controlPoints";
 import {Socket} from "socket.io-client";
+import {linearCurve} from "@/modules/Room/Whiteboard/utils/calculs/linearCurve";
 
 type emissionPayload = {
 	A: Point;
@@ -22,15 +21,10 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 	const [textBoxParams, setTextBoxParams] = useState<TextBoxParams>({ size: tool.width, color: tool.color, x: 0, y: 0, cpt:false})
 	const pointsRef: MutableRefObject<Point[]>  = useRef<Point[]>([])
 	const [rightClickActivated, setRightClickActivated] = useState(false)
-	const temporaryPoint = useRef<Point>(null)
 
-	const setTemporaryPoint = (temp: Point) => {
-		temporaryPoint.current = temp
-	}
 
 	const clearPoints = () => {
 		pointsRef.current = []
-		temporaryPoint.current = null
 	}
 
 	const clearCanvas = () => {
@@ -39,12 +33,12 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		clearPoints()
 	}
 
-	const plotPoints = () => {
+	/*	const plotPoints = () => {
 		const canvas = canvasRef.current
 		const context = canvas.getContext('2d')
 
-		bzCurveCustom(context, pointsRef.current, temporaryPoint.current, setTemporaryPoint)
-	}
+		linearCurve(context)
+	}*/
 
 	const emitPoints = ({ A, B, chalkParams, roomID }: emissionPayload) => {
 		const canvas = canvasRef.current
@@ -97,53 +91,33 @@ const useBoard = (boardContainerRef: MutableRefObject<HTMLDivElement>, canvasRef
 		context.lineWidth = width;
 		context.lineCap = 'round';
 
-		if(pointsRef.current.length <= 3 * STEP_POINT) {
-			pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
+		pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
+		//plotPoints()
 
-			if (isEmitting)
-				emitPoints({
-					A: { x: x0, y: y0 },
-					B: { x: x1, y: y1 },
-					chalkParams: { width, color },
-					roomID
-				})
+		const A = { x: x0 - offsetLeft, y: y0 - offsetTop }
+		const B = { x: x1 - offsetLeft, y: y1 - offsetTop }
 
-			return
-		}
+		linearCurve(context, A, B)
 
-		if(temporaryPoint.current === null) {
-			const { BRight } = calculateControlPoints(
-				pointsRef.current[pointsRef.current.length - 3 * STEP_POINT],
-				pointsRef.current[pointsRef.current.length - 2 * STEP_POINT],
-				pointsRef.current[pointsRef.current.length - STEP_POINT]
-			)
-
-			temporaryPoint.current = BRight
-		} else {
-			pointsRef.current.push({x: x0 - offsetLeft, y: y0 - offsetTop});
-			plotPoints()
-
-			if (isEmitting)
-				emitPoints({
-					A: { x: x0, y: y0 },
-					B: { x: x1, y: y1 },
-					chalkParams: { width, color },
-					roomID
-				})
-		}
+		if (isEmitting)
+			emitPoints({
+				A: { x: x0, y: y0 },
+				B: { x: x1, y: y1 },
+				chalkParams: { width, color },
+				roomID
+			})
 	}
 
-	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut, onRightClick} =
-		useMouseEvents(drawing,
-			setDrawing, chalkParams,
-			setChalkParams, drawLine,
-			clearPoints, setRightClickActivated,
-			rightClickActivated, textBoxParams,
-			setTextBoxParams,tool, inputSetCoords,
-			fillTextBox ,textBoxRef,
-			roomID,
-			socket
-		)
+	const {onMouseUp, onMouseMove, onMouseDown, onMouseOut, onRightClick} = useMouseEvents(drawing,
+		setDrawing, chalkParams,
+		setChalkParams, drawLine,
+		clearPoints, setRightClickActivated,
+		rightClickActivated, textBoxParams,
+		setTextBoxParams,tool, inputSetCoords,
+		fillTextBox ,textBoxRef,
+		roomID,
+		socket
+	)
 
 	useEffect(() => {
 		setChalkParams({ ...chalkParams, color: tool.color, width: tool.width })

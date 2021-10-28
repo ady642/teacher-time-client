@@ -1,12 +1,5 @@
-// limit the number of events per second
-export function throttle(callback: any, delay: number) {
-	let previousCall = new Date().getTime();
-	return function() {
-		let time = new Date().getTime();
+import { throttle } from 'throttle-typescript';
 
-		if ((time - previousCall) >= delay) {
-			previousCall = time;
-			callback.apply(null, arguments);
-		}
-	};
-}
+const myThrottle = (callback: () => void, delay: number) => throttle(callback, delay)
+
+export default myThrottle

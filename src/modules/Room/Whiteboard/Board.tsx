@@ -1,4 +1,4 @@
-import {FunctionComponent, MutableRefObject} from "react";
+import {FunctionComponent, MutableRefObject, useState, MouseEvent} from "react";
 import styles from './style.module.scss'
 import useBoard from "@/modules/Room/Whiteboard/hooks/useBoard";
 import ToolInterface from "@/modules/Room/Whiteboard/interfaces/Tool";

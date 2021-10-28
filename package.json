@@ -43,6 +43,7 @@
     "sass": "^1.33.0",
     "stripe": "^8.143.0",
     "styled-components": "^5.2.3",
+    "throttle-typescript": "^1.1.0",
     "uuidv4": "^6.2.8"
   },
   "devDependencies": {
