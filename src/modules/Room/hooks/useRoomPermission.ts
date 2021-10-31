@@ -1,4 +1,5 @@
 import {useEffect} from "react";
+import {isFirefox} from "@/common/utils/browser";
 
 const useRoomPermission = (callback: () => void) => {
 	const displayMicrophoneMessage = () => {
@@ -6,6 +7,10 @@ const useRoomPermission = (callback: () => void) => {
 	}
 
 	useEffect(() => {
+		if(isFirefox()) {
+			return
+		}
+
 		navigator.permissions.query({name:'microphone'}).then(function(result) {
 			result.onchange = function () {
 				switch(result.state) {
