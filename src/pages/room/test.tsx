@@ -1,7 +1,6 @@
 import React, {FunctionComponent, useEffect, useRef, useState} from "react";
 import TTInput from "@/common/components/Inputs/TTInput";
 import TailwindButton from "@/common/components/Buttons/TailwindButton";
-import {socket} from "@/common/utils/client";
 import TailwindCard from "@/common/components/Cards/TailwindCard";
 
 interface testProps {
@@ -14,7 +13,6 @@ const Test: FunctionComponent<testProps> = () => {
 
 	const peer = useRef(null)
 
-	const conn = useRef(null)
 	const call = useRef(null)
 	const userStream = useRef<MediaStream>()
 
@@ -31,11 +29,11 @@ const Test: FunctionComponent<testProps> = () => {
 				setMyPeerId(id)
 			});
 
-			peer.current.on('call', function(call) {
+			peer.current.on('call', function(call: any) {
 				// Answer the call, providing our mediaStream
 				call.answer(userStream.current);
-				
-				call.on('stream', function(stream) {
+
+				call.on('stream', function(stream: MediaStream) {
 					// `stream` is the MediaStream of the remote peer.
 					// Here you'd add it to an HTML video/canvas element.
 					const partnerVideo: HTMLAudioElement = document.createElement('audio')
