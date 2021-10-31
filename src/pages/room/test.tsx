@@ -38,9 +38,11 @@ const Test: FunctionComponent<testProps> = () => {
 				console.log('je recois un call')
 
 				// Answer the call, providing our mediaStream
+				console.log(userStream)
 				call.answer(userStream.current);
 
 				call.on('stream', function(stream: MediaStream) {
+					console.log('je set laudio distant')
 					// `stream` is the MediaStream of the remote peer.
 					// Here you'd add it to an HTML video/canvas element.
 					myAudio.current.srcObject = stream;
@@ -54,6 +56,14 @@ const Test: FunctionComponent<testProps> = () => {
 		// Call a peer, providing our mediaStream
 		console.log('jemet la connection')
 		call.current = peer.current.call(distPeer, userStream.current);
+
+		call.current.on('stream', function(stream: MediaStream) {
+			console.log('je set laudio distant')
+			// `stream` is the MediaStream of the remote peer.
+			// Here you'd add it to an HTML video/canvas element.
+			myAudio.current.srcObject = stream;
+			myAudio.current.autoplay = true
+		});
 	}
 
 	return <div className={'p-5'}>
