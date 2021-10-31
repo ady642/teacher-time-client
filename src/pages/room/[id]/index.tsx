@@ -9,6 +9,7 @@ import Head from "next/head";
 import useRoomPermission from "@/modules/Room/hooks/useRoomPermission";
 
 interface RoomProps {
+
 }
 
 const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -24,7 +25,6 @@ const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getS
 	const peers = useRef<{ [id: string]: RTCPeerConnection }>({})
 	const partnersVideos = useRef<HTMLAudioElement[]>([])
 	const userStream = useRef<MediaStream>()
-
 
 	const { answerToOffer, sendOffer,
 		setAnswerAsRemoteDescription, setICECandidateMsg
