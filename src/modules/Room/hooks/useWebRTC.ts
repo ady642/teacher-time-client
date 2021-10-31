@@ -66,15 +66,38 @@ const useWebRTC = ({
 	const createPeer = (): RTCPeerConnection => {
 		const peer = new RTCPeerConnection({
 			iceServers: [
-				{ urls: 'stun:stun1.l.google.com:19302' },
-				{ urls: 'stun:stun2.l.google.com:19302' },
-				{ urls: 'stun:stun3.l.google.com:19302' },
-				{ urls: 'stun:stun4.l.google.com:19302' },
-				{ urls: 'stun:stun.teacher-time.com:5349' },
 				{
-					urls: 'turn:turn.teacher-time.com:5349',
-					credential: 'username1',
-					username: 'password1'
+					"urls": "stun:eu-turn2.xirsys.com"
+				},
+				{
+					"username": "rg7JcoyO171K9YWHT2xzTdbyjQIQCWaH_wyo3e2EO1OmWEWmIa7FPMoIe2UdMAO5AAAAAGF-waR0ZWFjaGVydGltZQ==",
+					"urls": "turn:eu-turn2.xirsys.com:80?transport=udp",
+					"credential": "121aa356-3a66-11ec-a204-0242ac140004"
+				},
+				{
+					"username": "rg7JcoyO171K9YWHT2xzTdbyjQIQCWaH_wyo3e2EO1OmWEWmIa7FPMoIe2UdMAO5AAAAAGF-waR0ZWFjaGVydGltZQ==",
+					"urls": "turn:eu-turn2.xirsys.com:3478?transport=udp",
+					"credential": "121aa356-3a66-11ec-a204-0242ac140004"
+				},
+				{
+					"username": "rg7JcoyO171K9YWHT2xzTdbyjQIQCWaH_wyo3e2EO1OmWEWmIa7FPMoIe2UdMAO5AAAAAGF-waR0ZWFjaGVydGltZQ==",
+					"urls": "turn:eu-turn2.xirsys.com:80?transport=tcp",
+					"credential": "121aa356-3a66-11ec-a204-0242ac140004"
+				},
+				{
+					"username": "rg7JcoyO171K9YWHT2xzTdbyjQIQCWaH_wyo3e2EO1OmWEWmIa7FPMoIe2UdMAO5AAAAAGF-waR0ZWFjaGVydGltZQ==",
+					"urls": "turn:eu-turn2.xirsys.com:3478?transport=tcp",
+					"credential": "121aa356-3a66-11ec-a204-0242ac140004"
+				},
+				{
+					"username": "rg7JcoyO171K9YWHT2xzTdbyjQIQCWaH_wyo3e2EO1OmWEWmIa7FPMoIe2UdMAO5AAAAAGF-waR0ZWFjaGVydGltZQ==",
+					"urls": "turns:eu-turn2.xirsys.com:443?transport=tcp",
+					"credential": "121aa356-3a66-11ec-a204-0242ac140004"
+				},
+				{
+					"username": "rg7JcoyO171K9YWHT2xzTdbyjQIQCWaH_wyo3e2EO1OmWEWmIa7FPMoIe2UdMAO5AAAAAGF-waR0ZWFjaGVydGltZQ==",
+					"urls": "turns:eu-turn2.xirsys.com:5349?transport=tcp",
+					"credential": "121aa356-3a66-11ec-a204-0242ac140004"
 				}
 			],
 		})

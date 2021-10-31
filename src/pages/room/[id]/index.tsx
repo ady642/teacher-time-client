@@ -25,6 +25,7 @@ const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getS
 	const partnersVideos = useRef<HTMLAudioElement[]>([])
 	const userStream = useRef<MediaStream>()
 
+
 	const { answerToOffer, sendOffer,
 		setAnswerAsRemoteDescription, setICECandidateMsg
 	} = useWebRTC({ socket, peers, partnersVideos, roomID, userStream })
