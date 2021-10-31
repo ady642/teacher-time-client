@@ -21,8 +21,12 @@ const Test: FunctionComponent<testProps> = () => {
 			userStream.current = stream
 		})
 
-		import('peerjs').then(({ default: Peer }) => {
-			peer.current = new Peer()
+		import('peerjs').then(({ default: Peer }: {  default: any }) => {
+			peer.current = new Peer({
+				config: {'iceServers': [
+					{ url: 'stun:stun.l.google.com:19302' },
+				]} /* Sample servers, please use appropriate ones */
+			})
 
 			peer.current.on('open', function(id: string) {
 				console.log('My peer ID is: ' + id);
