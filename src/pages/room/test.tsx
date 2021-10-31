@@ -12,6 +12,7 @@ const Test: FunctionComponent<testProps> = () => {
 	const [myPeerId, setMyPeerId] = useState('')
 
 	const peer = useRef(null)
+	const myAudio = useRef<HTMLAudioElement>(null)
 
 	const call = useRef(null)
 	const userStream = useRef<MediaStream>()
@@ -19,7 +20,7 @@ const Test: FunctionComponent<testProps> = () => {
 	useEffect(() => {
 		navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream => {
 			userStream.current = stream
-		})
+		}).catch((e) => alert(e))
 
 		import('peerjs').then(({ default: Peer }: {  default: any }) => {
 			peer.current = new Peer({
@@ -34,26 +35,24 @@ const Test: FunctionComponent<testProps> = () => {
 			});
 
 			peer.current.on('call', function(call: any) {
+				console.log('je recois un call')
+
 				// Answer the call, providing our mediaStream
 				call.answer(userStream.current);
 
 				call.on('stream', function(stream: MediaStream) {
 					// `stream` is the MediaStream of the remote peer.
 					// Here you'd add it to an HTML video/canvas element.
-					const partnerVideo: HTMLAudioElement = document.createElement('audio')
-					partnerVideo.srcObject = stream;
-					partnerVideo.autoplay = true
+					myAudio.current.srcObject = stream;
+					myAudio.current.autoplay = true
 				});
 			});
-
-
-
 		});
 	}, [])
 
 	const connectToOtherId = () => {
 		// Call a peer, providing our mediaStream
-		console.log('test ts')
+		console.log('jemet la connection')
 		call.current = peer.current.call(distPeer, userStream.current);
 	}
 
@@ -64,6 +63,8 @@ const Test: FunctionComponent<testProps> = () => {
 			value={distPeer}
 			setValue={(value: string) => setDistPeer(value)}
 		/>
+
+		<audio ref={myAudio} />
 
 		<TailwindButton className={'p-5'} onClick={connectToOtherId}>
             Connect
