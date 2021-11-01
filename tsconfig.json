@@ -4,6 +4,9 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "types": [
+      "node"
+    ],
     "outDir": "build",
     "noImplicitAny": true,
     "declaration": true,

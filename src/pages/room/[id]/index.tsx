@@ -6,7 +6,7 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import Head from "next/head";
 import useRoomPermission from "@/modules/Room/hooks/useRoomPermission";
-import usePeerJS from "@/modules/Room/hooks/usePeerJS";
+import useSocketAudio from "@/modules/Room/hooks/useSocketAudio";
 
 interface RoomProps {
 
@@ -23,7 +23,7 @@ const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getS
 
 	// WebRTC
 	const userStream = useRef<MediaStream>()
-	const { connectToStudent, partnerAudio } = usePeerJS(userStream, roomID)
+	const { joinRoom, partnerAudio } = useSocketAudio(roomID)
 
 	const handleTeacherDisconnection = async () => {
 		alert('The teacher is gone')
@@ -43,7 +43,7 @@ const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getS
 	useRoomPermission(activateMicrophone)
 
 	useEffect(() => {
-		socket.on('on-student-joined', connectToStudent)
+		joinRoom()
 
 		socket.on('on-teacher-leave', handleTeacherDisconnection)
 		socket.on('on-student-leave', handleStudentDisconnection)
