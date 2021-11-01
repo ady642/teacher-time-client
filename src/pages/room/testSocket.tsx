@@ -15,7 +15,7 @@ const Test: FunctionComponent<testProps> = () => {
 	const chunks = useRef([])
 
 	const audioOfOtherUsers = useRef<HTMLAudioElement>(null)
-	
+
 	useEffect(() => {
 		socket.on('on-room-joined', () => {
 			setRoomJoined(roomID)
@@ -49,7 +49,7 @@ const Test: FunctionComponent<testProps> = () => {
 				// Stop recording after 5 seconds and broadcast it to server
 				setInterval(function() {
 					mediaRecorder.stop()
-				}, 1000);
+				}, 100);
 			}).catch((e) => alert(e))
 		})
 	}, [])
