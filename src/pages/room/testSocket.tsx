@@ -15,9 +15,7 @@ const Test: FunctionComponent<testProps> = () => {
 	const chunks = useRef([])
 
 	const audioOfOtherUsers = useRef<HTMLAudioElement>(null)
-
-	const userStream = useRef<MediaStream>()
-
+	
 	useEffect(() => {
 		socket.on('on-room-joined', () => {
 			setRoomJoined(roomID)

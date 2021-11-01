@@ -5,7 +5,6 @@ import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import Head from "next/head";
-import useRoomPermission from "@/modules/Room/hooks/useRoomPermission";
 import useSocketAudio from "@/modules/Room/hooks/useSocketAudio";
 
 interface RoomProps {
@@ -34,13 +33,11 @@ const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getS
 		alert('The student is gone')
 	}
 
-	const activateMicrophone = () => {
+	/*const activateMicrophone = () => {
 		navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream => {
 			userStream.current = stream
 		}).catch((e) => alert(e))
-	}
-
-	useRoomPermission(activateMicrophone)
+	}*/
 
 	useEffect(() => {
 		joinRoom()
