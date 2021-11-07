@@ -1,8 +1,9 @@
 import {FunctionComponent, useEffect, useRef} from "react";
 import * as THREE from "three";
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader"
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-
+import useActions from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useActions";
+import useModels from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useModels";
+import useKeyboardEvents from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useKeyboardEvents";
 
 interface ThreeProps {
 
@@ -13,26 +14,44 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	const scene = useRef(new THREE.Scene())
 	const camera = useRef<THREE.Camera>(new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 100 ))
 	const renderer = useRef(new THREE.WebGLRenderer( { antialias: true } ))
-	const model = useRef(new THREE.Scene())
 	const mixer = useRef<THREE.AnimationMixer>(null)
-	const previousAction = useRef<THREE.AnimationAction>(null)
-	const activeAction = useRef<THREE.AnimationAction>(null)
-	const actions = useRef<THREE.AnimationAction[]>([])
 	const clock = useRef(new THREE.Clock())
 
-	function onWindowResize() {
+	const walkDirection = useRef(new THREE.Vector3())
+	const rotateAngle = useRef(new THREE.Vector3(0, 1, 0))
+	const rotateQuarternion = useRef(new THREE.Quaternion())
 
+	const keysPressed = useRef({})
+
+	const { initActions } = useActions({ mixer })
+	const { loadModel, model, animationsMap } = useModels({ initActions, scene, mixer })
+	const { chooseDirection, move } = useKeyboardEvents({
+		keysPressed, model, walkDirection, rotateAngle, rotateQuarternion, camera, mixer
+	})
+
+	function onWindowResize() {
 		// @ts-ignore
 		camera.current.aspect = window.innerWidth / window.innerHeight;
 		// @ts-ignore
 		camera.current.updateProjectionMatrix();
 
 		renderer.current.setSize( window.innerWidth, window.innerHeight );
+	}
 
+	function animate() {
+		const delta = clock.current.getDelta();
+
+		if ( mixer.current ) mixer.current.update(delta);
+
+		move(delta)
+
+		requestAnimationFrame(animate);
+
+		renderer.current.render( scene.current, camera.current );
 	}
 
 	useEffect(() => {
-		camera.current.position.set( -20, 30, -20 );
+		camera.current.position.set( 0, 20, -30 );
 		camera.current.lookAt( new THREE.Vector3( 0, 2, 0 ) );
 
 		scene.current.fog = new THREE.Fog( 0xe0e0e0, 20, 100 );
@@ -41,7 +60,6 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 		const pmremGenerator = new THREE.PMREMGenerator( renderer.current );
 
 		scene.current.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.01 ).texture;
-
 
 		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
 		hemiLight.position.set( 0, 20, 0 );
@@ -56,21 +74,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 		mesh.rotation.x = - Math.PI / 2;
 		scene.current.add( mesh );
 
-		// model
-		const loader = new GLTFLoader();
-		loader.load( './3dModels/Robot.glb', function ( gltf ) {
-
-			// @ts-ignore
-			model.current = gltf.scene;
-			scene.current.add( model.current );
-
-			makeFirstAction( model.current, gltf.animations );
-
-		}, undefined, function ( e ) {
-
-			console.error( e );
-
-		} );
+		loadModel()
 
 		renderer.current.setPixelRatio( window.devicePixelRatio );
 		renderer.current.setSize( window.innerWidth, window.innerHeight );
@@ -79,39 +83,15 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		window.addEventListener( 'resize', onWindowResize );
 
-		function makeFirstAction( modelCurrent: any, animations: any ) {
-			mixer.current = new THREE.AnimationMixer(modelCurrent);
-
-			const actions: any = {};
-
-			for ( let i = 0; i < animations.length; i ++ ) {
-				const clip = animations[i];
-
-				actions[clip.name] = mixer.current.clipAction(clip);
-			}
-
-			activeAction.current = actions['Walking'];
-
-			activeAction.current.play();
-		}
-
-		function animate() {
-			const dt = clock.current.getDelta();
-
-			if ( mixer.current ) mixer.current.update( dt );
-
-			const time = performance.now() / 850;
-
-			model.current.position.set( 1, time % 100, time % 100 );
-
-			requestAnimationFrame(animate);
-
-			renderer.current.render( scene.current, camera.current );
-		}
 		animate();
 	}, [])
 
-	return <div ref={container} />
+	return <div
+		tabIndex={0}
+		onKeyDownCapture={(e) => chooseDirection(e)}
+		onKeyUp={(e) => chooseDirection(e, false)}
+		ref={container}
+	/>
 }
 
 export default ThreeComponent
