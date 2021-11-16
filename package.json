@@ -46,6 +46,7 @@
     "stripe": "^8.143.0",
     "styled-components": "^5.2.3",
     "three.js": "^0.77.1",
+    "three.terrain.js": "^2.0.0",
     "throttle-typescript": "^1.1.0",
     "uuidv4": "^6.2.8"
   },

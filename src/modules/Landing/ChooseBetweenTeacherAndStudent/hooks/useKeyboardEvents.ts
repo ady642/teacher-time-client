@@ -1,4 +1,4 @@
-import {MutableRefObject, KeyboardEvent, useState} from "react";
+import {MutableRefObject, KeyboardEvent, useRef} from "react";
 import * as THREE from "three";
 
 type useKeyboardEvents = {
@@ -8,7 +8,8 @@ type useKeyboardEvents = {
 	walkDirection: MutableRefObject<THREE.Vector3>;
 	rotateAngle: MutableRefObject<THREE.Vector3>;
 	rotateQuarternion: MutableRefObject<THREE.Quaternion>;
-	mixer: MutableRefObject<THREE.AnimationMixer>
+	mixer: MutableRefObject<THREE.AnimationMixer>;
+	animationsMap: MutableRefObject<Map<string, THREE.AnimationAction>>
 }
 
 export default ({
@@ -18,20 +19,47 @@ export default ({
 	walkDirection,
 	rotateAngle,
 	rotateQuarternion,
-	mixer
+	mixer,
+	animationsMap
 }: useKeyboardEvents) => {
 	const UP = 'ArrowUp'
 	const LEFT = 'ArrowLeft'
 	const DOWN = 'ArrowDown'
 	const RIGHT = 'ArrowRight'
 	const SHIFT = 'shift'
-	const DIRECTIONS = [UP, LEFT, DOWN, RIGHT]
 
-	const [currentAction, setCurrentAction] = useState('Walking')
+	const currentAction = useRef('Idle')
 
 	// constants
 	const runVelocity = 5
 	const walkVelocity = 2
+	const FADE_DURATION = 0.5
+
+	const chooseAction = () => {
+		let play = '';
+
+		if (isMoving()) {
+			play = 'Walking'
+		} else {
+			play = 'Idle'
+		}
+
+		if (currentAction.current !== play) {
+
+			const current = animationsMap.current.get(currentAction.current)
+
+			current.fadeOut(FADE_DURATION)
+
+			const toPlay = animationsMap.current.get(play)
+
+			toPlay
+				.reset()
+				.fadeIn( FADE_DURATION )
+				.play();
+
+			currentAction.current = play
+		}
+	}
 
 	const chooseDirection = (keyboardEvent: KeyboardEvent<HTMLDivElement>, isActive = true) => {
 		switch (keyboardEvent.key) {
@@ -50,36 +78,40 @@ export default ({
 		}
 	}
 
+	const isMoving = () => {
+		return Object.values(keysPressed.current).some((keyPressed: boolean) => keyPressed)
+	}
+
 	const move = (delta: number) => {
+		chooseAction()
+
 		// rotate model
-		const direction = directionOffset()
+		if (currentAction.current === 'Running' || currentAction.current === 'Walking') {
 
-		if(direction === null) {
-			return
+			const direction = directionOffset()
+
+			if (direction === null) {
+				return
+			}
+
+			rotateQuarternion.current.setFromAxisAngle(rotateAngle.current, direction)
+			model.current.quaternion.rotateTowards(rotateQuarternion.current, 0.1)
+
+			// calculate direction
+			camera.current.getWorldDirection(walkDirection.current)
+			walkDirection.current.y = 0
+			walkDirection.current.normalize()
+
+			walkDirection.current.applyAxisAngle(rotateAngle.current, direction)
+
+			// run/walk velocity
+			// move model & camera
+			const moveX = walkDirection.current.x * walkVelocity * delta
+			const moveZ = walkDirection.current.z * walkVelocity * delta
+
+			model.current.position.x += moveX
+			model.current.position.z += moveZ
 		}
-
-		rotateQuarternion.current.setFromAxisAngle(rotateAngle.current, direction)
-		model.current.quaternion.rotateTowards(rotateQuarternion.current, 0.2)
-
-		// calculate direction
-		camera.current.getWorldDirection(walkDirection.current)
-		walkDirection.current.y = 0
-		walkDirection.current.normalize()
-
-		walkDirection.current.applyAxisAngle(rotateAngle.current, direction)
-
-		if(mixer.current)
-			mixer.current.update(delta)
-
-		// run/walk velocity
-		const velocity = currentAction == 'Running' ? runVelocity : walkVelocity
-
-		// move model & camera
-		const moveX = walkDirection.current.x * velocity * delta
-		const moveZ = walkDirection.current.z * velocity * delta
-
-		model.current.position.x += moveX
-		model.current.position.z += moveZ
 	}
 
 	const directionOffset = () => {
