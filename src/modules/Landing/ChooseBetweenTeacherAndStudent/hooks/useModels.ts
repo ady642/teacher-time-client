@@ -15,27 +15,40 @@ export default ({ scene }: useModelsPayload) => {
 	const loadModel = () => {
 		const manager = new THREE.LoadingManager();
 		manager.addHandler( /\.dds$/i, new DDSLoader() );
+		const mtlLoader = new MTLLoader(manager).setPath( './3dModels/' )
+		const objLoader = new OBJLoader(manager).setPath( './3dModels/' )
 
-		// manager.addHandler( /\.tga$/i, new TGALoader() );
-
-		new MTLLoader( manager )
-			.setPath( './3dModels/' )
-			.load( 'Teacher.mtl', function ( materials ) {
-
+		mtlLoader
+			.load( 'whiteboard.mtl', function ( materials ) {
 				materials.preload();
-
-				new OBJLoader( manager )
-					.setMaterials( materials )
-					.setPath( './3dModels/' )
-					.load( 'Teacher.obj', function ( object ) {
+				objLoader
+					.setMaterials(materials)
+					.load( 'whiteboard.obj', function ( object ) {
 						// @ts-ignore
 						model.current = object
 
-						object.translateY(-80)
+						object.translateX(240)
+						object.translateZ(-100)
 
 						scene.current.add( object );
 					});
-			} );
+			})
+		mtlLoader
+			.load( 'TeacherAlone.mtl', function ( materials ) {
+				materials.preload();
+				objLoader
+					.setMaterials(materials)
+					.load( 'TeacherAlone.obj', function ( object ) {
+						// @ts-ignore
+						model.current = object
+
+						object.lookAt(-180, 50, 400)
+
+						scene.current.add( object );
+					});
+			})
+
+
 	}
 
 	return {

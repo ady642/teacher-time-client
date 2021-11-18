@@ -57,38 +57,34 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	useEffect(() => {
 		loadModel()
 
-		scene.current.add( new THREE.AxesHelper( 5 ) );
+		scene.current.add(new THREE.AxesHelper( 5 ));
 
 		controls.current.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
 		controls.current.dampingFactor = 0.05;
 		controls.current.screenSpacePanning = false;
 		controls.current.maxPolarAngle = Math.PI / 2;
+		controls.current.maxDistance = 600
+		controls.current.minDistance = 100
+		controls.current.target = new THREE.Vector3(0, 150, 0)
 
-		camera.current.position.set( 0, 300, -30 );
-		camera.current.lookAt( new THREE.Vector3( 0, 2, 0 ) );
+		camera.current.position.set( -100, 200, 400 );
+		camera.current.lookAt(new THREE.Vector3( 0, 150, 0 ));
+		controls.current.update();
 
-		scene.current.fog = new THREE.Fog( 0xe0e0e0, 20, 50000 );
-		scene.current.background = new THREE.Color( 0xeeeeee );
-
-		const pmremGenerator = new THREE.PMREMGenerator( renderer.current );
-
-		scene.current.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.01 ).texture;
-
-		const ambient = new THREE.AmbientLight(0xFFFFFA); //most black
+		const ambient = new THREE.AmbientLight(0xFFFFFF, 1);
 		scene.current.add( ambient );
 
-		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
-		hemiLight.position.set( 0, 20, 0 );
-		scene.current.add( hemiLight );
+		const color = 0x999;
+		const intensity = 0.5;
+		const light = new THREE.SpotLight(color, intensity);
+		light.position.set(0, 1000, 0);
+		light.target.position.set(-5, 0, 0);
+		scene.current.add(light);
+		scene.current.add(light.target);
 
-		var directionalLight = new THREE.DirectionalLight( 0xAAAAAA ); //to see shaders
-		directionalLight.position.set( 0, 0, -100 ).normalize(); //front of scene
-		scene.current.add( directionalLight );
+		const helper = new THREE.SpotLightHelper(light);
+		scene.current.add(helper);
 
-		// ground
-		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
-		mesh.rotation.x = - Math.PI / 2;
-		scene.current.add( mesh );
 
 		renderer.current.setPixelRatio( window.devicePixelRatio );
 		renderer.current.setSize( window.innerWidth, window.innerHeight );
