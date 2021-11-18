@@ -8,7 +8,6 @@ type useKeyboardEvents = {
 	walkDirection: MutableRefObject<THREE.Vector3>;
 	rotateAngle: MutableRefObject<THREE.Vector3>;
 	rotateQuarternion: MutableRefObject<THREE.Quaternion>;
-	mixer: MutableRefObject<THREE.AnimationMixer>;
 	animationsMap: MutableRefObject<Map<string, THREE.AnimationAction>>
 }
 
@@ -19,7 +18,6 @@ export default ({
 	walkDirection,
 	rotateAngle,
 	rotateQuarternion,
-	mixer,
 	animationsMap
 }: useKeyboardEvents) => {
 	const UP = 'ArrowUp'
