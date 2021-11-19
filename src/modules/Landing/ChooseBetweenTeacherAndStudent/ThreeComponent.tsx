@@ -1,6 +1,5 @@
 import {FunctionComponent, useEffect, useRef} from "react";
 import * as THREE from "three";
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import useModels from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useModels";
 import useKeyboardEvents from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useKeyboardEvents";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
@@ -13,7 +12,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	//Init
 	const container = useRef<HTMLDivElement>(null)
 	const scene = useRef(new THREE.Scene())
-	const camera = useRef<THREE.Camera>(new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 1000 ))
+	const camera = useRef<THREE.Camera>(new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 300 ))
 	const renderer = useRef(new THREE.WebGLRenderer( { antialias: true } ))
 	const mixer = useRef<THREE.AnimationMixer>(null)
 	const clock = useRef(new THREE.Clock())
@@ -57,39 +56,51 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	useEffect(() => {
 		loadModel()
 
+		scene.current.background = new THREE.Color( 'transparent' );
+
 		scene.current.add(new THREE.AxesHelper( 5 ));
 
+		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+		mesh.rotation.x = - Math.PI / 2;
+		mesh.receiveShadow = true;
+		scene.current.add( mesh );
+
 		controls.current.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-		controls.current.dampingFactor = 0.05;
+		controls.current.dampingFactor = 0.2;
 		controls.current.screenSpacePanning = false;
 		controls.current.maxPolarAngle = Math.PI / 2;
-		controls.current.maxDistance = 600
-		controls.current.minDistance = 100
-		controls.current.target = new THREE.Vector3(0, 150, 0)
+		controls.current.maxDistance = 200
+		controls.current.minDistance = 20
+		controls.current.target = new THREE.Vector3(0, 16, 0)
 
-		camera.current.position.set( -100, 200, 400 );
-		camera.current.lookAt(new THREE.Vector3( 0, 150, 0 ));
+		camera.current.position.set( -3, 17, 8 );
+		camera.current.lookAt(new THREE.Vector3( 0, 15, 0 ));
 		controls.current.update();
 
-		const ambient = new THREE.AmbientLight(0xFFFFFF, 1);
-		scene.current.add( ambient );
+		scene.current.background = new THREE.Color( 0xFFFFFF );
+		scene.current.fog = new THREE.Fog( 0xa0a0a0, 10, 2000 );
 
-		const color = 0x999;
-		const intensity = 0.5;
-		const light = new THREE.SpotLight(color, intensity);
-		light.position.set(0, 1000, 0);
-		light.target.position.set(-5, 0, 0);
-		scene.current.add(light);
-		scene.current.add(light.target);
+		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+		hemiLight.position.set( 0, 20, 10 );
+		scene.current.add( hemiLight );
 
-		const helper = new THREE.SpotLightHelper(light);
-		scene.current.add(helper);
+		const dirLight = new THREE.DirectionalLight( 0xffffff );
+		dirLight.position.set( -10, 20, 40 );
+		dirLight.castShadow = true;
+		dirLight.shadow.camera.top = 2;
+		dirLight.shadow.camera.bottom = - 2;
+		dirLight.shadow.camera.left = - 2;
+		dirLight.shadow.camera.right = 2;
+		dirLight.shadow.camera.near = 0.1;
+		dirLight.shadow.camera.far = 40;
+		scene.current.add( dirLight );
 
-
+		renderer.current.shadowMap.enabled = true;
+		renderer.current.toneMapping = THREE.ReinhardToneMapping
 		renderer.current.setPixelRatio( window.devicePixelRatio );
 		renderer.current.setSize( window.innerWidth, window.innerHeight );
 		renderer.current.outputEncoding = THREE.sRGBEncoding;
-		container.current.appendChild( renderer.current.domElement );
+		container.current.appendChild(renderer.current.domElement);
 
 		window.addEventListener( 'resize', onWindowResize );
 
