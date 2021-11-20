@@ -3,6 +3,7 @@ import * as THREE from "three";
 import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
 import {MTLLoader} from "three/examples/jsm/loaders/MTLLoader";
 import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
+import {MeshStandardMaterial} from "three";
 
 type useModelsPayload = {
 	scene: MutableRefObject<THREE.Scene>;
@@ -57,21 +58,6 @@ export default ({ scene }: useModelsPayload) => {
 		const mtlLoader = new MTLLoader(manager).setPath('./3dModels/')
 		const objLoader = new OBJLoader(manager).setPath('./3dModels/')
 
-		/*		mtlLoader
-			.load( 'whiteboard.mtl', function ( materials ) {
-				materials.preload();
-				objLoader
-					.setMaterials(materials)
-					.load( 'whiteboard.obj', function ( object ) {
-						// @ts-ignore
-						model.current = object
-
-						object.translateX(240)
-						object.translateZ(-100)
-
-						scene.current.add( object );
-					});
-			})*/
 		mtlLoader
 			.load( 'TeacherAlone.mtl', function ( materials ) {
 				materials.preload();
@@ -81,14 +67,10 @@ export default ({ scene }: useModelsPayload) => {
 						// @ts-ignore
 						model.current = object
 
-						object.traverse((obj) => {
-							obj.castShadow = true
-							obj.receiveShadow = true
-						})
+						const unitizedObject = unitize(object, 20)
+						unitizedObject.lookAt(-180, 50, 400)
 
-						object.lookAt(-180, 50, 400)
-
-						scene.current.add(unitize(object, 20));
+						scene.current.add(unitizedObject);
 					});
 			})
 

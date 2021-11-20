@@ -3,6 +3,7 @@ import * as THREE from "three";
 import useModels from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useModels";
 import useKeyboardEvents from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useKeyboardEvents";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {RoomEnvironment} from "three/examples/jsm/environments/RoomEnvironment";
 
 interface ThreeProps {
 
@@ -56,11 +57,11 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	useEffect(() => {
 		loadModel()
 
-		scene.current.background = new THREE.Color( 'transparent' );
+		scene.current.background = new THREE.Color( 0xffffff );
 
 		scene.current.add(new THREE.AxesHelper( 5 ));
 
-		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0xffffff, depthWrite: false } ) );
 		mesh.rotation.x = - Math.PI / 2;
 		mesh.receiveShadow = true;
 		scene.current.add( mesh );
@@ -78,28 +79,22 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 		controls.current.update();
 
 		scene.current.background = new THREE.Color( 0xFFFFFF );
-		scene.current.fog = new THREE.Fog( 0xa0a0a0, 10, 2000 );
 
-		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
-		hemiLight.position.set( 0, 20, 10 );
+		const ambilentLight = new THREE.AmbientLight( 0xffffff, 0.5)
+		scene.current.add(ambilentLight)
+
+		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff );
+		hemiLight.position.set( 0, 500, 30 );
 		scene.current.add( hemiLight );
 
-		const dirLight = new THREE.DirectionalLight( 0xffffff );
-		dirLight.position.set( -10, 20, 40 );
+		const dirLight = new THREE.DirectionalLight( 0xffffff, 0.1 );
+		dirLight.position.set( -10, 50, 50	 );
 		dirLight.castShadow = true;
-		dirLight.shadow.camera.top = 2;
-		dirLight.shadow.camera.bottom = - 2;
-		dirLight.shadow.camera.left = - 2;
-		dirLight.shadow.camera.right = 2;
-		dirLight.shadow.camera.near = 0.1;
-		dirLight.shadow.camera.far = 40;
 		scene.current.add( dirLight );
 
 		renderer.current.shadowMap.enabled = true;
-		renderer.current.toneMapping = THREE.ReinhardToneMapping
 		renderer.current.setPixelRatio( window.devicePixelRatio );
 		renderer.current.setSize( window.innerWidth, window.innerHeight );
-		renderer.current.outputEncoding = THREE.sRGBEncoding;
 		container.current.appendChild(renderer.current.domElement);
 
 		window.addEventListener( 'resize', onWindowResize );
