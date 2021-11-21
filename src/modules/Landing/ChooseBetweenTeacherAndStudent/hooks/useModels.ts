@@ -4,6 +4,8 @@ import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
 import {MTLLoader} from "three/examples/jsm/loaders/MTLLoader";
 import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
 import {MeshStandardMaterial} from "three";
+import {FBXLoader} from "three/examples/jsm/loaders/FBXLoader";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 
 type useModelsPayload = {
 	scene: MutableRefObject<THREE.Scene>;
@@ -58,6 +60,11 @@ export default ({ scene }: useModelsPayload) => {
 		const mtlLoader = new MTLLoader(manager).setPath('./3dModels/')
 		const objLoader = new OBJLoader(manager).setPath('./3dModels/')
 
+		const gtlfLoader = new GLTFLoader();
+		gtlfLoader.load( './3dModels/board.gltf', function ( object ) {
+			scene.current.add( unitize(object.scene, 20) );
+		});
+
 		mtlLoader
 			.load( 'TeacherAlone.mtl', function ( materials ) {
 				materials.preload();
@@ -68,13 +75,13 @@ export default ({ scene }: useModelsPayload) => {
 						model.current = object
 
 						const unitizedObject = unitize(object, 20)
-						unitizedObject.lookAt(-180, 50, 400)
+						unitizedObject.lookAt(-180, 10, 400)
+						unitizedObject.translateZ(20)
+						unitizedObject.translateX(-5)
 
 						scene.current.add(unitizedObject);
 					});
 			})
-
-
 	}
 
 

@@ -61,7 +61,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		scene.current.add(new THREE.AxesHelper( 5 ));
 
-		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0xffffff, depthWrite: false } ) );
+		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0xAAAAAA, depthWrite: false } ) );
 		mesh.rotation.x = - Math.PI / 2;
 		mesh.receiveShadow = true;
 		scene.current.add( mesh );
@@ -77,8 +77,6 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 		camera.current.position.set( -3, 17, 8 );
 		camera.current.lookAt(new THREE.Vector3( 0, 15, 0 ));
 		controls.current.update();
-
-		scene.current.background = new THREE.Color( 0xFFFFFF );
 
 		const ambilentLight = new THREE.AmbientLight( 0xffffff, 0.5)
 		scene.current.add(ambilentLight)
