@@ -3,8 +3,6 @@ import * as THREE from "three";
 import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
 import {MTLLoader} from "three/examples/jsm/loaders/MTLLoader";
 import {DDSLoader} from "three/examples/jsm/loaders/DDSLoader";
-import {MeshStandardMaterial} from "three";
-import {FBXLoader} from "three/examples/jsm/loaders/FBXLoader";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 
 type useModelsPayload = {
@@ -12,7 +10,7 @@ type useModelsPayload = {
 }
 
 export default ({ scene }: useModelsPayload) => {
-	const model = useRef(new THREE.Scene())
+	const earthModel = useRef(new THREE.Object3D())
 	const animationsMap = useRef(new Map())
 
 	////////////////////////////////////////
@@ -51,19 +49,31 @@ export default ({ scene }: useModelsPayload) => {
 				return v.y > v.z ? v.y : v.z;
 			}
 		}
-
 	}
 
 	const loadModel = () => {
+		const gtlfLoader = new GLTFLoader().setPath('./3dModels/');
+		gtlfLoader.load( 'board.gltf', function ( object ) {
+			const unitizedBoard = unitize(object.scene, 22)
+			unitizedBoard.rotateY(-Math.PI / 10)
+
+			scene.current.add( unitizedBoard );
+		});
+		gtlfLoader.load( 'earth.glb', function ( object ) {
+			const unitizedObject = unitize(object.scene, 5)
+			unitizedObject.translateZ(14)
+			unitizedObject.translateY(20)
+			unitizedObject.translateX(-17)
+
+			earthModel.current = object.scene
+
+			scene.current.add(unitizedObject);
+		})
+
 		const manager = new THREE.LoadingManager();
 		manager.addHandler( /\.dds$/i, new DDSLoader() );
 		const mtlLoader = new MTLLoader(manager).setPath('./3dModels/')
 		const objLoader = new OBJLoader(manager).setPath('./3dModels/')
-
-		const gtlfLoader = new GLTFLoader();
-		gtlfLoader.load( './3dModels/board.gltf', function ( object ) {
-			scene.current.add( unitize(object.scene, 20) );
-		});
 
 		mtlLoader
 			.load( 'TeacherAlone.mtl', function ( materials ) {
@@ -72,11 +82,9 @@ export default ({ scene }: useModelsPayload) => {
 					.setMaterials(materials)
 					.load( 'TeacherAlone.obj', function ( object ) {
 						// @ts-ignore
-						model.current = object
-
 						const unitizedObject = unitize(object, 20)
-						unitizedObject.lookAt(-180, 10, 400)
-						unitizedObject.translateZ(20)
+						unitizedObject.lookAt(-200, 10, 400)
+						unitizedObject.translateZ(10)
 						unitizedObject.translateX(-5)
 
 						scene.current.add(unitizedObject);
@@ -88,7 +96,7 @@ export default ({ scene }: useModelsPayload) => {
 
 	return {
 		loadModel,
-		model,
+		earthModel,
 		animationsMap
 	}
 }

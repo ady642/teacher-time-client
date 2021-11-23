@@ -1,9 +1,8 @@
 import {FunctionComponent, useEffect, useRef} from "react";
 import * as THREE from "three";
 import useModels from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useModels";
-import useKeyboardEvents from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useKeyboardEvents";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import {RoomEnvironment} from "three/examples/jsm/environments/RoomEnvironment";
+import styles from '@/modules/Landing/homeStyles.module.scss'
 
 interface ThreeProps {
 
@@ -15,39 +14,26 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	const scene = useRef(new THREE.Scene())
 	const camera = useRef<THREE.Camera>(new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 300 ))
 	const renderer = useRef(new THREE.WebGLRenderer( { antialias: true } ))
-	const mixer = useRef<THREE.AnimationMixer>(null)
 	const clock = useRef(new THREE.Clock())
 	const controls = useRef(new OrbitControls(camera.current, renderer.current.domElement))
 
-	const walkDirection = useRef(new THREE.Vector3())
-	const rotateAngle = useRef(new THREE.Vector3(0, 1, 0))
-	const rotateQuarternion = useRef(new THREE.Quaternion())
-
-	const keysPressed = useRef({})
-
-	const { loadModel, model, animationsMap } = useModels({ scene })
-	const { chooseDirection, move } = useKeyboardEvents({
-		keysPressed, model, walkDirection, rotateAngle, rotateQuarternion, camera, animationsMap
-	})
-
+	const { loadModel, earthModel } = useModels({ scene })
 
 	function onWindowResize() {
+
+
 		// @ts-ignore
-		camera.current.aspect = window.innerWidth / window.innerHeight;
+		camera.current.aspect = container.current.clientWidth / container.current.clientHeight;
 		// @ts-ignore
 		camera.current.updateProjectionMatrix();
 
-		renderer.current.setSize( window.innerWidth, window.innerHeight );
+		renderer.current.setSize( container.current.clientWidth, container.current.clientHeight );
 	}
 
 	function animate() {
 		const delta = clock.current.getDelta();
 
-		if ( mixer.current ) mixer.current.update(delta);
-
-		if(animationsMap.current.size > 0) {
-			move(delta)
-		}
+		earthModel.current.rotation.y += delta * 0.2
 
 		requestAnimationFrame(animate);
 
@@ -59,8 +45,6 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		scene.current.background = new THREE.Color( 0xffffff );
 
-		scene.current.add(new THREE.AxesHelper( 5 ));
-
 		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0xAAAAAA, depthWrite: false } ) );
 		mesh.rotation.x = - Math.PI / 2;
 		mesh.receiveShadow = true;
@@ -70,29 +54,30 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 		controls.current.dampingFactor = 0.2;
 		controls.current.screenSpacePanning = false;
 		controls.current.maxPolarAngle = Math.PI / 2;
-		controls.current.maxDistance = 200
+		controls.current.maxDistance = 100
 		controls.current.minDistance = 20
 		controls.current.target = new THREE.Vector3(0, 16, 0)
 
-		camera.current.position.set( -3, 17, 8 );
-		camera.current.lookAt(new THREE.Vector3( 0, 15, 0 ));
+		camera.current.position.set( -20, 20, 50 );
+		camera.current.lookAt(new THREE.Vector3(-10, 15, -10));
+
 		controls.current.update();
 
 		const ambilentLight = new THREE.AmbientLight( 0xffffff, 0.5)
 		scene.current.add(ambilentLight)
 
 		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff );
-		hemiLight.position.set( 0, 500, 30 );
+		hemiLight.position.set(0, 500, 30);
 		scene.current.add( hemiLight );
 
 		const dirLight = new THREE.DirectionalLight( 0xffffff, 0.1 );
-		dirLight.position.set( -10, 50, 50	 );
+		dirLight.position.set(-10, 50, 50);
 		dirLight.castShadow = true;
 		scene.current.add( dirLight );
 
 		renderer.current.shadowMap.enabled = true;
 		renderer.current.setPixelRatio( window.devicePixelRatio );
-		renderer.current.setSize( window.innerWidth, window.innerHeight );
+		renderer.current.setSize( container.current.clientWidth, container.current.clientHeight );
 		container.current.appendChild(renderer.current.domElement);
 
 		window.addEventListener( 'resize', onWindowResize );
@@ -101,9 +86,8 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	}, [])
 
 	return <div
+		className={styles['landing__models']}
 		tabIndex={0}
-		onKeyDownCapture={(e) => chooseDirection(e)}
-		onKeyUp={(e) => chooseDirection(e, false)}
 		ref={container}
 	/>
 }

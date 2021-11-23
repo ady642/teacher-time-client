@@ -1,0 +1,15 @@
+.landing {
+  &__left {
+    width: 200px;
+    height: 200px;
+  }
+  &__models {
+    width: clamp(500px, 50%, 1000px);
+    height: clamp(500px, 80%, 1000px);
+    cursor: pointer;
+  }
+  &__content {
+    display: flex;
+    justify-content: space-between
+  }
+}
