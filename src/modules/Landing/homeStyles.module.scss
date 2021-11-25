@@ -4,12 +4,40 @@
     height: 200px;
   }
   &__models {
-    width: clamp(500px, 50%, 1000px);
-    height: clamp(500px, 80%, 1000px);
+    width: clamp(500px, 55vw, 1000px);
+    height: clamp(500px, 80vh, 1000px);
     cursor: pointer;
   }
   &__content {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  &__container {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+  }
+}
+
+.main-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 7vh;
+
+  &__title {
+    color: #5F85E6;
+    font-weight: bold;
+    font-size: clamp(50px, 5vw, 64px);
+  }
+  &__subtitle {
+    &-1 {
+      color: black;
+      font-weight: bold;
+      font-size: clamp(50px, 5vw, 64px);
+    }
+    &-2 {
+      font-size: clamp(20px, 2vw, 26px);
+    }
   }
 }

@@ -20,8 +20,6 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	const { loadModel, earthModel } = useModels({ scene })
 
 	function onWindowResize() {
-
-
 		// @ts-ignore
 		camera.current.aspect = container.current.clientWidth / container.current.clientHeight;
 		// @ts-ignore
@@ -43,9 +41,9 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	useEffect(() => {
 		loadModel()
 
-		scene.current.background = new THREE.Color( 0xffffff );
+		scene.current.background = new THREE.Color( 0xfbfbfd );
 
-		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0xAAAAAA, depthWrite: false } ) );
+		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0xFBFBFD , depthWrite: true } ) );
 		mesh.rotation.x = - Math.PI / 2;
 		mesh.receiveShadow = true;
 		scene.current.add( mesh );
@@ -77,10 +75,11 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		renderer.current.shadowMap.enabled = true;
 		renderer.current.setPixelRatio( window.devicePixelRatio );
-		renderer.current.setSize( container.current.clientWidth, container.current.clientHeight );
 		container.current.appendChild(renderer.current.domElement);
 
 		window.addEventListener( 'resize', onWindowResize );
+
+		onWindowResize()
 
 		animate();
 	}, [])
