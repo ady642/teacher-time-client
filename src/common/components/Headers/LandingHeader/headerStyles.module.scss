@@ -1,0 +1,68 @@
+.landingHeader {
+  display: flex;
+  justify-content: space-between;
+  padding-left: clamp(30px, 7vw, 100px);
+  padding-right: clamp(30px, 7vw, 100px);
+  padding-top: clamp(10px, 2vw, 20px);
+
+  &__navLink {
+    &s {
+      display: flex;
+    }
+
+    display: flex;
+    align-items: center;
+    color: #323232;
+    font-size: 20px;
+    cursor: pointer;
+    &:first-child {
+      margin-right: 60px;
+    }
+
+    z-index: 1;
+    position: relative;
+    padding-bottom: 5px;
+
+    &:hover {
+      color: #829dde;
+    }
+
+    &Active {
+      color: #2A5CDD;
+
+      &:hover {
+        color: #2A5CDD;
+      }
+    }
+
+    &Active:before {
+      content : "";
+      position: absolute;
+      left    : 0;
+      bottom  : 0;
+      height  : 1px;
+      width   : 33%;  /* or 100px */
+      border-bottom: 2px solid #2A5CDD;
+    }
+
+  }
+
+  &__logo {
+
+  }
+
+  &__loginButton {
+    border-radius: 36px;
+    background-color: white;
+    color: #22A52F;
+    border: 1px solid #22A52F;
+    padding: 14px 44px;
+    font-size: 22px;
+    max-width: 220px;
+    transition: all ease-in-out 0.2s;
+
+    &:hover {
+      background-color: #f1f0f0;
+    }
+  }
+}

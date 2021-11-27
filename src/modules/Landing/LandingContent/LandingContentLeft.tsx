@@ -2,7 +2,7 @@ import {FunctionComponent} from "react";
 import styles from "@/modules/Landing/homeStyles.module.scss";
 import MainTitle from "@/modules/Landing/LandingContent/MainTitle";
 import RegistrationButton from "@/modules/Landing/LandingContent/RegistrationButton";
-import InfoAside from "@/modules/Landing/LandingContent/InfoAside";
+import InfoAsides from "@/modules/Landing/LandingContent/InfoAsides/InfoAsides";
 
 interface LandingContentLeftProps {
 
@@ -13,10 +13,13 @@ const LandingContentLeft: FunctionComponent<LandingContentLeftProps> = () => {
 		console.log('test')
 	}
 
-	return <div className={styles['landing_left']}>
-		<MainTitle />
-		<RegistrationButton onClick={register} />
-		<InfoAside />
+	return <div className={styles['landing__left']}>
+		<div/>
+		<div className={styles['landing-left__up']}>
+			<MainTitle />
+			<RegistrationButton onClick={register} />
+		</div>
+		<InfoAsides />
 	</div>
 }
 

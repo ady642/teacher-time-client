@@ -12,6 +12,7 @@ type useModelsPayload = {
 export default ({ scene }: useModelsPayload) => {
 	const earthModel = useRef(new THREE.Object3D())
 	const animationsMap = useRef(new Map())
+	const baseUrl = '../3dModels/'
 
 	////////////////////////////////////////
 	// create an Object3D of the given object
@@ -52,7 +53,7 @@ export default ({ scene }: useModelsPayload) => {
 	}
 
 	const loadModel = () => {
-		const gtlfLoader = new GLTFLoader().setPath('./3dModels/');
+		const gtlfLoader = new GLTFLoader().setPath(baseUrl);
 		gtlfLoader.load( 'board.gltf', function ( object ) {
 			const unitizedBoard = unitize(object.scene, 22)
 			unitizedBoard.rotateY(-Math.PI / 10)
@@ -72,8 +73,8 @@ export default ({ scene }: useModelsPayload) => {
 
 		const manager = new THREE.LoadingManager();
 		manager.addHandler( /\.dds$/i, new DDSLoader() );
-		const mtlLoader = new MTLLoader(manager).setPath('./3dModels/')
-		const objLoader = new OBJLoader(manager).setPath('./3dModels/')
+		const mtlLoader = new MTLLoader(manager).setPath(baseUrl)
+		const objLoader = new OBJLoader(manager).setPath(baseUrl)
 
 		mtlLoader
 			.load( 'TeacherAlone.mtl', function ( materials ) {

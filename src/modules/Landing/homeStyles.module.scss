@@ -1,7 +1,9 @@
 .landing {
   &__left {
-    width: 200px;
-    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: clamp(30px, 7vw, 100px);
   }
   &__models {
     width: clamp(500px, 55vw, 1000px);
@@ -14,9 +16,48 @@
     margin-top: 20px;
   }
   &__container {
-    position: relative;
     overflow: hidden;
-    height: 100vh;
+  }
+}
+
+.info-aside {
+  &s {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  display: flex;
+  &:first-child {
+    margin-right: 20px;
+  }
+
+  &__icon {
+    &__container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      border-radius: 100%;
+      border: 1px solid #CAC7C7;
+      width: 45px;
+      height: 45px;
+      margin-right: 10px;
+    }
+  }
+  &__texts {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+    &__title {
+      font-size: 16px;
+    }
+
+    &__subtitle {
+      max-width: 150px;
+      font-size: 14px;
+      color: #ADADAD;
+    }
   }
 }
 

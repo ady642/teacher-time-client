@@ -6,7 +6,7 @@ interface LogoProps {
     height?: number
 }
 
-const Logo: FC<LogoProps> = ({ width = 'auto', height = 'auto' }) => {
+const Logo: FC<LogoProps> = ({ width = '140', height = '30' }) => {
 	return <Image
 		src={'/img/logo/logo_text.png'}
 		alt="Logo"

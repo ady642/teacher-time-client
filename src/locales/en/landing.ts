@@ -3,7 +3,9 @@ const landing = {
 		help: 'Help',
 		students: 'many student',
 		improveRevenues: 'and imrove your revenues',
-		inscription: 'Register'
+		registration: 'Register',
+		forStudent: 'For Student',
+		forTeacher: 'For Teacher'
 	}
 };
 

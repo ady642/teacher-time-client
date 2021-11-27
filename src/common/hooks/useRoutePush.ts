@@ -12,7 +12,7 @@ const useRoutePush = () => {
 		setAppLoading(false)
 	}
 
-	return { goTo }
+	return { goTo, router }
 }
 
 export default useRoutePush
