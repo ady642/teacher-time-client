@@ -55,16 +55,23 @@ export default ({ scene }: useModelsPayload) => {
 	const loadModel = () => {
 		const gtlfLoader = new GLTFLoader().setPath(baseUrl);
 		gtlfLoader.load( 'board.gltf', function ( object ) {
-			const unitizedBoard = unitize(object.scene, 22)
+			const unitizedBoard = unitize(object.scene, 27)
 			unitizedBoard.rotateY(-Math.PI / 10)
+			unitizedBoard.translateY(4)
+			unitizedBoard.castShadow = true
+			unitizedBoard.receiveShadow = true
+			unitizedBoard.children[0].castShadow = true
 
 			scene.current.add( unitizedBoard );
 		});
 		gtlfLoader.load( 'earth.glb', function ( object ) {
 			const unitizedObject = unitize(object.scene, 5)
 			unitizedObject.translateZ(14)
-			unitizedObject.translateY(20)
+			unitizedObject.translateY(23)
 			unitizedObject.translateX(-17)
+			unitizedObject.castShadow = true
+			unitizedObject.receiveShadow = true
+			unitizedObject.children[0].castShadow = true
 
 			earthModel.current = object.scene
 
@@ -82,11 +89,14 @@ export default ({ scene }: useModelsPayload) => {
 				objLoader
 					.setMaterials(materials)
 					.load( 'TeacherAlone.obj', function ( object ) {
-						// @ts-ignore
 						const unitizedObject = unitize(object, 20)
 						unitizedObject.lookAt(-200, 10, 400)
 						unitizedObject.translateZ(10)
+						unitizedObject.translateY(4)
 						unitizedObject.translateX(-5)
+						unitizedObject.castShadow = true
+						unitizedObject.receiveShadow = true
+						unitizedObject.children[0].castShadow = true
 
 						scene.current.add(unitizedObject);
 					});

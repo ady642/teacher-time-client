@@ -8,7 +8,6 @@ const ThreeComponent = dynamic(() => import('@/modules/Landing/ChooseBetweenTeac
 	ssr: false
 })
 
-
 interface threeProps {
 
 }

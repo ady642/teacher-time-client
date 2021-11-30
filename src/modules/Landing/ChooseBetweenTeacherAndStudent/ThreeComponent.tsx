@@ -13,7 +13,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	const container = useRef<HTMLDivElement>(null)
 	const scene = useRef(new THREE.Scene())
 	const camera = useRef<THREE.Camera>(new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 300 ))
-	const renderer = useRef(new THREE.WebGLRenderer( { antialias: true } ))
+	const renderer = useRef(new THREE.WebGLRenderer( { antialias: true, alpha: true } ))
 	const clock = useRef(new THREE.Clock())
 	const controls = useRef(new OrbitControls(camera.current, renderer.current.domElement))
 
@@ -43,7 +43,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		scene.current.background = new THREE.Color( 0xfbfbfd );
 
-		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0xFBFBFD , depthWrite: true } ) );
+		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0xFBFBFD , depthWrite: false } ) );
 		mesh.rotation.x = - Math.PI / 2;
 		mesh.receiveShadow = true;
 		scene.current.add( mesh );
@@ -61,8 +61,8 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		controls.current.update();
 
-		const ambilentLight = new THREE.AmbientLight( 0xffffff, 0.5)
-		scene.current.add(ambilentLight)
+		const ambientLight = new THREE.AmbientLight( 0xffffff, 0.5)
+		scene.current.add(ambientLight)
 
 		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff );
 		hemiLight.position.set(0, 500, 30);
@@ -76,6 +76,8 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 		renderer.current.shadowMap.enabled = true;
 		renderer.current.setPixelRatio( window.devicePixelRatio );
 		container.current.appendChild(renderer.current.domElement);
+
+		console.log(scene.current)
 
 		window.addEventListener( 'resize', onWindowResize );
 
