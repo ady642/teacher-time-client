@@ -5,7 +5,7 @@ import LandingContentLeft from "@/modules/Landing/LandingContent/LandingContentL
 import BackgroundEllipse from "@/common/components/Background/BackgroundEllipse";
 import LandingLayout from "@/common/layouts/LandingLayout";
 
-const ThreeComponent = dynamic(() => import('@/modules/Landing/ChooseBetweenTeacherAndStudent/ThreeComponent'), {
+const ThreeComponent = dynamic(() => import('@/modules/Landing/Teacher/ThreeComponent'), {
 	ssr: false
 })
 

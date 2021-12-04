@@ -1,10 +1,10 @@
 import {FunctionComponent, useEffect, useRef} from "react";
 import * as THREE from "three";
-import useModels from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useModels";
+import useModels from "@/modules/Landing/Teacher/hooks/useModels";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import styles from '@/modules/Landing/homeStyles.module.scss'
 import LandingContentLeft from "@/modules/Landing/LandingContent/LandingContentLeft";
-import loadLights from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useLights";
+import loadLights from "@/modules/Landing/Teacher/hooks/useLights";
 
 interface ThreeProps {
 

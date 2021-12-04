@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import styles from '@/modules/Landing/homeStyles.module.scss'
 import LandingLayout from "@/common/layouts/LandingLayout";
 
-const ThreeComponent = dynamic(() => import('@/modules/Landing/ChooseBetweenTeacherAndStudent/ThreeComponent'), {
+const ThreeComponent = dynamic(() => import('@/modules/Landing/Teacher/ThreeComponent'), {
 	ssr: false
 })
 
