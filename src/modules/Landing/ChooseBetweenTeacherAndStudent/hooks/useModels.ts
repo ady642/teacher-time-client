@@ -57,7 +57,7 @@ export default ({ scene }: useModelsPayload) => {
 		const gtlfLoader = new GLTFLoader().setPath(baseUrl);
 		gtlfLoader.load( 'board.gltf', function ( object ) {
 			const unitizedBoard = unitize(object.scene, 27)
-			unitizedBoard.rotateY(-Math.PI / 10)
+			unitizedBoard.rotateY(-Math.PI / 3)
 
 			unitizedBoard.traverse((mesh) => {
 				mesh.castShadow = true
@@ -75,8 +75,8 @@ export default ({ scene }: useModelsPayload) => {
 			})
 
 			unitizedObject.translateZ(20)
-			unitizedObject.translateY(23)
-			unitizedObject.translateX(-17)
+			unitizedObject.translateY(22)
+			unitizedObject.translateX(-36)
 
 			earthModel.current = object.scene
 
@@ -84,7 +84,7 @@ export default ({ scene }: useModelsPayload) => {
 		})
 
 		const manager = new THREE.LoadingManager();
-		manager.addHandler( /\.dds$/i, new DDSLoader() );
+		manager.addHandler(/\.dds$/i, new DDSLoader());
 		const mtlLoader = new MTLLoader(manager).setPath(baseUrl)
 		const objLoader = new OBJLoader(manager).setPath(baseUrl)
 
@@ -93,14 +93,14 @@ export default ({ scene }: useModelsPayload) => {
 				materials.preload();
 				objLoader
 					.setMaterials(materials)
-					.load( 'TeacherAlone.obj', function ( object ) {
+					.load( 'TeacherAlone.obj', function (object	) {
 						const unitizedObject = unitize(object, 20)
 
 						unitizedObject.traverse((mesh) => {
 							mesh.castShadow = true
 							mesh.receiveShadow = true
 						})
-						unitizedObject.lookAt(-200, 10, 400)
+						unitizedObject.lookAt(-15, 0, 10)
 						unitizedObject.translateZ(10)
 						unitizedObject.translateY(0)
 						unitizedObject.translateX(-5)

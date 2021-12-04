@@ -3,6 +3,8 @@ import * as THREE from "three";
 import useModels from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useModels";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import styles from '@/modules/Landing/homeStyles.module.scss'
+import LandingContentLeft from "@/modules/Landing/LandingContent/LandingContentLeft";
+import loadLights from "@/modules/Landing/ChooseBetweenTeacherAndStudent/hooks/useLights";
 
 interface ThreeProps {
 
@@ -43,7 +45,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		const floorGeometry = new THREE.CircleGeometry(100, 360, 0, 90);
 		const floorMaterial = new THREE.MeshPhongMaterial({
-			color: 0xA79797,
+			color: 0xB9B3B3,
 			wireframe: false
 		});
 		const floor = new THREE.Mesh(floorGeometry, floorMaterial);
@@ -54,7 +56,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 		floor.receiveShadow = true;
 		scene.current.add(floor);
 
-		controls.current.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+		controls.current.enableDamping = true;
 		controls.current.dampingFactor = 0.2;
 		controls.current.screenSpacePanning = false;
 		controls.current.maxPolarAngle = Math.PI / 2;
@@ -62,44 +64,37 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 		controls.current.minDistance = 20
 		controls.current.target = new THREE.Vector3(0, 16, 0)
 
-		camera.current.position.set( -20, 20, 50 );
+		camera.current.position.set( -10, 20, 45 );
 		camera.current.lookAt(new THREE.Vector3(-10, 15, -10));
 
 		controls.current.update();
 
-		const ambientLight = new THREE.AmbientLight( 0xffffff, 0.6)
-		scene.current.add(ambientLight)
+		loadLights(scene, teacherModel)
 
-		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.8);
-		hemiLight.position.set(0, 500, 30);
-		scene.current.add( hemiLight );
-
-		const dirLight = new THREE.DirectionalLight( 0xfbfbfd, 0.6);
-		dirLight.position.set(-50, 30, 30);
-		dirLight.castShadow = true;
-		dirLight.target = teacherModel.current
-		dirLight.shadow.camera.top = 30
-		dirLight.shadow.camera.bottom = -10
-		dirLight.shadow.camera.left = -30
-		dirLight.shadow.camera.right = 30
-		scene.current.add( dirLight );
-
-		scene.current.add(new THREE.CameraHelper(dirLight.shadow.camera))
+		scene.current.translateX(20);
 
 		renderer.current.shadowMap.enabled = true;
-		renderer.current.setPixelRatio( window.devicePixelRatio );
+		renderer.current.setPixelRatio(window.devicePixelRatio);
 		container.current.appendChild(renderer.current.domElement);
 
 		onWindowResize()
 
+		window.addEventListener('resize', onWindowResize)
+
 		animate();
+
+		return () => {
+			window.removeEventListener('resize', onWindowResize)
+		}
 	}, [])
 
 	return <div
 		className={styles['landing__models']}
 		tabIndex={0}
 		ref={container}
-	/>
+	>
+		<LandingContentLeft />
+	</div>
 }
 
 export default ThreeComponent
