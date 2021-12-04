@@ -12,17 +12,15 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	//Init
 	const container = useRef<HTMLDivElement>(null)
 	const scene = useRef(new THREE.Scene())
-	const camera = useRef<THREE.Camera>(new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 300 ))
+	const camera = useRef(new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 300 ))
 	const renderer = useRef(new THREE.WebGLRenderer( { antialias: true, alpha: true } ))
 	const clock = useRef(new THREE.Clock())
 	const controls = useRef(new OrbitControls(camera.current, renderer.current.domElement))
 
-	const { loadModel, earthModel } = useModels({ scene })
+	const { loadModel, earthModel, teacherModel } = useModels({ scene })
 
 	function onWindowResize() {
-		// @ts-ignore
 		camera.current.aspect = container.current.clientWidth / container.current.clientHeight;
-		// @ts-ignore
 		camera.current.updateProjectionMatrix();
 
 		renderer.current.setSize( container.current.clientWidth, container.current.clientHeight );
@@ -35,7 +33,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		requestAnimationFrame(animate);
 
-		renderer.current.render( scene.current, camera.current );
+		renderer.current.render(scene.current, camera.current);
 	}
 
 	useEffect(() => {
@@ -43,10 +41,18 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		scene.current.background = new THREE.Color( 0xfbfbfd );
 
-		const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0xFBFBFD , depthWrite: false } ) );
-		mesh.rotation.x = - Math.PI / 2;
-		mesh.receiveShadow = true;
-		scene.current.add( mesh );
+		const floorGeometry = new THREE.CircleGeometry(100, 360, 0, 90);
+		const floorMaterial = new THREE.MeshPhongMaterial({
+			color: 0xA79797,
+			wireframe: false
+		});
+		const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+		floor.rotation.x = -Math.PI * 0.5;
+		floor.position.z = 0;
+		floor.position.x = 0;
+		floor.position.y = 0;
+		floor.receiveShadow = true;
+		scene.current.add(floor);
 
 		controls.current.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
 		controls.current.dampingFactor = 0.2;
@@ -61,25 +67,28 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		controls.current.update();
 
-		const ambientLight = new THREE.AmbientLight( 0xffffff, 0.5)
+		const ambientLight = new THREE.AmbientLight( 0xffffff, 0.6)
 		scene.current.add(ambientLight)
 
-		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff );
+		const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.8);
 		hemiLight.position.set(0, 500, 30);
 		scene.current.add( hemiLight );
 
-		const dirLight = new THREE.DirectionalLight( 0xffffff, 0.1 );
-		dirLight.position.set(-10, 50, 50);
+		const dirLight = new THREE.DirectionalLight( 0xfbfbfd, 0.6);
+		dirLight.position.set(-50, 30, 30);
 		dirLight.castShadow = true;
+		dirLight.target = teacherModel.current
+		dirLight.shadow.camera.top = 30
+		dirLight.shadow.camera.bottom = -10
+		dirLight.shadow.camera.left = -30
+		dirLight.shadow.camera.right = 30
 		scene.current.add( dirLight );
+
+		scene.current.add(new THREE.CameraHelper(dirLight.shadow.camera))
 
 		renderer.current.shadowMap.enabled = true;
 		renderer.current.setPixelRatio( window.devicePixelRatio );
 		container.current.appendChild(renderer.current.domElement);
-
-		console.log(scene.current)
-
-		window.addEventListener( 'resize', onWindowResize );
 
 		onWindowResize()
 

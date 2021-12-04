@@ -11,6 +11,7 @@ type useModelsPayload = {
 
 export default ({ scene }: useModelsPayload) => {
 	const earthModel = useRef(new THREE.Object3D())
+	const teacherModel = useRef(new THREE.Object3D())
 	const animationsMap = useRef(new Map())
 	const baseUrl = '../3dModels/'
 
@@ -57,21 +58,25 @@ export default ({ scene }: useModelsPayload) => {
 		gtlfLoader.load( 'board.gltf', function ( object ) {
 			const unitizedBoard = unitize(object.scene, 27)
 			unitizedBoard.rotateY(-Math.PI / 10)
-			unitizedBoard.translateY(4)
-			unitizedBoard.castShadow = true
-			unitizedBoard.receiveShadow = true
-			unitizedBoard.children[0].castShadow = true
+
+			unitizedBoard.traverse((mesh) => {
+				mesh.castShadow = true
+				mesh.receiveShadow = true
+			})
 
 			scene.current.add( unitizedBoard );
 		});
 		gtlfLoader.load( 'earth.glb', function ( object ) {
 			const unitizedObject = unitize(object.scene, 5)
-			unitizedObject.translateZ(14)
+
+			unitizedObject.traverse((mesh) => {
+				mesh.castShadow = true
+				mesh.receiveShadow = true
+			})
+
+			unitizedObject.translateZ(20)
 			unitizedObject.translateY(23)
 			unitizedObject.translateX(-17)
-			unitizedObject.castShadow = true
-			unitizedObject.receiveShadow = true
-			unitizedObject.children[0].castShadow = true
 
 			earthModel.current = object.scene
 
@@ -90,13 +95,17 @@ export default ({ scene }: useModelsPayload) => {
 					.setMaterials(materials)
 					.load( 'TeacherAlone.obj', function ( object ) {
 						const unitizedObject = unitize(object, 20)
+
+						unitizedObject.traverse((mesh) => {
+							mesh.castShadow = true
+							mesh.receiveShadow = true
+						})
 						unitizedObject.lookAt(-200, 10, 400)
 						unitizedObject.translateZ(10)
-						unitizedObject.translateY(4)
+						unitizedObject.translateY(0)
 						unitizedObject.translateX(-5)
-						unitizedObject.castShadow = true
-						unitizedObject.receiveShadow = true
-						unitizedObject.children[0].castShadow = true
+
+						teacherModel.current = unitizedObject
 
 						scene.current.add(unitizedObject);
 					});
@@ -108,6 +117,7 @@ export default ({ scene }: useModelsPayload) => {
 	return {
 		loadModel,
 		earthModel,
+		teacherModel,
 		animationsMap
 	}
 }

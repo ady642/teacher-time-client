@@ -1,20 +1,29 @@
 .landing {
   &__left {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 50%;
     display: flex;
+    width: 50vw;
     flex-direction: column;
     justify-content: space-between;
     padding-left: clamp(30px, 7vw, 100px);
   }
   &__models {
-    width: clamp(500px, 55vw, 1000px);
+    width: 100vw;
     height: clamp(500px, 80vh, 1000px);
     cursor: pointer;
   }
   &__content {
+    position: relative;
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
     height: calc(100vh - 200px);
+    pointer-events: none;
   }
   &__container {
     overflow: hidden;
