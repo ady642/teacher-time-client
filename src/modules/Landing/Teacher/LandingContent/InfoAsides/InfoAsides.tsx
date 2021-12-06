@@ -1,6 +1,6 @@
 import {FunctionComponent} from "react";
-import InstantInfo from "@/modules/Landing/LandingContent/InfoAsides/InstantInfo";
-import AdditionalIncomeInfo from "@/modules/Landing/LandingContent/InfoAsides/AdditionalIncomeInfo";
+import InstantInfo from "@/modules/Landing/Teacher/LandingContent/InfoAsides/InstantInfo";
+import AdditionalIncomeInfo from "@/modules/Landing/Teacher/LandingContent/InfoAsides/AdditionalIncomeInfo";
 import styles from "@/modules/Landing/homeStyles.module.scss";
 
 interface InfoAsideProps {

@@ -1,8 +1,8 @@
 import {FunctionComponent} from "react";
 import styles from "@/modules/Landing/homeStyles.module.scss";
-import MainTitle from "@/modules/Landing/LandingContent/MainTitle";
-import RegistrationButton from "@/modules/Landing/LandingContent/RegistrationButton";
-import InfoAsides from "@/modules/Landing/LandingContent/InfoAsides/InfoAsides";
+import MainTitle from "@/modules/Landing/Teacher/LandingContent/MainTitle";
+import RegistrationButton from "@/modules/Landing/Teacher/LandingContent/RegistrationButton";
+import InfoAsides from "@/modules/Landing/Teacher/LandingContent/InfoAsides/InfoAsides";
 
 interface LandingContentLeftProps {
 

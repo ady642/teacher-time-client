@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 50%;
+
+  &__student {
+    background: #FBFBFD;
+  }
+
+  &__teacher {
+    background: white;
+    box-shadow: -8px 0px 12px 0px rgba(177, 176, 176, 0.35);
+  }
+}

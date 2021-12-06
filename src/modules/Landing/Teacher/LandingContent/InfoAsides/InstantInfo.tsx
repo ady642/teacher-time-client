@@ -1,5 +1,5 @@
 import {FunctionComponent} from "react";
-import InfoAside from "@/modules/Landing/LandingContent/InfoAsides/InfoAside";
+import InfoAside from "@/modules/Landing/Teacher/LandingContent/InfoAsides/InfoAside";
 import useTranslation from "@/common/hooks/useTranslation";
 
 interface InstantInfoProps {

@@ -1,6 +1,6 @@
 import {FunctionComponent} from "react";
 import useTranslation from "@/common/hooks/useTranslation";
-import InfoAside from "@/modules/Landing/LandingContent/InfoAsides/InfoAside";
+import InfoAside from "@/modules/Landing/Teacher/LandingContent/InfoAsides/InfoAside";
 
 interface AdditionalIncomeInfoProps {
 
