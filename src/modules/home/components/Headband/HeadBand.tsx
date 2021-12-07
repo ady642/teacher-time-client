@@ -19,7 +19,7 @@ const HeadBand: FunctionComponent<HeadBandProps> = ({ goToTeachers }) => {
 			<span className={`${styles.headBand__text__subhead}`}>
 				{ t('home.freeCall') }
 			</span>
-			<TailwindButton onClick={goToTeachers} className={`${styles.headBand__button} animate-pulse mt-5 text-white flex justify-center transition-all font-bold`}>
+			<TailwindButton onClick={goToTeachers} size={'small'} className={`${styles.headBand__button} animate-pulse mt-5 text-white flex justify-center transition-all font-bold`}>
 				<span className={`mr-2 capitalize `}>
 					{ t('common.findAteacher') }
 				</span>

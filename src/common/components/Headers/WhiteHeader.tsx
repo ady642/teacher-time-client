@@ -40,7 +40,7 @@ const WhiteHeader: FC<HeaderProps> = ({ openPaymentModal }) => {
 	}
 
 	const goToHome = async () => {
-		await goTo( '')
+		await goTo( 'home')
 	}
 
 	return (

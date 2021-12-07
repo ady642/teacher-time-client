@@ -9,11 +9,12 @@ interface ChoiceProps {
     title: string,
     subtitle: string,
     imgSource: string,
-	onButtonClick: () => void
+	onButtonClick: () => void,
+	outlinedButton?: boolean
 }
 
 const Choice: FunctionComponent<ChoiceProps> = ({
-	imgSource, title, subtitle, onButtonClick
+	imgSource, title, subtitle, onButtonClick, outlinedButton = false
 }) => {
 	return <div className={styles['choice']}>
 		<ChoiceImage source={imgSource}/>
@@ -21,7 +22,10 @@ const Choice: FunctionComponent<ChoiceProps> = ({
 			<ChoiceTitle title={title} />
 			<ChoiceSubtitle subtitle={subtitle} />
 		</section>
-		<ChoiceButton onClick={onButtonClick} />
+		<ChoiceButton
+			outlined={outlinedButton}
+			onClick={onButtonClick}
+		/>
 	</div>
 }
 

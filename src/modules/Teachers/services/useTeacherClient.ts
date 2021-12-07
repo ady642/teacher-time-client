@@ -21,7 +21,7 @@ const useTeacherClient = () => {
 	const createTeacher = async (teacherCreationForm: TeacherCreationForm) => {
 		try {
 			await teacherClient.createTeacher(new TeacherCreationForm(teacherCreationForm))
-			await goTo('')
+			await goTo('home')
 		} catch (error) {
 			setError('Ce profil professeur existe déjà')
 		}

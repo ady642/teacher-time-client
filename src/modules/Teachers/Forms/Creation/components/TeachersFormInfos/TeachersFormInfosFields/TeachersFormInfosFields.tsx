@@ -90,7 +90,7 @@ const TeachersFormInfosFields: FunctionComponent<TeachersFormInfosFieldsProps> =
 
 	useEffect(() => {
 		if(teacher) {
-			goTo('')
+			goTo('home')
 		}
 	}, [teacher])
 

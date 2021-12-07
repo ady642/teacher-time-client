@@ -5,10 +5,10 @@ import {ButtonProps} from "@/common/types/button";
 
 interface ChoiceButtonProps extends ButtonProps {}
 
-const ChoiceButton: FunctionComponent<ChoiceButtonProps> = ({ onClick }) => {
+const ChoiceButton: FunctionComponent<ChoiceButtonProps> = ({ onClick, outlined }) => {
 	const { t } = useTranslation()
 
-	return <TailwindButton onClick={onClick}>
+	return <TailwindButton outlined={outlined} onClick={onClick}>
 		{ t('landing.getStarted') }
 	</TailwindButton>
 }

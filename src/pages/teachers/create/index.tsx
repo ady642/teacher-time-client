@@ -18,7 +18,7 @@ const CreateTeacher: FunctionComponent<CreateTeacherProps> = () => {
 
 	useEffect(() => {
 		const goAsync = async () => {
-			await goTo('')
+			await goTo('home')
 		}
 
 		if(teacher)

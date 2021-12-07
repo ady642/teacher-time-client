@@ -26,7 +26,7 @@ const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getS
 
 	const handleTeacherDisconnection = async () => {
 		alert('The teacher is gone')
-		await goTo('')
+		await goTo('home')
 	}
 
 	const handleStudentDisconnection = async () => {
