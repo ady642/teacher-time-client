@@ -15,7 +15,7 @@ interface threeProps {
 
 }
 
-const LandingTeacher: FunctionComponent<threeProps> = () => {()
+const LandingTeacher: FunctionComponent<threeProps> = () => {
 	const { goTo } = useRoutePush()
 
 	useEffect(() => {

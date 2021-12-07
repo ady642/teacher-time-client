@@ -15,14 +15,11 @@ import Bounce from "@/modules/home/components/Bounce";
 import homeStyles from "@/modules/home/styles/Home.module.scss"
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
-import useCookies from "@/common/hooks/useCookies";
 
 const Home: FC = ({ token: tokenQuery }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
 	const { setToken, openRegisterModal } = useAuthReducers()
 	const { token } = useAuthGetters()
-	const { getCookie } = useCookies()
-
 
 	useEffect(() => {
 		if(tokenQuery) {
