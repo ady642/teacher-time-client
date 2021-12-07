@@ -7,13 +7,13 @@ interface TeachersCreateTextTitleProps {
 
 const TeachersCreateTextTitle: FunctionComponent<TeachersCreateTextTitleProps> = () => {
 	return <div className={teachersCreateTextStyle['teachers-create__text__subtitle']}>
-		<p className={'mb-4'}>
-			Libre et sans intermédiaire, enseignez près de chez vous pour rencontrer des élèves géniaux.
-			Langues, Sports, Musique, Arts, Loisirs, Scolaire, plus de 1000 connaissances à partager.
+		<p className={'mb-4 text-xl'}>
+			Teacher-time est une plateforme vous permettant d'apparaître disponible pour des élèves ayant des questions.
+			Vous aidez les élèves et augmentez vos revenus !
 		</p>
 		<p>
 			Étudiants, enseignants, autodidactes, passionnés, diplômés, professionnels...
-			Rejoignez la communauté des Super Professeurs ! On vous attend 😍
+			Rejoignez les professeurs de Teacher-time.com ! On vous attend 😍
 		</p>
 	</div>
 }

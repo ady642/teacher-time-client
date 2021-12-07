@@ -13,8 +13,8 @@ const ForStudentLink: FunctionComponent<ForStudentLinkProps> = () => {
 
 	const { goTo, router } = useRoutePush()
 
-	const goToTeacherLanding = async () => {
-		await goTo('landing/student')
+	const goToTeacherList = async () => {
+		await goTo('teachers/list')
 	}
 
 	useEffect(() => {
@@ -25,7 +25,7 @@ const ForStudentLink: FunctionComponent<ForStudentLinkProps> = () => {
 
 	return <NavLink
 		title={t('landing.forStudent')}
-		onClick={goToTeacherLanding}
+		onClick={goToTeacherList}
 		isActive={isActive}
 	/>
 }

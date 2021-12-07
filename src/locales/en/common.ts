@@ -16,7 +16,9 @@ const common = {
 	join: "A student wants to ask you a question",
 	accept: "Accept",
 	reject: "Reject",
-	studentEntry: 'Student'
+	studentEntry: 'Student',
+	loginWithGoogle: 'Login with Google',
+	registerWithGoogle: 'Register with Google',
 };
 
 export default common;

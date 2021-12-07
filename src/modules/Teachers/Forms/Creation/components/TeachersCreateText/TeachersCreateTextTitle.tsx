@@ -7,7 +7,7 @@ interface TeachersCreateTextTitleProps {
 
 const TeachersCreateTextTitle: FunctionComponent<TeachersCreateTextTitleProps> = () => {
 	return <h1 className={teachersCreateTextStyle['teachers-create__text__title']}>
-		<span>Donner des cours,</span> <span>vivre de sa Passion !</span>
+		<span>Donner des cours,</span> <span>et augmentez vos revenus !</span>
 	</h1>
 }
 

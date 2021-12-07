@@ -11,7 +11,7 @@ interface LandingHeaderProps {
 const LandingHeader: FunctionComponent<LandingHeaderProps> = () => {
 	return <div className={styles['landingHeader']}>
 		<NavLinks />
-		<LogoText />
+		<LogoText width={180}/>
 		<LoginButton />
 	</div>
 }

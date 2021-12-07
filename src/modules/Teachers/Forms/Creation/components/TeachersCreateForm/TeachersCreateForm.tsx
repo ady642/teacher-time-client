@@ -21,7 +21,7 @@ const TeachersCreateForm: FunctionComponent<TeachersCreateFormProps> = (
 
 	return <div className={teachersCreateFormStyle['teachers-create__form__container']}>
 		<TeachersCreateFormTitle />
-		<TeachersCreateFormOAuth />
+		<TeachersCreateFormOAuth hasAccount={hasAccount}/>
 		<TTDivider className={'self-center my-6'} text={'Ou'}/>
 		<Switch componentName={hasAccount ? 'TeachersConnect' : 'TeachersCreateForm'} defaultComponent={<div>Default Form</div>}>
 			<Case value={'TeachersConnect'}>

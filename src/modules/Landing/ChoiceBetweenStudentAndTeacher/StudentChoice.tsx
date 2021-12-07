@@ -15,7 +15,7 @@ const StudentChoice: FunctionComponent<StudentChoiceProps> = () => {
 
 	const goToStudentLanding = async () => {
 		setCookie('initialChoice', 'student')
-		await goTo('landing/student')
+		await goTo('teachers/list')
 	}
 
 	return <Choice

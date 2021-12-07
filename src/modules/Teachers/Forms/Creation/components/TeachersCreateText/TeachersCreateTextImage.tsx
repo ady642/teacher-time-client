@@ -10,8 +10,8 @@ const TeachersCreateTextImage: FunctionComponent<TeachersCreateTextImageProps> =
 		className={teachersCreateTextStyle['teachers-create__text__image']}
 		src={'/img/teachers-speaking.svg'}
 		alt={'TTvideo'}
-		width={800}
-		height={600}
+		width={500}
+		height={300}
 	/>
 }
 

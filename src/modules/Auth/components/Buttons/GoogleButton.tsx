@@ -2,10 +2,11 @@ import {FunctionComponent} from "react";
 import styles from '@/modules/Auth/components/Buttons/GoogleButton.module.scss'
 
 interface GoogleButtonProps {
-    onClick: () => void
+    onClick: () => void;
+	text?: string;
 }
 
-const GoogleButton: FunctionComponent<GoogleButtonProps> = ({ onClick }) => {
+const GoogleButton: FunctionComponent<GoogleButtonProps> = ({ onClick, text= 'Inscription avec Google' }) => {
 	return <div onClick={onClick} className={styles.googleBtn}>
 		<div className={styles.googleIconWrapper}>
 			<img className={styles.googleIcon}
@@ -13,7 +14,7 @@ const GoogleButton: FunctionComponent<GoogleButtonProps> = ({ onClick }) => {
 				alt="google-button"
 			/>
 		</div>
-		<p className={styles.btnText}>Inscription avec Google</p>
+		<p className={styles.btnText}>{ text }</p>
 	</div>
 
 }
