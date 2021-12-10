@@ -36,7 +36,7 @@ const Home: FC = ({ token: tokenQuery }: InferGetServerSidePropsType<typeof getS
 	return (
 		<>
 			<Head>
-				<title>Teacher-time</title>
+				<title>Teacher-time | Home</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<WhiteHeaderLayout
