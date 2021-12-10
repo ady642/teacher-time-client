@@ -11,7 +11,7 @@ const ThreeComponent = dynamic(() => import('@/modules/Landing/Teacher/ThreeComp
 const LandingTeacher: FunctionComponent = () => {
 	return <>
 		<Head>
-			<title>Teacher-time | Choice</title>
+			<title>Teacher-time | Landing Teacher</title>
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 		<LandingLayout>
