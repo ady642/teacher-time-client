@@ -7,6 +7,10 @@ const teachers = {
 	offline: 'Hors ligne',
 	form: {
 		creation: {
+			title: {
+				login: 'Se connecter',
+				register: 'Créer votre compte'
+			},
 			fields: {
 				title: 'Sélectionner votre spécialité',
 				subtitle: 'Vous pouvez sélectionner plusieurs matières'

@@ -9,11 +9,6 @@ import TeachersConnectFormButton
 import LoginForm from "@/modules/Auth/models/LoginForm";
 import useAuthServices from "@/modules/Auth/services/useAuthServices";
 import LoginValidator from "@/modules/Auth/validators/LoginValidator";
-import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
-import {Teacher} from "@/modules/Teachers/models/Entity/Teacher";
-import TeacherClient from "@/modules/Teachers/services/TeacherClient";
-import useUserReducers from "@/context/user/helpers/useUserReducers";
-import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 interface TeachersConnectFormProps {
 }

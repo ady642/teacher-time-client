@@ -6,6 +6,10 @@ const teachers = {
 	offline: 'Offline',
 	form: {
 		creation: {
+			title: {
+				login: 'Login',
+				register: 'Create your account'
+			},
 			fields: {
 				title: 'Select a field',
 				subtitle: 'You can select multiple fields'

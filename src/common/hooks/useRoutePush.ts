@@ -6,9 +6,9 @@ const useRoutePush = () => {
 
 	const { setAppLoading } = useAppReducers()
 
-	const goTo = async (url: string, query?: any) => {
+	const goTo = async (url: string, query?: any, shallow = true) => {
 		setAppLoading(true)
-		await router.push({ pathname: `/${url}`, query }, null, { shallow: true })
+		await router.push({ pathname: `/${url}`, query }, null, { shallow })
 		setAppLoading(false)
 	}
 

@@ -8,10 +8,10 @@ import TeachersConnectionFormValidator
 	from "@/modules/Teachers/Forms/Creation/validator/TeachersConnectionFormValidator";
 
 interface TeachersConnectionProps {
-
+	toLogin: boolean
 }
 
-const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
+const TeachersConnection: FunctionComponent<TeachersConnectionProps> = ({ toLogin }) => {
 	const { registrationStatus, submitRegister, loginWithGoogle } = useAuthServices()
 	const [registrationForm, setRegistrationForm] = useState(new RegistrationForm())
 	const [registrationValidator, setRegistrationValidator] = useState(new TeachersConnectionFormValidator(registrationForm))
@@ -33,6 +33,7 @@ const TeachersConnection: FunctionComponent<TeachersConnectionProps> = () => {
 	return <TeachersCreateLayout
 		left={<TeachersCreateText />}
 		right={<TeachersCreateForm
+			toLogin={toLogin}
 			registrationForm={registrationForm}
 			setRegistrationForm={setRegistrationForm}
 			exceptions={registrationValidator.exceptions}

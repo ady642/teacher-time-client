@@ -13,14 +13,17 @@ import TeachersConnectForm from "@/modules/Teachers/Forms/Creation/components/Te
 import AlreadyAccount from "@/modules/Auth/components/RegisterModal/RegisterModalContent/AlreadyAccount";
 import NoAccount from "@/modules/Auth/components/LoginModal/LoginModalContent/NoAccount";
 
-export interface TeachersCreateFormProps extends Omit<RegisterModalContentProps, 'clickOnAlreadyExists' | 'refContent'> {}
+export interface TeachersCreateFormProps extends Omit<RegisterModalContentProps, 'clickOnAlreadyExists' | 'refContent'> {
+	toLogin: boolean;
+}
 
 const TeachersCreateForm: FunctionComponent<TeachersCreateFormProps> = (
-	{ onGoogleButtonClick, registrationForm, setRegistrationForm, registrationStatus,submitRegistration, exceptions }) => {
-	const [hasAccount, setHasAccount] = useState(false)
+	{ 	toLogin,
+		onGoogleButtonClick, registrationForm, setRegistrationForm, registrationStatus,submitRegistration, exceptions }) => {
+	const [hasAccount, setHasAccount] = useState(toLogin)
 
 	return <div className={teachersCreateFormStyle['teachers-create__form__container']}>
-		<TeachersCreateFormTitle />
+		<TeachersCreateFormTitle hasAccount={hasAccount} />
 		<TeachersCreateFormOAuth hasAccount={hasAccount}/>
 		<TTDivider className={'self-center my-6'} text={'Ou'}/>
 		<Switch componentName={hasAccount ? 'TeachersConnect' : 'TeachersCreateForm'} defaultComponent={<div>Default Form</div>}>

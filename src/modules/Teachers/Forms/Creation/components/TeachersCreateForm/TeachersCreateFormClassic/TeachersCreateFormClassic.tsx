@@ -13,7 +13,7 @@ import {TeachersCreateFormProps} from "@/modules/Teachers/Forms/Creation/compone
 import useObject from "@/common/hooks/useObject";
 import ErrorMessage from "@/common/components/Errors/ErrorMessage";
 
-interface TeachersCreateFormClassicProps extends TeachersCreateFormProps{}
+interface TeachersCreateFormClassicProps extends Omit<TeachersCreateFormProps, 'toLogin'>{}
 
 const TeachersCreateFormClassic: FunctionComponent<TeachersCreateFormClassicProps> = (
 	{ registrationForm,setRegistrationForm,registrationStatus,submitRegistration }

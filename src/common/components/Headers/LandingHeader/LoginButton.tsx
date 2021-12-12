@@ -13,7 +13,7 @@ const LoginButton: FunctionComponent<LoginButtonProps> = () => {
 	const { goTo } = useRoutePush()
 
 	const goToTeacherCreate = () => {
-		goTo('teachers/create')
+		goTo('teachers/create', { toLogin: true })
 	}
 
 	return <TailwindButton onClick={() => goToTeacherCreate()} outlined={true} className={styles['landingHeader__loginButton']}>

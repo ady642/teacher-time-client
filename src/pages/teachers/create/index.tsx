@@ -6,12 +6,13 @@ import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import TeachersFormInfos from "@/modules/Teachers/Forms/Creation/views/TeachersFormInfos";
 import useUserGetters from "@/context/user/helpers/useUserGetters";
 import useRoutePush from "@/common/hooks/useRoutePush";
+import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 
 interface CreateTeacherProps {
 
 }
 
-const CreateTeacher: FunctionComponent<CreateTeacherProps> = () => {
+const CreateTeacher: FunctionComponent<CreateTeacherProps> = ({ toLogin }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { token} = useAuthGetters()
 	const { teacher } = useUserGetters()
 	const { goTo } =  useRoutePush()
@@ -26,11 +27,20 @@ const CreateTeacher: FunctionComponent<CreateTeacherProps> = () => {
 	}, [teacher])
 
 	return <WhiteHeaderLayout>
-		<Switch componentName={token ? 'TeachersFormInfos': 'TeachersConnection'} defaultComponent={<TeachersConnection />}>
-			<Case value={'TeachersConnection'}><TeachersConnection /></Case>
+		<Switch componentName={token ? 'TeachersFormInfos': 'TeachersConnection'} defaultComponent={<TeachersConnection toLogin={false} />}>
+			<Case value={'TeachersConnection'}><TeachersConnection toLogin={toLogin} /></Case>
 			<Case value={'TeachersFormInfos'}><TeachersFormInfos /></Case>
 		</Switch>
 	</WhiteHeaderLayout>
+}
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+	const toLogin = ctx.query?.toLogin ?? ''
+
+	return {
+		props: { toLogin }
+	}
 }
 
 export default CreateTeacher
