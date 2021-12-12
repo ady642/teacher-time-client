@@ -21,7 +21,8 @@ const landing = {
 		registration: 'Inscrivez vous pour créer votre classe et apparaitre en ligne',
 		studentContact: 'Un élève peut alors vous contacter pour vous poser une question',
 		earn: 'A la fin de la session, vous êtes crédité en fonction du temps passé avec l’élève'
-	}
+	},
+	scrollDown: 'Faites défiler pour en savoir plus'
 }
 
 export default landing

@@ -2,8 +2,8 @@ import {FunctionComponent} from "react";
 import styles from "@/modules/Landing/homeStyles.module.scss";
 import MainTitle from "@/modules/Landing/Teacher/LandingContent/MainTitle";
 import RegistrationButton from "@/modules/Landing/Teacher/LandingContent/RegistrationButton";
-import InfoAsides from "@/modules/Landing/Teacher/LandingContent/InfoAsides/InfoAsides";
 import useRoutePush from "@/common/hooks/useRoutePush";
+import ScrollButton from "@/modules/Landing/Teacher/LandingContent/ScrollButton/ScrollButton";
 
 interface LandingContentLeftProps {
 
@@ -22,7 +22,7 @@ const LandingContentLeft: FunctionComponent<LandingContentLeftProps> = () => {
 			<MainTitle />
 			<RegistrationButton onClick={register} />
 		</div>
-		<InfoAsides />
+		<ScrollButton />
 	</div>
 }
 

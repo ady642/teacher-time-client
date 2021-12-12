@@ -23,7 +23,8 @@ const landing = {
 		registration: 'Register to create your class and appear online',
 		studentContact: 'A student can then contact you with a question',
 		earn: 'At the end of the session, you are credited according to the time spent with the student'
-	}
+	},
+	scrollDown: 'Scroll down to explore'
 };
 
 export default landing;

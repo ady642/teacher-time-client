@@ -19,7 +19,7 @@ const LandingTeacher: FunctionComponent = () => {
 			<section className={styles['landing__content']}>
 				<ThreeComponent />
 			</section>
-			<section className={styles['landing__hiw']}>
+			<section id={'hiw'} className={styles['landing__hiw']}>
 				<HowItWorks />
 			</section>
 		</LandingLayout>

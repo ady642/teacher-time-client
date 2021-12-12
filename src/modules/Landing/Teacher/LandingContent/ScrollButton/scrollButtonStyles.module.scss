@@ -1,0 +1,38 @@
+.scroll-button {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    .scroll-button__text {
+    }
+  }
+
+  &__icon {
+    width: 40%;
+
+    &-container {
+      $dim: 45px;
+      width: $dim + 5px;
+      height: $dim;
+      display: flex;
+      color: white;
+      border-radius: 45%;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+      background: #5F85E6;
+    }
+  }
+
+  &__text {
+    text-transform: uppercase;
+    color: #5F85E6;
+    font-weight: bolder;
+    font-size: 20px;
+    transition: all 0.2s ease-in;
+
+    &--translated {
+      transform: translateY(-20px);
+    }
+  }
+}

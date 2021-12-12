@@ -18,6 +18,7 @@ a:hover {
 html {
     min-height: 100%;
     font-family: 'Nunito', sans-serif;
+    scroll-behavior: smooth;
 }
 
 body {
