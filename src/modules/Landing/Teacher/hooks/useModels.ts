@@ -55,7 +55,7 @@ export default ({ scene }: useModelsPayload) => {
 
 	const loadModel = () => {
 		const gtlfLoader = new GLTFLoader().setPath(baseUrl);
-		gtlfLoader.load( 'board.gltf', function ( object ) {
+		/*gtlfLoader.load( 'board.gltf', function ( object ) {
 			const unitizedBoard = unitize(object.scene, 27)
 			unitizedBoard.rotateY(-Math.PI / 3)
 
@@ -65,7 +65,7 @@ export default ({ scene }: useModelsPayload) => {
 			})
 
 			scene.current.add( unitizedBoard );
-		});
+		}); */
 		gtlfLoader.load( 'earth.glb', function ( object ) {
 			const unitizedObject = unitize(object.scene, 5)
 

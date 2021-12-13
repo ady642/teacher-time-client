@@ -48,30 +48,30 @@ $deltaWave: 25px;
 
 @keyframes text {
   0% {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
   30% {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
   45% {
-    transform: translate3d(0, -$deltaWave, 0);
+    transform: translateY(-$deltaWave);
   }
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
 }
 
 @keyframes first {
   0% {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
   38% {
-    transform: translate3d(0, -$deltaWave, 0);
+    transform: translateY(-$deltaWave);
   }
   60% {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
 }
