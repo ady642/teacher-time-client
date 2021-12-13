@@ -1,9 +1,18 @@
+$textDur: 1050ms;
+$waveDur: 2100ms;
+$deltaWave: 25px;
+
 .scroll-button {
   display: flex;
   align-items: center;
 
   &:hover {
+    .scroll-button__icon-container {
+      animation: first $textDur infinite;
+    }
+
     .scroll-button__text {
+      animation: text $textDur infinite;
     }
   }
 
@@ -21,6 +30,7 @@
       align-items: center;
       margin-right: 10px;
       background: #5F85E6;
+      transition: all 0.5s ease-in-out;
     }
   }
 
@@ -29,10 +39,39 @@
     color: #5F85E6;
     font-weight: bolder;
     font-size: 20px;
-    transition: all 0.2s ease-in;
+    display: inline-block;
+    bottom: 0;
+    transition: all 0.5s ease-in-out;
+  }
+}
 
-    &--translated {
-      transform: translateY(-20px);
-    }
+
+@keyframes text {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    transform: translate3d(0, 0, 0);
+  }
+  45% {
+    transform: translate3d(0, -$deltaWave, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes first {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  38% {
+    transform: translate3d(0, -$deltaWave, 0);
+  }
+  60% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
   }
 }

@@ -33,7 +33,6 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		earthModel.current.rotation.y += delta * 0.2
 
-		requestAnimationFrame(animate);
 
 		renderer.current.render(scene.current, camera.current);
 	}
@@ -81,7 +80,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		window.addEventListener('resize', onWindowResize)
 
-		animate();
+		requestAnimationFrame(animate);
 
 		return () => {
 			window.removeEventListener('resize', onWindowResize)
