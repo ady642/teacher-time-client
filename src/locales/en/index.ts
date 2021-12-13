@@ -4,6 +4,7 @@ import room from './room'
 import teachers from './teachers'
 import profile from './profile'
 import landing from './landing'
+import dashboard from "./dahsboard"
 
 export default {
 	common,
@@ -11,5 +12,6 @@ export default {
 	room,
 	teachers,
 	profile,
-	landing
+	landing,
+	dashboard
 };

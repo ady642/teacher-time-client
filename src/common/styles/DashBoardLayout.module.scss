@@ -1,0 +1,24 @@
+$navBarBasis: 17%;
+
+.dashboard-layout {
+  &__container {
+    display: flex;
+    height: 100%;
+  }
+
+  &__nav-bar {
+    flex-basis: $navBarBasis;
+  }
+
+  &__content {
+    flex-basis: 100% - $navBarBasis;
+    padding: 20px;
+    background-color: #F9F8FE;
+  }
+
+  &__dropdown-user {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}
