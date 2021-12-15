@@ -8,17 +8,18 @@ $navBarBasis: 17%;
 
   &__nav-bar {
     flex-basis: $navBarBasis;
+    padding: 18px 30px;
   }
 
   &__content {
     flex-basis: 100% - $navBarBasis;
-    padding: 20px;
+    padding: 30px;
     background-color: #F9F8FE;
   }
 
   &__dropdown-user {
     position: absolute;
-    top: 20px;
+    top: 30px;
     right: 20px;
   }
 }

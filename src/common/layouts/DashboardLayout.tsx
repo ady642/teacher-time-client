@@ -13,7 +13,8 @@ const DashboardLayout: FunctionComponent<DashboardLayoutProps> = ({ content, nav
 		<div className={styles['dashboard-layout__content']}>
 			{ content }
 			<div className={styles['dashboard-layout__dropdown-user']}>
-				<ConnectedComponent />
+				{ //<ConnectedComponent />
+					 }
 			</div>
 		</div>
 	</div>

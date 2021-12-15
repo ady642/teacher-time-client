@@ -1,0 +1,27 @@
+.banner {
+  background-color: #4e49e1;
+  border-radius: 15px;
+  width: 100%;
+  padding: 26px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: 140px;
+
+  &__text {
+    color: white;
+    font-size: 25px;
+
+    &__highlight {
+      font-size: 34px;
+      font-weight: bold;
+    }
+  }
+
+  &__woman {
+    width: 220px;
+    position: absolute;
+    right: 10px;
+    top: -50px;
+  }
+}

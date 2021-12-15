@@ -1,15 +1,29 @@
+import useTranslation from "@/common/hooks/useTranslation";
+
 const translations: Record<string, any>= {
-	form: {
-		creation: {
-			title: 'the title'
+	fr: {
+		form: {
+			creation: {
+				title: 'the title',
+				banner: 'Vous m\'avez parlé $count fois ce mois de $month'
+			}
 		}
 	}
 }
 
-const resolvePath = (object: Record<string, any>, path: string, defaultValue = '') => path
-	.split('.')
-	.reduce((o, p) => o ? o[p] : defaultValue, object)
+jest.mock('@/locales', () => translations)
+jest.mock('next/router', () => ({
+	useRouter: () => ({
+		locale: 'fr'
+	})
+}))
+
+const { t } = useTranslation()
 
 it('should return the title', () => {
-	expect(resolvePath(translations, 'form.creation.title')).toBe('the title')
+	expect(t('form.creation.title')).toBe('the title')
+})
+
+it('should return the translation with parameters', () => {
+	expect(t('form.creation.banner', { count: 27, month: 'Mai' })).toBe('Vous m\'avez parlé 27 fois ce mois de Mai')
 })
