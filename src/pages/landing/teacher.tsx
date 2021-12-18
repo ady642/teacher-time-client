@@ -1,15 +1,10 @@
 import React, {FunctionComponent} from "react";
-import dynamic from "next/dynamic";
 import styles from '@/modules/Landing/homeStyles.module.scss'
 import LandingLayout from "@/common/layouts/LandingLayout";
 import Head from "next/head";
 import HowItWorks from "@/modules/Landing/Teacher/HowItWorks/HowItWorks";
 import LandingContentLeft from "@/modules/Landing/Teacher/LandingContent/LandingContentLeft";
 import Image from "next/image"
-
-const ThreeComponent = dynamic(() => import('@/modules/Landing/Teacher/ThreeComponent'), {
-	ssr: false
-})
 
 const LandingTeacher: FunctionComponent = () => {
 	return <>
