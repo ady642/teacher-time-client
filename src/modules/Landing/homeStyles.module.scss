@@ -1,11 +1,5 @@
 .landing {
   &__left {
-    z-index: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 50%;
     display: flex;
     width: 50vw;
     flex-direction: column;
@@ -75,9 +69,16 @@
   line-height: clamp(50px, 8vw, 100px);
 
   &__title {
+    display: flex;
     color: #5F85E6;
     font-weight: bold;
     font-size: clamp(40px, 7vw, 100px);
+
+    &s {
+      display: flex;
+      align-items: center;
+      column-gap: 60px;
+    }
   }
   &__subtitle {
     &-1 {

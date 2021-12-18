@@ -39,7 +39,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 	}
 
 	useEffect(() => {
-		loadModel()
+		//loadModel()
 
 		scene.current.background = new THREE.Color( 0xfbfbfd );
 
@@ -81,7 +81,7 @@ const ThreeComponent: FunctionComponent<ThreeProps> = () => {
 
 		window.addEventListener('resize', onWindowResize)
 
-		animate();
+		//animate();
 
 		return () => {
 			window.removeEventListener('resize', onWindowResize)
