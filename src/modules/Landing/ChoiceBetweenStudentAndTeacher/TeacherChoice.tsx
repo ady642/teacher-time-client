@@ -3,6 +3,7 @@ import useTranslation from "@/common/hooks/useTranslation";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import Choice from "@/modules/Landing/ChoiceBetweenStudentAndTeacher/Choice/Choice";
 import useCookies from "@/common/hooks/useCookies";
+import IncomeBanner from "@/modules/Landing/Teacher/LandingContent/IncomeBanner/IncomeBanner";
 
 interface TeacherChoiceProps {
 
@@ -24,6 +25,7 @@ const TeacherChoice: FunctionComponent<TeacherChoiceProps> = () => {
 		imgSource={'img/teacher.png'}
 		onButtonClick={() => goToTeacherLanding()}
 		outlinedButton={true}
+		buttonSlot={<IncomeBanner />}
 	/>
 }
 

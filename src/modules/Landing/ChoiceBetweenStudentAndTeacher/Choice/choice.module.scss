@@ -30,6 +30,11 @@
   }
 
   &__button {
-
+    &s {
+      display: flex;
+      justify-content: space-between;
+      column-gap: 36px;
+      margin-top: 10px;
+    }
   }
 }
