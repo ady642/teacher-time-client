@@ -14,6 +14,7 @@ const Banner: FunctionComponent<BannerProps> = ({ studentCount, timeCount }) => 
 		<h2 className={styles['banner__text']}>
 			{ t('dashboard.home.banner.title', { studentCount, timeCount }) }
 		</h2>
+		<span className={styles['banner__polygon']}/>
 		<img src={'/img/dashboard/bannerWoman.svg'} alt={'bannerWoman'} className={styles['banner__woman']} />
 	</div>
 }

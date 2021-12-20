@@ -32,4 +32,9 @@ export default class TeacherClient extends Client{
 	modifyTeacher = async(teacher: Partial<Teacher> & { teacherID: string }): Promise<void> => {
 		await this.client.put(`${process.env.SERVER_URL}/teachers`, teacher)
 	}
+	getStats = async(teacherID: string): Promise<{ totalDuration: number, totalHelped: number }> => {
+		const { data } = await this.client.get(`${process.env.SERVER_URL}/room/${teacherID}`)
+
+		return data
+	}
 }

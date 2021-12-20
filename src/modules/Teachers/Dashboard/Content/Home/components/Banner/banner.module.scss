@@ -11,6 +11,8 @@
   &__text {
     color: white;
     font-size: 25px;
+    max-width: 450px;
+    z-index:1;
 
     &__highlight {
       font-size: 34px;
@@ -19,9 +21,23 @@
   }
 
   &__woman {
-    width: 220px;
+    width: 210px;
     position: absolute;
     right: 10px;
-    top: -50px;
+    top: -40px;
+  }
+
+  &__polygon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    clip-path: polygon(0 0, 46% 0, 62% 66%, 42% 66%);
+    width: 100%;
+    background: rgb(248,240,240);
+    background: linear-gradient(144deg, rgba(248,240,240,1) 0%, rgba(248,240,240,0) 74%);
+    border-radius: 15px;
   }
 }
