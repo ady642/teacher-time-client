@@ -4,6 +4,7 @@ import useClickOutside from "@/common/hooks/useClickOutside";
 import DropdownList from "@/common/components/Dropdowns/DropdownList";
 import DropdownActivator from "@/common/components/Dropdowns/DropdownActivator";
 import styles from "@/common/components/Dropdowns/fieldSelector.module.scss";
+import classNames from "classnames";
 
 interface DropdownProps {
     values: dropdownValues;
@@ -22,9 +23,11 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
 	opened,
 	setOpened,
 	activator = <DropdownActivator label={DDvalue.label} active={opened} onClick={() => setOpened(!opened)}/>,
-	className = styles.fieldSelector__container
+	className = styles['fieldSelector__container--default']
 }) => {
 	const fieldSelectorRef = useRef<HTMLDivElement>(null)
+
+	const containerClasses = classNames([styles.fieldSelector__container, className])
 
 	useEffect(() => {
 		setOpened(false)
@@ -32,7 +35,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
 
 	useClickOutside([fieldSelectorRef], () => setOpened(false))
 
-	return <div ref={fieldSelectorRef} className={className}>
+	return <div ref={fieldSelectorRef} className={containerClasses}>
 		{ activator }
 		<DropdownList setValue={setValue} values={values} opened={opened}/>
 	</div>

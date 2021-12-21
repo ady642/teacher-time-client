@@ -5,6 +5,9 @@ const dashboard = {
 		title: 'Bienvenue',
 		banner: {
 			title: 'Vous avez aidé $studentCount étudiants soit une durée totale de $timeCount secondes !'
+		},
+		incomes: {
+			title: 'Revenus'
 		}
 	}
 }
