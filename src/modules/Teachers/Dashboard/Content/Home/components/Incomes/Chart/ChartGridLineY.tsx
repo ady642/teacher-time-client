@@ -7,8 +7,8 @@ interface ChartGridLineYProps {
 
 const ChartGridLineY: FunctionComponent<ChartGridLineYProps> = ({ value }) => {
 	return <div className={styles['incomes__chart__grid__line-y']}>
-		<span className={styles['incomes__chart__grid__line-y__value']} >{ value }</span>
-		<div className={styles['incomes__chart__grid__line-y__axis']} />
+		<span className={styles['incomes__chart__grid__line-y__value']}>{ value } €</span>
+		<hr className={styles['incomes__chart__grid__line-y__axis']} />
 	</div>
 }
 

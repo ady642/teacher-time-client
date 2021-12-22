@@ -7,9 +7,10 @@ interface ChartGridProps {
 
 const ChartGrid: FunctionComponent<ChartGridProps> = () => {
 	return <div>
-		<ChartGridLineY
-			value={100}
-		/>
+		<ChartGridLineY value={100} />
+		<ChartGridLineY value={100} />
+		<ChartGridLineY value={100} />
+		<ChartGridLineY value={100} />
 	</div>
 }
 

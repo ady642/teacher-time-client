@@ -32,7 +32,23 @@
     &__grid {
       &__line {
         &-y {
+          display: flex;
+          align-items: center;
+          padding: 40px 10px;
+          column-gap: 10px;
 
+
+          &__axis {
+            border-top: 2px dotted #b8b8b8;
+            flex-basis: 93%;
+          }
+
+          &__value {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            flex-basis: 7%;
+          }
         }
       }
     }
