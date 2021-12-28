@@ -65,13 +65,22 @@ const useTeacherClient = () => {
 		return await teacherClient.getStats(teacher._id)
 	}
 
+	const getStatsIncomes = async () => {
+		if(!teacher._id) {
+			throw new Error('teacher id is required')
+		}
+
+		return await teacherClient.getStatsIncomes(teacher._id)
+	}
+
 	return {
 		createTeacher,
 		getTeacher,
 		modifyTeacher,
 		error,
 		submitStatus,
-		getStats
+		getStats,
+		getStatsIncomes
 	}
 }
 

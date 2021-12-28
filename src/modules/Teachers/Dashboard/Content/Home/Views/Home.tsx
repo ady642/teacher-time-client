@@ -12,15 +12,14 @@ interface HomeProps {
 }
 
 const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
-	const { getStats } = useTeacherClient()
+	const { getStats, getStatsIncomes } = useTeacherClient()
 	const [stats, setStats] = useState({ totalDuration: 0, totalHelped: 0})
+	const [statsIncomes, setStatsIncomes] = useState([])
 	const { goTo } = useRoutePush()
 
 	const getTeacherStats = async () => {
 		try {
 			const stats = await getStats()
-
-			console.log(stats)
 
 			setStats(stats)
 		} catch (e) {
@@ -28,8 +27,19 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 		}
 	}
 
+	const getTeacherStatIncomes = async () => {
+		const stats = await getStatsIncomes()
+
+		console.log(stats)
+
+		setStatsIncomes(stats)
+	}
+
 	useEffect(() => {
-		(async() => await getTeacherStats())()
+		(async() => {
+			await Promise.all([await getTeacherStats(), await getTeacherStatIncomes()])
+		}
+		)()
 	}, [teacher])
 
 
@@ -41,7 +51,9 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 					timeCount={stats.totalDuration}
 					studentCount={stats.totalHelped}
 				/>
-				<Incomes />
+				<Incomes
+					statsIncome={statsIncomes}
+				/>
 			</section>
 			<section>
 				div

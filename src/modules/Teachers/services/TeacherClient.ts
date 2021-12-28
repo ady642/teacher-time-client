@@ -2,6 +2,7 @@ import {Client} from "@/common/utils/client";
 import TeacherCreationForm
 	from "@/modules/Teachers/Forms/Creation/components/TeachersFormInfos/TeachersFormInfosFields/models/TeacherCreationForm";
 import {Teacher} from "@/modules/Teachers/models/Entity/Teacher";
+import {StatIncome} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/Chart";
 
 export default class TeacherClient extends Client{
 	createTeacher = async (teacherCreationForm: TeacherCreationForm) => {
@@ -34,6 +35,11 @@ export default class TeacherClient extends Client{
 	}
 	getStats = async(teacherID: string): Promise<{ totalDuration: number, totalHelped: number }> => {
 		const { data } = await this.client.get(`${process.env.SERVER_URL}/room/${teacherID}`)
+
+		return data
+	}
+	getStatsIncomes = async(teacherID: string): Promise<StatIncome[]> => {
+		const { data } = await this.client.get(`${process.env.SERVER_URL}/room/${teacherID}/stats`)
 
 		return data
 	}
