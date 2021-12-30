@@ -3,21 +3,21 @@ import styles from '@/modules/Teachers/Dashboard/Content/Home/components/Incomes
 import ChartGrid from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/ChartGrid";
 
 export interface StatIncome {
-	dayIncome: number,
+	dayIncomes: number,
 	date: Date
 }
 
 interface ChartContainerProps {
-	stats: StatIncome[]
+	stats: StatIncome[],
 }
 
 const Chart: FunctionComponent<ChartContainerProps> = ({ stats }) => {
 	const findMax = (): number => {
-		let max = 1
+		let max = stats[0]?.dayIncomes
 
 		stats.forEach(stat => {
-			if(stat.dayIncome > max) {
-				max = stat.dayIncome
+			if(stat.dayIncomes > max) {
+				max = stat.dayIncomes
 			}
 		})
 

@@ -30,8 +30,6 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 	const getTeacherStatIncomes = async () => {
 		const stats = await getStatsIncomes()
 
-		console.log(stats)
-
 		setStatsIncomes(stats)
 	}
 

@@ -16,7 +16,11 @@ const ChartGridXAxis: FunctionComponent<ChartGridXAxisProps> = () => {
 
 	return <div className={styles['incomes__chart__grid__x-axis']}>
 		{
-			periods.months.map((period: Dayjs, index: number) => <div key={index} className={styles['incomes__chart__grid__x-vl']} />)
+			periods.months.map((period: Dayjs, index: number) => <div className={styles['incomes__chart__grid__x-unit']} key={index}>
+				<div className={styles['incomes__chart__grid__x-vl']} />
+				<div className={styles['incomes__chart__grid__x-month']}>{ period.format('MMM') }</div>
+			</div>
+			)
 		}
 	</div>
 }
