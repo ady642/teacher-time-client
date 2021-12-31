@@ -22,18 +22,19 @@
 
   &__chart {
     &__container {
+      position: relative;
       background-color: white;
       border-radius: 15px;
       width: 100%;
       margin-top: 15px;
-      padding: 20px 10px;
-      height: clamp(200px, 25vh, 300px);
+      padding: 20px;
     }
 
     &__grid {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      row-gap: 20px;
       height: 100%;
 
       &__x {
@@ -41,11 +42,12 @@
           position: relative;
           border-top: 2px solid #D4D3D3;
           width: 92%;
-          align-self: flex-end;
           display: flex;
+          align-self: flex-end;
           justify-content: space-between;
-          align-items: flex-end;
-          margin-top: 10px;
+          margin-top: 12px;
+          padding-left: 10px;
+          padding-right: 10px;
         }
 
         &-vl {
@@ -72,7 +74,7 @@
 
           &__axis {
             border-top: 2px dotted #b8b8b8;
-            flex-basis: 93%;
+            flex-basis: 100%;
           }
 
           &__value {
@@ -81,6 +83,7 @@
             flex-wrap: nowrap;
             text-wrap: none;
             flex-basis: 7%;
+            font-size: clamp(12px, 0.8vw, 20px);
           }
         }
       }

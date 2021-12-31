@@ -35,7 +35,10 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 
 	useEffect(() => {
 		(async() => {
-			await Promise.all([await getTeacherStats(), await getTeacherStatIncomes()])
+			await Promise.all([
+				await getTeacherStats(),
+				await getTeacherStatIncomes()
+			])
 		}
 		)()
 	}, [teacher])
