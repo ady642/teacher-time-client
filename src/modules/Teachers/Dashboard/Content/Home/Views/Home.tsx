@@ -18,13 +18,9 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 	const { goTo } = useRoutePush()
 
 	const getTeacherStats = async () => {
-		try {
-			const stats = await getStats()
+		const stats = await getStats()
 
-			setStats(stats)
-		} catch (e) {
-			await goTo('home')
-		}
+		setStats(stats)
 	}
 
 	const getTeacherStatIncomes = async () => {
@@ -35,10 +31,14 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 
 	useEffect(() => {
 		(async() => {
-			await Promise.all([
-				await getTeacherStats(),
-				await getTeacherStatIncomes()
-			])
+			try {
+				await Promise.all([
+					await getTeacherStats(),
+					await getTeacherStatIncomes()
+				])
+			} catch (e) {
+				await goTo('home')
+			}
 		}
 		)()
 	}, [teacher])

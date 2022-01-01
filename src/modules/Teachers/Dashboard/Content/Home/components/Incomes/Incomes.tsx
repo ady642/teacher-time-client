@@ -1,8 +1,8 @@
 import {FunctionComponent, useState} from "react";
-import styles from './incomesStyles.module.scss'
+import styles from './incomesStyles.module.scss';
 import Bar from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/Bar";
 import {Period, Periods} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
-import Chart, { StatIncome } from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/Chart";
+import Chart, {StatIncome} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/Chart";
 
 interface IncomesProps {
 	statsIncome: StatIncome[]
@@ -18,6 +18,7 @@ const Incomes: FunctionComponent<IncomesProps> = ({ statsIncome }) => {
 		/>
 		<Chart
 			stats={statsIncome}
+			period={period.value}
 		/>
 	</div>
 }

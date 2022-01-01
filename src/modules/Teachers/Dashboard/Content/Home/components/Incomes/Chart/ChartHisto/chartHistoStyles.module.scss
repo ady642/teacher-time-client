@@ -10,8 +10,9 @@
   }
 
   &__bar {
-    height: 100px;
-    width: 15px;
+    position: absolute;
+    height: 200px;
+    width: 20px;
     background-color: rgba(53, 31, 216, 0.21);
   }
 }

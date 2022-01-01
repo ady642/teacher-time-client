@@ -3,14 +3,14 @@ import Dropdown from "@/common/components/Dropdowns/Dropdown";
 import styles from '@/modules/Teachers/Dashboard/Content/Home/components/Incomes/incomesStyles.module.scss'
 
 export enum Periods {
-    Day = 'Day',
-    Week = 'Week',
-    Month = 'Month',
-    Year = 'Year'
+    Day = 'day',
+    Week = 'week',
+    Month = 'month',
+    Year = 'year'
 }
 
 export type Period = {
-    label: string, value: keyof typeof Periods
+    label: string, value: Periods
 }
 
 export interface PeriodSelectorProps {
@@ -21,7 +21,7 @@ export interface PeriodSelectorProps {
 const PeriodSelector: FunctionComponent<PeriodSelectorProps> = ({ period, setPeriod }) => {
 	const [opened, setOpened] = useState(false)
 
-    const values = [
+	const values = [
 		{ label: 'Jour', value: Periods.Day },
 		{ label: 'Semaine', value: Periods.Week },
 		{ label: 'Mois', value: Periods.Month },
@@ -30,10 +30,10 @@ const PeriodSelector: FunctionComponent<PeriodSelectorProps> = ({ period, setPer
 
 	return <Dropdown
 		values={values}
-        opened={opened}
-        setOpened={setOpened}
-        DDvalue={period}
-        setValue={setPeriod}
+		opened={opened}
+		setOpened={setOpened}
+		DDvalue={period}
+		setValue={setPeriod}
 		className={styles['incomes__bar__period-selector__container']}
 	/>
 }
