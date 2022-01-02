@@ -5,25 +5,29 @@ import ChartHisto from "@/modules/Teachers/Dashboard/Content/Home/components/Inc
 import useDates from "@/common/hooks/useDates";
 
 interface ChartHistosProps {
+	max: number,
 	stats: StatIncome[],
 	vLRefs: MutableRefObject<HTMLDivElement>[],
 	xAxisRef: MutableRefObject<HTMLDivElement>,
-	chartContainerRef: MutableRefObject<HTMLDivElement>
+	chartContainerRef: MutableRefObject<HTMLDivElement>,
+	yAxisMaxRef: MutableRefObject<HTMLDivElement>
 }
 
 const ChartHistos: FunctionComponent<ChartHistosProps> = (props) => {
-	const { stats, vLRefs, xAxisRef, chartContainerRef } = props
+	const { max, stats, vLRefs, xAxisRef, chartContainerRef, yAxisMaxRef } = props
 
 	const { getCurrentDate } = useDates()
 
 	return <div className={styles['chart-histo__container']}>
 		{ stats.map((stat, index) => <ChartHisto
 			key={index}
+			max={max}
 			stat={stat}
 			currentDate={getCurrentDate()}
 			vLRefs={vLRefs}
 			chartContainerRef={chartContainerRef}
 			xAxisRef={xAxisRef}
+			yAxisMaxRef={yAxisMaxRef}
 		/>) }
 	</div>
 }

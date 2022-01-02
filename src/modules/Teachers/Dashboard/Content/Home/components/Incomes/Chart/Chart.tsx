@@ -1,4 +1,4 @@
-import {FunctionComponent, MutableRefObject, useRef} from "react";
+import {FunctionComponent, MutableRefObject, useEffect, useRef, useState} from "react";
 import styles from '@/modules/Teachers/Dashboard/Content/Home/components/Incomes/incomesStyles.module.scss';
 import ChartGrid from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/ChartGrid";
 import ChartHistos from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/ChartHisto/ChartHistos";
@@ -23,31 +23,40 @@ const Chart: FunctionComponent<ChartContainerProps> = ({ stats, period }) => {
 	const vLRefs =[ ...Array(12).keys() ].map(() => useRef<HTMLDivElement>(null));
 	const xAxisRef = useRef<HTMLDivElement>(null)
 	const chartContainerRef = useRef<HTMLDivElement>(null)
+	const yAxisMaxRef = useRef<HTMLDivElement>(null)
+	const [maxIncomes, setMax] = useState(0)
 
 	const findMax = (): number => {
-		let max = stats[0]?.incomes
+		let result = stats[0]?.incomes
 
 		stats.forEach(stat => {
-			if(stat.incomes > max) {
-				max = stat.incomes
+			if(stat.incomes > result) {
+				result = stat.incomes
 			}
 		})
 
-		return max
+		return result
 	}
+
+	useEffect(() => {
+		setMax(findMax())
+	}, [stats])
 
 	return <div ref={chartContainerRef} className={styles['incomes__chart__container']}>
 		<ChartGrid
-			maxValue={findMax()}
+			maxValue={maxIncomes}
 			vLRefs={vLRefs}
 			period={period}
 			xAxisRef={xAxisRef}
+			yAxisMaxRef={yAxisMaxRef}
 		/>
 		<ChartHistos
+			max={maxIncomes}
 			stats={stats}
 			vLRefs={vLRefs}
 			xAxisRef={xAxisRef}
 			chartContainerRef={chartContainerRef}
+			yAxisMaxRef={yAxisMaxRef}
 		/>
 	</div>
 }

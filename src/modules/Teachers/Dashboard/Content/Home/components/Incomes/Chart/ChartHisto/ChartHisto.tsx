@@ -3,34 +3,54 @@ import styles
 	from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/ChartHisto/chartHistoStyles.module.scss";
 import {StatIncome} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/Chart";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
+import {Tooltip} from "@material-ui/core";
 
 interface ChartHistoProps {
-    stat: StatIncome,
+	max: number,
+	stat: StatIncome,
 	currentDate: number,
 	vLRefs: MutableRefObject<HTMLDivElement>[],
 	chartContainerRef: MutableRefObject<HTMLDivElement>,
 	xAxisRef: MutableRefObject<HTMLDivElement>,
+	yAxisMaxRef: MutableRefObject<HTMLDivElement>
 }
 
-const ChartHisto: FunctionComponent<ChartHistoProps> = ({ stat,
-	chartContainerRef, vLRefs, xAxisRef }) => {
+const ChartHisto: FunctionComponent<ChartHistoProps> = (props) => {
+	const { stat,
+		chartContainerRef, vLRefs, xAxisRef, yAxisMaxRef, max } = props
+
 	const [position, setPosition] = useState<Point>({ x: 0, y: 0 });
+	const [height, setHeight] = useState(0)
 	const histoBarRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		console.log(stat)
+		setHeight(findHeight())
+	}, [max])
+
+	useEffect(() => {
+		setHeight(findHeight())
 		setPosition(findVlPosition())
 
 		window.addEventListener('resize', () => {
 			setPosition(findVlPosition())
+			setHeight(findHeight())
 		})
 
 		return () => {
 			window.removeEventListener('resize', () => {
-				console.log('remove event')
+				console.log('remove resize event')
 			})
 		}
 	}, [])
+
+	const findHeight = (): number => {
+		const clientXAxis = xAxisRef.current.getBoundingClientRect()
+		const clientYAxisMax = yAxisMaxRef.current.getBoundingClientRect()
+
+		const heightMax = clientXAxis.y - clientYAxisMax.y - clientYAxisMax.height / 2
+
+		return heightMax * (stat.incomes / max)
+	}
 
 	const findVlPosition = (): Point => {
 		const vls = vLRefs
@@ -58,14 +78,17 @@ const ChartHisto: FunctionComponent<ChartHistoProps> = ({ stat,
 		}
 	}
 
-	return <div
-		ref={histoBarRef}
-		className={styles['chart-histo__bar']}
-		style={{
-			left: position.x,
-			bottom: position.y
-		}}
-	/>
+	return <Tooltip placement={"left-start"} title={`${stat.incomes} €`}>
+		<div
+			ref={histoBarRef}
+			className={styles['chart-histo__bar']}
+			style={{
+				left: position.x,
+				bottom: position.y,
+				height
+			}}
+		/>
+	</Tooltip>
 }
 
 export default ChartHisto

@@ -8,14 +8,15 @@ interface ChartGridProps {
 	maxValue: number,
 	vLRefs: MutableRefObject<HTMLDivElement>[],
 	period: Periods,
-	xAxisRef: MutableRefObject<HTMLDivElement>
+	xAxisRef: MutableRefObject<HTMLDivElement>,
+	yAxisMaxRef: MutableRefObject<HTMLDivElement>
 }
 
 const ChartGrid: FunctionComponent<ChartGridProps> = (props) => {
-	const { maxValue, vLRefs, period, xAxisRef } = props
+	const { maxValue, vLRefs, period, xAxisRef, yAxisMaxRef } = props
 
 	return <div className={styles['incomes__chart__grid']}>
-		<ChartGridLineY value={maxValue} />
+		<ChartGridLineY yAxisMaxRef={yAxisMaxRef} value={maxValue} />
 		<ChartGridLineY value={maxValue * 0.75} />
 		<ChartGridLineY value={maxValue * 0.50} />
 		<ChartGridLineY value={maxValue * 0.25} />

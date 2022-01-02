@@ -3,7 +3,7 @@ import {FunctionComponent, ReactNode } from "react";
 
 interface TooltipProps {
     children: ReactNode,
-    tooltip: string,
+    tooltip: string | number,
     disabled: boolean,
 }
 
