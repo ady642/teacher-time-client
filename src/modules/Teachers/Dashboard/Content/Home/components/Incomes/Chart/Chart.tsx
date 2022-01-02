@@ -22,6 +22,7 @@ const Chart: FunctionComponent<ChartContainerProps> = ({ stats, period }) => {
 	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const vLRefs =[ ...Array(12).keys() ].map(() => useRef<HTMLDivElement>(null));
 	const xAxisRef = useRef<HTMLDivElement>(null)
+	const chartContainerRef = useRef<HTMLDivElement>(null)
 
 	const findMax = (): number => {
 		let max = stats[0]?.incomes
@@ -35,7 +36,7 @@ const Chart: FunctionComponent<ChartContainerProps> = ({ stats, period }) => {
 		return max
 	}
 
-	return <div className={styles['incomes__chart__container']}>
+	return <div ref={chartContainerRef} className={styles['incomes__chart__container']}>
 		<ChartGrid
 			maxValue={findMax()}
 			vLRefs={vLRefs}
@@ -46,6 +47,7 @@ const Chart: FunctionComponent<ChartContainerProps> = ({ stats, period }) => {
 			stats={stats}
 			vLRefs={vLRefs}
 			xAxisRef={xAxisRef}
+			chartContainerRef={chartContainerRef}
 		/>
 	</div>
 }

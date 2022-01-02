@@ -1,4 +1,4 @@
-import {FunctionComponent, MutableRefObject, useEffect, useState} from "react";
+import {FunctionComponent, MutableRefObject, useEffect, useRef, useState} from "react";
 import styles
 	from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/ChartHisto/chartHistoStyles.module.scss";
 import {StatIncome} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/Chart";
@@ -15,9 +15,21 @@ interface ChartHistoProps {
 const ChartHisto: FunctionComponent<ChartHistoProps> = ({ stat,
 	chartContainerRef, vLRefs, xAxisRef }) => {
 	const [position, setPosition] = useState<Point>({ x: 0, y: 0 });
+	const histoBarRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		setPosition(findVlPosition)
+		console.log(stat)
+		setPosition(findVlPosition())
+
+		window.addEventListener('resize', () => {
+			setPosition(findVlPosition())
+		})
+
+		return () => {
+			window.removeEventListener('resize', () => {
+				console.log('remove event')
+			})
+		}
 	}, [])
 
 	const findVlPosition = (): Point => {
@@ -33,24 +45,21 @@ const ChartHisto: FunctionComponent<ChartHistoProps> = ({ stat,
 
 		const clientRectsVl = vls[stat.date.month - 1]?.current.getBoundingClientRect()
 
-		console.log(vls[stat.date.month - 1]?.current.getBoundingClientRect())
-
 		const clientRectsChartContainer = chartContainerRef.current.getBoundingClientRect()
 		const clientXAxis = xAxisRef.current.getBoundingClientRect()
 
-		const heightVl =  clientRectsVl.top - clientRectsVl.bottom;
+		const clientHistoBar = histoBarRef.current.getBoundingClientRect()
 
-		console.log(heightVl)
+		const paddingTopContainer = Number(getComputedStyle(chartContainerRef.current).paddingTop.split('px')[0])
 
-		const position = {
-			x: clientRectsVl.x - clientRectsChartContainer.x - clientRectsVl.height,
-			y: clientXAxis.y - clientRectsChartContainer.y + clientXAxis.height - heightVl
+		return {
+			x: clientRectsVl.x - clientRectsChartContainer.x - clientHistoBar.width / 2,
+			y: clientXAxis.height + paddingTopContainer
 		}
-
-		return position
 	}
 
 	return <div
+		ref={histoBarRef}
 		className={styles['chart-histo__bar']}
 		style={{
 			left: position.x,
