@@ -47,7 +47,7 @@ const ChartHisto: FunctionComponent<ChartHistoProps> = (props) => {
 		const clientXAxis = xAxisRef.current.getBoundingClientRect()
 		const clientYAxisMax = yAxisMaxRef.current.getBoundingClientRect()
 
-		const heightMax = clientXAxis.y - clientYAxisMax.y - clientYAxisMax.height / 2
+		const heightMax = clientXAxis.y - clientYAxisMax.y - 10
 
 		return heightMax * (stat.incomes / max)
 	}
