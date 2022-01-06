@@ -8,6 +8,7 @@ import {Teacher} from "@/modules/Teachers/models/Entity/Teacher";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import constants from "@/common/constants";
 import useUserGetters from "@/context/user/helpers/useUserGetters";
+import {Periods} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
 
 const useTeacherClient = () => {
 	const { token, user } = useAuthGetters()
@@ -58,19 +59,25 @@ const useTeacherClient = () => {
 	}
 
 	const getStats = async () => {
-		if(!teacher._id) {
-			throw new Error('teacher id is required')
+		if(!teacher?._id) {
+			console.error(teacher)
+			return
 		}
 
 		return await teacherClient.getStats(teacher._id)
 	}
 
-	const getStatsIncomes = async () => {
-		if(!teacher._id) {
-			throw new Error('teacher id is required')
+	const getStatsIncomes = async (payload: {
+		period: Periods;
+		startDate: string;
+		endDate: string;
+	}) => {
+		if(!teacher?._id) {
+			console.error(teacher)
+			return
 		}
 
-		return await teacherClient.getStatsIncomes(teacher._id)
+		return await teacherClient.getStatsIncomes({ teacherId: teacher._id, ...payload })
 	}
 
 	return {

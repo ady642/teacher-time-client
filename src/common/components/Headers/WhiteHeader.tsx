@@ -22,7 +22,7 @@ const WhiteHeader: FC<HeaderProps> = ({ openPaymentModal }) => {
 	const { t } = useTranslation()
 	const { goTo } = useRoutePush()
 	const { token } = useAuthGetters()
-	const { teacher } = useUserGetters()
+	const { teacher } = useUserGetters()	
 
 	const [navItems] = useState([
 		{

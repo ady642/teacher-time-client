@@ -4,6 +4,7 @@ import styles
 import {StatIncome} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/Chart";
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
 import {Tooltip} from "@material-ui/core";
+import {Periods} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
 
 interface ChartHistoProps {
 	max: number,
@@ -12,12 +13,13 @@ interface ChartHistoProps {
 	vLRefs: MutableRefObject<HTMLDivElement>[],
 	chartContainerRef: MutableRefObject<HTMLDivElement>,
 	xAxisRef: MutableRefObject<HTMLDivElement>,
-	yAxisMaxRef: MutableRefObject<HTMLDivElement>
+	yAxisMaxRef: MutableRefObject<HTMLDivElement>,
+	period: Periods
 }
 
 const ChartHisto: FunctionComponent<ChartHistoProps> = (props) => {
 	const { stat,
-		chartContainerRef, vLRefs, xAxisRef, yAxisMaxRef, max } = props
+		chartContainerRef, vLRefs, xAxisRef, yAxisMaxRef, max, period } = props
 
 	const [position, setPosition] = useState<Point>({ x: 0, y: 0 });
 	const [height, setHeight] = useState(0)
@@ -26,6 +28,11 @@ const ChartHisto: FunctionComponent<ChartHistoProps> = (props) => {
 	useEffect(() => {
 		setHeight(findHeight())
 	}, [max])
+
+	useEffect(() => {
+		setHeight(findHeight())
+		setPosition(findVlPosition())
+	}, [stat])
 
 	useEffect(() => {
 		setHeight(findHeight())
@@ -63,7 +70,15 @@ const ChartHisto: FunctionComponent<ChartHistoProps> = (props) => {
 			}
 		}
 
-		const clientRectsVl = vls[stat.date.month - 1]?.current.getBoundingClientRect()
+		let clientRectsVl: DOMRect
+
+		if(period === 'month') {
+			clientRectsVl = vls[stat.date.month - 1]?.current.getBoundingClientRect()
+		} else if (period === 'year') {
+			console.log(stat)
+			clientRectsVl = vls[Math.abs(stat.date.year - 2022) + 9]?.current.getBoundingClientRect()
+			console.log(clientRectsVl)
+		}
 
 		const clientRectsChartContainer = chartContainerRef.current.getBoundingClientRect()
 		const clientXAxis = xAxisRef.current.getBoundingClientRect()

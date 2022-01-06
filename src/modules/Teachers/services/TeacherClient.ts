@@ -39,9 +39,18 @@ export default class TeacherClient extends Client{
 
 		return data
 	}
-	getStatsIncomes = async(teacherID: string): Promise<StatIncome[]> => {
-		const { data } = await this.client.get(`${process.env.SERVER_URL}/room/${teacherID}/stats`, {
-			params: { period: Periods.Month }
+	getStatsIncomes = async(payload: {
+		teacherId: string;
+		period: Periods;
+		startDate: string;
+		endDate: string;
+	}): Promise<StatIncome[]> => {
+		const { data } = await this.client.get(`${process.env.SERVER_URL}/room/${payload.teacherId}/stats`, {
+			params: {
+				period: payload.period,
+				startDate: payload.startDate,
+				endDate: payload.endDate
+			}
 		})
 
 		return data

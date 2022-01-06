@@ -27,7 +27,7 @@ const UserProfileDropdown: FunctionComponent<UserProfileDropdownProps> = ({ firs
 	}
 
 	const goToProfile = () => {
-		goTo('teachers/dashboard/profile')
+		goTo('teachers/dashboard')
 	}
 
 	const onItemClick = (nameAction: string) => {

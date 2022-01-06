@@ -6,28 +6,44 @@ import Banner from "@/modules/Teachers/Dashboard/Content/Home/components/Banner/
 import Incomes from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Incomes";
 import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
 import useRoutePush from "@/common/hooks/useRoutePush";
+import {Period, Periods} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
+import useDates from "@/common/hooks/useDates";
 
 interface HomeProps {
 	teacher: Teacher
 }
 
 const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
+	const { getFirstDayOfCurrentYear, getLastDayOfCurrentYear } = useDates()
 	const { getStats, getStatsIncomes } = useTeacherClient()
 	const [stats, setStats] = useState({ totalDuration: 0, totalHelped: 0})
 	const [statsIncomes, setStatsIncomes] = useState([])
+	const [period, setPeriod] = useState<Period>({ label: 'Mois', value: Periods.Month })
+	const [startDate, setStartDate] = useState(getFirstDayOfCurrentYear())
+	const [endDate, setEndDate] = useState(getLastDayOfCurrentYear())
 	const { goTo } = useRoutePush()
 
 	const getTeacherStats = async () => {
 		const stats = await getStats()
 
-		setStats(stats)
+		if(stats)
+			setStats(stats)
 	}
 
 	const getTeacherStatIncomes = async () => {
-		const stats = await getStatsIncomes()
+		const statsIncomes = await getStatsIncomes({
+			startDate,
+			endDate,
+			period: period.value
+		})
 
-		setStatsIncomes(stats)
+		if(statsIncomes)
+			setStatsIncomes(statsIncomes)
 	}
+
+	useEffect(() => {
+		(async () => await getTeacherStatIncomes())()
+	}, [period])
 
 	useEffect(() => {
 		(async() => {
@@ -37,7 +53,7 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 					await getTeacherStatIncomes()
 				])
 			} catch (e) {
-				await goTo('home')
+				//await goTo('home')
 			}
 		}
 		)()
@@ -54,6 +70,8 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 				/>
 				<Incomes
 					statsIncome={statsIncomes}
+					period={period}
+					setPeriod={setPeriod}
 				/>
 			</section>
 			<section>

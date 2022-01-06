@@ -6,7 +6,6 @@ import AvailableSwitch from "@/modules/Teachers/List/components/AvailableSwitch"
 import useUserGetters from "@/context/user/helpers/useUserGetters";
 
 interface TextDraw2Props {
-	token?: string;
 	openRegisterModal: () => void;
 }
 

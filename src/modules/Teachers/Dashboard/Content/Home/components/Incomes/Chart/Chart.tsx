@@ -1,4 +1,4 @@
-import {FunctionComponent, MutableRefObject, useEffect, useRef, useState} from "react";
+import {FunctionComponent, useEffect, useRef, useState} from "react";
 import styles from '@/modules/Teachers/Dashboard/Content/Home/components/Incomes/incomesStyles.module.scss';
 import ChartGrid from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/ChartGrid";
 import ChartHistos from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/ChartHisto/ChartHistos";
@@ -27,6 +27,10 @@ const Chart: FunctionComponent<ChartContainerProps> = ({ stats, period }) => {
 	const [maxIncomes, setMax] = useState(0)
 
 	const findMax = (): number => {
+		if(!stats) {
+			return
+		}
+
 		let result = stats[0]?.incomes
 
 		stats.forEach(stat => {
@@ -50,14 +54,15 @@ const Chart: FunctionComponent<ChartContainerProps> = ({ stats, period }) => {
 			xAxisRef={xAxisRef}
 			yAxisMaxRef={yAxisMaxRef}
 		/>
-		<ChartHistos
+		{ stats && <ChartHistos
 			max={maxIncomes}
 			stats={stats}
+			period={period}
 			vLRefs={vLRefs}
 			xAxisRef={xAxisRef}
 			chartContainerRef={chartContainerRef}
 			yAxisMaxRef={yAxisMaxRef}
-		/>
+		/> }
 	</div>
 }
 

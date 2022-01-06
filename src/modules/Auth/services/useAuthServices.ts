@@ -5,7 +5,6 @@ import LoginForm from "@/modules/Auth/models/LoginForm";
 import LoginValidator from "@/modules/Auth/validators/LoginValidator";
 import RegistrationForm from "@/modules/Auth/models/RegistrationForm";
 import RegistrationValidator from "../validators/RegistrationValidator";
-import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
 
 const useAuthServices = () => {
 	const [submitAttempt, setSubmitAttempt] = useState(false)

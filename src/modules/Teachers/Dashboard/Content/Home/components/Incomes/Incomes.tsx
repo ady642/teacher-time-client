@@ -1,15 +1,17 @@
-import {FunctionComponent, useState} from "react";
+import {FunctionComponent} from "react";
 import styles from './incomesStyles.module.scss';
 import Bar from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/Bar";
-import {Period, Periods} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
+import {Period} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
 import Chart, {StatIncome} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/Chart";
 
 interface IncomesProps {
-	statsIncome: StatIncome[]
+	statsIncome: StatIncome[],
+	period: Period,
+	setPeriod: (period: Period) => void
 }
 
-const Incomes: FunctionComponent<IncomesProps> = ({ statsIncome }) => {
-	const [period, setPeriod] = useState<Period>({ label: 'Mois', value: Periods.Month })
+const Incomes: FunctionComponent<IncomesProps> = (props) => {
+	const { statsIncome, period, setPeriod } = props
 
 	return <div className={styles['incomes__container']}>
 		<Bar

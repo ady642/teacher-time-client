@@ -48,7 +48,6 @@ const Home: FC = ({ token: tokenQuery }: InferGetServerSidePropsType<typeof getS
 						<div className="xl:px-40 lg:px-20 md:px-10 px-5 relative">
 							<TextDraw1 />
 							<TextDraw2
-								token={token}
 								openRegisterModal={openRegisterModal}
 							/>
 							<TextDraw3 />
