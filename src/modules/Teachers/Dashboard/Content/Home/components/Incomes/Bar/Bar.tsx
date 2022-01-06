@@ -6,12 +6,13 @@ import PeriodSelector, {
 } from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
 
 interface BarProps extends PeriodSelectorProps{
-
+	setStartDate: (startDate: string) => void,
 }
 
 const Bar: FunctionComponent<BarProps> = ({
 	period,
-	setPeriod
+	setPeriod,
+	setStartDate
 }) => {
 	const { t } = useTranslation()
 
@@ -22,6 +23,7 @@ const Bar: FunctionComponent<BarProps> = ({
 		<PeriodSelector
 			period={period}
 			setPeriod={setPeriod}
+			setStartDate={setStartDate}
 		/>
 	</div>
 }

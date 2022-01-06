@@ -69,6 +69,7 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 					studentCount={stats.totalHelped}
 				/>
 				<Incomes
+					setStartDate={setStartDate}
 					statsIncome={statsIncomes}
 					period={period}
 					setPeriod={setPeriod}

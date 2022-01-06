@@ -20,7 +20,7 @@ export interface ChartContainerProps {
 
 const Chart: FunctionComponent<ChartContainerProps> = ({ stats, period }) => {
 	// eslint-disable-next-line react-hooks/rules-of-hooks
-	const vLRefs =[ ...Array(12).keys() ].map(() => useRef<HTMLDivElement>(null));
+	const vLRefs = [ ...Array(12).keys() ].map(() => useRef<HTMLDivElement>(null));
 	const xAxisRef = useRef<HTMLDivElement>(null)
 	const chartContainerRef = useRef<HTMLDivElement>(null)
 	const yAxisMaxRef = useRef<HTMLDivElement>(null)

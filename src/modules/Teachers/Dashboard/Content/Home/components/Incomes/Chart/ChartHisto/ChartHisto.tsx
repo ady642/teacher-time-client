@@ -5,6 +5,7 @@ import {StatIncome} from "@/modules/Teachers/Dashboard/Content/Home/components/I
 import Point from "@/modules/Room/Whiteboard/interfaces/Point";
 import {Tooltip} from "@material-ui/core";
 import {Periods} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
+import {yearsPeriod} from "@/common/hooks/useDates";
 
 interface ChartHistoProps {
 	max: number,
@@ -72,12 +73,10 @@ const ChartHisto: FunctionComponent<ChartHistoProps> = (props) => {
 
 		let clientRectsVl: DOMRect
 
-		if(period === 'month') {
+		if(period === Periods.Month) {
 			clientRectsVl = vls[stat.date.month - 1]?.current.getBoundingClientRect()
-		} else if (period === 'year') {
-			console.log(stat)
-			clientRectsVl = vls[Math.abs(stat.date.year - 2022) + 9]?.current.getBoundingClientRect()
-			console.log(clientRectsVl)
+		} else if (period === Periods.Year) {
+			clientRectsVl = vls[stat.date.year + yearsPeriod - 2022 - 1]?.current.getBoundingClientRect()
 		}
 
 		const clientRectsChartContainer = chartContainerRef.current.getBoundingClientRect()

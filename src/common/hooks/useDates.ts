@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 
-const yearsPeriod = 10
+export const yearsPeriod = 10
 
 const useDates = () => {
 	const getMonths = () => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((value) => dayjs().month(value))
@@ -14,6 +14,7 @@ const useDates = () => {
 	}).reverse()
 	const getFirstDayOfCurrentYear = () => dayjs().format('YYYY-01-01')
 	const getLastDayOfCurrentYear = () => dayjs().format('YYYY-12-31')
+	const getFirstYearOf10YearsBeforeCurrentYear = () => `${getCurrentYear() - 10}-01-01`
 
 	return {
 		getMonths,
@@ -21,7 +22,8 @@ const useDates = () => {
 		getCurrentYear,
 		getYears,
 		getFirstDayOfCurrentYear,
-		getLastDayOfCurrentYear
+		getLastDayOfCurrentYear,
+		getFirstYearOf10YearsBeforeCurrentYear
 	}
 }
 

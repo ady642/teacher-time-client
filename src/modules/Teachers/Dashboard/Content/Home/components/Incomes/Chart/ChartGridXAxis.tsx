@@ -35,8 +35,6 @@ const ChartGridXAxis: FunctionComponent<ChartGridXAxisProps> = (props) => {
 		[Periods.Day]: []
 	}
 
-	console.log(getYears())
-
 	return <div ref={xAxisRef} className={styles['incomes__chart__grid__x-axis']}>
 		{
 			periods[period].map((period: Dayjs, index: number) => <div className={styles['incomes__chart__grid__x-unit']} key={index}>
