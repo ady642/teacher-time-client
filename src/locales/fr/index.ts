@@ -4,7 +4,7 @@ import room from './room'
 import teachers from './teachers'
 import profile from './profile'
 import landing from './landing'
-import dashboard from "./dahsboard";
+import dashboard from "./dashboard";
 
 export default {
 	common,

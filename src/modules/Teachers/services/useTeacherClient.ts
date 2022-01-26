@@ -80,6 +80,15 @@ const useTeacherClient = () => {
 		return await teacherClient.getStatsIncomes({ teacherId: teacher._id, ...payload })
 	}
 
+	const getTopStudents = async () => {
+		if(!teacher?._id) {
+			console.error(teacher)
+			return
+		}
+
+		return await teacherClient.getTopStudents(teacher._id)
+	}
+
 	return {
 		createTeacher,
 		getTeacher,
@@ -87,7 +96,8 @@ const useTeacherClient = () => {
 		error,
 		submitStatus,
 		getStats,
-		getStatsIncomes
+		getStatsIncomes,
+		getTopStudents
 	}
 }
 

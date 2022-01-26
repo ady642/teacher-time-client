@@ -8,6 +8,9 @@ const dashboard = {
 		},
 		incomes: {
 			title: 'Incomes'
+		},
+		topStudents: {
+			title: 'Top students'
 		}
 	}
 }

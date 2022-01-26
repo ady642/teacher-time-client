@@ -8,6 +8,8 @@ import useTeacherClient from "@/modules/Teachers/services/useTeacherClient";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import {Period, Periods} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
 import useDates from "@/common/hooks/useDates";
+import TopStudentsCard from "@/modules/Teachers/Dashboard/Content/Home/components/TopStudents/TopStudentsCard";
+import {Student} from "@/modules/Teachers/Dashboard/Content/Home/components/TopStudents/TopStudentsCardItem";
 
 interface HomeProps {
 	teacher: Teacher
@@ -15,12 +17,13 @@ interface HomeProps {
 
 const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 	const { getFirstDayOfCurrentYear, getLastDayOfCurrentYear } = useDates()
-	const { getStats, getStatsIncomes } = useTeacherClient()
+	const { getStats, getStatsIncomes, getTopStudents } = useTeacherClient()
 	const [stats, setStats] = useState({ totalDuration: 0, totalHelped: 0})
 	const [statsIncomes, setStatsIncomes] = useState([])
 	const [period, setPeriod] = useState<Period>({ label: 'Mois', value: Periods.Month })
 	const [startDate, setStartDate] = useState(getFirstDayOfCurrentYear())
 	const [endDate, setEndDate] = useState(getLastDayOfCurrentYear())
+	const [topStudents, setTopStudents] = useState<Student[]>([])
 	const { goTo } = useRoutePush()
 
 	const getTeacherStats = async () => {
@@ -41,6 +44,13 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 			setStatsIncomes(statsIncomes)
 	}
 
+	const getTeacherTopStudents = async () => {
+		const topStudents = await getTopStudents()
+
+		if(topStudents)
+			setTopStudents(topStudents)
+	}
+
 	useEffect(() => {
 		(async () => await getTeacherStatIncomes())()
 	}, [period])
@@ -50,7 +60,8 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 			try {
 				await Promise.all([
 					await getTeacherStats(),
-					await getTeacherStatIncomes()
+					await getTeacherStatIncomes(),
+					await getTeacherTopStudents()
 				])
 			} catch (e) {
 				//await goTo('home')
@@ -74,6 +85,11 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 					period={period}
 					setPeriod={setPeriod}
 				/>
+				<div className={'flex'}>
+					<TopStudentsCard
+						topStudents={topStudents}
+					/>
+				</div>
 			</section>
 			<section>
 				div

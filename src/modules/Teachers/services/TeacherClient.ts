@@ -4,6 +4,7 @@ import TeacherCreationForm
 import {Teacher} from "@/modules/Teachers/models/Entity/Teacher";
 import {StatIncome} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Chart/Chart";
 import {Periods} from "@/modules/Teachers/Dashboard/Content/Home/components/Incomes/Bar/PeriodSelector";
+import User from "@/modules/Auth/types/User";
 
 export default class TeacherClient extends Client{
 	createTeacher = async (teacherCreationForm: TeacherCreationForm) => {
@@ -52,6 +53,11 @@ export default class TeacherClient extends Client{
 				endDate: payload.endDate
 			}
 		})
+
+		return data
+	}
+	getTopStudents = async(teacherID: string): Promise<[{ timeHelped: number, student: User }]> => {
+		const { data } = await this.client.get(`${process.env.SERVER_URL}/room/${teacherID}/topStudents`)
 
 		return data
 	}

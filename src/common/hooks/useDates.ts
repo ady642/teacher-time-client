@@ -1,5 +1,7 @@
 import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
 
+dayjs.extend(duration)
 
 export const yearsPeriod = 10
 
@@ -16,6 +18,8 @@ const useDates = () => {
 	const getLastDayOfCurrentYear = () => dayjs().format('YYYY-12-31')
 	const getFirstYearOf10YearsBeforeCurrentYear = () => `${getCurrentYear() - 10}-01-01`
 
+	const convertToMinutes = (value: number): number => Math.round(dayjs.duration(value, 'seconds').asMinutes())
+
 	return {
 		getMonths,
 		getCurrentDate,
@@ -23,7 +27,8 @@ const useDates = () => {
 		getYears,
 		getFirstDayOfCurrentYear,
 		getLastDayOfCurrentYear,
-		getFirstYearOf10YearsBeforeCurrentYear
+		getFirstYearOf10YearsBeforeCurrentYear,
+		convertToMinutes
 	}
 }
 
