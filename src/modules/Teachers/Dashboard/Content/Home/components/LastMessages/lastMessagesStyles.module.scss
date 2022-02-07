@@ -1,5 +1,6 @@
-.top-students {
+.last-messages {
   &__card {
+    flex-grow: 1;
     background: white;
     padding: 10px;
     border-radius: 16px;
@@ -7,13 +8,11 @@
     &__title {
       font-size: 18px;
       font-weight: 600;
-      margin-bottom: 10px;
     }
 
     &__item {
       display: flex;
       align-items: center;
-      background: #F9F8FE;
       border-radius: 8px;
       padding: 5px 10px;
       column-gap: 10px;
@@ -31,9 +30,11 @@
           font-weight: bold;
         }
         &__time {
-          color: #E48276;
+          color: #8E99A9;
         }
       }
     }
   }
 }
+
+

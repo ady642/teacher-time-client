@@ -11,6 +11,9 @@ const dashboard = {
 		},
 		topStudents: {
 			title: 'Top des étudiants'
+		},
+		lastMessages: {
+			title: 'Messages'
 		}
 	}
 }

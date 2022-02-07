@@ -10,6 +10,9 @@ import {Period, Periods} from "@/modules/Teachers/Dashboard/Content/Home/compone
 import useDates from "@/common/hooks/useDates";
 import TopStudentsCard from "@/modules/Teachers/Dashboard/Content/Home/components/TopStudents/TopStudentsCard";
 import {Student} from "@/modules/Teachers/Dashboard/Content/Home/components/TopStudents/TopStudentsCardItem";
+import LastMessages, {
+	LastMessageI
+} from "@/modules/Teachers/Dashboard/Content/Home/components/LastMessages/LastMessages";
 
 interface HomeProps {
 	teacher: Teacher
@@ -24,6 +27,35 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 	const [startDate, setStartDate] = useState(getFirstDayOfCurrentYear())
 	const [endDate, setEndDate] = useState(getLastDayOfCurrentYear())
 	const [topStudents, setTopStudents] = useState<Student[]>([])
+	const [lastMessages, setLastMessages] = useState<LastMessageI[]>([
+		{
+			message: 'Bonjour je suis un message',
+			sender: {
+				_id: 'tets',
+				firstName: 'Gaston Nahman',
+				lastName: 'HAIK',
+				email: 'tghmaths@gmail.com',
+			},
+		},
+		{
+			message: 'Bonjour je ne comprend pas ce probleme, vpouvez vous m\'aider svp ?',
+			sender: {
+				_id: 'tets',
+				firstName: 'Gaston Nahman',
+				lastName: 'HAIK',
+				email: 'tghmaths@gmail.com',
+			},
+		},
+		{
+			message: 'Bonjour je suis un autre message',
+			sender: {
+				_id: 'tets',
+				firstName: 'Gaston Nahman',
+				lastName: 'HAIK',
+				email: 'tghmaths@gmail.com',
+			},
+		}
+	])
 	const { goTo } = useRoutePush()
 
 	const getTeacherStats = async () => {
@@ -74,7 +106,7 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 	return <div className={styles.home}>
 		<HomeTitle teacherName={teacher?.user?.firstName ?? 'Adrien'} />
 		<div className={styles['home-content']}>
-			<section>
+			<section className={styles['home-content__left']}>
 				<Banner
 					timeCount={stats.totalDuration}
 					studentCount={stats.totalHelped}
@@ -85,9 +117,12 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 					period={period}
 					setPeriod={setPeriod}
 				/>
-				<div className={'flex'}>
+				<div className={styles['home-content__left__last']}>
 					<TopStudentsCard
 						topStudents={topStudents}
+					/>
+					<LastMessages
+						messages={lastMessages}
 					/>
 				</div>
 			</section>
