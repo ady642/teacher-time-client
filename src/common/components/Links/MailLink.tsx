@@ -5,7 +5,7 @@ interface MailLinkProps {
 }
 
 const MailLink: FunctionComponent<MailLinkProps> = ({ className }) => {
-	return <a href="mailto:webmaster@teacher.com" className={`pointer font-bold text-blue-400 ${className}`}>
+	return <a href="mailto:webmaster@teacher-time.com" className={`pointer font-bold text-blue-400 ${className}`}>
 		webmaster@teacher-time.com
 	</a>
 
