@@ -2,8 +2,8 @@
 .income-banner {
   display: flex;
   align-items: center;
-  height: 35px;
-  width: 70px;
+  height: 45px;
+  width: 90px;
   border-top: 5px solid #5F85E6;
   border-bottom: 5px solid #5F85E6;
   border-right: 5px solid #5F85E6;
@@ -26,27 +26,35 @@
   }
 
   &::before {
+    top: -1px;
+    left: -10px;
     content: "";
     border-left: 5px solid #5F85E6;
     border-bottom: 5px solid #5F85E6;
     border-radius: 10px;
-    height: 60px;
-    width: 60px;
+    height: 36px;
+    width: 36px;
     position: absolute;
     transform: rotate(45deg);
-  }
 
-  &::before {
-    top: 5px;
-    left: -24px;
+    @include sm {
+      height: 60px;
+      width: 60px;
+      top: 5px;
+      left: -24px;
+    }
   }
 
   &__content {
     color: #5F85E6;
-    font-size: 36px;
+    font-size: 12px;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include sm {
+      font-size: 36px;
+    }
   }
 }
