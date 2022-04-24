@@ -121,13 +121,7 @@ const Home: FunctionComponent<HomeProps> = ({ teacher }) => {
 					<TopStudentsCard
 						topStudents={topStudents}
 					/>
-					<LastMessages
-						messages={lastMessages}
-					/>
 				</div>
-			</section>
-			<section>
-				div
 			</section>
 		</div>
 	</div>
