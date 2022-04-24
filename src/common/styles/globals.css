@@ -1,7 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
 @import './stripe_style.css';
 @import './override_material.css';
-@import './_breakpoints.scss';
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
 
 @tailwind components;
 @tailwind utilities;

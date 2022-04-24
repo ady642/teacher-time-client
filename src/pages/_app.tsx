@@ -1,4 +1,4 @@
-import '@/common/styles/globals.scss'
+import '@/common/styles/globals.css'
 import {NextPage} from "next";
 
 import { ContextProvider } from "@/context";

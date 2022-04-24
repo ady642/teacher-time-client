@@ -19,9 +19,6 @@ module.exports = {
 		defaultLocale: 'fr'
 	},
 	sassOptions: {
-		prependData: `
-        @import "src/common/styles/breakpoints";
-      `,
-		includePaths: [path.join(__dirname, 'src/common/styles')],
+		prependData: `@import "src/common/styles/breakpoints.scss";`,
 	},
 };
