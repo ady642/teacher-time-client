@@ -13,8 +13,8 @@ interface ProfileContentRightProps {
 
 const ProfileContentRight: FunctionComponent<ProfileContentRightProps> = ({ openEditionModal, teacher }) => {
 	return <div className={styles['profile-content-right']}>
-		<ProfileContentHourlyRate openEditionModal={openEditionModal} hourlyRate={teacher.hourlyRate} />
-		<ProfileContentDescription openEditionModal={openEditionModal} description={teacher.description} />
+		<ProfileContentHourlyRate openEditionModal={openEditionModal} hourlyRate={teacher?.hourlyRate ?? 0} />
+		<ProfileContentDescription openEditionModal={openEditionModal} description={teacher?.description ?? ''} />
 	</div>
 }
 

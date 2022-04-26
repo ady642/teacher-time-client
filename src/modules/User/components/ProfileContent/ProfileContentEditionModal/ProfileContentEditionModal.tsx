@@ -88,29 +88,29 @@ const ProfileContentEditionModal: FunctionComponent<ProfileContentEditionModalPr
 				</Case>
 				<Case value="fields">
 					<FieldsModification
-						initFields={new Set(teacher.fields)}
+						initFields={new Set(teacher?.fields ?? [])}
 						modifyFields={modifyTeacher}
 						submitStatus={submitStatus}
 					/>
 				</Case>
 				<Case value="levels">
 					<LevelsModification
-						initLevels={new Set(teacher.levels)}
+						initLevels={new Set(teacher?.levels ?? [])}
 						modifyLevels={modifyTeacher}
 						submitStatus={submitStatus}
 					/>
 				</Case>
 				<Case value="hourlyRate">
 					<HourlyRateModification
-						hourlyRateInit={teacher.hourlyRate}
+						hourlyRateInit={teacher?.hourlyRate ?? 0}
 						modifyHourlyRate={modifyTeacher}
 						submitStatus={submitStatus}
 					/>
 				</Case>
 				<Case value="name">
 					<NameModification
-						initFirstName={teacher.user.firstName}
-						initLastName={teacher.user.lastName}
+						initFirstName={teacher?.user?.firstName ?? ''}
+						initLastName={teacher?.user?.lastName ?? ''}
 						modifyNames={modifyUser}
 						submitStatus={submitUserStatus}
 					/>

@@ -12,7 +12,7 @@ interface AsideInformationsFirstLineProps {
 
 const AsideInformationsFirstLine: FunctionComponent<AsideInformationsFirstLineProps> = ({ teacher }) => {
 	return <div className={styles['aside-information__first-line']}>
-		<AsideInformationsName firstName={teacher.user.firstName} lastName={teacher.user.lastName} />
+		<AsideInformationsName firstName={teacher?.user?.firstName} lastName={teacher?.user?.lastName} />
 		<AsideInformationsCertificate />
 	</div>
 }

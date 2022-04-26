@@ -16,11 +16,11 @@ const ProfileContentLeft: FunctionComponent<ProfileContentLeftProps> = ({ teache
 	return <div className={styles['profile-content-left']}>
 		<ProfileContentName
 			openEditionModal={openEditionModal}
-			firstName={teacher.user.firstName}
-			lastName={teacher.user.lastName}
+			firstName={teacher?.user?.firstName}
+			lastName={teacher?.user?.lastName}
 		/>
-		<ProfileContentFields openEditionModal={openEditionModal} fields={teacher.fields}/>
-		<ProfileContentLevels openEditionModal={openEditionModal} levels={teacher.levels} />
+		<ProfileContentFields openEditionModal={openEditionModal} fields={teacher?.fields ?? []}/>
+		<ProfileContentLevels openEditionModal={openEditionModal} levels={teacher?.levels ?? []} />
 	</div>
 }
 
