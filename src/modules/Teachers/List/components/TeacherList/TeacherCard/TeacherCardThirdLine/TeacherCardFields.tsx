@@ -10,6 +10,9 @@ const TeacherCardFields: FunctionComponent<TeacherCardFieldsProps> = ({ fields }
 		[Fields.SPANISH]: 'Espagnol',
 		[Fields.ENGLISH]: 'Anglais',
 		[Fields.MATHS]: 'Mathématiques',
+		[Fields.PHILOSOPHY]: 'Philosophie',
+		[Fields.HISTORY]: 'Histoire',
+		[Fields.FRENCH]: 'Français'
 	}
 
 	return <div className={'flex flex-wrap gap-1'}>

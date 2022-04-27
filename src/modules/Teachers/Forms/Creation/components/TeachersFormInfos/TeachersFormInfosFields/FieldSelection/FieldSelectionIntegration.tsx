@@ -12,7 +12,9 @@ export enum Fields {
     MATHS = 'maths',
     ENGLISH = 'english',
     FRENCH = 'french',
-    SPANISH = 'spanish'
+    SPANISH = 'spanish',
+	PHILOSOPHY = 'philosophy',
+	HISTORY = 'history',
 }
 
 const FieldSelectionIntegration: FunctionComponent<FieldSelectionIntegrationProps> = ({ selectedFields, setSelectedFields, className }) => {
@@ -30,32 +32,27 @@ const FieldSelectionIntegration: FunctionComponent<FieldSelectionIntegrationProp
 		});
 	}
 
-	const fields: SelectionItemProps[] = [
-		{
-			active: selectedFields.has(Fields.MATHS),
-			label: "Mathématiques",
-			icon: '/img/icon/pi.svg',
-			onClick: () => selectedFields.has(Fields.MATHS) ? removeField(Fields.MATHS): addField(Fields.MATHS)
-		},
-		{
-			active: selectedFields.has(Fields.ENGLISH),
-			label: "Anglais",
-			icon: '/img/icon/ingles.svg',
-			onClick: () => selectedFields.has(Fields.ENGLISH) ? removeField(Fields.ENGLISH): addField(Fields.ENGLISH)
-		},
-		{
-			active: selectedFields.has(Fields.FRENCH),
-			label: "Français",
-			icon: '/img/icon/francia.png',
-			onClick: () => selectedFields.has(Fields.FRENCH) ? removeField(Fields.FRENCH): addField(Fields.FRENCH)
-		},
-		{
-			active: selectedFields.has(Fields.SPANISH),
-			label: "Espagnol",
-			icon: '/img/icon/espana.png',
-			onClick: () => selectedFields.has(Fields.SPANISH) ? removeField(Fields.SPANISH): addField(Fields.SPANISH)
-		}
-	]
+	type option = 'value' | 'label' | 'icon'
+	type fieldOption = {
+		[key in option]: string
+	}
+	const buildFields = (fieldsOption: fieldOption[]): SelectionItemProps[] => {
+		return fieldsOption.map((field) => ({
+			active: selectedFields.has(field.value),
+			label: field.label,
+			icon: field.icon,
+			onClick: () => selectedFields.has(field.value) ? removeField(field.value): addField(field.value)
+		}))
+	}
+
+	const fields = buildFields([
+		{ value: Fields.MATHS, icon: '/img/icon/pi.svg', label: 'Mathématiques' },
+		{ value: Fields.ENGLISH, icon: '/img/icon/ingles.png', label: 'Anglais' },
+		{ value: Fields.FRENCH, icon: '/img/icon/francia.png', label: 'Français' },
+		{ value: Fields.PHILOSOPHY, icon: '/img/icon/fields/philosophy.png', label: 'Philosophie' },
+		{ value: Fields.HISTORY, icon: '/img/icon/fields/history.png', label: 'Histoire' },
+		{ value: Fields.SPANISH, icon: '/img/icon/espana.png', label: 'Espagnol' },
+	])
 
 	return <CheckboxSelector
 		className={className}

@@ -24,7 +24,7 @@ const ProfileContentLevels: FunctionComponent<ProfileContentLevelsProps> = ({ le
 		<div className={styles['tag-profile-container']}>
 			{ levels.map(level => <Tag key={level}>
 				<div className={'flex items-center'}>
-					<ProfileContentIcon src={`img/icon/levels/${level}.svg`} />
+					<ProfileContentIcon src={`/img/icon/levels/${level}.svg`} />
 					{ levelName[level].label }
 				</div>
 			</Tag>) }

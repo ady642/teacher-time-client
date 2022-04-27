@@ -12,19 +12,21 @@ interface ProfileContentFieldsProps {
 
 const ProfileContentFields: FunctionComponent<ProfileContentFieldsProps> = ({ fields, openEditionModal }) => {
 	const fieldName: {
-		[key: string]: { label: string }
+		[key: string]: { label: string, icon: string }
 	} = {
-		[Fields.MATHS]: { label: 'Mathématiques' },
-		[Fields.ENGLISH]: { label: 'Anglais' },
-		[Fields.SPANISH]: { label: 'Espagnol' },
-		[Fields.FRENCH]: { label: 'Français' },
+		[Fields.MATHS]: { icon: '/img/icon/pi.svg', label: 'Mathématiques' },
+		[Fields.ENGLISH]: { icon: '/img/icon/ingles.png', label: 'Anglais' },
+		[Fields.SPANISH]: { icon: '/img/icon/espana.png', label: 'Espagnol' },
+		[Fields.FRENCH]: { icon: '/img/icon/francia.png', label: 'Français' },
+		[Fields.HISTORY]: { icon: '/img/icon/fields/history.png', label: 'Histoire' },
+		[Fields.PHILOSOPHY]: { icon: '/img/icon/fields/philosophy.png', label: 'Philosophie' },
 	}
 
 	return <ProfileContentElement  onPencilClick={() => openEditionModal('fields')} title={'Vos spécialités'}>
 		<div className={styles['tag-profile-container']}>
 			{ fields.map(field => <Tag key={field}>
 				<div className={'flex items-center'}>
-					<ProfileContentIcon src={`img/icon/fields/${field}.svg`} />
+					<ProfileContentIcon src={fieldName[field].icon} />
 					{ fieldName[field].label }
 				</div>
 			</Tag>) }

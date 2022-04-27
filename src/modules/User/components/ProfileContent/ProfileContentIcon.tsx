@@ -5,7 +5,7 @@ interface ProfileContentIconProps {
 }
 
 const ProfileContentIcon: FunctionComponent<ProfileContentIconProps> = ({ src }) => {
-	return <img className={'mr-2'} src={src} alt={'profile content icon'}/>
+	return <img className={'mr-2 w-8'} src={src} alt={'profile content icon'}/>
 }
 
 export default ProfileContentIcon
