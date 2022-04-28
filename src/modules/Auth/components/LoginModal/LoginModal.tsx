@@ -9,7 +9,6 @@ import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 
 const LoginModal: FC = () => {
-	const [openedLoginModal, setOpenedLoginModalState] = useState(false)
 	const [loginForm, setLoginForm] = useState(new LoginForm())
 	const [loginValidator, setLoginValidator] = useState(new LoginValidator(loginForm))
 	const { loginStatus, submitLogin, submitAttempt, loginWithGoogle } = useAuthServices()
@@ -30,17 +29,6 @@ const LoginModal: FC = () => {
 		}
 	}
 
-	/*
-		useEffect(() => {
-		setOpenedLoginModalState(signInModalOpened)
-	}, [signInModalOpened])
-
-	useEffect(() => {
-		openedLoginModal ? openSignInModal() : closeSignInModal()
-	}, [openedLoginModal])
-
-	*/
-
 	useEffect(() => {
 		if(submitAttempt) {
 			setLoginValidator(new LoginValidator(loginForm))
@@ -49,7 +37,7 @@ const LoginModal: FC = () => {
 	}, [loginForm, submitAttempt])
 
 	return <>
-		<Modal open={openedLoginModal} handleClose={() => setOpenedLoginModalState(false)}>
+		<Modal open={signInModalOpened} handleClose={() => closeSignInModal()}>
 			<LoginModalContent
 				loginForm={loginForm}
 				setLoginForm={setLoginForm}
@@ -60,7 +48,7 @@ const LoginModal: FC = () => {
 				onGoogleButtonClick={loginWithGoogle}
 			/>
 		</Modal>
-		<LoginActivator onClick={() => setOpenedLoginModalState(true)}/>
+		<LoginActivator onClick={() => openSignInModal()}/>
 	</>
 }
 

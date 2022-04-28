@@ -24,7 +24,13 @@ const TeacherCard: FunctionComponent<TeacherCardProps> = ({online, onCall, onOpe
 		<div className={'p-5'}>
 			<TeacherCardFirstLine online={online} name={teacher.name} rating={teacher.rating} />
 			<TeacherCardSecondLine description={teacher.description} />
-			<TeacherCardThirdLine online={online} onCall={callTeacher} onOpenProfile={onOpenProfile} fields={teacher.fields} languages={teacher.languages} />
+			<TeacherCardThirdLine
+				online={online}
+				onCall={callTeacher}
+				onOpenProfile={onOpenProfile}
+				fields={teacher.fields}
+				languages={teacher.languages}
+			/>
 		</div>
 	</div>
 }

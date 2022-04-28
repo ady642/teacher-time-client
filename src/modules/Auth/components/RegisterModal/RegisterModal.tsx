@@ -9,28 +9,18 @@ import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 const RegisterModal: FC = () => {
-	const [openedRegisterModal, setOpenedRegisterModal] = useState(false)
 	const [registrationForm, setRegistrationForm] = useState(new RegistrationForm())
 	const [registrationValidator, setRegistrationValidator] = useState(new RegistrationValidator(registrationForm))
 	const registerModalContentRef = useRef<HTMLDivElement>(null)
 	const registerActivatorRef = useRef<HTMLButtonElement>(null)
-	const { registrationStatus, submitRegister, submitAttempt, loginWithGoogle } = useAuthServices()
+	const { registrationStatus, submitRegister, loginWithGoogle } = useAuthServices()
 	const { openSignInModal, closeRegisterModal, openRegisterModal } = useAuthReducers()
 	const { registerModalOpened } = useAuthGetters()
 
 	const clickOnAlreadyExists = () => {
-		setOpenedRegisterModal(false)
 		closeRegisterModal()
 		openSignInModal()
 	}
-
-	useEffect(() => {
-		setOpenedRegisterModal(registerModalOpened)
-	}, [registerModalOpened])
-
-	useEffect(() => {
-		openedRegisterModal ? openRegisterModal() : closeRegisterModal()
-	}, [openedRegisterModal])
 
 	const register = async (e: Event) => {
 		e.preventDefault(); // remove refresh when click on submit button
@@ -38,7 +28,7 @@ const RegisterModal: FC = () => {
 			try {
 				await submitRegister(registrationForm, registrationValidator)
 				setTimeout(() => {
-					setOpenedRegisterModal(false)
+					closeRegisterModal()
 				}, 2000)
 			} catch (e) {
 				console.warn('Failed to submit registration')
@@ -54,7 +44,7 @@ const RegisterModal: FC = () => {
 	return <>
 		<Modal
 			className={'rounded-xl'}
-			open={openedRegisterModal} handleClose={() => setOpenedRegisterModal(false)}>
+			open={registerModalOpened} handleClose={() => closeRegisterModal()}>
 			<RegisterModalContent
 				registrationForm={registrationForm}
 				setRegistrationForm={setRegistrationForm}
@@ -66,7 +56,7 @@ const RegisterModal: FC = () => {
 				onGoogleButtonClick={loginWithGoogle}
 			/>
 		</Modal>
-		<RegisterActivator registerActivatorRef={registerActivatorRef} onClick={() => setOpenedRegisterModal(true)}/>
+		<RegisterActivator registerActivatorRef={registerActivatorRef} onClick={() => openRegisterModal()}/>
 	</>
 }
 
