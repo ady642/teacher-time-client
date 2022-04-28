@@ -30,13 +30,16 @@ const LoginModal: FC = () => {
 		}
 	}
 
-	useEffect(() => {
+	/*
+		useEffect(() => {
 		setOpenedLoginModalState(signInModalOpened)
 	}, [signInModalOpened])
 
 	useEffect(() => {
 		openedLoginModal ? openSignInModal() : closeSignInModal()
 	}, [openedLoginModal])
+
+	*/
 
 	useEffect(() => {
 		if(submitAttempt) {

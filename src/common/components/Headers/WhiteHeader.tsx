@@ -10,6 +10,7 @@ import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 import dynamic from "next/dynamic";
 import useUserGetters from "@/context/user/helpers/useUserGetters";
 import AvailableSwitch, { AvailableSwitchProps } from "@/modules/Teachers/List/components/AvailableSwitch";
+import AuthButtons from "@/modules/Auth/components/Buttons/AuthButtons";
 
 const ConnectedComponent = dynamic(() => import('@/common/components/Headers/ConnectedComponent'))
 
@@ -22,7 +23,7 @@ const WhiteHeader: FC<HeaderProps> = ({ openPaymentModal }) => {
 	const { t } = useTranslation()
 	const { goTo } = useRoutePush()
 	const { token } = useAuthGetters()
-	const { teacher } = useUserGetters()	
+	const { teacher } = useUserGetters()
 
 	const [navItems] = useState([
 		{
@@ -59,9 +60,8 @@ const WhiteHeader: FC<HeaderProps> = ({ openPaymentModal }) => {
 								{ t('common.giveClasses') }
 							</NavItem> }
 					</ul>
-
 				</nav>
-				{ token ? <ConnectedComponent /> : ''  }
+				{ token ? <ConnectedComponent /> : <AuthButtons />   }
 			</div>
 		</div>
 	)
