@@ -38,7 +38,7 @@ const usePeerJS = (userStream: MutableRefObject<MediaStream>, roomID: string) =>
 
 			peer.current.on('open', function(id: string) {
 				console.log('My peer ID is: ' + id);
-				socket.emit('join-room', { roomID, peerID: id })
+				//socket.emit('join-room', { roomID, peerID: id })
 			});
 
 			peer.current.on('call', function(call: any) {

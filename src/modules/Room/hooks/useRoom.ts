@@ -7,7 +7,7 @@ import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 
 const useRoom = () => {
 	const { setAppLoading } = useAppReducers()
-	const { token } = useAuthGetters()
+	const { token, user } = useAuthGetters()
 	const { openSignInModal } = useAuthReducers()
 	const [noRoomModalOpened, setNoRoomModalOpened] = useState(false)
 	const { goTo } = useRoutePush()
@@ -18,17 +18,17 @@ const useRoom = () => {
 			return
 		}
 
-		await socket.emit('join-intent', teacherID)
+		await socket.emit('join-intent', { teacherID, studentID: user._id})
 		setAppLoading(true)
 	}
 
 	useEffect(() => {
-		socket.on('on-accepted', async ({roomID = '', teacherID = '' }) => {
+		socket.on('on-accepted', async ({roomID = '', teacherID }) => {
 			await goTo(`room/${roomID}`, { teacherID })
 			setAppLoading(false)
 		})
 		socket.on('on-rejected', () => {
-			alert('Les professeur sont tous occupés pour le moment, Veuillez réessayer plus tard')
+			alert('Le professeur est occupé pour le moment, Veuillez réessayer plus tard :)')
 			setAppLoading(false)
 		})
 	}, [])

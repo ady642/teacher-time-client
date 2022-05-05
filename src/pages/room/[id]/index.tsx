@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import {socket} from "@/common/utils/client";
 import {withRouter} from 'next/router'
 import BoardContainer from "@/modules/Room/Whiteboard/BoardContainer";
@@ -6,13 +6,20 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import Head from "next/head";
 import useSocketAudio from "@/modules/Room/hooks/useSocketAudio";
+import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 interface RoomProps {
 
 }
 
-const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Room: FC<RoomProps> = ({ roomID, teacherID }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const { goTo } = useRoutePush()
+	const [studentName, setStudentName] = useState('')
+	const [teacherName, setTeacherName] = useState('')
+	const [duration, setDuration] = useState(0)
+	const { user } = useAuthGetters()
+
+
 	/*	const [muted, setMuted] = useState(false)
 
 	const toggleMute = () => {
@@ -47,6 +54,11 @@ const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getS
 
 		socket.on('on-ended-room', () => alert('This room does not exist anymore'))
 
+		if(teacherID) {
+			setStudentName(`${user.firstName} ${user.lastName}`)
+			setTeacherName(`Gaston Nahman HAIK`)
+		}
+
 		return () => {
 			userStream.current.getTracks().forEach(track => {
 				track.stop();
@@ -66,6 +78,10 @@ const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getS
 			<BoardContainer
 				socket={socket}
 				roomID={roomID}
+				setDuration={setDuration}
+				duration={duration}
+				teacherName={teacherName}
+				studentName={studentName}
 			/>
 		</div>
 	</>
@@ -73,8 +89,9 @@ const Room: FC<RoomProps> = ({ roomID }: InferGetServerSidePropsType<typeof getS
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const id = ctx.query?.id ?? ''
+	const teacherID = ctx.query?.teacherID ?? ''
 
-	return { props: { roomID: id } }
+	return { props: { roomID: id, teacherID } }
 }
 
 export default withRouter(Room)

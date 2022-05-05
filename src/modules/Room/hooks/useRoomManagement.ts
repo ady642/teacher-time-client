@@ -11,6 +11,7 @@ import useRoomReducers from "@/context/room/helpers/useRoomReducers";
 
 const useRoomManagement = () => {
 	const [studentID, setStudentID] = useState('')
+	const [studentSocketID, setSocketStudentID] = useState('')
 	const llamadaRef = useRef<HTMLAudioElement>(null)
 	const [displayAcceptModal, setDisplayAcceptModal] = useState(false)
 	const { goTo } = useRoutePush()
@@ -40,8 +41,9 @@ const useRoomManagement = () => {
 		socket.emit('delete-room', roomID)
 	}
 
-	const joinIntent = async (id: string) => {
-		setStudentID(id)
+	const joinIntent = async ({ studentSocketID, studentID }: { studentSocketID: string, studentID: string }) => {
+		setStudentID(studentID)
+		setSocketStudentID(studentSocketID)
 		setDisplayAcceptModal(true)
 		await beep()
 	}
@@ -52,13 +54,13 @@ const useRoomManagement = () => {
 
 	const acceptStudent = async () => {
 		await llamadaRef.current.pause()
+		socket.emit('accept-student', { studentSocketID, studentID, roomID })
 		await goTo(`room/${roomID}`)
-		socket.emit('accept-student', { studentID, roomID: roomID })
 	}
 
 	const rejectStudent = async () => {
 		await llamadaRef.current.pause()
-		socket.emit('reject-student', studentID)
+		socket.emit('reject-student', studentSocketID)
 		setStudentID('')
 		setDisplayAcceptModal(false)
 	}

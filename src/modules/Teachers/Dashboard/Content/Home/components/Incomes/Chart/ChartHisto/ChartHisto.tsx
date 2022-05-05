@@ -92,7 +92,7 @@ const ChartHisto: FunctionComponent<ChartHistoProps> = (props) => {
 		}
 	}
 
-	return <Tooltip placement={"left-start"} title={`${stat.incomes} €`}>
+	return <Tooltip placement={"left-start"} title={`${stat.incomes / 100} €`}>
 		<div
 			ref={histoBarRef}
 			className={styles['chart-histo__bar']}

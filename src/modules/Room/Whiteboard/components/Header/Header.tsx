@@ -1,48 +1,40 @@
-import {FunctionComponent, useEffect, useState} from "react";
+import {FunctionComponent, useEffect} from "react";
 import UserInfos from "@/modules/Room/Whiteboard/components/Header/UserInfos";
 import TimeInfos from "@/modules/Room/Whiteboard/components/Header/TimeInfos";
 
 interface HeaderProps {
-
+	studentName: string;
+	teacherName: string;
+	duration: number;
+	setDuration: (value: number) => void;
 }
 
-const Header: FunctionComponent<HeaderProps> = () => {
-	const [count, setCount] = useState<number>(0)
-	const [balanceCoins, setBalanceCoins] = useState<number>(20)
+const Header: FunctionComponent<HeaderProps> = (props: HeaderProps) => {
+	const { studentName, teacherName, setDuration, duration } = props
 
 	useEffect(() => {
 		const countInterval = setInterval(() => {
-			setCount(count + 1)
-		}, 1000)
-
-		const balanceInterval = setInterval(() => {
-			setBalanceCoins(Math.floor(20 - 0.1 * count))
-			if(balanceCoins <= 0) {
-				setBalanceCoins(0)
-				clearInterval(balanceInterval)
-			}
+			setDuration(duration + 1)
 		}, 1000)
 
 		return () => {
 			clearInterval(countInterval)
-			clearInterval(balanceInterval)
 		}
-	}, [count])
+	}, [duration])
 
 	return	<div className="flex flex-wrap justify-content text-lg lg:text-2xl">
 		<UserInfos
 			className={'justify-start'}
 			userType={'Teacher'}
-			name={'Adrien HM'}
+			name={teacherName}
 		/>
 		<TimeInfos
-			count={count}
-			balanceCoins={balanceCoins}
+			count={duration}
 		/>
 		<UserInfos
 			className={'sm:justify-end'}
 			userType={'Student'}
-			name={'Invité 2705'}
+			name={studentName}
 		/>
 	</div>
 }

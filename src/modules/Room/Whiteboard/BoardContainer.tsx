@@ -11,10 +11,14 @@ import Header from "@/modules/Room/Whiteboard/components/Header/Header";
 
 interface BoardContainerProps {
 	socket: any;
-	roomID: string
+	roomID: string;
+	duration: number;
+	setDuration: (value: number) => void;
+	studentName: string;
+	teacherName: string;
 }
 
-const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, roomID }) => {
+const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, teacherName, studentName, roomID, duration, setDuration }) => {
 	const boardContainerRef = useRef<HTMLDivElement>(null)
 	const [tool, setTool] = useState<ToolInterface>(new Pencil())
 	const [cursorClass, setCursorClass] = useState<string>(null)
@@ -33,7 +37,12 @@ const BoardContainer: FunctionComponent<BoardContainerProps> = ({ socket, roomID
 	return <div ref={boardContainerRef} className={`${styles.shade}`}>
 		<InputText textBoxRef={textBoxRef}/>
 		<div className="flex flex-col">
-			<Header />
+			<Header
+				studentName={studentName}
+				teacherName={teacherName}
+				setDuration={setDuration}
+				duration={duration}
+			/>
 			<div className="flex justify-between mt-28">
 				<Toolbox clearCanvas={emitToClear} tool={tool} setTool={setTool} />
 				<Board

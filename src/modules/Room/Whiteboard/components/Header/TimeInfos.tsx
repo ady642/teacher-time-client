@@ -6,10 +6,9 @@ dayjs.extend(duration);
 
 interface TimeInfosProps {
 	count: number;
-	balanceCoins: number
 }
 
-const TimeInfos: FunctionComponent<TimeInfosProps> = ({ count, balanceCoins }) => {
+const TimeInfos: FunctionComponent<TimeInfosProps> = ({ count }) => {
 	const [time, setTime] = useState('')
 
 	useEffect(() => {
@@ -18,7 +17,6 @@ const TimeInfos: FunctionComponent<TimeInfosProps> = ({ count, balanceCoins }) =
 
 	return <section className={'flex'}>
 		<TimeInfo className={'mr-12'} title={'Time of the class'} time={time} />
-		<TimeInfo title={'Coins balance'} time={balanceCoins}/>
 	</section>
 }
 
