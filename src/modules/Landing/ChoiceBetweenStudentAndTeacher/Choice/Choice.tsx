@@ -12,43 +12,53 @@ interface ChoiceProps {
     imgSource: string,
 	onButtonClick: () => void,
 	outlinedButton?: boolean,
-	buttonSlot?: JSX.Element
+	buttonSlot?: JSX.Element,
+	buttonLabel: string
 }
 
 const Choice: FunctionComponent<ChoiceProps> = ({
-	imgSource, title, subtitle, onButtonClick, outlinedButton = false, buttonSlot
+	imgSource,
+	title,
+	subtitle,
+	onButtonClick,
+	outlinedButton = false,
+	buttonSlot,
+	buttonLabel
 }) => {
 	return <div className={styles['choice']}>
+		<ChoiceTitle title={title} />
 		<ChoiceImage source={imgSource}/>
-		<section className={styles['choice__titles']}>
-			<ChoiceTitle title={title} />
-			<ChoiceSubtitle subtitle={subtitle} />
-		</section>
-		<Switch
-			defaultComponent={
-				<ChoiceButton
-					outlined={outlinedButton}
-					onClick={onButtonClick}
-				/>
-			}
-			componentName={buttonSlot ? 'withSlot': 'withoutSlot'}
-		>
-			<Case value={'withSlot'}>
-				<div className={styles['choice__buttons']}>
+		<ChoiceSubtitle subtitle={subtitle} />
+		<div className={styles['choice__buttons']}>
+			<Switch
+				defaultComponent={
 					<ChoiceButton
 						outlined={outlinedButton}
 						onClick={onButtonClick}
+						label={buttonLabel}
 					/>
-					{buttonSlot}
-				</div>
-			</Case>
-			<Case value={'withoutSlot'}>
-				<ChoiceButton
-					outlined={outlinedButton}
-					onClick={onButtonClick}
-				/>
-			</Case>
-		</Switch>
+				}
+				componentName={buttonSlot ? 'withSlot': 'withoutSlot'}
+			>
+				<Case value={'withSlot'}>
+					<div className={styles['choice__buttons']}>
+						<ChoiceButton
+							outlined={outlinedButton}
+							onClick={onButtonClick}
+							label={buttonLabel}
+						/>
+						{buttonSlot}
+					</div>
+				</Case>
+				<Case value={'withoutSlot'}>
+					<ChoiceButton
+						outlined={outlinedButton}
+						onClick={onButtonClick}
+						label={buttonLabel}
+					/>
+				</Case>
+			</Switch>
+		</div>
 	</div>
 }
 

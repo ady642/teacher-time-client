@@ -23,6 +23,7 @@ const StudentChoice: FunctionComponent<StudentChoiceProps> = () => {
 		subtitle={t('landing.studentSubtitle')}
 		imgSource={'img/student.png'}
 		onButtonClick={() => goToStudentLanding()}
+		buttonLabel={t('common.teachersList')}
 	/>
 }
 

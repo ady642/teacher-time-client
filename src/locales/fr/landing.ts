@@ -12,9 +12,9 @@ const landing = {
 	forStudent: 'Pour étudiant',
 	forTeacher: 'Pour enseignant',
 	getStarted: 'Commencer',
-	teacherTitle: 'Je souhaite enseigner',
+	teacherTitle: 'ESPACE PROFESSEURS',
 	teacherSubtitle: 'Vous souhaitez arrondir vos fins de mois ?\n Aidez des élèves et augmentez vos revenus !',
-	studentTitle: 'Je souhaite apprendre',
+	studentTitle: 'ESPACE ELEVES',
 	studentSubtitle: 'Tu es bloqué sur un exercice ?\n Contacte un professeur qui répondra à ta question !',
 	hiw: {
 		title: 'Comment ça marche ?',
