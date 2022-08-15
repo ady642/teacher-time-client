@@ -3,22 +3,21 @@ import {useEffect, useState} from "react";
 import {socket} from "@/common/utils/client";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
-import useAuthReducers from "@/context/auth/helpers/useAuthReducers";
 
 const useRoom = () => {
 	const { setAppLoading } = useAppReducers()
-	const { token, user } = useAuthGetters()
-	const { openSignInModal } = useAuthReducers()
+	const { user } = useAuthGetters()
+	//const { openSignInModal } = useAuthReducers()
 	const [noRoomModalOpened, setNoRoomModalOpened] = useState(false)
 	const { goTo } = useRoutePush()
 
 	const callTeacher = async (teacherID: string) => {
-		if(!token) {
+		/*if(!token) {
 			openSignInModal()
 			return
-		}
+		}*/
 
-		await socket.emit('join-intent', { teacherID, studentID: user._id})
+		await socket.emit('join-intent', { teacherID, studentID: user?._id})
 		setAppLoading(true)
 	}
 

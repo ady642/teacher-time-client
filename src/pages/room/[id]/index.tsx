@@ -6,7 +6,6 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import useRoutePush from "@/common/hooks/useRoutePush";
 import Head from "next/head";
 import useSocketAudio from "@/modules/Room/hooks/useSocketAudio";
-import useAuthGetters from "@/context/auth/helpers/useAuthGetters";
 
 interface RoomProps {
 
@@ -17,7 +16,7 @@ const Room: FC<RoomProps> = ({ roomID, teacherID }: InferGetServerSidePropsType<
 	const [studentName, setStudentName] = useState('')
 	const [teacherName, setTeacherName] = useState('')
 	const [duration, setDuration] = useState(0)
-	const { user } = useAuthGetters()
+	//const { user } = useAuthGetters()
 
 
 	/*	const [muted, setMuted] = useState(false)
@@ -55,7 +54,8 @@ const Room: FC<RoomProps> = ({ roomID, teacherID }: InferGetServerSidePropsType<
 		socket.on('on-ended-room', () => alert('This room does not exist anymore'))
 
 		if(teacherID) {
-			setStudentName(`${user.firstName} ${user.lastName}`)
+			//setStudentName(`${user.firstName} ${user.lastName}`)
+			setStudentName(`Elève`)
 			setTeacherName(`Gaston Nahman HAIK`)
 		}
 
