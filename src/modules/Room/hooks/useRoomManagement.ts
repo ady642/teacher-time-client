@@ -56,6 +56,7 @@ const useRoomManagement = () => {
 		await llamadaRef.current.pause()
 		socket.emit('accept-student', { studentSocketID, studentID, roomID })
 		await goTo(`room/${roomID}`)
+		await window.open(`https://meet.google.com/${teacher.meetID}`)
 	}
 
 	const rejectStudent = async () => {
