@@ -7,6 +7,7 @@ interface TeacherParams {
 	levels: string[],
 	fields: string[],
 	user: User,
+	meetID: string,
 	socketId?: string
 }
 
@@ -15,6 +16,7 @@ export default class Teacher {
     name: string
     avatar: string | undefined
     description: string
+	meetID: string
     rating: number
 	hourlyRate: number
 	levels: string[]
@@ -26,6 +28,7 @@ export default class Teacher {
 		_id= '',
 		description = '',
 		hourlyRate = 0,
+		meetID = '',
 		levels = new Array<string>(),
 		fields = new Array<string>(),
 		user,
@@ -34,6 +37,7 @@ export default class Teacher {
 		this._id = _id
 		this.name = `${user.firstName} ${user.lastName.charAt(0)}.`
 		this.avatar = ''
+		this.meetID = meetID
 		this.levels = levels
 		this.fields = fields
 		this.description = description

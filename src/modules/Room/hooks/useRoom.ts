@@ -9,7 +9,6 @@ const useRoom = () => {
 	const { user } = useAuthGetters()
 	//const { openSignInModal } = useAuthReducers()
 	const [noRoomModalOpened, setNoRoomModalOpened] = useState(false)
-	const { goTo } = useRoutePush()
 
 	const callTeacher = async (teacherID: string) => {
 		/*if(!token) {
@@ -22,9 +21,10 @@ const useRoom = () => {
 	}
 
 	useEffect(() => {
-		socket.on('on-accepted', async ({roomID = '', teacherID }) => {
-			await goTo(`room/${roomID}`, { teacherID })
+		socket.on('on-accepted', async ({ meetID = ''}) => {
+			await window.open(`https://meet.google.com/${meetID}`)
 			setAppLoading(false)
+			//await goTo(`room/${roomID}`, { teacherID })
 		})
 		socket.on('on-rejected', () => {
 			alert('Le professeur est occupé pour le moment, Veuillez réessayer plus tard :)')

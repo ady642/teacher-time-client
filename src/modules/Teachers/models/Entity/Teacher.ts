@@ -7,4 +7,5 @@ export interface Teacher {
     description: string;
     levels: string[];
     hourlyRate: number;
+    meetID: string;
 }
